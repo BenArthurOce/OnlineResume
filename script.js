@@ -1,27 +1,37 @@
 'use strict';
 
-//This code successfully adds "competicies"
-$(document).ready(function() {
+/**************************************/
+/**** Dynamically add Elements ********/
+/**************************************/
+// Function to add template article content for a section
+function addSectionContent(sectionId, templateId, sectionName, articleName) {
   $.getJSON('resumeDataJSON.json', function(data) {
 
-    // Number of competencies
-    const numberOfCompetencies = data['my-competencies']['competency'].length;
-
-    console.log("Number of competencies: " + numberOfCompetencies);
-
-    const section = $("#competencies");   //Establish <section>
-    const template = $("template");       //Establish <template>
+    const section = $(sectionId);
+    const template = $(templateId);
     const templateContent = template.html();
+    const dataToAdd = data[sectionName][articleName]
 
-    // Add copies of the template to the section
-    for (let i = 0; i < numberOfCompetencies; i++) {
+    // for each article, add the template element
+    for (let i = 0; i < dataToAdd.length; i++) {
       section.append(templateContent);
     }
   });
+};
+
+
+$(document).ready(function () {
+  // Call the addSectionContent function for each section
+  addSectionContent("#competencies", "#template-competency", "my-competencies", "competency");
+  addSectionContent("#education", "#template-education", "education-history", "education");
+  addSectionContent("#experience", "#template-experience", "experience-history" ,"job");
+  addSectionContent("#portfolio", "#template-portfolio", "portfolio-history" ,"project");
 });
 
 
-
+/******************************/
+/**** Scrolling Functions *****/
+/******************************/
 $(document).ready(function () {
   // Optimize scroll event by using debounce to reduce the frequency of function calls
   const debounce = (func, delay) => {
