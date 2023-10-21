@@ -159,7 +159,7 @@ nav {
   display: block;
   font-size: 20px;
   padding-bottom: 10px;
-  padding-left: 15px;
+  padding-left: 30px;
   padding-right: 0;
   padding-top: 10px;
 }
@@ -178,7 +178,7 @@ nav {
   text-decoration: none;
 }
 
-.navlink-container > a.active {
+.navlink-container > a > span.active {
   /* When viewer is looking at particular part of screen, js code will highlight relevant sidebar in green*/
   color: green;
 }
@@ -189,8 +189,8 @@ nav {
 .navicon-container {
   display: flex;
   flex-direction: row;
-  margin-top: 40px;
-  padding-left: 15px;  
+  margin-top: 30px;
+  padding-left: 30px;  
 }
 
 .navicon-container > i {
@@ -202,7 +202,7 @@ nav {
   display: flex;
   height: 50px;
   justify-content: center;
-  margin: 5px;
+  margin: 10px;
   text-rendering: auto;
   width: 50px;
 }

@@ -1,5 +1,27 @@
 'use strict';
 
+//This code successfully adds "competicies"
+$(document).ready(function() {
+  $.getJSON('resumeDataJSON.json', function(data) {
+
+    // Number of competencies
+    const numberOfCompetencies = data['my-competencies']['competency'].length;
+
+    console.log("Number of competencies: " + numberOfCompetencies);
+
+    const section = $("#competencies");   //Establish <section>
+    const template = $("template");       //Establish <template>
+    const templateContent = template.html();
+
+    // Add copies of the template to the section
+    for (let i = 0; i < numberOfCompetencies; i++) {
+      section.append(templateContent);
+    }
+  });
+});
+
+
+
 $(document).ready(function () {
   // Optimize scroll event by using debounce to reduce the frequency of function calls
   const debounce = (func, delay) => {
@@ -35,12 +57,8 @@ $(document).ready(function () {
   function updateActiveNavigation() {
     const visibleSectionIndex = getVisibleSection();
 
-    $('.nav-link').each(function (index) {
-      $(this).closest('a').toggleClass('active', index === visibleSectionIndex);
-    });
-
-    $('.sidebar-singlenavlink-container i').each(function (index) {
-      $(this).closest('i').toggleClass('active', index === visibleSectionIndex);
+    $('.navlink-container span').each(function (index) {
+      $(this).closest('span').toggleClass('active', index === visibleSectionIndex);
     });
   }
 
@@ -310,9 +328,9 @@ function createGallery() {
   
   function showImage(index) {
     console.log("Function: showImage")
-    var images = document.getElementById("image-slideshow-container").getElementsByTagName("img");
+    let images = document.getElementById("image-slideshow-container").getElementsByTagName("img");
   
-    for (var i = 0; i < images.length; i++) {
+    for (let i = 0; i < images.length; i++) {
       images[i].style.display = "none";
     }
   
@@ -325,13 +343,13 @@ function createGallery() {
   
   document.addEventListener('DOMContentLoaded', function() {
     console.log("addEventListener: DomContentLoaded")
-    var imageContainers = document.querySelectorAll('.portfolio-image-container');
+    let imageContainers = document.querySelectorAll('.portfolio-image-container');
   
     document.addEventListener('touchstart', function(event) {
     console.log("addEventListener: touchstart")
-      var isGallery = false;
+      let isGallery = false;
   
-      for (var i = 0; i < imageContainers.length; i++) {
+      for (let i = 0; i < imageContainers.length; i++) {
         if (event.target === imageContainers[i] || imageContainers[i].contains(event.target)) {
           isGallery = true;
           break;
@@ -346,7 +364,7 @@ function createGallery() {
   
     function closeGallery() {
         console.log("Function: closeGallery")
-      for (var i = 0; i < imageContainers.length; i++) {
+      for (let i = 0; i < imageContainers.length; i++) {
         imageContainers[i].style.display = "none";
         imageContainers[i].classList.remove('active');
       }
@@ -355,3 +373,5 @@ function createGallery() {
   });
   
 });
+
+
