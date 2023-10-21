@@ -1,0 +1,638 @@
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/*********** General CSS ***********/
+/**********************************/
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: teal;
+}
+
+
+section {
+  /* One section for introduction, eduction, experience etc */
+  background-color: #dfdcdccb;
+  border-bottom: 60px solid teal;
+  padding-bottom: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  position: relative;
+}
+
+section:last-child {
+  /* The last section should have no extra space underneath it */
+  border-bottom: 0 solid teal;
+  padding-bottom: 0;
+}
+
+article {
+  /* Each job in experience, each project in portfolio is an article */
+  border-left: 3px solid #EB210FDF;
+  border-bottom: 3px solid #eb210fdf;
+  display: block;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 0;
+  padding-top: 20px;
+  position: relative;
+}
+
+article:last-child {
+  /* The last article in a section should not have a bottom red border */
+  border-bottom: 0px solid #EB210FDF;
+}
+
+
+a {
+  color: #222222;
+  transition: all .3s;
+}
+
+h1 {
+  /* Maintain font size, just change font to more professional style */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  min-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+h3 {
+  /* Removing in-built padding and margin to remove whitespace */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0;
+  max-width: 100%;
+  padding: 0
+}
+
+h4 {
+  /* Smaller italic heading */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  max-width: 100%;
+}
+
+h5 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  max-width: 100%;
+}
+
+h6 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+
+li, p {
+  /* Encompasses all general text content in resume */
+  margin: 0;
+  font-size: 15px;
+  padding-right: 50px;
+  line-height: 1.5;
+}
+
+.portfolio-caption-container p {
+  /* For the "Scroll by clicking left/right of image" */
+  padding-top: 10px;
+}
+
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/********* Wrapper Layout *********/
+/**********************************/
+
+.wrapper {
+  /* This holds the two big elements: Sidebar and MainContent */
+  display: flex;
+}
+
+
+.wrapper .sidebar-master-container {
+  /* Sidebar to left of screen */
+  background-color: #111;
+  flex-shrink: 0;
+  left: 0;
+  padding-top: 40px;
+  position: sticky;
+  top: 0;
+  transition: 0.5s;
+  z-index: 1;
+  overflow-y: hidden;
+  width: 20%;
+  max-height: 100vh; 
+}
+
+
+.wrapper .content-master-container {
+  /* Container that houses all the <section> elements */
+  flex-grow: 1; /* Unsure if required */
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+
+  
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/************ SideBar *************/
+/**********************************/
+
+
+.sidebar-allnavlinks-container {
+  /* Element in sidebar that houses and organises the layout that goes in the sidebar */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+.sidebar-singlenavlink-container {
+  /* Each Page Navigation link in the sidebar. Turns green when active*/
+    display: block;
+    font-size: 18px;
+    padding-bottom: 6px;
+    padding-left: 15px;
+    padding-right: 0;
+    padding-top: 6px;
+    text-align: left;
+    transition: all .3s;
+  }
+
+.sidebar-singlenavlink-container .nav-link {
+  /* Regarding the text in the sidebar. Colour white and show no hyperlink deceration */
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.sidebar-singlenavlink-container .sidebar-icon.active,
+.sidebar-singlenavlink-container .nav-link.active{
+  /* When viewer is looking at particular part of screen, js code will highlight relevant sidebar in green*/
+  color: green;
+}
+
+.sidebar-singlenavlink-container .nav-link .sidebar-icon {
+  /* Sidebar icons on the right of the link text */
+  color: rgba(232, 125, 63, 0.915);
+  padding-left: 15px;
+  padding-bottom: 6px;
+  padding-right: 6px;
+  padding-top: 6px;
+  transition: all .3s;
+}
+
+/* */
+/******** Sidebar Icon Links *************/
+/* */
+
+.sidebar-allicon-container {
+  /* Container for social media "Squares" in the sidebar. Code defines distance to the left of sidebar. */
+  /* The Container is housed with a "sidebar-singlenavlink-container" so its distance from the top is defined like that */
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  padding-left: 15px;
+}
+
+.sidebar-singleicon-container {
+  /* Container for each single social media "Square" */
+  align-items: center;
+  background-color: rgb(248, 84, 84);
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  margin: 5px;
+  width: 50px;
+}
+
+.sidebar-allicon-container i {
+  /* Specifies how the logos should look. Also specifies the "FontAwesome" which is required to get the unique logos*/
+  cursor: pointer;
+  justify-content: center;
+  padding: 6px;
+  transition: all .3s;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 22px;
+  text-rendering: auto;
+}
+
+
+
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/****** Competency Articles *******/
+/**********************************/
+
+#competencies article {
+  /* Remove boarder. Display needs to be flex so the software and scores can be side by side */
+  border-bottom: 0px solid #EB210FDF;
+  display: flex;
+}
+
+.competency-software-container {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  height: 40px; 
+  padding: 5px;
+  max-width: 300px;   
+}
+
+.competency-score-container {
+  /* all 10 circle items go in this */
+  align-items: center;
+  display: flex;
+  flex: 1;
+  height: 40px; 
+  padding: 5px;
+}
+
+.circle {
+  /* competency score is shown by 10 circles, either colored green or not */
+  background-color: #ddd; /* Color for non lit circles */
+  border-radius: 50%;
+  height: 30px;
+  margin-right: 5px;
+  width: 30px;
+}
+
+.circle.active {
+  background-color: rgba(13, 118, 22, 0.915); /* Color for lit circles */
+}
+
+
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/****** Red Dot on Boarder ********/
+/**********************************/
+
+article span {
+  /* Details the text that goes next to the red dot */
+  display: block;
+  font-size: 13px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  position: relative
+}
+
+article span::before {
+  /* Details the red dot in the webpage */
+    background: #EB210FDF;
+    border-radius: 5px;  
+    content: "";
+    height: 11px;
+    left: -26px;
+    position: absolute;
+    top: 3px;
+    width: 11px;
+}
+
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/****** Portfolio Contents ********/
+/**********************************/
+
+#portfolio article {
+  /*Display needs to be flex so the software and scores can be side by side */
+  display: flex;
+  flex-direction: row;
+}
+
+.portfolio-caption-container {
+  /* Specifies the container that holds the project description text. Needs to take up 50% */
+  flex-direction: column;
+  float: left;
+  height: 100%;
+  width: 50%
+}
+
+.portfolio-image-container {
+  /* Specifies the container that holds the images for the project*/
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+  vertical-align: top;
+  display: inline-block;
+  width: 50%
+}
+
+.image-slideshow-container {
+  /* Specifies the area around the image. Maybe important for mobile? May require review*/
+  display: flex;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-width: 5px;
+  border-color: black;
+  border-style: solid;
+  overflow: hidden;
+}
+
+.image-slideshow-container img {
+  /* Details how the images in the slideshow should look */
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/* */
+/******** Slideshows *************/
+/* */
+.slideshow-container {
+  /* Requires review. is used in every slideshow */
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+  
+.prev, 
+.next {
+  /* Next & previous buttons */
+  /* These currently are not used. Their display later is set to "None" */
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0,0,0,0.8);
+  opacity: 0.7;
+}
+  
+
+.next {
+  /* Position the "next button" to the right */
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  /* On hover, add a black background color with a little bit see-through */
+  opacity: 1;
+}
+
+
+/* */
+/******** Mobile Icons *************/
+/* */
+
+.mobile-allicon-container {
+  /* Image Gallery is removed on mobile. Replaced with two buttons for opening the images, and another for going to Github */
+  align-items: center;
+  display: none;
+  justify-content: center;
+  margin-top: 20px;
+  width: 30px;
+}
+
+.mobile-allicon-container i {
+  /* Specifies how the logos should look. Also specifies the "FontAwesome" which is required to get the unique logos*/
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: 30px;
+  transition: all .3s;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 22px;
+  text-rendering: auto;
+  flex-direction: column;
+}
+
+
+/*---------------------------------------*/
+/*-------------- MOBILE -----------------*/
+/*------------COMPATIBILITY--------------*/
+/*---------------------------------------*/
+
+
+@media screen and (max-width: 768px) {
+
+
+/*-------- MOBILE FORMAT ---------*/
+/**********************************/
+/*********** General CSS ***********/
+/**********************************/
+
+body {
+  overflow-x: hidden;
+}
+
+section {
+  padding-left: 10px;
+}
+
+li, p {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#portfolio p {
+  padding-left: 0;
+  padding-right: 40px;
+}
+
+
+/*-------- MOBILE FORMAT ---------*/
+/**********************************/
+/************ SideBar *************/
+/**********************************/
+
+.wrapper {
+  /* flex-direction to column lets the sidebar sit on top, and not on the right*/
+  flex-direction: column;
+}
+
+.wrapper .sidebar-master-container {
+  /* Navigation Sidebar moved to top of screen */
+  height: 40px;
+  width: 100%;
+  position: sticky;
+  padding-bottom: 20px;
+  padding-top: 5px;
+
+}
+
+.wrapper .sidebar-master-container .sidebar-allnavlinks-container {
+  /* Icons in navigation bar to arrange horizontally across top of screen */
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/* */
+/******** Sidebar Icon Links *************/
+/* */
+
+.wrapper .sidebar-master-container .sidebar-allicon-container {
+  /* social media links/icons to not appear on mobile version */
+  display: none
+}
+
+.nav-link {
+  /* Requires Review */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link i {
+  /* Requires Review */
+  font-size: 24px;
+}
+
+.link-text {
+  /* Requires Review */
+  /* Removes the text next to the icon in the sidebar */
+  display: none;
+}
+
+.sidebar-singlenavlink-container .sidebar-icon.active,
+.sidebar-singlenavlink-container .nav-link.active{
+  /* When viewer is looking at particular part of screen, js code will highlight relevant sidebar icon in green*/
+  color: green;
+}
+
+
+/*-------- MOBILE FORMAT ---------*/
+/**********************************/
+/****** Competency Articles *******/
+/**********************************/
+#competencies article {
+  flex-direction: column;
+}
+
+.competency-software-container {
+  min-width: auto;
+  width: auto;
+}
+  
+.circle {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+/*-------- MOBILE FORMAT ---------*/
+/**********************************/
+/****** Red Dot on Boarder ********/
+/**********************************/
+  article span {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    position: relative
+  }
+    
+  article span::before {
+    background: #EB210FDF;
+    border-radius: 5px;  
+    content: "";
+    height: 11px;
+    left: -26px;
+    position: absolute;
+    top: 3px;
+    width: 11px;
+  }
+
+
+
+/*-------- MOBILE FORMAT ---------*/
+/**********************************/
+/****** Portfolio Contents ********/
+/**********************************/
+
+.mobile-allicon-container {
+  /* Standard image gallary is removed from mobile version */
+  /* Standard image gallary is replaced with an icon that opens up the gallary and another that opens github*/
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-caption-container {
+  /* Since the image galary is removed on mobile, extend the width of the text box from 50% to larger */
+  width: 90%
+}
+
+.portfolio-caption-container .project-url {
+  /* Text that displays link to Github is removed and replaced with an icon */
+  display: none;
+}
+
+.portfolio-image-caption {
+  /* On Desktop versions there is a small box that gives instructions to click left/right of image. Remove that. */
+  display: none;
+}
+
+/* */
+/******** Slideshows *************/
+/* */
+
+.portfolio-image-container {
+  /* Remove from mobile page, set as a middle of phone gallery */
+  /* Is now to be 100% wide to fill screen, with black seethrough background WHEN ACTIVATED*/
+  position: fixed;
+  top: 25%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  z-index: 9999;
+  width: 100%;
+}
+ 
+.portfolio-image-container .image-slideshow-container {
+  /* Set images inside of mobile image container to fill some of the container area */
+  align-items: center;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 200px;
+}
+
+      
+.portfolio-image-container .image-slideshow-container img {
+  /* Images are to be in the middle of the display*/
+  border: 0;
+  vertical-align: middle;
+  align-content: center;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.prev, .next {
+  /* Do not display navigation arrows. Navigation on mobile is swiping */
+  display:none;
+}
+
+.portfolio-image-container.active {
+  /* Requires review */
+  display: flex;
+}
+
+img.active {
+  /* Requires review */
+  display: block;
+}
+}

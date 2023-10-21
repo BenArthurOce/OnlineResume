@@ -1,0 +1,76 @@
+
+TD;DR:
+	Long class names
+		- Wrapper but then everything else is wrapper-prefix
+	Wrapper
+		- <wrapper> exists
+		- class names a bit long
+	Menu bar
+		- Parent is just "wrapper" but then in it are sidebar-etc
+	Nav bar
+		- use <nav> instead of <div>
+		- class like sidebar instead of wrapper
+			- then child link inside the sidebar
+	Sidebar Links
+		- Do the child divs need sidebar-singlenavlink-container?
+	
+	Compenticies
+		They all have "competency-prefix" 
+		But they're already within a section
+		The JS could create every article tag
+		Too much repetition
+		Design:
+			Could be shrunk down to fit more information on first page
+			Each one takes up a whole row and has lots of v padding
+			The whole list could fit on one line with a more compact graphic of scoring
+				- Inline progress bar	
+		Could be shrunk down to
+
+	Education / Exp
+		Can be filled in by JS
+		Design:
+			- Pale blue seperator doesnt fit with colours
+			- More information into front by shrinking compenticies
+			
+
+	Portfolio
+		- Grey boarder around image to be thinner
+		- Text underneath is missleading
+		- Requires slideshow
+		- Images break when you shrink window to trigger media query
+
+	Title:
+		Ben's is possessive
+		Introduction needs a full stop
+		"Online in "Online Resume" can be removed
+
+
+What I notice most is that the class names are a bit longer than they need to be, and a bit redundant; for example, in your menu bar/sidebar, its parent class is just wrapper (line 22) and then all the classes within it are prefixed with sidebar- followed by longer names; it feels like you should be able to remove most of this just with better arrangement
+Firstly, since this is your nav bar, it would probably make sense to use the semantic <nav> element instead of a <div> , and use a class like sidebar instead of the very generic wrapper
+Then a child link inside the sidebar which currently has the class sidebar-singlenavlink-container can just be singlenavlink-container and be targeted in your CSS using this selector:
+
+nav.sidebar .singlenavlink-container { }
+
+But beyond that, do all those child divs even need the class sidebar-singlenavlink-container, since they all have it? Whatever styles they need via that class can be targeted via the parent, i.e. .sidebar-allnavlinks-container > div
+So there are ways to shrink that down a lot using good CSS selectors and simpler structure, but I realise with CSS that once you get it working, you're reluctant to mess with it too much; I also realise that some of the class names might be due to the JS you have written to populate those tags, but I don't want to think about that right now :lolsob:  (nonetheless, the JS could just as easily target the simpler classnames the same as a CSS selector could, using querySelector() )Similar notes about all the classes in the Competencies section, they all have competency- prefixes even though they're already within a section that has the ID of comptency, so those prefixes could be gotten rid of
+You have this:
+
+        <article class="competency-article">
+          <div class="competency-software-container">
+            <h3 class="competency-software"></h3>
+          </div>
+          <div class="competency-score-container"></div>
+        </article>
+
+but none of those classes really need to be there. If you want to target the article tags, you could write in your CSS:
+
+#competencies article { }
+
+and to target the h3, you could write
+
+#competencies article h3 { }
+
+etcMore broadly, why is there so much repetition of the article tags in that section when all the content is coming from a JSON file and being filled in by JS anyway? The JS could itself create every article tag and the child tags as needed from looping over the JSON scores (either directly in the JS or via an HTML template defined only once). If you're not sure how to do this yet, you will be after weeks 4 & 5 of the course where we look in detail at how JS interacts with the page DOM
+Same for the education and experience sections where the same empty HTML structure is repeated and then filled in by JSDesign-wise, I must stress that IANAD (I Am Not A Designer) so this is just my opinion, but I would get rid of the pale blue separator block between sections as it doesn't really fit with the rest of the colours and is a bit distracting, I'd just leave the other blue-green background colour (that appears in the vertical margins) to fill that space too, to make the boxes floatI think you could maybe fit more information onto the first page of the resume by shrinking the Competencies section down a bit; each one takes up a whole row and each row has a lot of vertical padding too; the whole list could almost fit on one line with a more compact choice of graphic for the scoring (like an inline progress-bar kind of thing); from what I understand about Resumes, HR people scan them very quickly and don't necessarily even view page 2+ if they don't see anything that catches the attention on the first page, so I'd get the Experience section up near the topI'd personally also get rid of the red borders and dots, just to keep the layout clean (I realise they probably took a bit of fiddling to get right); and I'd make the heavy grey borders around the portfolio images much thinner. The text underneath each image is also misleading - you don't have to click on the side, you can click anywhere. Ideally you'd get rid of this text underneath each image and have a self-explanatory slideshow left and right arrow icons floating within the image itself, near the left and right edges. Also, the images all break when you shrink the browser window down enough to trigger the media query for smaller/mobile screens, better fix that!To get an accessibility rating for your page, and lots of good tips, open the page in the Chrome browser and find the Accessibility test (it used to be called Lighthouse) in the dev tools tabs. Firefox has something similar in the Accessibility tab under the dropdown "Check for Issues".Finally, your title says "Bens Online Resume" but the correct grammar is "Ben's" i.e. the possessive, it belongs to you. The last sentence in your Introduction needs a full stop.
+Pedantic! But people are looking for coders who pay attention to the details right?
+Also, you call it "Online Resume" in several places but I think it's self-evidently online if people are looking at it on a website, that word can be removed.I guess I did have more notes that I thought (though not too many about the actual tags)! Hope this helps

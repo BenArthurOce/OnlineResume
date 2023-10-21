@@ -1,0 +1,290 @@
+{
+      "personal-info": {
+         "personal-email": "mailto:benjaminmatthewarthur@gmail.com",
+         "personal-phone": "MyPhone",
+         "personal-linkedin": "https://www.linkedin.com/in/benjamin-arthur-125b07ab/",
+         "personal-github": "https://github.com/BenArthurOce",
+         "my-background": "Background: Programming, Accounting, Finance",
+         "my-introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
+      },
+      "my-competencies": {
+         "competency": [
+            {
+               "competency-software": "Excel, VBA",
+               "competency-score": "10"
+            },
+            {
+               "competency-software": "Python",
+               "competency-score": "9"
+            },
+            {
+               "competency-software": "SQL",
+               "competency-score": "7"
+            },
+            {
+               "competency-software": "C#",
+               "competency-score": "6"
+            },
+            {
+               "competency-software": "HTML, Javascript",
+               "competency-score": "5"
+            }
+         ]
+      },
+      "education-history": {
+         "education": [
+            {
+               "degree": "Certificate III in Computer Information Technology",
+               "institution": "Gordon TAFE - East Geelong campus"
+            },
+            {
+               "degree": "Bachelor of Commerce - Accounting and Finance",
+               "institution": "Deakin University - Waurn Ponds campus"
+            },
+            {
+               "degree": "HR Block Tax Consultant Course (3 Taxation Seasons)",
+               "institution": "HR Block Belmont/Werribee"
+            },
+            {
+               "degree": "MYOB, Payroll, BAS + IAS short courses",
+               "institution": "Gordon TAFE - Geelong campus"
+            }
+         ]
+      },
+      "experience-history": {
+         "job": [
+            {
+               "company": "Interfi Systems",
+               "address": "Yarra Street, Geelong \n(Fintech company providing banking infrastructure to small/medium sized lenders)",
+               "position": "Application Support Developer (Support Team)",
+               "period": "Jun-2022 to Nov-2022",
+               "softwares": {
+                  "software": [
+                     "Capital Desktop - Proprietary Software",
+                     "Microsoft SQL Server Manager Studio 2019",
+                     "Microsoft Visual Studio 2019",
+                     "Atlassian JIRA",
+                     "Atlassian Confluence",
+                     "Citrix Desktops",
+                     "Office365",
+                     "Github",
+                     "Windows Remote Desktop Connection"
+                  ]
+               },
+               "duties": {
+                  "duty": [
+                     "Acted as the initial point of contact for application incidents and requests, providing comprehensive support for Interfi Systems' proprietary software, Capital Desktop. Utilized JIRA for efficient ticket management.",
+                     "Developed and adjusted SQL scripts using Microsoft SQL Server Manager Studio 2019 to extract relevant data for individual and company accounts, banking information, and rate adjustments.",
+                     "Investigated and analyzed C# code to troubleshoot issues and improve functionality of Capital Desktop. Resolved support tickets related to interest calculation discrepancies.",
+                     "Created and reviewed client and employee documentation on Confluence, ensuring clear and accurate instructions for the usage of Capital Desktop. Streamlined support procedures and documentation templates for enhanced efficiency.",
+                     "Collaborated with development and feature teams through Microsoft Teams calls, extracting and documenting key information to share with the support team. Communicated findings and updates to facilitate effective issue resolution.",
+                     "Proficiently worked with various software tools, including Citrix Desktops, Office365, GitHub repository on Visual Studio 2019, and Remote Desktop Connection, enabling seamless operations and collaborative development."
+                  ]
+               }
+            },
+            {
+               "company": "Parsons Charactered Accountant",
+               "address": "Fenwick Street, Geelong",
+               "position": "Accountant",
+               "period": "Aug 2020 to Dec 2021",
+               "softwares": {
+                  "software": [
+                     "Xero",
+                     "MYOB",
+                     "Intuit Quickbooks",
+                     "CCH iFirm",
+                     "Microsoft Excel",
+                     "Microsoft Outlook",
+                     "VBA Programming",
+                     "Office365"
+                  ]
+               },
+               "duties": {
+                  "duty": [
+                     "Proficiently prepared Income Tax Returns and financial statements for companies, partnerships, and trusts using CCH iFirm, ensuring accuracy and compliance with regulatory requirements.",
+                     "Assumed responsibility for managing ASIC lodgement requirements for all clients, ensuring timely submission and adherence to regulatory deadlines.",
+                     "Created procedures,instructions and programs for proper record-keeping and task completion."
+                  ]
+               }
+            },
+            {
+               "company": "The Accountant Group / Platinum Institute Australia",
+               "address": "Moorabool Street, Geelong",
+               "position": "Accountant / Admin Assistant",
+               "period": "Feb 2020 to Jun 2020 (Temp COVID support)",
+               "softwares": {
+                  "software": [
+                     "Handisoft",
+                     "Xero",
+                     "Microsoft Excel"
+                  ]
+               },
+               "duties": {
+                  "duty": [
+                     "Preparing of Income Tax Returns and financials of companies, partnerships, and trusts",
+                     "Preparing additional reoccurring lodgement obligations such as: TPARs, PSARs, payroll tax and resolutions/minutes.",
+                     "Developing and producing in depth formulas, forms and working papers on Microsoft Excel such as billing and student class schedules",
+                     "Assisting office staff in detailed cataloging, organising and process implementation of student data."
+                  ]
+               }
+            },
+            {
+               "company": "Boness Accounting and Tax",
+               "address": "Yarra Street, Geelong",
+               "position": "Junior Accountant",
+               "period": "Nov 2017 to Mar 2019",
+               "softwares": {
+                  "software": [
+                     "Xero",
+                     "MYOB AccountRight Desktop",
+                     "Reckon Elite",
+                     "State Revenue Office Services"
+                  ]
+               },
+               "duties": {
+                  "duty": [
+                     "Preparing of Income Tax Returns, BAS, and IAS obligations of partnerships, companies and trusts",
+                     "Preparing additional reoccurring lodgement obligations such as: TPARs, PSARs, payroll tax and resolutions/minutes",
+                     "Developing and producing in depth formulas, forms and working papers",
+                     "Management of clients compliance obligations (yearly, quarterly and monthly) through consistent communication and general bookkeeping.",
+                     "Timesheet recording and job task management"
+                  ]
+               }
+            },
+            {
+               "company": "Advance Business Centres",
+               "address": "Moorabool Street, Geelong",
+               "position": "Assistant Accountant",
+               "period": "Jan 2017 to Oct 2017",
+               "softwares": {
+                  "software": [
+                     "Xero",
+                     "MYOB",
+                     "SageOne",
+                     "Handisoft Practice Management"
+                  ]
+               },
+               "duties": {
+                  "duty": [
+                     "Preparing of Income Tax Returns, BAS and IAS obligations of partnerships, companies and trusts",
+                     "Independently prepared tax returns and financials for individuals, partnerships, small businesses and trusts",
+                     "Various assistance duties to practice owner in data management and reporting"
+                  ]
+               }
+            },
+            {
+               "company": "Australian Taxation Office",
+               "address": "Little Ryrie Street, Geelong",
+               "position": "Taxation Officer, APS3",
+               "period": "Sept 2016 to Jan 2017 (Contract)",
+               "softwares": {
+                  "software": [
+                     "ATO in-house software"
+                  ]
+               },
+               "duties": {
+                  "duty": [
+                     "Outbound and Inbound telephony to achieve lodgement of overdue tax obligations and compliance activities",
+                     "Outbound telephony to arrange payment plans of debt collections from required taxpayers",
+                     "Engaging and encouraging clients to use ATO Online Services including: MyGov, MyTax, business online portals, and the ABR"
+                  ]
+               }
+            }
+         ]
+      },
+      "portfolio-history": {
+         "project": [
+            {
+               "project-name": "Resume Website",
+               "project-lang": "HTML, CSS, JavaScript, JSON (and XML)",
+               "project-desc": "Website that reads from an JSON file and imports into a HTML page using Javascript. Hosted using GoDaddy. First Version used XML to hold resume data.",
+               "project-url": "https://github.com/BenArthurOce/",
+               "project_images": {
+                  "project_image": [
+                     "images\\slideshowWebsite\\ResumeWebsite01.png",
+                     "images\\slideshowWebsite\\ResumeWebsite02.png",
+                     "images\\slideshowWebsite\\ResumeWebsite03.png",
+                     "images\\slideshowWebsite\\ResumeWebsite04.png",
+                     "images\\slideshowWebsite\\ResumeWebsite05.png"
+                  ]
+               }
+            },
+            {
+               "project-name": "ASX Program",
+               "project-lang": "SQL, C# (Modelling with Dapper)",
+               "project-desc": "Application that reads historical ASX prices from self created 10-15 table database on SQL. Modeled with Dapper",
+               "project-url": "https://github.com/BenArthurOce/ASXSharePrices",
+               "project_images": {
+                  "project_image": [
+                     "images\\slideshowASX\\ASXProgram1.png",
+                     "images\\slideshowASX\\ASXProgram2.png",
+                     "images\\slideshowASX\\ASXProgram3.png",
+                     "images\\slideshowASX\\ASXProgram4.png",
+                     "images\\slideshowASX\\ASXProgram5.png"
+                  ]
+               }
+            },
+            {
+               "project-name": "Chess Opening UI",
+               "project-lang": "Python, Tkinter",
+               "project-desc": "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening.",
+               "project-url": "https://github.com/BenArthurOce/",
+               "project_images": {
+                  "project_image": [
+                     "images\\slideshowChess\\Chess01.png",
+                     "images\\slideshowChess\\Chess02.png"
+                  ]
+               }
+            },
+            {
+               "project-name": "Loan Schedule",
+               "project-lang": "SQL",
+               "project-desc": "Uses a recursive CTE and payment/interest functions to calculate the balances, principal/interest repayments on a mortgage over its lifetime. No Image provided",
+               "project-url": "https://github.com/BenArthurOce/InstalmentAmortisationSchedule",
+               "project_images": {
+                  "project_image": [
+                     "images\\PlaceHolderImage.png"
+                  ]
+               }
+            },
+            {
+               "project-name": "PokerHands",
+               "project-lang": "Python, PANDAS",
+               "project-desc": "Object orientated text based program that simulates Texas hold ‘em games thousands of times to show the likely outcome of each hand against the other.",
+               "project-url": "https://github.com/BenArthurOce/Poker5Hand",
+               "project_images": {
+                  "project_image": [
+                     "images\\slideshowPoker\\Poker01.png",
+                     "images\\slideshowPoker\\Poker02.png",
+                     "images\\slideshowPoker\\Poker03.png",
+                     "images\\slideshowPoker\\Poker04.png",
+                     "images\\slideshowPoker\\Poker05.png"
+                  ]
+               }
+            },
+            {
+               "project-name": "Bank Transaction Coder",
+               "project-lang": "MS Excel",
+               "project-desc": "Complex spreadsheet that reads your banking transactions and allocates each transaction based on lookup/reference codes inputted",
+               "project-url": "https://github.com/BenArthurOce/",
+               "project_images": {
+                  "project_image": [
+                     "images\\slideshowTransactionSorter\\TransactionCoder01.png",
+                     "images\\slideshowTransactionSorter\\TransactionCoder02.png"
+                  ]
+               }
+            },
+            {
+               "project-name": "Timesheeter",
+               "project-lang": "VBA",
+               "project-desc": "VBA Program that uses a basic interface to store the start and end time in a job, and records details of that job into a stored library of files, sorted/grouped by date of job",
+               "project-url": "https://github.com/BenArthurOce/",
+               "project_images": {
+                  "project_image": [
+                     "images\\slideshowTimesheeter\\Timesheeter01.png"
+                  ]
+               }
+            }
+         ]
+      }
+}
