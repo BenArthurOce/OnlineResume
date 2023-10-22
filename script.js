@@ -1,31 +1,120 @@
 'use strict';
 
+
+// Get API data
+function fetchJSONData(callback) {        // The callback argument is a function that will be executed after the JSON data is fetched and processed.
+  console.log(`function: fetchJSONData`)
+  $(document).ready(function() {          // wait for the HTML page to be fully loaded 
+    $.getJSON('resumeDataJSON.json', function(data) {     // Callback executed when JSON is fully fetched
+      if (typeof callback === 'function') {
+        callback(data);                   // A callback is a function passed as an argument to another function.
+      }
+    });
+  });
+}
+
+
 /**************************************/
 /**** Dynamically add Elements ********/
 /**************************************/
 // Function to add template article content for a section
-function addSectionContent(sectionId, templateId, sectionName, articleName) {
-  $.getJSON('resumeDataJSON.json', function(data) {
+function createSectionElements(resumeData, sectionId, templateId, sectionName, articleName) {
+  console.log(`function: createSectionElements`)
 
-    const section = $(sectionId);
-    const template = $(templateId);
+    const template = $(templateId);   //Id name of the <template>
+    const section = $(sectionId);     //Id name of the <section>
     const templateContent = template.html();
-    const dataToAdd = data[sectionName][articleName]
+    const dataToAdd = resumeData[sectionName][articleName]
 
     // for each article, add the template element
     for (let i = 0; i < dataToAdd.length; i++) {
       section.append(templateContent);
     }
-  });
-};
+  };
+
+
+// Function to update HTML elements with JSON data
+function updateSectionElements(jsonData, elementMappings, sectionId, sectionName, articleName) {
+  console.log(`function: updateSectionElements`);
+  for (const section in elementMappings) {
+    const sectionData = jsonData[section];
+    const sectionElements = elementMappings[section];
+
+    for (const key in sectionElements) {
+      const element = sectionElements[key];
+
+      // Check if the element exists in the DOM and has a corresponding key in JSON data
+      if (element && sectionData[key]) {
+        if (element.tagName === 'A') {
+          // Handle anchor tags (e.g., links)
+          element.href = sectionData[key];
+        } else if (element.tagName === 'IMG') {
+          // Handle image tags
+          element.src = sectionData[key];
+        } else {
+          // Update text content for other elements
+          element.textContent = sectionData[key];
+        }
+      }
+    }
+  }
+}
+
 
 
 $(document).ready(function () {
-  // Call the addSectionContent function for each section
-  addSectionContent("#competencies", "#template-competency", "my-competencies", "competency");
-  addSectionContent("#education", "#template-education", "education-history", "education");
-  addSectionContent("#experience", "#template-experience", "experience-history" ,"job");
-  addSectionContent("#portfolio", "#template-portfolio", "portfolio-history" ,"project");
+  console.log(`function: documentREADY`)
+
+  fetchJSONData(function(resumeData) {
+
+    const elements = {
+      'personal-info': {
+        email: $('.personal-email'),
+        linkedin: $('.personal-linkedin'),
+        github: $('.personal-github'),
+        background: $('.my-background'),
+        introduction: $('.my-introduction'),
+      },
+      'my-competencies': {
+        competencySoftware: $('.competency-software'),
+        competencyScoreDisplayDivs: $('.competency-score-container'),
+      },
+      'education-history': {
+        degree: $('.degree'),
+        institution: $('.institution'),
+      },
+      'experience-history': {
+        company: $('.company'),
+        address: $('.address'),
+        position: $('.position'),
+        period: $('.period'),
+        softwares: $('.softwares'),
+        duties: $('.duties'),
+      },
+      'portfolio-history': {
+        projectName: $('.project-name'),
+        projectLang: $('.project-lang'),
+        projectDesc: $('.project-desc'),
+        projectUrl: $('.project-url a'),
+        projectImages: $('.project-image'),
+      },
+    };
+   
+
+    // add the HTML elements for each section
+    createSectionElements(resumeData, "#competencies", "#template-competency", "my-competencies", "competency");
+    createSectionElements(resumeData, "#education", "#template-education", "education-history", "education");
+    createSectionElements(resumeData, "#experience", "#template-experience", "experience-history" ,"job");
+    createSectionElements(resumeData, "#portfolio", "#template-portfolio", "portfolio-history" ,"project");
+
+    console.log(resumeData)
+    console.log(elements)
+    // From the JSON file, add the data into the created HTML elements
+    updateSectionElements(resumeData, elements, "#competencies", "my-competencies", "competency");
+    updateSectionElements(resumeData, elements, "#education", "education-history", "education");
+    updateSectionElements(resumeData, elements, "#experience", "experience-history", "job");
+    updateSectionElements(resumeData, elements, "#portfolio", "portfolio-history", "project");
+  });
 });
 
 
@@ -75,196 +164,196 @@ $(document).ready(function () {
   $(document).on('scroll', debounce(updateActiveNavigation, 200));
 
 
-/******************************/
-/******** JSON to HTML ********/
-/******************************/
-$.getJSON('resumeDataJSON.json', function (resumeData) {
-    console.log('Fetching: resumeDataJSON.json');
+// /******************************/
+// /******** JSON to HTML ********/
+// /******************************/
+// $.getJSON('resumeDataJSON.json', function (resumeData) {
+//     console.log('Fetching: resumeDataJSON.json');
 
-    //
-    // PERSONAL INFO
-    //
-    const personalInfo = resumeData['personal-info'];
+//     //
+//     // PERSONAL INFO
+//     //
+//     const personalInfo = resumeData['personal-info'];
 
-    // PERSONAL INFO HTML ELEMENTS
-    const personalInfoElements = {
-      email: $('.email-icon'),
-      linkedin: $('.linkedin-icon'),
-      github: $('.github-icon'),
-      background: $('.my-background'),
-      introduction: $('.my-introduction'),
-    };
+//     // PERSONAL INFO HTML ELEMENTS
+//     const personalInfoElements = {
+//       email: $('.email-icon'),
+//       linkedin: $('.linkedin-icon'),
+//       github: $('.github-icon'),
+//       background: $('.my-background'),
+//       introduction: $('.my-introduction'),
+//     };
 
-    // Update HTML elements with personal info data
-    personalInfoElements.background.text(personalInfo['my-background']);
-    personalInfoElements.introduction.text(personalInfo['my-introduction']);
+//     // Update HTML elements with personal info data
+//     personalInfoElements.background.text(personalInfo['my-background']);
+//     personalInfoElements.introduction.text(personalInfo['my-introduction']);
 
-    // Add links to social media icons
-    personalInfoElements.linkedin.click(function () {
-      window.location.href = personalInfo['personal-linkedin'];
-    });
+//     // Add links to social media icons
+//     personalInfoElements.linkedin.click(function () {
+//       window.location.href = personalInfo['personal-linkedin'];
+//     });
 
-    personalInfoElements.email.click(function () {
-      window.location.href = personalInfo['personal-email'];
-    });
+//     personalInfoElements.email.click(function () {
+//       window.location.href = personalInfo['personal-email'];
+//     });
 
-    personalInfoElements.github.click(function () {
-      window.location.href = personalInfo['personal-github'];
-    });
+//     personalInfoElements.github.click(function () {
+//       window.location.href = personalInfo['personal-github'];
+//     });
 
-    //
-    // COMPETENCIES
-    //
-    const myCompetencies = resumeData['my-competencies'];
-    const competencies = myCompetencies['competency'];
+//     //
+//     // COMPETENCIES
+//     //
+//     const myCompetencies = resumeData['my-competencies'];
+//     const competencies = myCompetencies['competency'];
 
-    // COMPETENCIES HTML ELEMENTS
-    const competencyElements = {
-      competencySoftware: $('.competency-software'),
-      competencyScoreDisplayDivs: $('.competency-score-container'),
-    };
+//     // COMPETENCIES HTML ELEMENTS
+//     const competencyElements = {
+//       competencySoftware: $('.competency-software'),
+//       competencyScoreDisplayDivs: $('.competency-score-container'),
+//     };
 
-    competencies.forEach(function (competency, i) {
-      const singleSoftware = competency['competency-software'];
-      const singleScore = competency['competency-score'];
+//     competencies.forEach(function (competency, i) {
+//       const singleSoftware = competency['competency-software'];
+//       const singleScore = competency['competency-score'];
 
-      // Update HTML elements for this competency
-      competencyElements.competencySoftware.eq(i).text(singleSoftware);
+//       // Update HTML elements for this competency
+//       competencyElements.competencySoftware.eq(i).text(singleSoftware);
 
-      const competencyLevel = parseInt(singleScore); // Convert to an integer
-      const levelDiv = competencyElements.competencyScoreDisplayDivs.eq(i);
-      levelDiv.html(''); // Clear previous circles
+//       const competencyLevel = parseInt(singleScore); // Convert to an integer
+//       const levelDiv = competencyElements.competencyScoreDisplayDivs.eq(i);
+//       levelDiv.html(''); // Clear previous circles
 
-      for (let i = 0; i < 10; i++) {
-        const circle = $('<div>').addClass('circle');
-        if (i < competencyLevel) {
-          circle.addClass('active');
-        }
-        levelDiv.append(circle);
-      }
-    });
+//       for (let i = 0; i < 10; i++) {
+//         const circle = $('<div>').addClass('circle');
+//         if (i < competencyLevel) {
+//           circle.addClass('active');
+//         }
+//         levelDiv.append(circle);
+//       }
+//     });
 
-    //
-    // EDUCATION
-    //
-    const educationHistory = resumeData['education-history'];
-    const educations = educationHistory['education'];
+//     //
+//     // EDUCATION
+//     //
+//     const educationHistory = resumeData['education-history'];
+//     const educations = educationHistory['education'];
 
-    // EDUCATION HTML ELEMENTS
-    const educationElements = {
-      degree: $('.degree'),
-      institution: $('.institution'),
-    };
+//     // EDUCATION HTML ELEMENTS
+//     const educationElements = {
+//       degree: $('.degree'),
+//       institution: $('.institution'),
+//     };
 
-    educations.forEach(function (education, i) {
-      const degree = education['degree'];
-      const institution = education['institution'];
+//     educations.forEach(function (education, i) {
+//       const degree = education['degree'];
+//       const institution = education['institution'];
 
-      // Update HTML elements for this education
-      educationElements.degree.eq(i).text(degree);
-      educationElements.institution.eq(i).text(institution);
-    });
+//       // Update HTML elements for this education
+//       educationElements.degree.eq(i).text(degree);
+//       educationElements.institution.eq(i).text(institution);
+//     });
 
-    //
-    // EXPERIENCE
-    //
-    const experienceHistory = resumeData['experience-history'];
-    const jobs = experienceHistory['job'];
+//     //
+//     // EXPERIENCE
+//     //
+//     const experienceHistory = resumeData['experience-history'];
+//     const jobs = experienceHistory['job'];
 
-    // EXPERIENCE HTML ELEMENTS
-    const experienceElements = {
-      company: $('.company'),
-      address: $('.address'),
-      position: $('.position'),
-      period: $('.period'),
-      softwares: $('.softwares'),
-      duties: $('.duties'),
-    };
+//     // EXPERIENCE HTML ELEMENTS
+//     const experienceElements = {
+//       company: $('.company'),
+//       address: $('.address'),
+//       position: $('.position'),
+//       period: $('.period'),
+//       softwares: $('.softwares'),
+//       duties: $('.duties'),
+//     };
 
-    jobs.forEach(function (job, i) {
-      const company = job['company'];
-      const address = job['address'];
-      const position = job['position'];
-      const period = job['period'];
-      const softwares = job.softwares.software.map(function (s) {
-        return s.trim();
-      });
-      const duties = job.duties.duty.map(function (d) {
-        return d.trim();
-      });
+//     jobs.forEach(function (job, i) {
+//       const company = job['company'];
+//       const address = job['address'];
+//       const position = job['position'];
+//       const period = job['period'];
+//       const softwares = job.softwares.software.map(function (s) {
+//         return s.trim();
+//       });
+//       const duties = job.duties.duty.map(function (d) {
+//         return d.trim();
+//       });
 
-      // Update HTML elements for this job
-      experienceElements.company.eq(i).text(company);
-      experienceElements.address.eq(i).text(address);
-      experienceElements.position.eq(i).text(position);
-      experienceElements.period.eq(i).text(period);
+//       // Update HTML elements for this job
+//       experienceElements.company.eq(i).text(company);
+//       experienceElements.address.eq(i).text(address);
+//       experienceElements.position.eq(i).text(position);
+//       experienceElements.period.eq(i).text(period);
 
-      experienceElements.softwares.eq(i).html(''); // Clear previous items
-      softwares.forEach(function (s) {
-        const li = $('<li>').text(s);
-        experienceElements.softwares.eq(i).append(li);
-      });
+//       experienceElements.softwares.eq(i).html(''); // Clear previous items
+//       softwares.forEach(function (s) {
+//         const li = $('<li>').text(s);
+//         experienceElements.softwares.eq(i).append(li);
+//       });
 
-      experienceElements.duties.eq(i).html(''); // Clear previous items
-      duties.forEach(function (d) {
-        const li = $('<li>').text(d);
-        experienceElements.duties.eq(i).append(li);
-      });
-    });
+//       experienceElements.duties.eq(i).html(''); // Clear previous items
+//       duties.forEach(function (d) {
+//         const li = $('<li>').text(d);
+//         experienceElements.duties.eq(i).append(li);
+//       });
+//     });
 
-    //
-    // PORTFOLIO
-    //
-    const portfolioHistory = resumeData['portfolio-history'];
-    const projects = portfolioHistory['project'];
+//     //
+//     // PORTFOLIO
+//     //
+//     const portfolioHistory = resumeData['portfolio-history'];
+//     const projects = portfolioHistory['project'];
 
-    // PORTFOLIO HTML ELEMENTS
-    const portfolioElements = {
-      projectName: $('.project-name'),
-      projectLang: $('.project-lang'),
-      projectDesc: $('.project-desc'),
-      projectUrl: $('.project-url a'),
-      mobileGithubIcons: $('.mob-icon.fa-github'),
-      projectImages: $('.image-slideshow-container'),
-    };
+//     // PORTFOLIO HTML ELEMENTS
+//     const portfolioElements = {
+//       projectName: $('.project-name'),
+//       projectLang: $('.project-lang'),
+//       projectDesc: $('.project-desc'),
+//       projectUrl: $('.project-url a'),
+//       mobileGithubIcons: $('.mob-icon.fa-github'),
+//       projectImages: $('.image-slideshow-container'),
+//     };
 
-    console.log(portfolioElements)
-    projects.forEach(function (project, i) {
-      const name = project['project-name'];
-      const lang = project['project-lang'];
-      const url = project['project-url'];
-      const desc = project['project-desc'];
-      const images = project.project_images.project_image.map(function (j) {
-        return j.trim();
-      });
+//     console.log(portfolioElements)
+//     projects.forEach(function (project, i) {
+//       const name = project['project-name'];
+//       const lang = project['project-lang'];
+//       const url = project['project-url'];
+//       const desc = project['project-desc'];
+//       const images = project.project_images.project_image.map(function (j) {
+//         return j.trim();
+//       });
 
-      // Update HTML elements for this project
-      portfolioElements.projectName.eq(i).text(name);
-      portfolioElements.projectLang.eq(i).text(lang);
-      portfolioElements.projectDesc.eq(i).text(desc);
+//       // Update HTML elements for this project
+//       portfolioElements.projectName.eq(i).text(name);
+//       portfolioElements.projectLang.eq(i).text(lang);
+//       portfolioElements.projectDesc.eq(i).text(desc);
 
-      // Add GitHub link to the element (desktop)
-      portfolioElements.projectUrl.eq(i).attr('href', url);
-      portfolioElements.projectUrl.eq(i).attr('target', '_blank'); // Open in new window
+//       // Add GitHub link to the element (desktop)
+//       portfolioElements.projectUrl.eq(i).attr('href', url);
+//       portfolioElements.projectUrl.eq(i).attr('target', '_blank'); // Open in new window
 
-      // Add Github link to project icon (mobile)
-      portfolioElements.mobileGithubIcons.eq(i).click(function () {
-        window.open(url, '_blank');
-      });
+//       // Add Github link to project icon (mobile)
+//       portfolioElements.mobileGithubIcons.eq(i).click(function () {
+//         window.open(url, '_blank');
+//       });
 
 
-        // Update Image Lists
-        portfolioElements.projectImages[i].innerHTML = ''; // Clear previous images
-        images.forEach(s => {
-            const img = document.createElement('img');
-            img.src = s;
-            img.addEventListener('click', () => imageWasClicked());
-            portfolioElements.projectImages[i].appendChild(img);
-        });
-        updateDisplayedImage();
-        });
-        createGallery();
-    });
+//         // Update Image Lists
+//         portfolioElements.projectImages[i].innerHTML = ''; // Clear previous images
+//         images.forEach(s => {
+//             const img = document.createElement('img');
+//             img.src = s;
+//             img.addEventListener('click', () => imageWasClicked());
+//             portfolioElements.projectImages[i].appendChild(img);
+//         });
+//         updateDisplayedImage();
+//         });
+//         createGallery();
+//     });
 
 
 
