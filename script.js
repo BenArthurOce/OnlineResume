@@ -30,7 +30,38 @@ function createSectionElements(resumeData, sectionId, templateId, sectionName, a
     for (let i = 0; i < dataToAdd.length; i++) {
       section.append(templateContent);
     }
-  };
+
+    
+    // If its a job, add the elements for software and duties
+    // Also add the relevant data - may need to adjust this later as it seems a bit gross
+    if (sectionName == "experience-history")
+    {
+      const apiJobs = resumeData['experience-history']['job'];
+
+      // Software
+      $.each(apiJobs, function (i, each_job) { 
+        $.each(each_job.softwares, function (j, each_softwareList) {
+          $.each(each_softwareList, function (k, each_software) {
+
+            const targedElement = $("#experience article .softwares:eq(" + i + ")");
+            const li = $('<li>').text(each_software);
+            targedElement.append(li);
+          });
+        });
+      });  
+      
+      // Duties
+      $.each(apiJobs, function (i, each_job) { 
+        $.each(each_job.duties, function (j, each_dutyList) {
+          $.each(each_dutyList, function (k, each_duty) {
+
+            const targedElement = $("#experience article .duties:eq(" + i + ")");
+            const li = $('<li>').text(each_duty);
+            targedElement.append(li);
+          });
+        });
+      });       
+    }};
 
 
 $(document).ready(function () {
@@ -89,6 +120,11 @@ $(document).ready(function () {
     createSectionElements(resumeData, "#portfolio", "#template-portfolio", "portfolio-history" ,"project");
 
 
+    // Add Software, Add Duties - will modify later
+
+
+
+
     // Personal Info
     const personalInfo = resumeData['personal-info'];
 
@@ -97,7 +133,12 @@ $(document).ready(function () {
     });
 
     // Competencies
-    // const competencies = resumeData['my-competencies']['competency'];
+    const competencies = resumeData['my-competencies']['competency'][1];
+    // const competencies = resumeData['my-competencies'];
+    $.map(competencies, function(value, key) {
+      $(`.${key}`).text(value);
+    });
+
 
     // const competencyHtml = $.map(competencies, function(competency) {
     //   return `<div>${competency['competency-software']}: ${competency['competency-score']}</div>`;
@@ -105,53 +146,65 @@ $(document).ready(function () {
     
     // $('.competency').html(competencyHtml.join(''));
 
+//     // COMPETENCIES HTML ELEMENTS
+//     const competencyElements = {
+//       competencySoftware: $('.competency-software'),
+//       competencyScoreDisplayDivs: $('.competency-score-container'),
+//     };
+
+//     competencies.forEach(function (competency, i) {
+//       const singleSoftware = competency['competency-software'];
+//       const singleScore = competency['competency-score'];
+
+//       // Update HTML elements for this competency
+//       competencyElements.competencySoftware.eq(i).text(singleSoftware);
+
+//       const competencyLevel = parseInt(singleScore); // Convert to an integer
+//       const levelDiv = competencyElements.competencyScoreDisplayDivs.eq(i);
+//       levelDiv.html(''); // Clear previous circles
+
+//       for (let i = 0; i < 10; i++) {
+//         const circle = $('<div>').addClass('circle');
+//         if (i < competencyLevel) {
+//           circle.addClass('active');
+//         }
+//         levelDiv.append(circle);
+//       }
+//     });
+
+
     // Education
     const educationData = resumeData['education-history']['education'];
 
     $.each(educationData, function (i, education) {
-    
-      let institutionElement = $("#education article .institution:eq(" + i + ")");
-      let degreeElement = $("#education article .degree:eq(" + i + ")");
-    
-      institutionElement.text(education['institution']);
-      degreeElement.text(education['degree']);
+      
+      // $.map() loops over the properties of the 'education' object, which cotains the API information of each education
+      $.map(education, function(value, key) {
+        // 'value' is the API data
+        // 'key' is the property name (e.g., 'degree' or 'institution')
+        
+        // Use 'key' to select elements with matching class names and set their text content
+        // Find the nth education article, match the html elements to the key and input the data
+        $(`#education article:eq(${i}) .${key}`).text(value);
+      });
     });
-
 
     // Expeprience
+    // Software and Duties are already added in the "createSectionElements" function. Needs adjusting
     const experienceData = resumeData['experience-history']['job'];
-
     $.each(experienceData, function (i, job) {
-    
-      let companyElement = $("#experience article .company:eq(" + i + ")");
-      let addressElement = $("#experience article .address:eq(" + i + ")");
-      let positionElement = $("#experience article .position:eq(" + i + ")");
-      let periodElement = $("#experience article .period:eq(" + i + ")");
-      let softwaresElement = $("#experience article .softwares:eq(" + i + ")");
-      let dutiesElement = $("#experience article .duties:eq(" + i + ")");
-    
-      companyElement.text(job['company']);
-      addressElement.text(job['address']);
-      positionElement.text(job['position']);
-      periodElement.text(job['period']);
-
-      const softwares = job.softwares.software.map(function (s) {
-        return s.trim();
+      
+      // $.map() loops over the properties of the 'job' object, which cotains the API information of each job
+      console.log(job)
+      $.map(job, function(value, key) {
+        // 'value' is the API data
+        // 'key' is the property name (e.g., 'company' or 'period')
+        
+        // Use 'key' to select elements with matching class names and set their text content
+        // Find the nth job article, match the html elements to the key and input the data
+        $(`#experience article:eq(${i}) .${key}`).text(value);
       });
-      const duties = job.duties.duty.map(function (d) {
-        return d.trim();
-      });
-
-      $.each(softwares, function (j, software) {
-        // const softwareElement = $("#experience article .softwares ul:eq(" + i + "):eq(" + j + ")");
-        // const li = $('<li>').text(software);
-        // softwaresElement.softwares.eq(j).append(li);
-        // softwareElement.text(job['softwares']['software'][j]);
-        // TODO: Add code in the "createSectionElements" for the softwares
-        // TODO: Add code in the "createSectionElements" for the duties
-      })
     });
-
   });
 });
 
