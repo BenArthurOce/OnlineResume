@@ -33,87 +33,125 @@ function createSectionElements(resumeData, sectionId, templateId, sectionName, a
   };
 
 
-// Function to update HTML elements with JSON data
-function updateSectionElements(jsonData, elementMappings, sectionId, sectionName, articleName) {
-  console.log(`function: updateSectionElements`);
-  for (const section in elementMappings) {
-    const sectionData = jsonData[section];
-    const sectionElements = elementMappings[section];
-
-    for (const key in sectionElements) {
-      const element = sectionElements[key];
-
-      // Check if the element exists in the DOM and has a corresponding key in JSON data
-      if (element && sectionData[key]) {
-        if (element.tagName === 'A') {
-          // Handle anchor tags (e.g., links)
-          element.href = sectionData[key];
-        } else if (element.tagName === 'IMG') {
-          // Handle image tags
-          element.src = sectionData[key];
-        } else {
-          // Update text content for other elements
-          element.textContent = sectionData[key];
-        }
-      }
-    }
-  }
-}
-
-
-
 $(document).ready(function () {
   console.log(`function: documentREADY`)
 
   fetchJSONData(function(resumeData) {
 
-    const elements = {
-      'personal-info': {
+    // https://www.w3schools.com/jquery/jquery_traversing.asp
+    const section_selectors = {
+      personal_info: '#personal-info',
+      my_competencies: '#my-competencies',
+      education_history: '#education-history',
+      experience_history: '#experience-history',
+      portfolio_history: '#portfolio-history',
+    };
+
+    const element_selectors = {
+      personal_info: {
         email: $('.personal-email'),
         linkedin: $('.personal-linkedin'),
         github: $('.personal-github'),
         background: $('.my-background'),
         introduction: $('.my-introduction'),
       },
-      'my-competencies': {
-        competencySoftware: $('.competency-software'),
-        competencyScoreDisplayDivs: $('.competency-score-container'),
+      my_competencies: {
+        competencies: $('.competency'),
       },
-      'education-history': {
-        degree: $('.degree'),
-        institution: $('.institution'),
+      education_history: {
+        education: $('.education'),
+        // degrees: $('.degree'),
+        // institutions: $('.institution'),
       },
-      'experience-history': {
-        company: $('.company'),
-        address: $('.address'),
-        position: $('.position'),
-        period: $('.period'),
-        softwares: $('.softwares'),
-        duties: $('.duties'),
+      experience_history: {
+        job: $('.job'),
+        // companies: $('.company'),
+        // addresses: $('.address'),
+        // positions: $('.position'),
+        // periods: $('.period'),
+        // softwares: $('.softwares'),
+        // duties: $('.duties'),
       },
-      'portfolio-history': {
-        projectName: $('.project-name'),
-        projectLang: $('.project-lang'),
-        projectDesc: $('.project-desc'),
-        projectUrl: $('.project-url a'),
-        projectImages: $('.project-image'),
+      portfolio_history: {
+        project: $('.project'),
+        // projectNames: $('.project-name'),
+        // projectLangs: $('.project-lang'),
+        // projectDescs: $('.project-desc'),
+        // projectUrls: $('.project-url a'),
+        // projectImages: $('.project-image'),
       },
     };
-   
-
+    
     // add the HTML elements for each section
     createSectionElements(resumeData, "#competencies", "#template-competency", "my-competencies", "competency");
     createSectionElements(resumeData, "#education", "#template-education", "education-history", "education");
     createSectionElements(resumeData, "#experience", "#template-experience", "experience-history" ,"job");
     createSectionElements(resumeData, "#portfolio", "#template-portfolio", "portfolio-history" ,"project");
 
-    console.log(resumeData)
-    console.log(elements)
-    // From the JSON file, add the data into the created HTML elements
-    updateSectionElements(resumeData, elements, "#competencies", "my-competencies", "competency");
-    updateSectionElements(resumeData, elements, "#education", "education-history", "education");
-    updateSectionElements(resumeData, elements, "#experience", "experience-history", "job");
-    updateSectionElements(resumeData, elements, "#portfolio", "portfolio-history", "project");
+
+    // Personal Info
+    const personalInfo = resumeData['personal-info'];
+
+    $.map(personalInfo, function(value, key) {
+      $(`.${key}`).text(value);
+    });
+
+    // Competencies
+    // const competencies = resumeData['my-competencies']['competency'];
+
+    // const competencyHtml = $.map(competencies, function(competency) {
+    //   return `<div>${competency['competency-software']}: ${competency['competency-score']}</div>`;
+    // });
+    
+    // $('.competency').html(competencyHtml.join(''));
+
+    // Education
+    const educationData = resumeData['education-history']['education'];
+
+    $.each(educationData, function (i, education) {
+    
+      let institutionElement = $("#education article .institution:eq(" + i + ")");
+      let degreeElement = $("#education article .degree:eq(" + i + ")");
+    
+      institutionElement.text(education['institution']);
+      degreeElement.text(education['degree']);
+    });
+
+
+    // Expeprience
+    const experienceData = resumeData['experience-history']['job'];
+
+    $.each(experienceData, function (i, job) {
+    
+      let companyElement = $("#experience article .company:eq(" + i + ")");
+      let addressElement = $("#experience article .address:eq(" + i + ")");
+      let positionElement = $("#experience article .position:eq(" + i + ")");
+      let periodElement = $("#experience article .period:eq(" + i + ")");
+      let softwaresElement = $("#experience article .softwares:eq(" + i + ")");
+      let dutiesElement = $("#experience article .duties:eq(" + i + ")");
+    
+      companyElement.text(job['company']);
+      addressElement.text(job['address']);
+      positionElement.text(job['position']);
+      periodElement.text(job['period']);
+
+      const softwares = job.softwares.software.map(function (s) {
+        return s.trim();
+      });
+      const duties = job.duties.duty.map(function (d) {
+        return d.trim();
+      });
+
+      $.each(softwares, function (j, software) {
+        // const softwareElement = $("#experience article .softwares ul:eq(" + i + "):eq(" + j + ")");
+        // const li = $('<li>').text(software);
+        // softwaresElement.softwares.eq(j).append(li);
+        // softwareElement.text(job['softwares']['software'][j]);
+        // TODO: Add code in the "createSectionElements" for the softwares
+        // TODO: Add code in the "createSectionElements" for the duties
+      })
+    });
+
   });
 });
 
