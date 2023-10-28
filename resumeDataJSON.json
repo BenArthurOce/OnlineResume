@@ -1,5 +1,5 @@
 {
-      "personal-info": {
+      "aboutMe": {
          "personal-email": "mailto:benjaminmatthewarthur@gmail.com",
          "personal-phone": "MyPhone",
          "personal-linkedin": "https://www.linkedin.com/in/benjamin-arthur-125b07ab/",
@@ -7,31 +7,31 @@
          "my-background": "Background: Programming, Accounting, Finance",
          "my-introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
       },
-      "my-competencies": {
+      "myCompetencies": {
          "competency": [
             {
-               "competency-software": "Excel, VBA",
-               "competency-score": "10"
+               "competencySoftware": "Excel, VBA",
+               "competencyScore": "10"
             },
             {
-               "competency-software": "Python",
-               "competency-score": "9"
+               "competencySoftware": "Python",
+               "competencyScore": "9"
             },
             {
-               "competency-software": "SQL",
-               "competency-score": "7"
+               "competencySoftware": "SQL",
+               "competencyScore": "7"
             },
             {
-               "competency-software": "C#",
-               "competency-score": "6"
+               "competencySoftware": "C#",
+               "competencyScore": "6"
             },
             {
-               "competency-software": "HTML, Javascript",
-               "competency-score": "5"
+               "competencySoftware": "HTML, Javascript",
+               "competencyScore": "5"
             }
          ]
       },
-      "education-history": {
+      "myEducation": {
          "education": [
             {
                "degree": "Certificate III in Computer Information Technology",
@@ -51,7 +51,7 @@
             }
          ]
       },
-      "experience-history": {
+      "myExperience": {
          "job": [
             {
                "company": "Interfi Systems",
@@ -192,7 +192,7 @@
             }
          ]
       },
-      "portfolio-history": {
+      "myPortfolio": {
          "project": [
             {
                "project-name": "Resume Website",

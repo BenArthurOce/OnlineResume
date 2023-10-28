@@ -4,29 +4,23 @@
 /**** Dynamically add Elements ********/
 /**************************************/
 // Function to add template article content for a section
-function addSectionContent(sectionId, templateId, sectionName, articleName) {
-  $.getJSON('resumeDataJSON.json', function(data) {
+function addSectionContent(jsonData, sectionId, templateId, sectionName, articleName) {
 
-    const section = $(sectionId);
-    const template = $(templateId);
-    const templateContent = template.html();
-    const dataToAdd = data[sectionName][articleName]
+  const section = document.querySelector(`#${sectionId}`);
+  const template = document.querySelector(`#${templateId}`);
 
-    // for each article, add the template element
+  if (section && template) {
+    const templateContent = template.innerHTML;
+    const dataToAdd = jsonData[sectionName][articleName];
+
+    // For each article, add the template element
     for (let i = 0; i < dataToAdd.length; i++) {
-      section.append(templateContent);
-    }
-  });
+      const newElement = document.createElement('div');
+      newElement.innerHTML = templateContent;
+      section.appendChild(newElement);
+    };
+  };
 };
-
-
-$(document).ready(function () {
-  // Call the addSectionContent function for each section
-  addSectionContent("#competencies", "#template-competency", "my-competencies", "competency");
-  addSectionContent("#education", "#template-education", "education-history", "education");
-  addSectionContent("#experience", "#template-experience", "experience-history" ,"job");
-  addSectionContent("#portfolio", "#template-portfolio", "portfolio-history" ,"project");
-});
 
 
 /******************************/
@@ -43,6 +37,15 @@ $(document).ready(function () {
       }, delay);
     };
   };
+}
+);
+
+$(document).ready(function () {
+  runCode();
+})
+
+
+
 
   /******************************/
   /**** Scrolling Nav Bar ********/
@@ -75,313 +78,266 @@ $(document).ready(function () {
   $(document).on('scroll', debounce(updateActiveNavigation, 200));
 
 
-/******************************/
-/******** JSON to HTML ********/
-/******************************/
-$.getJSON('resumeDataJSON.json', function (resumeData) {
-    console.log('Fetching: resumeDataJSON.json');
+function runCode() {
+  console.log("RUNNING CODE")
 
-    //
-    // PERSONAL INFO
-    //
-    const personalInfo = resumeData['personal-info'];
+  fetch('resumeDataJSON.json')
+  .then(response => response.json())
+  .then(resumeData => {
 
-    // PERSONAL INFO HTML ELEMENTS
-    const personalInfoElements = {
-      email: $('.email-icon'),
-      linkedin: $('.linkedin-icon'),
-      github: $('.github-icon'),
-      background: $('.my-background'),
-      introduction: $('.my-introduction'),
+    addSectionContent(resumeData, "myCompetencies", "template-competency", "myCompetencies", "competency");
+    addSectionContent(resumeData, "myEducation", "template-education", "myEducation", "education");
+    addSectionContent(resumeData, "myExperience", "template-experience", "myExperience" ,"job");
+    addSectionContent(resumeData, "myPortfolio", "template-portfolio", "myPortfolio" ,"project");
+
+    const domMapping = {
+      personalInfo: {
+        email: document.querySelector('.email-icon')
+        ,phone: document.querySelector('.personal-phone')
+        ,linkedin: document.querySelector('.linkedin-icon')
+        ,github: document.querySelector('.github-icon')
+        ,background: document.querySelector(".my-background")
+        ,introduction: document.querySelector(".my-introduction")
+      }
+      ,myCompetencies: {
+        competencySoftware: document.querySelectorAll(".competencySoftware")
+        ,competencyScore: document.querySelectorAll(".competencyScore-container")
+      }
+      ,myEducation: {
+        degree: document.querySelectorAll(".institution")
+        ,institution: document.querySelectorAll(".degree")
+      }
+      ,myExperience: {
+        company: document.querySelectorAll(".company")
+        ,address: document.querySelectorAll(".address")
+        ,position: document.querySelectorAll(".position")
+        ,period: document.querySelectorAll(".period")
+        ,softwares: document.querySelectorAll(".softwares")
+        ,duties: document.querySelectorAll(".duties")
+      }
+      ,myPortfolio: {
+        projectName: document.querySelectorAll(".project-name")
+        ,projectLang: document.querySelectorAll(".project-lang")
+        ,projectDesc: document.querySelectorAll(".project-desc")
+        ,projectUrl: document.querySelectorAll(".project-url")
+        ,projectGallery: document.querySelectorAll(".image-slideshow-container")
+      }
     };
 
-    // Update HTML elements with personal info data
-    personalInfoElements.background.text(personalInfo['my-background']);
-    personalInfoElements.introduction.text(personalInfo['my-introduction']);
+    console.log(`DOMMAPPING:`)
+    console.log(domMapping)
 
-    // Add links to social media icons
-    personalInfoElements.linkedin.click(function () {
-      window.location.href = personalInfo['personal-linkedin'];
-    });
 
-    personalInfoElements.email.click(function () {
-      window.location.href = personalInfo['personal-email'];
-    });
 
-    personalInfoElements.github.click(function () {
-      window.location.href = personalInfo['personal-github'];
-    });
+    // // PERSONAL INFO
+    // const personalInfo = resumeData["aboutMe"];
 
-    //
-    // COMPETENCIES
-    //
-    const myCompetencies = resumeData['my-competencies'];
-    const competencies = myCompetencies['competency'];
+    // // PERSONAL INFO HTML ELEMENTS
+    // const personalInfoElements = {
+    //     email: document.querySelector('.email-icon'),
+    //     //   phone: document.querySelector('.personal-phone'),
+    //     linkedin: document.querySelector('.linkedin-icon'),
+    //     github: document.querySelector('.github-icon'),
+    //     background: document.querySelector('.my-background'),
+    //     introduction: document.querySelector('.my-introduction')
+    // };
 
-    // COMPETENCIES HTML ELEMENTS
-    const competencyElements = {
-      competencySoftware: $('.competency-software'),
-      competencyScoreDisplayDivs: $('.competency-score-container'),
-    };
+    // // Update HTML elements with personal info data
+    // // personalInfoElements.phone.textContent = personalInfo["personal-phone"];
+    // personalInfoElements.background.textContent = personalInfo["my-background"];
+    // personalInfoElements.introduction.textContent = personalInfo["my-introduction"];
 
-    competencies.forEach(function (competency, i) {
-      const singleSoftware = competency['competency-software'];
-      const singleScore = competency['competency-score'];
+    // // Add links to social media icons
+    // personalInfoElements.linkedin.addEventListener('click', function() {
+    //     window.location.href = personalInfo["personal-linkedin"];
+    // });
+
+    // personalInfoElements.email.addEventListener('click', function() {
+    //     window.location.href = personalInfo["personal-email"];
+    // });
+
+    // personalInfoElements.github.addEventListener('click', function() {
+    //     window.location.href = personalInfo["personal-github"]; 
+    // });
+
+
+
+// COMPENTENCY
+    resumeData.myCompetencies.competency.forEach((competency, i) => {
 
       // Update HTML elements for this competency
-      competencyElements.competencySoftware.eq(i).text(singleSoftware);
+      domMapping.myCompetencies.competencySoftware[i].textContent = competency["competencySoftware"];
+      const softwareScore = parseInt(competency.competencyScore);
 
-      const competencyLevel = parseInt(singleScore); // Convert to an integer
-      const levelDiv = competencyElements.competencyScoreDisplayDivs.eq(i);
-      levelDiv.html(''); // Clear previous circles
-
-      for (let i = 0; i < 10; i++) {
-        const circle = $('<div>').addClass('circle');
-        if (i < competencyLevel) {
-          circle.addClass('active');
+      // Add circle elements
+      for (let j = 0; j < 10; j++) {
+        const circle = document.createElement('div');
+        circle.classList.add('circle');
+        if (j < softwareScore) {
+          circle.classList.add('active');
         }
-        levelDiv.append(circle);
+        else {
+          circle.classList.remove('active'); // Remove 'active' class if not needed
+        }
+        domMapping.myCompetencies.competencyScore[i].appendChild(circle);
       }
     });
 
-    //
-    // EDUCATION
-    //
-    const educationHistory = resumeData['education-history'];
-    const educations = educationHistory['education'];
 
-    // EDUCATION HTML ELEMENTS
-    const educationElements = {
-      degree: $('.degree'),
-      institution: $('.institution'),
-    };
-
-    educations.forEach(function (education, i) {
-      const degree = education['degree'];
-      const institution = education['institution'];
+// EDUCATION
+    resumeData.myEducation.education.forEach((education, i) => {
 
       // Update HTML elements for this education
-      educationElements.degree.eq(i).text(degree);
-      educationElements.institution.eq(i).text(institution);
+      domMapping.myEducation.degree[i].textContent = education["degree"];
+      domMapping.myEducation.institution[i].textContent = education["institution"];
     });
 
-    //
-    // EXPERIENCE
-    //
-    const experienceHistory = resumeData['experience-history'];
-    const jobs = experienceHistory['job'];
 
-    // EXPERIENCE HTML ELEMENTS
-    const experienceElements = {
-      company: $('.company'),
-      address: $('.address'),
-      position: $('.position'),
-      period: $('.period'),
-      softwares: $('.softwares'),
-      duties: $('.duties'),
-    };
-
-    jobs.forEach(function (job, i) {
-      const company = job['company'];
-      const address = job['address'];
-      const position = job['position'];
-      const period = job['period'];
-      const softwares = job.softwares.software.map(function (s) {
-        return s.trim();
-      });
-      const duties = job.duties.duty.map(function (d) {
-        return d.trim();
-      });
+// EXPERIENCE
+    resumeData.myExperience.job.forEach((job, i) => {
 
       // Update HTML elements for this job
-      experienceElements.company.eq(i).text(company);
-      experienceElements.address.eq(i).text(address);
-      experienceElements.position.eq(i).text(position);
-      experienceElements.period.eq(i).text(period);
+      domMapping.myExperience.company[i].textContent = job["company"];
+      domMapping.myExperience.address[i].textContent = job["address"];
+      domMapping.myExperience.position[i].textContent = job["position"];
+      domMapping.myExperience.period[i].textContent = job["period"];
 
-      experienceElements.softwares.eq(i).html(''); // Clear previous items
-      softwares.forEach(function (s) {
-        const li = $('<li>').text(s);
-        experienceElements.softwares.eq(i).append(li);
+      // Add softwares
+      const softwares = Array.from(job.softwares.software).map(s => s.trim());
+      domMapping.myExperience.softwares[i].innerHTML = ''; // Clear previous items
+      softwares.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        domMapping.myExperience.softwares[i].appendChild(li);
       });
 
-      experienceElements.duties.eq(i).html(''); // Clear previous items
-      duties.forEach(function (d) {
-        const li = $('<li>').text(d);
-        experienceElements.duties.eq(i).append(li);
+      // Add duties
+      const duties = Array.from(job.duties.duty).map(s => s.trim());
+      domMapping.myExperience.duties[i].innerHTML = ''; // Clear previous items
+      duties.forEach(d => {
+          const li = document.createElement('li');
+          li.textContent = d;
+          domMapping.myExperience.duties[i].appendChild(li);
       });
     });
+    
 
-    //
-    // PORTFOLIO
-    //
-    const portfolioHistory = resumeData['portfolio-history'];
-    const projects = portfolioHistory['project'];
+// PORTFOLIO
+    resumeData.myPortfolio.project.forEach((project, i) => {
 
-    // PORTFOLIO HTML ELEMENTS
-    const portfolioElements = {
-      projectName: $('.project-name'),
-      projectLang: $('.project-lang'),
-      projectDesc: $('.project-desc'),
-      projectUrl: $('.project-url a'),
-      mobileGithubIcons: $('.mob-icon.fa-github'),
-      projectImages: $('.image-slideshow-container'),
+      domMapping.myPortfolio.projectName[i].textContent = project["project-name"];
+      domMapping.myPortfolio.projectLang[i].textContent = project["project-lang"];
+      domMapping.myPortfolio.projectDesc[i].textContent = project["project-desc"];
+      domMapping.myPortfolio.projectUrl[i].textContent = project["project-url"];
+
+      // Add images
+      const images = Array.from(project.project_images.project_image).map(j => j.trim());
+      createProjectGallery(images, domMapping.myPortfolio.projectGallery[i]);
+    });
+
+
+// ADD IMAGES TO GALLERY
+    function createProjectGallery(imageArray, gallery) {
+      imageArray.forEach((image, index) => {
+        const img = document.createElement('img');
+        img.src = image;
+        img.style.display = index === 0 ? 'block' : 'none';   // Hide all images except the first one when the page loads
+        // showSlides(1, 1)
+        gallery.appendChild(img);
+      });
     };
 
-    console.log(portfolioElements)
-    projects.forEach(function (project, i) {
-      const name = project['project-name'];
-      const lang = project['project-lang'];
-      const url = project['project-url'];
-      const desc = project['project-desc'];
-      const images = project.project_images.project_image.map(function (j) {
-        return j.trim();
-      });
+// GALLERY FUNCTION
+    document.querySelectorAll(".prev").forEach(el => el.addEventListener('click',function (e) {
+      const target = e.target
+      const gallery = target.closest('.image-slideshow-container');
+      showSlides(-1, gallery);
+    }));
 
-      // Update HTML elements for this project
-      portfolioElements.projectName.eq(i).text(name);
-      portfolioElements.projectLang.eq(i).text(lang);
-      portfolioElements.projectDesc.eq(i).text(desc);
+    document.querySelectorAll(".next").forEach(el => el.addEventListener('click',function (e) {
+      const target = e.target
+      const gallery = target.closest('.image-slideshow-container');
+      showSlides(1, gallery);
+    }));
 
-      // Add GitHub link to the element (desktop)
-      portfolioElements.projectUrl.eq(i).attr('href', url);
-      portfolioElements.projectUrl.eq(i).attr('target', '_blank'); // Open in new window
+    function showSlides(n, containerElement) {
+      let slides = containerElement.querySelectorAll('img');
 
-      // Add Github link to project icon (mobile)
-      portfolioElements.mobileGithubIcons.eq(i).click(function () {
-        window.open(url, '_blank');
-      });
+      let inx
+      for (let i = 0; i < slides.length; i++) {
+        if (slides[i].style.display === 'block') {
+          inx = i   // current active slide
+        };
+      };
 
+      let nxt = inx+n;  // index number of the next slide to come up
+      if (inx + n >= slides.length) {nxt = 0};  // if the next slide was to go over max slides, return to 0
+      if (inx + n < 0) {nxt = slides.length-1}; // if the prev slide was to go under 0, return the max length number
 
-        // Update Image Lists
-        portfolioElements.projectImages[i].innerHTML = ''; // Clear previous images
-        images.forEach(s => {
-            const img = document.createElement('img');
-            img.src = s;
-            img.addEventListener('click', () => imageWasClicked());
-            portfolioElements.projectImages[i].appendChild(img);
-        });
-        updateDisplayedImage();
-        });
-        createGallery();
-    });
-
-
-
-/******************************/
-/****** Image Functions *******/
-/******************************/
-function createGallery() {
-    console.log("Function: createGallary")
-  
-    const galleries = document.querySelectorAll('.image-slideshow-container');
-    const currentImageIndexes = new Array(galleries.length).fill(0);
-  
-    // Hide all images except the first one when the page loads
-    galleries.forEach(gallery => {
-      const images = gallery.querySelectorAll('img');
-      images.forEach((image, index) => {
-        image.style.display = index === 0 ? 'block' : 'none';
-      });
-    });
-  
-    document.addEventListener("click", event => {
-        console.log("EventListener: createGallary")
-      const target = event.target;
-      if (target.tagName === "IMG") {
-        const rect = target.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const gallery = target.closest('.image-slideshow-container');
-        const galleryIndex = Array.from(galleries).indexOf(gallery);
-        const images = gallery.querySelectorAll('img');
-  
-        if (x < rect.width / 2) {
-          currentImageIndexes[galleryIndex] = (currentImageIndexes[galleryIndex] - 1 + images.length) % images.length;
-          console.log(`Clicked left side of image in gallery ${galleryIndex}`);
-        } else {
-          currentImageIndexes[galleryIndex] = (currentImageIndexes[galleryIndex] + 1) % images.length;
-          console.log(`Clicked right side of image in gallery ${galleryIndex}`);
-        }
-  
-        showImage(gallery, currentImageIndexes[galleryIndex]);
-      }
-    });
-  
-    function showImage(gallery, imageIndex) {
-        console.log("Function: showImage")
-      const images = gallery.querySelectorAll('img');
-      images.forEach((image, index) => {
-        image.style.display = index === imageIndex ? 'block' : 'none';
-      });
-    }
-  }
-  
-  function imageWasClicked() {
-    console.log("Function: imageWasClicked")
-    console.log("an image was clicked");
-  }
-  
-  function updateDisplayedImage() {}
-  
-
-  //////////////////////////////////
-  ////////MOBILE SLIDESHOW//////////
-  //////////////////////////////////
-  function openSlideshow(index) {
-    console.log("Function: openSlideshow")
-    const slideshows = document.querySelectorAll('.portfolio-image-container');
-    const slideContainers = document.querySelectorAll('.image-slideshow-container');
-  
-    slideshows[index].style.display = "block";
-    slideshows[index].classList.add('active');
-  }
-  
-  function showImage(index) {
-    console.log("Function: showImage")
-    let images = document.getElementById("image-slideshow-container").getElementsByTagName("img");
-  
-    for (let i = 0; i < images.length; i++) {
-      images[i].style.display = "none";
-    }
-  
-    images[index].style.display = "block";
-  }
-  
-  //////////////////////////////////
-  ////////MOBILE GITHUB/////////////
-  //////////////////////////////////
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log("addEventListener: DomContentLoaded")
-    let imageContainers = document.querySelectorAll('.portfolio-image-container');
-  
-    document.addEventListener('touchstart', function(event) {
-    console.log("addEventListener: touchstart")
-      let isGallery = false;
-  
-      for (let i = 0; i < imageContainers.length; i++) {
-        if (event.target === imageContainers[i] || imageContainers[i].contains(event.target)) {
-          isGallery = true;
-          break;
-        }
-      }
-  
-      if (!isGallery) {
-        console.log("User touched outside the image container");
-        closeGallery();
-      }
-    });
-  
-    function closeGallery() {
-        console.log("Function: closeGallery")
-      for (let i = 0; i < imageContainers.length; i++) {
-        imageContainers[i].style.display = "none";
-        imageContainers[i].classList.remove('active');
-      }
-      console.log("Gallery closed");
+      slides[inx].style.display = "none";   // current visible image is hidden
+      slides[nxt].style.display = "block";  // next image is visible
     }
   });
+};  // End of runCode()
+
+
+runCode()
+
+
+//   //////////////////////////////////
+//   ////////MOBILE SLIDESHOW//////////
+//   //////////////////////////////////
+//   function openSlideshow(index) {
+//     console.log("Function: openSlideshow")
+//     const slideshows = document.querySelectorAll('.portfolio-image-container');
+//     const slideContainers = document.querySelectorAll('.image-slideshow-container');
   
-});
-
-
+//     slideshows[index].style.display = "block";
+//     slideshows[index].classList.add('active');
+//   }
+  
+//   function showImage(index) {
+//     console.log("Function: showImage")
+//     let images = document.getElementById("image-slideshow-container").getElementsByTagName("img");
+  
+//     for (let i = 0; i < images.length; i++) {
+//       images[i].style.display = "none";
+//     }
+  
+//     images[index].style.display = "block";
+//   }
+  
+//   //////////////////////////////////
+//   ////////MOBILE GITHUB/////////////
+//   //////////////////////////////////
+  
+//   document.addEventListener('DOMContentLoaded', function() {
+//     console.log("addEventListener: DomContentLoaded")
+//     let imageContainers = document.querySelectorAll('.portfolio-image-container');
+  
+//     document.addEventListener('touchstart', function(event) {
+//     console.log("addEventListener: touchstart")
+//       let isGallery = false;
+  
+//       for (let i = 0; i < imageContainers.length; i++) {
+//         if (event.target === imageContainers[i] || imageContainers[i].contains(event.target)) {
+//           isGallery = true;
+//           break;
+//         }
+//       }
+  
+//       if (!isGallery) {
+//         console.log("User touched outside the image container");
+//         closeGallery();
+//       }
+//     });
+  
+//     function closeGallery() {
+//         console.log("Function: closeGallery")
+//       for (let i = 0; i < imageContainers.length; i++) {
+//         imageContainers[i].style.display = "none";
+//         imageContainers[i].classList.remove('active');
+//       }
+//       console.log("Gallery closed");
+//     }
+//   });

@@ -17,15 +17,17 @@
 </head>
 
 
+
+
 <body>
   <div class="wrapper">
     <nav class="sidebar"> <!--Sidebar -->
       <div class="navlink-container">   <!--Sidebar Navigation Links-->
-        <a href="#section-about-me" class="nav-link"><i class="sidebar-icon fa fa-child"></i><span class="link-text">About</span></a>
-        <a href="#competencies" class="nav-link"><i class="sidebar-icon fa fa-star"></i><span class="link-text">Competencies</span></a>
-        <a href="#education" class="nav-link"><i class="sidebar-icon fa fa-book"></i><span class="link-text">Education</span></a>
-        <a href="#experience" class="nav-link"><i class="sidebar-icon fa fa-briefcase"></i><span class="link-text">Experience</span></a>
-        <a href="#portfolio" class="nav-link"><i class="sidebar-icon fa fa-file"></i><span class="link-text">Portfolio</span></a>
+        <a href="#aboutMe" class="nav-link"><i class="sidebar-icon fa fa-child"></i><span class="link-text">About</span></a>
+        <a href="#myCompetencies" class="nav-link"><i class="sidebar-icon fa fa-star"></i><span class="link-text">Competencies</span></a>
+        <a href="#myEducation" class="nav-link"><i class="sidebar-icon fa fa-book"></i><span class="link-text">Education</span></a>
+        <a href="#myExperience" class="nav-link"><i class="sidebar-icon fa fa-briefcase"></i><span class="link-text">Experience</span></a>
+        <a href="#myPortfolio" class="nav-link"><i class="sidebar-icon fa fa-file"></i><span class="link-text">Portfolio</span></a>
       </div>
       <div class="navicon-container">   <!--External Website Icons-->
         <i class="fab fa-linkedin"></i>
@@ -39,7 +41,7 @@
     <div class="content-master-container" id="content-master-container">
       <h1>Ben Arthur Resume</h1>
 
-      <section id="section-about-me">
+      <section id="aboutMe">
         <h2>Introduction:</h2>
         <article>
           <h3 class="my-background"></h3><br>
@@ -47,22 +49,22 @@
         </article>
       </section>
 
-      <section id="competencies">
+      <section id="myCompetencies">
         <h2>Competencies:</h2>
           <!-- Each article is added from template tag -->
       </section>
 
-      <section id="education">
+      <section id="myEducation">
           <h2>Education:</h2>
           <!-- Each article is added from template tag -->
       </section>
 
-      <section id="experience">
+      <section id="myExperience">
           <h2>Experience:</h2>
           <!-- Each article is added from template tag -->
       </section>
 
-      <section id="portfolio">
+      <section id="myPortfolio">
         <h2>Portfolio:</h2>
           <!-- Each article is added from template tag -->
       </section>
@@ -74,9 +76,9 @@
   <template id="template-competency">
     <article class="template-competency-article">
       <div class="competency-software-container">
-        <h3 class="competency-software"></h3>
+        <h3 class="competencySoftware"></h3>
       </div>
-      <div class="competency-score-container"></div>
+      <div class="competencyScore-container"></div>
     </article>    
   </template>
 
@@ -110,10 +112,9 @@
       </div>
       <div class="portfolio-image-container">
           <div class="image-slideshow-container">
-            <a class="prev" onclick="plusSlides(-1)">❮</a>
-            <a class="next" onclick="plusSlides(1)">❯</a>
+            <a class="prev"></a>
+            <a class="next"></a>
           </div>
-          <p class="portfolio-image-caption">(click on side of image to navigate)</p>
       </div>
       <div class="mobile-allicon-container">
         <i class="mob-icon fa-image" onclick="openSlideshow(0)"></i>
