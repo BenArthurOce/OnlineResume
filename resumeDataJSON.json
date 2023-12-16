@@ -1,11 +1,11 @@
 {
       "aboutMe": {
-         "personal-email": "mailto:benjaminmatthewarthur@gmail.com",
-         "personal-phone": "MyPhone",
-         "personal-linkedin": "https://www.linkedin.com/in/benjamin-arthur-125b07ab/",
-         "personal-github": "https://github.com/BenArthurOce",
-         "my-background": "Background: Programming, Accounting, Finance",
-         "my-introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
+         "email": "mailto:benjaminmatthewarthur@gmail.com",
+         "phone": "MyPhone",
+         "linkedin": "https://www.linkedin.com/in/benjamin-arthur-125b07ab/",
+         "github": "https://github.com/BenArthurOce",
+         "background": "Background: Programming, Accounting, Finance",
+         "introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
       },
       "myCompetencies": {
          "competency": [

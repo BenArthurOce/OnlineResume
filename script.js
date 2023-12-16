@@ -1,5 +1,9 @@
 'use strict';
 
+const navIconElements = document.querySelectorAll('.navlink-container a');
+const navTextElements = document.querySelectorAll('.navlink-container i');
+const sectionTitles = document.querySelectorAll('section h2');
+
 /**************************************/
 /**** Dynamically add Elements ********/
 /**************************************/
@@ -37,45 +41,48 @@ $(document).ready(function () {
       }, delay);
     };
   };
-}
-);
+});
 
 $(document).ready(function () {
   runCode();
-})
+});
 
 
 
 
-  /******************************/
-  /**** Scrolling Nav Bar ********/
-  /******************************/
-  function getVisibleSection() {
-    let minDistance = Infinity;
-    let visibleSectionIndex = -1;
+/******************************/
+/**** Scrolling Nav Bar ********/
+/******************************/
+function getVisibleSection() {
+  let minDistance = Infinity;
+  let visibleSectionIndex = -1;
 
-    $('section h2').each(function (index) {
-      const rect = $(this).get(0).getBoundingClientRect();
-      const distance = Math.abs(rect.top);
+  sectionTitles.forEach((sectionTitle, index) => {
+    const rect = sectionTitle.getBoundingClientRect();
+    const distance = Math.abs(rect.top);
 
-      if (distance < minDistance) {
-        minDistance = distance;
-        visibleSectionIndex = index;
-      }
-    });
+    if (distance < minDistance) {
+      minDistance = distance;
+      visibleSectionIndex = index;
+    };
+  });
 
-    return visibleSectionIndex;
-  }
+  return visibleSectionIndex;
+};
 
-  function updateActiveNavigation() {
-    const visibleSectionIndex = getVisibleSection();
+function updateActiveNavigation() {
+  const visibleSectionIndex = getVisibleSection();
 
-    $('.navlink-container span').each(function (index) {
-      $(this).closest('span').toggleClass('active', index === visibleSectionIndex);
-    });
-  }
+  navTextElements.forEach((navElement, index) => {
+    navElement.closest('a').classList.toggle('active', index === visibleSectionIndex);
+  });
 
-  $(document).on('scroll', debounce(updateActiveNavigation, 200));
+  navIconElements.forEach((navElement, index) => {
+    navElement.closest('i').classList.toggle('active', index === visibleSectionIndex);
+  });
+};
+
+document.addEventListener('scroll', debounce(updateActiveNavigation, 200));
 
 
 function runCode() {
@@ -90,76 +97,65 @@ function runCode() {
     addSectionContent(resumeData, "myExperience", "template-experience", "myExperience" ,"job");
     addSectionContent(resumeData, "myPortfolio", "template-portfolio", "myPortfolio" ,"project");
 
-    const domMapping = {
-      personalInfo: {
+const domMapping = {
+    aboutMe: {
         email: document.querySelector('.email-icon')
         ,phone: document.querySelector('.personal-phone')
         ,linkedin: document.querySelector('.linkedin-icon')
         ,github: document.querySelector('.github-icon')
         ,background: document.querySelector(".my-background")
         ,introduction: document.querySelector(".my-introduction")
-      }
-      ,myCompetencies: {
+    }
+    ,myCompetencies: {
         competencySoftware: document.querySelectorAll(".competencySoftware")
         ,competencyScore: document.querySelectorAll(".competencyScore-container")
-      }
-      ,myEducation: {
+    }
+    ,myEducation: {
         degree: document.querySelectorAll(".institution")
         ,institution: document.querySelectorAll(".degree")
-      }
-      ,myExperience: {
+    }
+    ,myExperience: {
         company: document.querySelectorAll(".company")
         ,address: document.querySelectorAll(".address")
         ,position: document.querySelectorAll(".position")
         ,period: document.querySelectorAll(".period")
         ,softwares: document.querySelectorAll(".softwares")
         ,duties: document.querySelectorAll(".duties")
-      }
-      ,myPortfolio: {
+    }
+    ,myPortfolio: {
         projectName: document.querySelectorAll(".project-name")
         ,projectLang: document.querySelectorAll(".project-lang")
         ,projectDesc: document.querySelectorAll(".project-desc")
         ,projectUrl: document.querySelectorAll(".project-url")
         ,projectGallery: document.querySelectorAll(".image-slideshow-container")
-      }
-    };
+    }
+};
 
     console.log(`DOMMAPPING:`)
     console.log(domMapping)
 
 
+// PERSONAL INFO
+    domMapping.aboutMe.email = resumeData.aboutMe.email
+    domMapping.aboutMe.phone = resumeData.aboutMe.phone
+    domMapping.aboutMe.linkedin = resumeData.aboutMe.linkedin
+    domMapping.aboutMe.github = resumeData.aboutMe.github
+    domMapping.aboutMe.background.textContent = resumeData.aboutMe.background
+    domMapping.aboutMe.introduction.textContent = resumeData.aboutMe.introduction
 
-    // // PERSONAL INFO
-    // const personalInfo = resumeData["aboutMe"];
-
-    // // PERSONAL INFO HTML ELEMENTS
-    // const personalInfoElements = {
-    //     email: document.querySelector('.email-icon'),
-    //     //   phone: document.querySelector('.personal-phone'),
-    //     linkedin: document.querySelector('.linkedin-icon'),
-    //     github: document.querySelector('.github-icon'),
-    //     background: document.querySelector('.my-background'),
-    //     introduction: document.querySelector('.my-introduction')
-    // };
-
-    // // Update HTML elements with personal info data
-    // // personalInfoElements.phone.textContent = personalInfo["personal-phone"];
-    // personalInfoElements.background.textContent = personalInfo["my-background"];
-    // personalInfoElements.introduction.textContent = personalInfo["my-introduction"];
 
     // // Add links to social media icons
-    // personalInfoElements.linkedin.addEventListener('click', function() {
-    //     window.location.href = personalInfo["personal-linkedin"];
+    // domMapping.aboutMe.linkedin.addEventListener('click', function() {
+    //     window.location.href = resumeData.aboutMe.linkedin;
     // });
 
-    // personalInfoElements.email.addEventListener('click', function() {
-    //     window.location.href = personalInfo["personal-email"];
+    // domMapping.aboutMe.email.addEventListener('click', function() {
+    //     window.location.href = resumeData.aboutMe.email
     // });
 
-    // personalInfoElements.github.addEventListener('click', function() {
-    //     window.location.href = personalInfo["personal-github"]; 
+    // domMapping.aboutMe.github.addEventListener('click', function() {
+    //     window.location.href = resumeData.aboutMe.github
     // });
-
 
 
 // COMPENTENCY
@@ -237,27 +233,30 @@ function runCode() {
 
 
 // ADD IMAGES TO GALLERY
-    function createProjectGallery(imageArray, gallery) {
+    function createProjectGallery(imageArray, galleryElement) {
       imageArray.forEach((image, index) => {
         const img = document.createElement('img');
         img.src = image;
         img.style.display = index === 0 ? 'block' : 'none';   // Hide all images except the first one when the page loads
         // showSlides(1, 1)
-        gallery.appendChild(img);
+        galleryElement.appendChild(img);
       });
     };
 
+
 // GALLERY FUNCTION
+    // Press left arrow on slideshow
     document.querySelectorAll(".prev").forEach(el => el.addEventListener('click',function (e) {
       const target = e.target
-      const gallery = target.closest('.image-slideshow-container');
-      showSlides(-1, gallery);
+      const galleryElement = target.closest('.image-slideshow-container');
+      showSlides(-1, galleryElement);
     }));
 
+    // Press right arrow on slideshow
     document.querySelectorAll(".next").forEach(el => el.addEventListener('click',function (e) {
       const target = e.target
-      const gallery = target.closest('.image-slideshow-container');
-      showSlides(1, gallery);
+      const galleryElement = target.closest('.image-slideshow-container');
+      showSlides(1, galleryElement);
     }));
 
     function showSlides(n, containerElement) {
