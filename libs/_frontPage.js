@@ -3,6 +3,7 @@ import HTMLcompetency from "./HTMLcompetency.js";
 import HTMLexp from "./HTMLexp.js";
 import HTMLeducation from "./HTMLeducation.js";
 import HTMLportfolio from "./HTMLportfolio.js";
+import HTMLportfolioTile from "./HTMLportfolioTile.js";
 
 
 const classResumeData = new ResumeData;
@@ -10,6 +11,7 @@ const classComp = new HTMLcompetency;
 const classEdu = new HTMLeducation;
 const classExp = new HTMLexp;
 const classPort = new HTMLportfolio;
+const classPortTile = new HTMLportfolioTile;
 
 
 // fetch json resume data
@@ -31,9 +33,16 @@ classResumeData.getJSONdata()
         classExp.renderToPage(company, address, position, period, softwares, duties);
     };
 
-    for (const {projectname, projectlang, projectdesc, projecturl, projectimages} of myPortfolio) {
-        classPort.renderToPage(projectname, projectlang, projectdesc, projecturl, projectimages);
+    // for (const {projectname, projectlangs, projectdesc, projecturl, projectimages} of myPortfolio) {
+    //     classPort.renderToPage(projectname, projectlangs, projectdesc, projecturl, projectimages);
+    // };
+
+    for (const {projectname, projectlangs, projectdesc, projecturl, projectimages} of myPortfolio) {
+        // classPort.renderToPage(projectname, projectlang, projectdesc, projecturl, projectimages);
+        classPortTile.renderToPage(projectname, projectlangs, projectdesc, projecturl, projectimages);
     };
+
+
 });
 
 

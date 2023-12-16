@@ -165,7 +165,11 @@
     "myPortfolio": [
         {
             "projectname": "Resume Website",
-            "projectlang": "HTML, CSS, JavaScript, JSON (and XML)",
+            "projectlangs": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
             "projectdesc": "Website that reads from an JSON file and imports into a HTML page using Javascript. Hosted using GoDaddy. First Version used XML to hold resume data.",
             "projecturl": "https://github.com/BenArthurOce/",
             "projectimages":  [
@@ -178,7 +182,10 @@
         },
         {
             "projectname": "ASX Program",
-            "projectlang": "SQL, C# (Modelling with Dapper)",
+            "projectlangs": [
+                "SQL",
+                "C#"
+            ],
             "projectdesc": "Application that reads historical ASX prices from self created 10-15 table database on SQL. Modeled with Dapper",
             "projecturl": "https://github.com/BenArthurOce/ASXSharePrices",
             "projectimages": [
@@ -191,7 +198,9 @@
         },
         {
             "projectname": "Chess Opening UI",
-            "projectlang": "Python, Tkinter",
+            "projectlangs": [
+                "Python"
+            ],
             "projectdesc": "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening.",
             "projecturl": "https://github.com/BenArthurOce/",
             "projectimages": [
@@ -201,7 +210,9 @@
         },
         {
             "projectname": "Loan Schedule",
-            "projectlang": "SQL",
+            "projectlangs": [
+                "SQL"
+            ],
             "projectdesc": "Uses a recursive CTE and payment/interest functions to calculate the balances, principal/interest repayments on a mortgage over its lifetime. No Image provided",
             "projecturl": "https://github.com/BenArthurOce/InstalmentAmortisationSchedule",
             "projectimages": [
@@ -210,8 +221,10 @@
         },
         {
             "projectname": "PokerHands",
-            "projectlang": "Python, PANDAS",
-            "projectdesc": "Object orientated text based program that simulates Texas hold ‘em games thousands of times to show the likely outcome of each hand against the other.",
+            "projectlangs": [
+                "Python"
+            ],
+            "projectdesc": "(Mention Pandas) Object orientated text based program that simulates Texas hold ‘em games thousands of times to show the likely outcome of each hand against the other.",
             "projecturl": "https://github.com/BenArthurOce/Poker5Hand",
             "projectimages": [
                 "images\\slideshowPoker\\Poker01.png",
@@ -223,7 +236,9 @@
         },
         {
             "projectname": "Bank Transaction Coder",
-            "projectlang": "MS Excel",
+            "projectlangs": [
+                "Excel"
+            ],
             "projectdesc": "Complex spreadsheet that reads your banking transactions and allocates each transaction based on lookup/reference codes inputted",
             "projecturl": "https://github.com/BenArthurOce/",
             "projectimages": [
@@ -233,7 +248,9 @@
         },
         {
             "projectname": "Timesheeter",
-            "projectlang": "VBA",
+            "projectlangs": [
+                "VBA"
+            ],
             "projectdesc": "VBA Program that uses a basic interface to store the start and end time in a job, and records details of that job into a stored library of files, sorted/grouped by date of job",
             "projecturl": "https://github.com/BenArthurOce/",
             "projectimages": [
