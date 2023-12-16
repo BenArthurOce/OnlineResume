@@ -12,15 +12,26 @@ classResumeData.getJSONdata()
 .then(resumeData => {
     console.log(resumeData)
 
+    const {aboutMe, myCompetencies, myEducation, myExperience, myPortfolio} = resumeData
+    console.log(aboutMe, myCompetencies, myEducation, myExperience, myPortfolio)
+
     // Break up into its headers
     // loop through each one 
 
-    Object.entries(resumeData).forEach(([key, value], i) => {
-        console.log(`key: ${key}, value: ${value}, index: ${i}`);
-    });
+    // Loops through all the headers
+    // Object.entries(resumeData).forEach(([key, value], i) => {
+    //     // console.log(`key: ${key}, value: ${value}, index: ${i}`);
+    //     Object.entries(value).forEach(([key, value], i) => {
+    //         console.log(value)
+    //     });
+    // });
 
-    }
-)
+
+    // for (const {aboutMe, myCompetencies, myEducation, myExperience, myPortfolio} of Object.keys(resumeData)) {
+
+    //     console.log(aboutMe, myCompetencies, myEducation, myExperience, myPortfolio)
+    // }}
+})
 
 
 

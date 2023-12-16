@@ -2,7 +2,7 @@ class ResumeData {
     #data;
     #url;
     constructor() {
-        this.#url = './resumeDataJSON.json';
+        this.#url = './resumeDataJSON2.json';
         this.#data = '';
     };
     get url() {
