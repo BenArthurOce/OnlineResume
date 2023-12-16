@@ -1,6 +1,8 @@
 class HTMLexp {
+    #parentElement;
     #templateExpElement;
     constructor() {
+        this.#parentElement = document.querySelector("#myExperience");
         this.#templateExpElement = `
           <article>
             <span class="period"></span>
@@ -14,15 +16,26 @@ class HTMLexp {
           </article>
       `;
     };
+    get parentElement() {
+        return this.#parentElement;
+    };
     get templateExpElement() {
         return this.#templateExpElement;
     };
 
-    renderToPage(parentElement) {
+    renderToPage(company, address, position, period, softwares, duties) {
         const newExpElement = document.createElement('div');
         newExpElement.innerHTML = this.templateExpElement;
-        parentElement.appendChild(newExpElement);
-    }
+
+        newExpElement.querySelector('.company').textContent = company;
+        newExpElement.querySelector('.address').textContent = address;
+        newExpElement.querySelector('.position').textContent = position;
+        newExpElement.querySelector('.period').textContent = period;
+        newExpElement.querySelector('.softwares').textContent = softwares;
+        newExpElement.querySelector('.duties').textContent = duties;
+
+        this.parentElement.appendChild(newExpElement);
+    };
 };
 
 export default HTMLexp

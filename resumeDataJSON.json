@@ -164,11 +164,11 @@
     ],
     "myPortfolio": [
         {
-            "project-name": "Resume Website",
-            "project-lang": "HTML, CSS, JavaScript, JSON (and XML)",
-            "project-desc": "Website that reads from an JSON file and imports into a HTML page using Javascript. Hosted using GoDaddy. First Version used XML to hold resume data.",
-            "project-url": "https://github.com/BenArthurOce/",
-            "project_images":  [
+            "projectname": "Resume Website",
+            "projectlang": "HTML, CSS, JavaScript, JSON (and XML)",
+            "projectdesc": "Website that reads from an JSON file and imports into a HTML page using Javascript. Hosted using GoDaddy. First Version used XML to hold resume data.",
+            "projecturl": "https://github.com/BenArthurOce/",
+            "projectimages":  [
                 "images\\slideshowWebsite\\ResumeWebsite01.png",
                 "images\\slideshowWebsite\\ResumeWebsite02.png",
                 "images\\slideshowWebsite\\ResumeWebsite03.png",
@@ -177,11 +177,11 @@
             ]
         },
         {
-            "project-name": "ASX Program",
-            "project-lang": "SQL, C# (Modelling with Dapper)",
-            "project-desc": "Application that reads historical ASX prices from self created 10-15 table database on SQL. Modeled with Dapper",
-            "project-url": "https://github.com/BenArthurOce/ASXSharePrices",
-            "project_images": [
+            "projectname": "ASX Program",
+            "projectlang": "SQL, C# (Modelling with Dapper)",
+            "projectdesc": "Application that reads historical ASX prices from self created 10-15 table database on SQL. Modeled with Dapper",
+            "projecturl": "https://github.com/BenArthurOce/ASXSharePrices",
+            "projectimages": [
                 "images\\slideshowASX\\ASXProgram1.png",
                 "images\\slideshowASX\\ASXProgram2.png",
                 "images\\slideshowASX\\ASXProgram3.png",
@@ -190,30 +190,30 @@
             ]
         },
         {
-            "project-name": "Chess Opening UI",
-            "project-lang": "Python, Tkinter",
-            "project-desc": "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening.",
-            "project-url": "https://github.com/BenArthurOce/",
-            "project_images": [
+            "projectname": "Chess Opening UI",
+            "projectlang": "Python, Tkinter",
+            "projectdesc": "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening.",
+            "projecturl": "https://github.com/BenArthurOce/",
+            "projectimages": [
                 "images\\slideshowChess\\Chess01.png",
                 "images\\slideshowChess\\Chess02.png"
             ]
         },
         {
-            "project-name": "Loan Schedule",
-            "project-lang": "SQL",
-            "project-desc": "Uses a recursive CTE and payment/interest functions to calculate the balances, principal/interest repayments on a mortgage over its lifetime. No Image provided",
-            "project-url": "https://github.com/BenArthurOce/InstalmentAmortisationSchedule",
-            "project_images": [
+            "projectname": "Loan Schedule",
+            "projectlang": "SQL",
+            "projectdesc": "Uses a recursive CTE and payment/interest functions to calculate the balances, principal/interest repayments on a mortgage over its lifetime. No Image provided",
+            "projecturl": "https://github.com/BenArthurOce/InstalmentAmortisationSchedule",
+            "projectimages": [
                 "images\\PlaceHolderImage.png"
             ]
         },
         {
-            "project-name": "PokerHands",
-            "project-lang": "Python, PANDAS",
-            "project-desc": "Object orientated text based program that simulates Texas hold ‘em games thousands of times to show the likely outcome of each hand against the other.",
-            "project-url": "https://github.com/BenArthurOce/Poker5Hand",
-            "project_images": [
+            "projectname": "PokerHands",
+            "projectlang": "Python, PANDAS",
+            "projectdesc": "Object orientated text based program that simulates Texas hold ‘em games thousands of times to show the likely outcome of each hand against the other.",
+            "projecturl": "https://github.com/BenArthurOce/Poker5Hand",
+            "projectimages": [
                 "images\\slideshowPoker\\Poker01.png",
                 "images\\slideshowPoker\\Poker02.png",
                 "images\\slideshowPoker\\Poker03.png",
@@ -222,21 +222,21 @@
             ]
         },
         {
-            "project-name": "Bank Transaction Coder",
-            "project-lang": "MS Excel",
-            "project-desc": "Complex spreadsheet that reads your banking transactions and allocates each transaction based on lookup/reference codes inputted",
-            "project-url": "https://github.com/BenArthurOce/",
-            "project_images": [
+            "projectname": "Bank Transaction Coder",
+            "projectlang": "MS Excel",
+            "projectdesc": "Complex spreadsheet that reads your banking transactions and allocates each transaction based on lookup/reference codes inputted",
+            "projecturl": "https://github.com/BenArthurOce/",
+            "projectimages": [
                 "images\\slideshowTransactionSorter\\TransactionCoder01.png",
                 "images\\slideshowTransactionSorter\\TransactionCoder02.png"
             ]
         },
         {
-            "project-name": "Timesheeter",
-            "project-lang": "VBA",
-            "project-desc": "VBA Program that uses a basic interface to store the start and end time in a job, and records details of that job into a stored library of files, sorted/grouped by date of job",
-            "project-url": "https://github.com/BenArthurOce/",
-            "project_images": [
+            "projectname": "Timesheeter",
+            "projectlang": "VBA",
+            "projectdesc": "VBA Program that uses a basic interface to store the start and end time in a job, and records details of that job into a stored library of files, sorted/grouped by date of job",
+            "projecturl": "https://github.com/BenArthurOce/",
+            "projectimages": [
                 "images\\slideshowTimesheeter\\Timesheeter01.png"
             ]
         }

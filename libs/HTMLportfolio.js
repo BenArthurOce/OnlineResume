@@ -1,13 +1,15 @@
 class HTMLportfolio {
+    #parentElement;
     #templatePortElement;
     constructor() {
+        this.#parentElement = document.querySelector("#myPortfolio");
         this.#templatePortElement = `
         <article>
         <div class="portfolio-caption-container">
-          <span class="project-lang"></span>
-            <h3 class="project-name"></h3>
-            <h4 class="project-url"><a href="">Github Link</a></h4>
-            <p class="project-desc"></p>
+          <span class="projectlang"></span>
+            <h3 class="projectname"></h3>
+            <h4 class="projecturl"><a href="">Github Link</a></h4>
+            <p class="projectdesc"></p>
         </div>
         <div class="portfolio-image-container">
             <div class="image-slideshow-container">
@@ -22,15 +24,26 @@ class HTMLportfolio {
       </article>
       `;
     };
+    get parentElement() {
+        return this.#parentElement;
+    };
     get templatePortElement() {
         return this.#templatePortElement;
     };
 
-    renderToPage(parentElement) {
+    renderToPage(projectname, projectlang, projectdesc, projecturl, projectimages) {
         const newPortElement = document.createElement('div');
         newPortElement.innerHTML = this.templatePortElement;
-        parentElement.appendChild(newPortElement);
-    }
+
+        newPortElement.querySelector('.projectname').textContent = projectname;
+        newPortElement.querySelector('.projectlang').textContent = projectlang;
+        newPortElement.querySelector('.projectdesc').textContent = projectdesc;
+        newPortElement.querySelector('.projecturl').textContent = projecturl;
+        // newPortElement.querySelector('.projectimages').textContent = projectimages;
+
+        this.parentElement.appendChild(newPortElement);
+    };
+
 };
 
 export default HTMLportfolio
