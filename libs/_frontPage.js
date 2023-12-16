@@ -34,12 +34,50 @@ classResumeData.getJSONdata()
     for (const {projectname, projectlang, projectdesc, projecturl, projectimages} of myPortfolio) {
         classPort.renderToPage(projectname, projectlang, projectdesc, projecturl, projectimages);
     };
+});
 
 
-})
+let visibleSectionIndex = -1;
+
+function handleScrollPosition() {
+
+    function getPosition(element) {
+        let xPosition = 0;
+        let yPosition = 0;
+    
+        while (element) {
+            xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+            yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+            element = element.offsetParent;
+        };
+    
+        return { x: xPosition, y: yPosition };
+    };
 
 
-// Read from the JSON file
-// For each comp, exp, edu, port:
-    // Add that into the document using the class function "renderToPage"
-        // You also need to add code that adds each duty, software etc
+    const sectionTitles = document.querySelectorAll('section h2');
+    const navTextElements = document.querySelectorAll('.navlink-container span');
+    const navIconElements = document.querySelectorAll('.navlink-container i');
+
+    // Find which h2 header has been passed
+    sectionTitles.forEach((sectionTitle, index) => {
+        const position = getPosition(sectionTitle);
+        const distance = position.y - window.scrollY;
+
+        if (distance >= 0 && distance < sectionTitle.clientHeight) {
+            visibleSectionIndex = index;
+        }
+    });
+
+    // Depending on which h2 element is passed, highlight the relevant navlink
+    navTextElements.forEach((navElement, index) => {
+        navElement.classList.toggle('active', index === visibleSectionIndex);
+    });
+
+    navIconElements.forEach((navElement, index) => {
+        navElement.classList.toggle('active', index === visibleSectionIndex);
+    });
+}
+
+document.addEventListener('scroll', handleScrollPosition);
+

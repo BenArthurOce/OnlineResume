@@ -31,8 +31,23 @@ class HTMLexp {
         newExpElement.querySelector('.address').textContent = address;
         newExpElement.querySelector('.position').textContent = position;
         newExpElement.querySelector('.period').textContent = period;
-        newExpElement.querySelector('.softwares').textContent = softwares;
-        newExpElement.querySelector('.duties').textContent = duties;
+
+        // Select the ul elements
+        const softwaresUl = newExpElement.querySelector('.softwares');
+        const dutiesUl = newExpElement.querySelector('.duties');
+
+        // Loop through each software and duty and create li elements
+        softwares.forEach((software) => {
+            const li = document.createElement('li');
+            li.textContent = software;
+            softwaresUl.appendChild(li);
+        });
+
+        duties.forEach((duty) => {
+            const li = document.createElement('li');
+            li.textContent = duty;
+            dutiesUl.appendChild(li);
+        });
 
         this.parentElement.appendChild(newExpElement);
     };

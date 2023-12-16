@@ -228,7 +228,7 @@ nav {
   max-width: 300px;   
 }
 
-.competency-score-container {
+.competencyscore-container {
   /* all 10 circle items go in this */
   align-items: center;
   display: flex;
@@ -449,7 +449,7 @@ nav {
 }
 
 /* TO BE ADJUSTED. NOW: "navlink-container" */
-.wrapper .sidebar .sidebar-allnavlinks-container {
+.wrapper .sidebar .navlink-container {
   /* Icons in navigation bar to arrange horizontally across top of screen */
   flex-direction: row;
   align-items: center;
@@ -463,7 +463,7 @@ nav {
 /* */
 
 /* TO BE ADJUSTED. NOW: ".navicon-container" */
-.wrapper .sidebar .sidebar-allicon-container {
+.wrapper .sidebar .navlink-container {
   /* social media links/icons to not appear on mobile version */
   display: none
 }
@@ -476,8 +476,9 @@ nav {
   display: none;
 }
 
-.sidebar-navlink-container .sidebar-icon.active,
-.sidebar-navlink-container .nav-link.active{
+.navlink-container a.active,
+.nav-link.active,
+.link-text.active{
   /* When viewer is looking at particular part of screen, js code will highlight relevant sidebar icon in green*/
   color: green;
 }
