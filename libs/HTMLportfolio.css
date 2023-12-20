@@ -1,0 +1,118 @@
+
+/*---------- PC FORMAT -----------*/
+/**********************************/
+/****** Portfolio Contents ********/
+/**********************************/
+
+#portfolio article {
+    /*Display needs to be flex so the software and scores can be side by side */
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .portfolio-caption-container {
+    /* Specifies the container that holds the project description text. Needs to take up 50% */
+    flex-direction: column;
+    float: left;
+    height: 100%;
+    width: 50%
+  }
+  
+  .portfolio-image-container {
+    /* Specifies the container that holds the images for the project*/
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    vertical-align: top;
+    display: inline-block;
+    width: 50%
+  }
+  
+  .image-slideshow-container {
+    /* Specifies the area around the image. Maybe important for mobile? May require review*/
+    display: flex;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    overflow: hidden;
+  }
+  
+  .image-slideshow-container img {
+    /* Details how the images in the slideshow should look */
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  
+  /* */
+  /******** Slideshows *************/
+  /* */
+  .slideshow-container {
+    /* Requires review. is used in every slideshow */
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+    
+  .prev, 
+  .next {
+    /* Next & previous buttons */
+    /* These currently are not used. Their display later is set to "None" */
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0,0,0,0.8);
+    opacity: 0.7;
+  }
+    
+  
+  .next {
+    /* Position the "next button" to the right */
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  .prev:hover, .next:hover {
+    /* On hover, add a black background color with a little bit see-through */
+    opacity: 1;
+  }
+
+
+  /* */
+/******** Mobile Icons *************/
+/* */
+
+.mobile-allicon-container {
+    /* Image Gallery is removed on mobile. Replaced with two buttons for opening the images, and another for going to Github */
+    align-items: center;
+    display: none;
+    justify-content: center;
+    margin-top: 20px;
+    width: 30px;
+  }
+  
+  .mobile-allicon-container i {
+    /* Specifies how the logos should look. Also specifies the "FontAwesome" which is required to get the unique logos*/
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: 30px;
+    transition: all .3s;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 22px;
+    text-rendering: auto;
+    flex-direction: column;
+  }
+  
