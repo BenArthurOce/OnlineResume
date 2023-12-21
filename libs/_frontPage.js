@@ -37,9 +37,9 @@ classResumeData.getJSONdata()
     //     classPort.renderToPage(projectname, projectlangs, projectdesc, projecturl, projectimages);
     // };
 
-    for (const {projectname, projectlangs, projectdesc, projecturl, projectimages} of myPortfolio) {
+    for (const {projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
         // classPort.renderToPage(projectname, projectlang, projectdesc, projecturl, projectimages);
-        classPortTile.renderToPage(projectname, projectdesc, projectlangs, projecturl, projectimages);
+        classPortTile.renderToPage(projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages);
     };
 
 

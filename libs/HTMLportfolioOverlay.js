@@ -2,21 +2,23 @@ class HTMLPortfolioOverlay {
     #parentElement;
     #templateOverlayElement;
     #currentImageIndex
-    #projectname;
-    #projectdesc;
-    #projectlangs;
-    #projecturl;
-    #projectimages
+    #projectName;
+    #projectLangs;
+    #projectSumSmall;
+    #projectSumLarge;
+    #projectUrl;
+    #projectImages
+    #iconContainer
     
-    constructor(projectname, projectdesc, projectlangs, projecturl, projectimages) {
+    constructor(projectName, projectLangs, projectSumSmall, projectSumLarge, projectUrl, projectImages, iconContainer) {
         this.#parentElement = document.querySelector("#myPortfolio");
         this.#templateOverlayElement = `
         <dialog id="infoOverlay">
             <div id="infoWrapper">
                 <div id="portfolioInfo">
                     <h2 id="projectTitleOlay"></h2>
-                    <p id="projectlangsOlay">Project Langs go here</p>
-                    <p id="projectdescOlay"></p>
+                    <p id="projectLangsOlay"></p>
+                    <p id="projectSummaryOlay"></p>
                 </div>
                 <div id="imageContainer">
                     <div id="slideshowContainer">
@@ -28,13 +30,14 @@ class HTMLPortfolioOverlay {
             </div>
          </dialog>
         `;
-        // <span id="closeBtn">Close</span>
         this.#currentImageIndex = 0
-        this.#projectname = projectname;
-        this.#projectdesc = projectdesc;
-        this.#projectlangs = projectlangs;
-        this.#projecturl = projecturl;
-        this.#projectimages = projectimages;
+        this.#projectName = projectName;
+        this.#projectLangs = projectLangs;
+        this.#projectSumSmall = projectSumSmall;
+        this.#projectSumLarge = projectSumLarge;
+        this.#projectUrl = projectUrl;
+        this.#projectImages = projectImages;
+        this.#iconContainer = iconContainer;
     };
     get parentElement() {
         return this.#parentElement;
@@ -48,20 +51,26 @@ class HTMLPortfolioOverlay {
     set currentImageIndex(value) {
         this.#currentImageIndex = value
     };
-    get projectname() {
-        return this.#projectname;
+    get projectName() {
+        return this.#projectName;
     };
-    get projectdesc() {
-        return this.#projectdesc;
+    get projectLangs() {
+        return this.#projectLangs;
     };
-    get projectlangs() {
-        return this.#projectlangs;
+    get projectSumSmall() {
+        return this.#projectSumSmall;
     };
-    get projecturl() {
-        return this.#projecturl;
+    get projectSumLarge() {
+        return this.#projectSumLarge;
     };
-    get projectimages() {
-        return this.#projectimages;
+    get projectUrl() {
+        return this.#projectUrl;
+    };
+    get projectImages() {
+        return this.#projectImages;
+    };
+    get iconContainer() {
+        return this.#iconContainer;
     };
 
 
@@ -69,10 +78,14 @@ class HTMLPortfolioOverlay {
         const overlayElement = document.createElement('div');
         overlayElement.innerHTML = this.#templateOverlayElement;
 
-        overlayElement.querySelector('#projectTitleOlay').textContent = this.projectname;
-        overlayElement.querySelector('#projectdescOlay').textContent = this.projectdesc;
+        overlayElement.querySelector('#projectTitleOlay').textContent = this.projectName;
+        overlayElement.querySelector('#projectSummaryOlay').textContent = this.projectSumLarge;
 
 
+        // Import the icons from the tile (doesnt work)
+        overlayElement.querySelector('#projectLangsOlay').textContent = this.iconContainer.textContent
+
+        // Prepare slideshow
         const imageContainer = overlayElement.querySelector('#slideshowContainer');
 
         //
@@ -86,22 +99,21 @@ class HTMLPortfolioOverlay {
         };
 
         const nextImage = () => {
-            this.currentImageIndex = (this.currentImageIndex + 1) % this.projectimages.length;
+            this.currentImageIndex = (this.currentImageIndex + 1) % this.projectImages.length;
             showImage(this.currentImageIndex);
         };
 
         const prevImage = () => {
-            this.currentImageIndex = (this.currentImageIndex - 1 + this.projectimages.length) % this.projectimages.length;
+            this.currentImageIndex = (this.currentImageIndex - 1 + this.projectImages.length) % this.projectImages.length;
             showImage(this.currentImageIndex);
         };
 
-        // Attach event listeners to the arrows
         // Attach event listeners to the arrows
         overlayElement.querySelector('.prev').addEventListener('click', prevImage);
         overlayElement.querySelector('.next').addEventListener('click', nextImage);
 
         // Add each image to the gallery element
-        this.projectimages.forEach((image, index) => {
+        this.projectImages.forEach((image, index) => {
             const img = document.createElement('img');
             img.src = image;
             img.style.display = index === 0 ? 'block' : 'none';
