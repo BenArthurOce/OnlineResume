@@ -76,14 +76,24 @@ class HTMLPortfolioOverlay {
 
     createElement() {
         const overlayElement = document.createElement('div');
-        overlayElement.innerHTML = this.#templateOverlayElement;
+        overlayElement.innerHTML = this.templateOverlayElement;
 
         overlayElement.querySelector('#projectTitleOlay').textContent = this.projectName;
         overlayElement.querySelector('#projectSummaryOlay').textContent = this.projectSumLarge;
 
 
-        // Import the icons from the tile (doesnt work)
-        overlayElement.querySelector('#projectLangsOlay').textContent = this.iconContainer.textContent
+        this.projectLangs.forEach(lang => {
+            const logoPath = `imgLogos/${lang}.svg`;
+
+            // Create a new image element for each language
+            const langLogo = document.createElement('img');
+            langLogo.src = logoPath;
+            langLogo.alt = lang; // You can set alt text as the language name
+            langLogo.classList.add('lang-logo');
+
+            overlayElement.querySelector('#projectLangsOlay').appendChild(langLogo);
+        });
+
 
         // Prepare slideshow
         const imageContainer = overlayElement.querySelector('#slideshowContainer');
@@ -120,8 +130,9 @@ class HTMLPortfolioOverlay {
             imageContainer.appendChild(img);
         });
 
+        // Closes the overlay
         overlayElement.querySelector('#closeBtn').onclick = () => {
-            document.body.removeChild(overlayElement);
+            this.removeFromPage();
         };
 
         document.body.appendChild(overlayElement);
@@ -136,8 +147,14 @@ class HTMLPortfolioOverlay {
   
     // Remove the overlay from the screen
     removeFromPage() {
-        document.body.querySelector('#infoOverlay').classList.remove('active');
-    };
+        const overlayElement = document.body.querySelector('#infoOverlay');
+        if (overlayElement) {
+            const parentElement = overlayElement.parentNode;
+            if (parentElement) {
+                parentElement.parentNode.removeChild(parentElement);
+            }
+        }
+    }
 
 };
   

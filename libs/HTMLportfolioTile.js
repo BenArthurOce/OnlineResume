@@ -35,7 +35,7 @@ class HTMLportfolioTile {
 
         const iconContainer = tile.querySelector('.icon-container');
         projectLangs.forEach(lang => {
-            const logoPath = `${this.#logoPath}${lang}.svg`;
+            const logoPath = `${this.logoPath}${lang}.svg`;
 
             // Create a new image element for each language
             const langLogo = document.createElement('img');

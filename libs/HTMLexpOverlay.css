@@ -1,0 +1,55 @@
+#expDiag {
+    display: none;   /* Default display is non visible. Display is modified when class becomes "active" */
+    position: fixed;  /* Positions the overlay relative to the browser window and does not scroll with the page */
+    top: 0;
+    left: 0;
+    margin-left: 20%;   /* navigation sidebar is currently at 20%. The overlay does not overlap the sidebar*/
+    width: 80%;         /* navigation sidebar is currently at 20%. The overlay does not overlap the sidebar*/
+    height: 95%;        /* Set at 100% to cover whole screen. Reduced by 5% to include the "Close" button at the bottom */
+    background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
+    color: #fff;
+    justify-content: center;    /* Centers the child elements horizontally */
+    align-items: center;        /* Centers the child elements vertically */
+    
+}
+
+#expDiag.active {
+    display: flex;      /* Overlay becomes visible when is active*/
+}
+
+#infoWrapper {
+    font-family: 'Arial', sans-serif;
+    padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
+    gap: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    /* Centers the child elements horizontally */
+    align-items: center;        /* Centers the child elements vertically */
+    flex: 1 1 0px;
+}
+
+
+#expInfoOverlay, #expDutiesOverlay, #expSoftwaresOverlay {
+    padding: 20px;
+    /* min-height: 300px; */
+
+}
+
+
+#expInfoOverlay, #expDutiesOverlay, #expSoftwaresOverlay {
+    padding: 20px;
+    background-color: #2ecc71;
+    flex: 1; /* Updated to make all child elements take up equal space */
+}   
+
+
+#closeBtn {
+    cursor: pointer;
+    color: #e74c3c;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);         /* Centers the button horizontally.*/
+    font-weight: bold;
+    font-size: 20px;
+}

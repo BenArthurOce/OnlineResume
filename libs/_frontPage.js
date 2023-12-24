@@ -4,6 +4,7 @@ import HTMLexp from "./HTMLexp.js";
 import HTMLeducation from "./HTMLeducation.js";
 import HTMLportfolio from "./HTMLportfolio.js";
 import HTMLportfolioTile from "./HTMLportfolioTile.js";
+import HTMLexpTile from "./HTMLexpTile.js";
 
 
 const classResumeData = new ResumeData;
@@ -11,7 +12,9 @@ const classComp = new HTMLcompetency;
 const classEdu = new HTMLeducation;
 const classExp = new HTMLexp;
 const classPort = new HTMLportfolio;
+const classExpTile = new HTMLexpTile;
 const classPortTile = new HTMLportfolioTile;
+
 
 
 // fetch json resume data
@@ -29,9 +32,15 @@ classResumeData.getJSONdata()
         classEdu.renderToPage(degree, institution);
     };
 
+    // for (const {company, address, position, period, softwares, duties} of myExperience) {
+    //     classExp.renderToPage(company, address, position, period, softwares, duties);
+    // };
+
     for (const {company, address, position, period, softwares, duties} of myExperience) {
-        classExp.renderToPage(company, address, position, period, softwares, duties);
+        classExpTile.renderToPage(company, address, position, period, softwares, duties);
     };
+
+    
 
     // for (const {projectname, projectlangs, projectdesc, projecturl, projectimages} of myPortfolio) {
     //     classPort.renderToPage(projectname, projectlangs, projectdesc, projecturl, projectimages);

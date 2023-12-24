@@ -1,0 +1,32 @@
+<!-- <i class="fa-solid fa-bell-concierge"></i><span class="link-text">Customer Support</span> -->
+
+<!-- <i class="fa-solid fa-puzzle-piece"></i>
+
+<i class="fa-solid fa-database"></i>
+<i class="fa-solid fa-user-secret"></i>
+<i class="fa-solid fa-bell-concierge"></i>
+
+<i class="fa-solid fa-code-branch"></i>
+<i class="fa-solid fa-code"></i>
+<i class="fa-solid fa-keyboard"></i>
+
+<i class="fa-solid fa-people-carry-box"></i>
+<i class="fa-solid fa-book"></i>`
+<i class="fa-solid fa-handshake"></i>
+
+<i class="fa-solid fa-file-excel"></i>
+<i class="fa-brands fa-html5"></i>
+<i class="fa-solid fa-laptop"></i>
+<i class="fa-brands fa-gitlab"></i>
+<i class="fa-brands fa-atlassian"></i>
+<i class="fa-solid fa-list-ul"></i>
+<i class="fa-solid fa-book"></i>
+
+<i class="fa-solid fa-chalkboard-user"></i>
+<i class="fa-brands fa-github"></i>
+<i class="fa-brands fa-slack"></i>
+<i class="fa-brands fa-trello"></i>
+<i class="fa-brands fa-node-js"></i>
+<i class="fa-brands fa-css3"></i>
+<i class="fa-brands fa-cpanel"></i>
+<i class="fa-brands fa-confluence"></i> -->
