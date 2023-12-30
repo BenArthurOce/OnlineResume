@@ -1,409 +1,62 @@
-/*---------- PC FORMAT -----------*/
-/**********************************/
-/*********** General CSS ***********/
-/**********************************/
-
-
-
 body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: teal;
-  width: 100%;
-  height: 100%;
-  overflow-x:hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-
-section {
-  /* One section for introduction, eduction, experience etc */
-  background-color: #dfdcdccb;
-  border-bottom: 60px solid teal;
-  padding-bottom: 40px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  position: relative;
-
-}
-
-section:last-child {
-  /* The last section should have no extra space underneath it */
-  border-bottom: 0 solid teal;
-  padding-bottom: 0;
-}
-
-article {
-  /* Each job in experience, each project in portfolio is an article */
-  border-left: 3px solid #EB210FDF;
-  border-bottom: 3px solid #eb210fdf;
-  display: block;
-  font-size: 13px;
-  letter-spacing: 1px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 0;
-  padding-top: 20px;
-  position: relative;
-}
-
-article:last-child {
-  /* The last article in a section should not have a bottom red border */
-  border-bottom: 0px solid #EB210FDF;
-}
-
-
-a {
-  color: #222222;
-  transition: all .3s;
-}
-
-
-
-
-li, p {
-  /* Encompasses all general text content in resume */
-  margin: 0;
-  font-size: 15px;
-  padding-right: 50px;
-  line-height: 1.5;
-}
-
-nav {
-  /* Sidebar to left of screen */
-  background-color: #111;
-  flex-shrink: 0;
-  left: 0;
-  padding-top: 40px;
-  position: sticky;
-  top: 0;
-  transition: 0.5s;
-  z-index: 1;
-  width: 20%;
-  max-height: 100vh; 
-}
-
-.portfolio-caption-container p {
-  /* For the "Scroll by clicking left/right of image" */
-  padding-top: 10px;
-}
-
-/*---------- PC FORMAT -----------*/
-/**********************************/
-/********* Wrapper Layout *********/
-/**********************************/
-
-.wrapper {
-  /* This holds the two big elements: Sidebar and MainContent */
-  display: flex;
-}
-
-.wrapper .content-master-container {
-  /* Container that houses all the <section> elements */
-  flex-grow: 1; /* Unsure if required */
-  padding-left: 4%;
-  padding-right: 4%;
-}
-
-
-  
-/*---------- PC FORMAT -----------*/
-/**********************************/
-/************ SideBar *************/
-/**********************************/
-
-/* */
-/******** Sidebar Navigation Links *************/
-/* */
-.navlink-container > a {
-  display: block;
-  font-size: 20px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 0;
-  padding-top: 10px;
-}
-
-.navlink-container > a > i {
-  color: rgba(232, 125, 63, 0.915);
-  text-align: left;
-  transition: all .3s;
-}
-
-.navlink-container > a > span {
-  color: #ffffff;
-  padding-bottom: 10px;
-  margin-left: 10px;
-  padding-top: 10px;
-  text-decoration: none;
-}
-
-.navlink-container > a > span.active {
-  /* When viewer is looking at particular part of screen, js code will highlight relevant sidebar in green*/
-  color: green;
-}
-
-/* */
-/******** Sidebar Icon Links *************/
-/* */
-.navicon-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 30px;
-  padding-left: 30px;  
-}
-
-.navicon-container > i {
-  align-items: center;
-  background-color: rgb(248, 84, 84);
-  cursor: pointer;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: 22px;
-  display: flex;
-  height: 50px;
-  justify-content: center;
-  margin: 10px;
-  text-rendering: auto;
-  width: 50px;
+#wrapper {
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 
 
 
 
-/*---------- PC FORMAT -----------*/
-/**********************************/
-/****** Red Dot on Boarder ********/
-/**********************************/
 
-article span {
-  /* Details the text that goes next to the red dot */
-  display: block;
-  font-size: 13px;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-  position: relative
+
+
+#myPortfolio #portfolio-flters {
+    padding: 0;
+    margin: -15px 0 30px 0;
+    list-style: none;
+    font-size: 0;
 }
 
-article span::before {
-  /* Details the red dot in the webpage */
-    background: #EB210FDF;
-    border-radius: 5px;  
-    content: "";
-    height: 11px;
-    left: -26px;
-    position: absolute;
-    top: 3px;
-    width: 11px;
-}
-
-
-/*---------------------------------------*/
-/*-------------- MOBILE -----------------*/
-/*------------COMPATIBILITY--------------*/
-/*---------------------------------------*/
-
-
-@media screen and (max-width: 768px) {
-
-
-/*-------- MOBILE FORMAT ---------*/
-/**********************************/
-/*********** General CSS ***********/
-/**********************************/
-
-body {
-  overflow-x: hidden;
-}
-
-section {
-  padding-left: 10px;
-}
-
-li, p {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#portfolio p {
-  padding-left: 0;
-  padding-right: 40px;
-}
-
-
-/*-------- MOBILE FORMAT ---------*/
-/**********************************/
-/************ SideBar *************/
-/**********************************/
-
-.wrapper {
-  /* flex-direction to column lets the sidebar sit on top, and not on the right*/
-  flex-direction: column;
-}
-
-nav {
-  /* Navigation Sidebar moved to top of screen */
-  height: 40px;
-  width: 100%;
-  position: sticky;
-  padding-bottom: 20px;
-  padding-top: 5px;
-
-}
-
-/* TO BE ADJUSTED. NOW: "navlink-container" */
-.wrapper .sidebar .navlink-container {
-  /* Icons in navigation bar to arrange horizontally across top of screen */
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-
-/* */
-/******** Sidebar Icon Links *************/
-/* */
-
-/* TO BE ADJUSTED. NOW: ".navicon-container" */
-.wrapper .sidebar .navlink-container {
-  /* social media links/icons to not appear on mobile version */
-  display: none
-}
-
-
-
-.link-text {
-  /* Requires Review */
-  /* Removes the text next to the icon in the sidebar */
-  display: none;
-}
-
-.navlink-container a.active,
-.nav-link.active,
-.link-text.active{
-  /* When viewer is looking at particular part of screen, js code will highlight relevant sidebar icon in green*/
-  color: green;
-}
-
-
-
-
-/*-------- MOBILE FORMAT ---------*/
-/**********************************/
-/****** Competency Articles *******/
-/**********************************/
-#competencies article {
-  flex-direction: column;
-}
-
-.competency-software-container {
-  min-width: auto;
-  width: auto;
-}
-  
-.circle {
-  height: 1.5em;
-  width: 1.5em;
-}
-
-/*-------- MOBILE FORMAT ---------*/
-/**********************************/
-/****** Red Dot on Boarder ********/
-/**********************************/
-  article span {
-    display: block;
+#myPortfolio #portfolio-flters li {
+    cursor: pointer;
+    margin: 15px -1px 0 0;
+    display: inline-block;
+    height: 35px;
+    padding: 10px;
+    color: #666666;
     font-size: 13px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    position: relative
-  }
-    
-  article span::before {
-    background: #EB210FDF;
-    border-radius: 5px;  
-    content: "";
-    height: 11px;
-    left: -26px;
-    position: absolute;
-    top: 3px;
-    width: 11px;
-  }
-
-
-
-/*-------- MOBILE FORMAT ---------*/
-/**********************************/
-/****** Portfolio Contents ********/
-/**********************************/
-
-.mobile-allicon-container {
-  /* Standard image gallary is removed from mobile version */
-  /* Standard image gallary is replaced with an icon that opens up the gallary and another that opens github*/
-  display: flex;
-  flex-direction: column;
+    line-height: 15px;
+    text-transform: uppercase;
+    border: 1px solid #FF6F61;
+    background: #ffffff;
+    transition: all 0.3s ease-in-out;
 }
 
-.portfolio-caption-container {
-  /* Since the image galary is removed on mobile, extend the width of the text box from 50% to larger */
-  width: 90%
+#myPortfolio #portfolio-flters li:hover,
+#myPortfolio #portfolio-flters li.filter-active {
+    background: #FF6F61;
+    color: #222222;
 }
 
-.portfolio-caption-container .project-url {
-  /* Text that displays link to Github is removed and replaced with an icon */
-  display: none;
+#myPortfolio .portfolio-item {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
 }
 
-.portfolio-image-caption {
-  /* On Desktop versions there is a small box that gives instructions to click left/right of image. Remove that. */
-  display: none;
-}
-
-/* */
-/******** Slideshows *************/
-/* */
-
-.portfolio-image-container {
-  /* Remove from mobile page, set as a middle of phone gallery */
-  /* Is now to be 100% wide to fill screen, with black seethrough background WHEN ACTIVATED*/
-  position: fixed;
-  top: 25%;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  display: none;
-  z-index: 9999;
-  width: 100%;
-}
- 
-.portfolio-image-container .image-slideshow-container {
-  /* Set images inside of mobile image container to fill some of the container area */
-  align-items: center;
-  border: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  height: 200px;
-}
-
-      
-.portfolio-image-container .image-slideshow-container img {
-  /* Images are to be in the middle of the display*/
-  border: 0;
-  vertical-align: middle;
-  align-content: center;
-  margin-left: 2%;
-  margin-right: 2%;
-}
-
-.prev, .next {
-  /* Do not display navigation arrows. Navigation on mobile is swiping */
-  display:none;
-}
-
-.portfolio-image-container.active {
-  /* Requires review */
-  display: flex;
-}
-
-img.active {
-  /* Requires review */
-  display: block;
-}
+#myPortfolio .portfolio-item figure {
+    background: #ffffff;
+    overflow: hidden;
+    height: 220px;
+    position: relative;
+    border-radius: 0;
+    margin: 0; 
 }

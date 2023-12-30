@@ -32,6 +32,7 @@
 #expInfoOverlay, #expDutiesOverlay, #expSoftwaresOverlay {
     padding: 20px;
     /* min-height: 300px; */
+    flex-basis: 30%;
 
 }
 

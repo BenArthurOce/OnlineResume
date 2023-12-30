@@ -5,6 +5,9 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
+    /* display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(4, 25%); */
 }
 
 #myPortfolio > h2{

@@ -1,5 +1,6 @@
 import ResumeData from "./factoryResumeData.js";
 import HTMLcompetency from "./HTMLcompetency.js";
+import HTMLskill from "./HTMLskill.js";
 import HTMLexp from "./HTMLexp.js";
 import HTMLeducation from "./HTMLeducation.js";
 import HTMLportfolio from "./HTMLportfolio.js";
@@ -9,6 +10,7 @@ import HTMLexpTile from "./HTMLexpTile.js";
 
 const classResumeData = new ResumeData;
 const classComp = new HTMLcompetency;
+const classSkill = new HTMLskill;
 const classEdu = new HTMLeducation;
 const classExp = new HTMLexp;
 const classPort = new HTMLportfolio;
@@ -27,6 +29,8 @@ classResumeData.getJSONdata()
     for (const {competencySoftware, competencyScore} of myCompetencies) {
         classComp.renderToPage(competencySoftware, competencyScore);
     };
+
+    classSkill.renderToPage()
 
     for (const {degree, institution} of myEducation) {
         classEdu.renderToPage(degree, institution);

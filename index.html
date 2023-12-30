@@ -10,154 +10,92 @@
 
     <title>Ben Arthur Resume</title>
 
-    <!-- CSS Stylesheet -->
-    <link href="styles.css" rel="stylesheet">
-    <link href="libs/HTMLexpTile.css" rel="stylesheet" type="text/css">
-    <link href="libs/HTMLexpOverlay.css" rel="stylesheet" type="text/css">
-    <link href="libs/HTMLportfolioTile.css" rel="stylesheet" type="text/css">
-    <link href="libs/HTMLportfolioOverlay.css" rel="stylesheet" type="text/css">
-    <link href="libs/HTMLcompetency.css" rel="stylesheet" type="text/css">
-    <!-- <link href="libs/HTMLportfolio.css" rel="stylesheet" type="text/css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- https://www.w3schools.com/icons/fontawesome_icons_webapp.asp -->
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Additional Stylesheets -->
+    <link rel="stylesheet" href="libs/HTMLskill.css" type="text/css">
+    <link rel="stylesheet" href="libs/HTMLexpTile.css" type="text/css">
+    <link rel="stylesheet" href="libs/HTMLexpOverlay.css" type="text/css">
+    <link rel="stylesheet" href="libs/HTMLportfolioTile.css" type="text/css">
+    <link rel="stylesheet" href="libs/HTMLportfolioOverlay.css" type="text/css">
+    <link rel="stylesheet" href="libs/HTMLsectionScroller.css" type="text/css">
+
 </head>
-
-
-
-
 <body>
-  <div class="wrapper">
-    <nav class="sidebar"> <!--Sidebar -->
-      <div class="navlink-container">   <!--Sidebar Navigation Links-->
-        <a href="#aboutMe" class="nav-link"><i class="sidebar-icon fa fa-child"></i><span class="link-text">About</span></a>
-        <a href="#myCompetencies" class="nav-link"><i class="sidebar-icon fa fa-star"></i><span class="link-text">Competencies</span></a>
-        <a href="#myEducation" class="nav-link"><i class="sidebar-icon fa fa-book"></i><span class="link-text">Education</span></a>
-        <a href="#myExperience" class="nav-link"><i class="sidebar-icon fa fa-briefcase"></i><span class="link-text">Experience</span></a>
-        <a href="#myPortfolio" class="nav-link"><i class="sidebar-icon fa fa-file"></i><span class="link-text">Portfolio</span></a>
-      </div>
-      <div class="navicon-container">   <!--External Website Icons-->
-        <i class="fab fa-linkedin"></i>
-        <i class="fab fa-envelope"></i>
-        <i class="fab fa-github"></i>
-      </div>
-    </nav>  <!-- End of Sidebar -->
+    <div id="wrapper">
+        <section id="sectionContainer">
+            <div id="box0" class="resumeArticleBox active">
+                <section id="mySkills">
+                    <h2>Skills:</h2>
+                </section>
+            </div>                                                                                                                                                                                                                  
+            <div id="box1" class="resumeArticleBox">
+                <section id="myCompetencies">
+                    <h2>Compents:</h2>
+                </section>
+            </div>
+            <div id="box2" class="resumeArticleBox">
+                <section id="myEducation">
+                    <h2>Education:</h2>
+                    <!-- Each article is added from template tag -->
+                </section>
+            </div>
+            <div id="box3" class="resumeArticleBox">
+                <section id="myExperience">
+                    <h2>Experience:</h2>
+                    <!-- Each article is added from template tag -->
+                </section>
+            </div>
+            <div id="box4" class="resumeArticleBox">
+                <section id="myPortfolio">
+                    <h2>Portfolio:</h2>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul id="portfolio-flters">
+                                <li data-filter="*" class="filter-active">All</li>
+                                <li data-filter=".web-des">Design</li>
+                                <li data-filter=".web-dev">Development</li>
+                                <li data-filter=".dig-mar">Marketing</li>
+                            </ul>
+                        </div>
+                    </div>
 
 
+                    <!-- Each article is added from template tag -->
+                </section>
+            </div>
+            <button id="prev" class="arrow" onclick="changeSlide(-1)">❮</button>
+            <button id="next" class="arrow" onclick="changeSlide(1)">❯</button>
+        </section>
+    </div>
 
 
-    <!-- Main Content Body -->
-    <div class="content-master-container" id="content-master-container">
-      <h1>Ben Arthur Resume</h1>
+    <script>
+        let currentSlide = 1;
 
-      <section id="aboutMe">
-        <h2>Introduction:</h2><br>
-        <article>
-          <h3 class="my-background"></h3><br>
-          <p class="my-introduction"></p>
-        </article>
-      </section>
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.resumeArticleBox');
+            if (n > slides.length) {
+                currentSlide = 1;
+            }
+            if (n < 1) {
+                currentSlide = slides.length;
+            }
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+            });
 
-    <section id="mySkills">
-        <h3>Soft Skills</h3>
-        <i class="sidebar-icon fa fa-child"></i><span class="link-text">About</span>
-        <i class="sidebar-icon fa fa-database"></i><span class="link-text">Database Management</span>
-        <i class="sidebar-icon fa fa-user-secret"></i><span class="link-text">Personal Information Security</span>
-        <i class="sidebar-icon fa fa-bell"></i><span class="link-text">Customer Support</span>
-        <i class="sidebar-icon fa fa-puzzle-piece"></i><span class="link-text">Critical Thinking</span>
-        <i class="sidebar-icon fa fa-book"></i><span class="link-text">Documentation</span>
-        <i class="sidebar-icon fa fa-laptop"></i><span class="link-text">Idk its a laptop</span>
-        <i class="sidebar-icon fa fa-list-ul"></i><span class="link-text">Task management</span>
-    
-        <h3>Experienced In</h3>
-        <i class="sidebar-icon fa fa-gitlab"></i><span class="link-text">Git</span>
-        <i class="sidebar-icon fa fa-cpanel"></i><span class="link-text">cPanel</span>
-        <i class="sidebar-icon fa fa-trello"></i><span class="link-text">Trello</span>
-        <i class="sidebar-icon fa fa-atlassian"></i><span class="link-text">Jira</span>
-        <i class="sidebar-icon fa fa-confluence"></i><span class="link-text">Confluence</span>
-        <i class="sidebar-icon fa fa-slack"></i><span class="link-text">Slack</span>
-    </section>
-    <!-- <i class="fa-brands fa-confluence"></i> -->
+            slides[currentSlide - 1].classList.add('active');
+        }
 
-      <section id="myCompetencies">
-        <h2>Competencies:</h2><br>
-          <!-- Each article is added from template tag -->
-      </section>
+        function changeSlide(n) {
+            showSlide(currentSlide += n);
+        }
 
-      <section id="myEducation">
-          <h2>Education:</h2><br>
-          <!-- Each article is added from template tag -->
-      </section>
-
-      <section id="myExperience">
-          <h2>Experience:</h2>
-          <!-- Each article is added from template tag -->
-      </section>
-
-      <section id="myPortfolio">
-        <h2>Portfolio:</h2>
-          <!-- Each article is added from template tag -->
-      </section>
-
-    </div> <!-- End of Content Body -->
-  </div> <!-- End of Wrapper -->
-
-  <!-- Article templates for each section -->
-  <template id="template-competency">
-    <article class="template-competency-article">
-      <div class="competency-software-container">
-        <h3 class="competencySoftware"></h3>
-      </div>
-      <div class="competencyScore-container"></div>
-    </article>    
-  </template>
-
-  <template id="template-education">
-    <article>
-      <span class="institution"></span>
-      <h3 class="degree"></h3>
-    </article>   
-  </template>
-
-  <template id="template-experience">
-    <article>
-      <span class="period"></span>
-      <h3 class="company"></h3>
-      <h4 class="address"></h4>
-      <h5 class="position"></h5>
-      <h6>Software Used:</h6>
-      <ul class="softwares"></ul> 
-      <h6>Duties:</h6>
-      <ul class="duties"></ul> 
-    </article>
-  </template>
-
-  <template id="template-portfolio">
-    <article>
-      <div class="portfolio-caption-container">
-        <span class="project-lang"></span>
-          <h3 class="project-name"></h3>
-          <h4 class="project-url"><a href="">Github Link</a></h4>
-          <p class="project-desc"></p>
-      </div>
-      <div class="portfolio-image-container">
-          <div class="image-slideshow-container">
-            <a class="prev"></a>
-            <a class="next"></a>
-          </div>
-      </div>
-      <div class="mobile-allicon-container">
-        <i class="mob-icon fa-image" onclick="openSlideshow(0)"></i>
-        <i class="mob-icon fa-github"></i>
-      </div>
-    </article>
-  </template>
-
-  <!-- JavaScript Libraries -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Javascript -->
-  <!-- <script src="script.js"></script> -->
-  <script type="module" src="libs/_frontPage.js"></script>
-  </body>  
+        showSlide(currentSlide);
+    </script>
+    <script type="module" src="libs/_frontPage.js"></script>
+</body>
 </html>
-
