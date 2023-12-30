@@ -7,71 +7,77 @@
     <meta name="Bens Resume" content="Ben Arthur Resume">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ben Arthur">
-
     <title>Ben Arthur Resume</title>
+
+    <!-- Dynamic Stylesheet for the body -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 
     <!-- CSS Stylesheets -->
     <link rel="stylesheet" href="styles.css">
 
     <!-- Additional Stylesheets -->
     <link rel="stylesheet" href="libs/HTMLskill.css" type="text/css">
-    <link rel="stylesheet" href="libs/HTMLexpTile.css" type="text/css">
-    <link rel="stylesheet" href="libs/HTMLexpOverlay.css" type="text/css">
-    <link rel="stylesheet" href="libs/HTMLportfolioTile.css" type="text/css">
-    <link rel="stylesheet" href="libs/HTMLportfolioOverlay.css" type="text/css">
     <link rel="stylesheet" href="libs/HTMLsectionScroller.css" type="text/css">
-
 </head>
 <body>
-    <div id="wrapper">
-        <section id="sectionContainer">
-            <div id="box0" class="resumeArticleBox active">
-                <section id="mySkills">
-                    <h2>Skills:</h2>
-                </section>
-            </div>                                                                                                                                                                                                                  
-            <div id="box1" class="resumeArticleBox">
-                <section id="myCompetencies">
-                    <h2>Compents:</h2>
-                </section>
-            </div>
-            <div id="box2" class="resumeArticleBox">
-                <section id="myEducation">
-                    <h2>Education:</h2>
-                    <!-- Each article is added from template tag -->
-                </section>
-            </div>
-            <div id="box3" class="resumeArticleBox">
-                <section id="myExperience">
-                    <h2>Experience:</h2>
-                    <!-- Each article is added from template tag -->
-                </section>
-            </div>
-            <div id="box4" class="resumeArticleBox">
-                <section id="myPortfolio">
-                    <h2>Portfolio:</h2>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <ul id="portfolio-flters">
-                                <li data-filter="*" class="filter-active">All</li>
-                                <li data-filter=".web-des">Design</li>
-                                <li data-filter=".web-dev">Development</li>
-                                <li data-filter=".dig-mar">Marketing</li>
-                            </ul>
-                        </div>
-                    </div>
+    <!-- JavaScript to create elements dynamically -->
+    <script>
+        // Create wrapper div
+        var wrapper = document.createElement('div');
+        wrapper.id = 'wrapper';
+        document.body.appendChild(wrapper);
 
+        // Create sectionContainer div
+        var sectionContainer = document.createElement('section');
+        sectionContainer.id = 'sectionContainer';
+        wrapper.appendChild(sectionContainer);
 
-                    <!-- Each article is added from template tag -->
-                </section>
-            </div>
-            <button id="prev" class="arrow" onclick="changeSlide(-1)">❮</button>
-            <button id="next" class="arrow" onclick="changeSlide(1)">❯</button>
-        </section>
-    </div>
+        // Create resumeArticleBoxes dynamically
+        var boxIds = ['mySkills', 'myCompetencies', 'myEducation', 'myExperience', 'myPortfolio'];
+        for (var i = 0; i < boxIds.length; i++) {
+            var box = document.createElement('div');
+            box.id = 'box' + i;
+            box.className = 'resumeArticleBox' + (i === 0 ? ' active' : ''); // Add 'active' class to the first box
+            sectionContainer.appendChild(box);
 
+            var section = document.createElement('section');
+            section.id = boxIds[i];
+            box.appendChild(section);
 
+            var h2 = document.createElement('h2');
+            h2.textContent = boxIds[i].replace('my', ''); // Assuming you want to remove 'my' from the section heading
+            section.appendChild(h2);
+
+            // For demonstration purposes, add a placeholder paragraph
+            var p = document.createElement('p');
+            p.textContent = 'This is a placeholder content for ' + boxIds[i];
+            section.appendChild(p);
+        }
+
+        // Create navigation buttons
+        var prevButton = document.createElement('button');
+        prevButton.id = 'prev';
+        prevButton.className = 'arrow';
+        prevButton.textContent = '❮';
+        prevButton.onclick = function() { changeSlide(-1); };
+        sectionContainer.appendChild(prevButton);
+
+        var nextButton = document.createElement('button');
+        nextButton.id = 'next';
+        nextButton.className = 'arrow';
+        nextButton.textContent = '❯';
+        nextButton.onclick = function() { changeSlide(1); };
+        sectionContainer.appendChild(nextButton);
+    </script>
+
+    <!-- Include the existing script -->
     <script>
         let currentSlide = 1;
 
@@ -96,6 +102,7 @@
 
         showSlide(currentSlide);
     </script>
+    <script type="module" src="libs/HTMLnavBar.js"></script>
     <script type="module" src="libs/_frontPage.js"></script>
 </body>
 </html>

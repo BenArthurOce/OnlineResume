@@ -1,4 +1,4 @@
-class HTMLPortfolioOverlay {
+class HTMLportfolioOverlay {
     #parentElement;
     #templateOverlayElement;
     #currentImageIndex
@@ -9,7 +9,7 @@ class HTMLPortfolioOverlay {
     #projectUrl;
     #projectImages
     #iconContainer
-    
+
     constructor(projectName, projectLangs, projectSumSmall, projectSumLarge, projectUrl, projectImages, iconContainer) {
         this.#parentElement = document.querySelector("#myPortfolio");
         this.#templateOverlayElement = `
@@ -38,6 +38,97 @@ class HTMLPortfolioOverlay {
         this.#projectUrl = projectUrl;
         this.#projectImages = projectImages;
         this.#iconContainer = iconContainer;
+
+        // Add CSS styles dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            #infoOverlay {
+                display: none;   /* Default display is non visible. Display is modified when class becomes "active" */
+                position: fixed;  /* Positions the overlay relative to the browser window and does not scroll with the page */
+                top: 0;
+                left: 0;
+                margin-left: 20%;   /* navigation sidebar is currently at 20%. The overlay does not overlap the sidebar*/
+                width: 80%;         /* navigation sidebar is currently at 20%. The overlay does not overlap the sidebar*/
+                height: 95%;        /* Set at 100% to cover whole screen. Reduced by 5% to include the "Close" button at the bottom */
+                background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
+                color: #fff;
+                justify-content: center;    /* Centers the child elements horizontally */
+                align-items: center;        /* Centers the child elements vertically */
+                
+            }
+            
+            #infoOverlay.active {
+                display: flex;      /* Overlay becomes visible when is active*/
+            }
+            
+            #infoWrapper {
+                font-family: 'Arial', sans-serif;
+                padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
+            }
+            
+            #portfolioInfo,
+            #imageContainer {
+                padding: 20px;
+                height: 100%;
+            }
+            
+            #portfolioInfo {
+                background-color: #2ecc71;
+                flex-basis: 40%;
+            }
+            
+            #imageContainer {
+                background-color: rgba(0, 0, 0, 0.9);   /* Sets transparent background */
+                flex-basis: 55%;
+                display: flex;
+                align-items: center;
+                justify-content: center;    /* Allows images inside this to be centered.*/
+                position: relative;
+            }
+            
+            
+            #slideshowContainer img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+            
+            .next, .prev {
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                padding: 16px;
+                margin-top: -22px;
+                color: black;
+                font-weight: bold;
+                font-size: 18px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+                user-select: none;
+            }
+            
+            .next {
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+            
+            .prev:hover, .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
+            }
+            
+            #closeBtn {
+                cursor: pointer;
+                color: #e74c3c;
+                position: absolute;
+                top: 90%;
+                left: 50%;
+                transform: translateX(-50%);         /* Centers the button horizontally.*/
+                font-weight: bold;
+                font-size: 20px;
+            }
+        `;
+        document.head.appendChild(style);
     };
     get parentElement() {
         return this.#parentElement;
@@ -81,7 +172,6 @@ class HTMLPortfolioOverlay {
         overlayElement.querySelector('#projectTitleOlay').textContent = this.projectName;
         overlayElement.querySelector('#projectSummaryOlay').textContent = this.projectSumLarge;
 
-
         this.projectLangs.forEach(lang => {
             const logoPath = `imgLogos/${lang}.svg`;
 
@@ -94,13 +184,9 @@ class HTMLPortfolioOverlay {
             overlayElement.querySelector('#projectLangsOlay').appendChild(langLogo);
         });
 
-
         // Prepare slideshow
         const imageContainer = overlayElement.querySelector('#slideshowContainer');
 
-        //
-        // Image slideshow, left and right arrows
-        //
         const showImage = (index) => {
             const images = imageContainer.querySelectorAll('img');
             images.forEach((img, i) => {
@@ -118,11 +204,9 @@ class HTMLPortfolioOverlay {
             showImage(this.currentImageIndex);
         };
 
-        // Attach event listeners to the arrows
         overlayElement.querySelector('.prev').addEventListener('click', prevImage);
         overlayElement.querySelector('.next').addEventListener('click', nextImage);
 
-        // Add each image to the gallery element
         this.projectImages.forEach((image, index) => {
             const img = document.createElement('img');
             img.src = image;
@@ -130,22 +214,17 @@ class HTMLPortfolioOverlay {
             imageContainer.appendChild(img);
         });
 
-        // Closes the overlay
         overlayElement.querySelector('#closeBtn').onclick = () => {
             this.removeFromPage();
         };
 
         document.body.appendChild(overlayElement);
-        
     };
 
-
-    // Change the display attribute to show the overlay over the screen
     renderToPage() {
         document.body.querySelector('#infoOverlay').classList.add('active');
     };
-  
-    // Remove the overlay from the screen
+
     removeFromPage() {
         const overlayElement = document.body.querySelector('#infoOverlay');
         if (overlayElement) {
@@ -153,9 +232,8 @@ class HTMLPortfolioOverlay {
             if (parentElement) {
                 parentElement.parentNode.removeChild(parentElement);
             }
-        }
+        }                                                                       
     }
-
-};
+}
   
-  export default HTMLPortfolioOverlay;
+  export default HTMLportfolioOverlay;
