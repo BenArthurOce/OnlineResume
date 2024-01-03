@@ -10,7 +10,7 @@ class HTMLportfolioTile {
         this.#templateTileElement = `
             <div class="tile"">
                 <h3 class="projectName"></h3>
-                <p class="summarySmall">dskdfdsm dsfn,.we fdslewjring ,ds,sd f dfde rqw</p>
+                <p class="summarySmall">dskdfdsm dsfn,.we fdslewjring ,d s,sd f dfde rqw</p>
                 <div class="icon-container">
                 </div>
             </div>
@@ -18,19 +18,7 @@ class HTMLportfolioTile {
 
         // Add CSS styles dynamically
         const style = document.createElement('style');
-        style.textContent = `
-            #myPortfolio {
-                font-family: 'Arial', sans-serif;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            #myPortfolio > h2{
-                display: none;
-            }
-            
+        style.textContent = `          
             .tile {
                 width: 200px;
                 height: 200px;

@@ -42,7 +42,7 @@ class HTMLportfolioOverlay {
         // Add CSS styles dynamically
         const style = document.createElement('style');
         style.textContent = `
-            #infoOverlay {
+            dialog {
                 display: none;   /* Default display is non visible. Display is modified when class becomes "active" */
                 position: fixed;  /* Positions the overlay relative to the browser window and does not scroll with the page */
                 top: 0;
@@ -57,13 +57,15 @@ class HTMLportfolioOverlay {
                 
             }
             
-            #infoOverlay.active {
+            dialog.active {
                 display: flex;      /* Overlay becomes visible when is active*/
             }
             
             #infoWrapper {
                 font-family: 'Arial', sans-serif;
                 padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
+                display: flex;      
+                flex-direction: row; /* Elements inside the overlay become side by side*/
             }
             
             #portfolioInfo,

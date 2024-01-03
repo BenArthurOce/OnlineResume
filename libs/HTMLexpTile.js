@@ -5,8 +5,8 @@ class HTMLexpTile {
     #templateTileElement;
     // #logoPath = "imgLogos/";
     
-    constructor() {
-        this.#parentElement = document.querySelector("#myExperience");
+    constructor(parentElement) {
+        this.#parentElement = parentElement
         this.#templateTileElement = `
             <div class="tile"">
                 <h3 class="company"></h3>
@@ -18,18 +18,6 @@ class HTMLexpTile {
         // Add CSS styles dynamically
         const style = document.createElement('style');
         style.textContent = `
-            /* Global styles */
-            #myExperience {
-                font-family: 'Arial', sans-serif;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                padding: 20px;
-            }
-            
-            #myExperience > h2{
-                display: none;
-            }
             
             /* Tile styles */
             .tile {

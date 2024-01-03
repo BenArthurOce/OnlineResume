@@ -1,4 +1,17 @@
-body {
+
+#wrapper {
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+}
+
+main {
+    min-height: 700px;
+}
+
+
+
+/* body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,4 +72,4 @@ body {
     position: relative;
     border-radius: 0;
     margin: 0; 
-}
+} */

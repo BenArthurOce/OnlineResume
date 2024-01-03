@@ -22,87 +22,56 @@
     <link rel="stylesheet" href="styles.css">
 
     <!-- Additional Stylesheets -->
-    <link rel="stylesheet" href="libs/HTMLskill.css" type="text/css">
-    <link rel="stylesheet" href="libs/HTMLsectionScroller.css" type="text/css">
+    <!-- <link rel="stylesheet" href="libs/HTMLskill.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="libs/HTMLsectionScroller.css" type="text/css"> -->
 </head>
+
 <body>
+    <div id="wrapper">
+        <!-- <nav>
+            <a href="#" data-index="0">Skills</a>
+            <a href="#" data-index="1">Competencies</a>
+            <a href="#" data-index="2">Education</a>
+            <a href="#" data-index="3">Experience</a>
+            <a href="#" data-index="4">Portfolio</a>
+        </nav>
 
-    <!-- JavaScript to create elements dynamically -->
-    <script>
-        // Create wrapper div
-        var wrapper = document.createElement('div');
-        wrapper.id = 'wrapper';
-        document.body.appendChild(wrapper);
+        <main>
+            <section id="mySkills" class="resumeArticleBox active">
+                <h2>Skills:</h2>
+            </section>
 
-        // Create sectionContainer div
-        var sectionContainer = document.createElement('section');
-        sectionContainer.id = 'sectionContainer';
-        wrapper.appendChild(sectionContainer);
+            <section id="myCompetencies" class="resumeArticleBox">
+                <h2>myCompetencies:</h2>
+            </section>
 
-        // Create resumeArticleBoxes dynamically
-        var boxIds = ['mySkills', 'myCompetencies', 'myEducation', 'myExperience', 'myPortfolio'];
-        for (var i = 0; i < boxIds.length; i++) {
-            var box = document.createElement('div');
-            box.id = 'box' + i;
-            box.className = 'resumeArticleBox' + (i === 0 ? ' active' : ''); // Add 'active' class to the first box
-            sectionContainer.appendChild(box);
+            <section id="myEducation" class="resumeArticleBox">
+                <h2>myEducation:</h2>
+            </section>
 
-            var section = document.createElement('section');
-            section.id = boxIds[i];
-            box.appendChild(section);
+            <section id="myExperience" class="resumeArticleBox">
+                <h2>myExperience:</h2>
+            </section>
 
-            var h2 = document.createElement('h2');
-            h2.textContent = boxIds[i].replace('my', ''); // Assuming you want to remove 'my' from the section heading
-            section.appendChild(h2);
+            <section id="myPortfolio" class="resumeArticleBox">
+                <h2>myPortfolio:</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul id="portfolio-flters">
+                            <li data-filter="*" class="filter-active">All</li>
+                            <li data-filter=".web-des">Design</li>
+                            <li data-filter=".web-dev">Development</li>
+                            <li data-filter=".dig-mar">Marketing</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <button id="prev" class="arrow">❮</button>
+            <button id="next" class="arrow">❯</button>
+        </main> -->
 
-            // For demonstration purposes, add a placeholder paragraph
-            var p = document.createElement('p');
-            p.textContent = 'This is a placeholder content for ' + boxIds[i];
-            section.appendChild(p);
-        }
-
-        // Create navigation buttons
-        var prevButton = document.createElement('button');
-        prevButton.id = 'prev';
-        prevButton.className = 'arrow';
-        prevButton.textContent = '❮';
-        prevButton.onclick = function() { changeSlide(-1); };
-        sectionContainer.appendChild(prevButton);
-
-        var nextButton = document.createElement('button');
-        nextButton.id = 'next';
-        nextButton.className = 'arrow';
-        nextButton.textContent = '❯';
-        nextButton.onclick = function() { changeSlide(1); };
-        sectionContainer.appendChild(nextButton);
-    </script>
-
-    <!-- Include the existing script -->
-    <script>
-        let currentSlide = 1;
-
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.resumeArticleBox');
-            if (n > slides.length) {
-                currentSlide = 1;
-            }
-            if (n < 1) {
-                currentSlide = slides.length;
-            }
-            slides.forEach((slide) => {
-                slide.classList.remove('active');
-            });
-
-            slides[currentSlide - 1].classList.add('active');
-        }
-
-        function changeSlide(n) {
-            showSlide(currentSlide += n);
-        }
-
-        showSlide(currentSlide);
-    </script>
-    <script type="module" src="libs/HTMLnavBar.js"></script>
+    </div>
+    <!-- <script type="module" src="libs/HTMLnavBar.js"></script> -->
     <script type="module" src="libs/_frontPage.js"></script>
 </body>
 </html>
