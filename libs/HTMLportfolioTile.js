@@ -4,21 +4,21 @@ class HTMLportfolioTile {
     #parentElement;
     #templateTileElement;
     #logoPath = "imgLogos/";
-    
+
+
     constructor(parentElement) {
-        this.#parentElement = parentElement
-        this.#templateTileElement = `
-            <div class="tile"">
+        this.#parentElement = parentElement;
+        this.#templateTileElement = document.createElement('div');
+    
+        this.#templateTileElement.innerHTML = `
                 <h3 class="projectName"></h3>
                 <p class="summarySmall"></p>
                 <div class="icon-container">
-                </div>
-            </div>
         `;
 
         // Add CSS styles dynamically
         const style = document.createElement('style');
-        style.textContent = `          
+        style.textContent = `
             .tile {
                 width: 200px;
                 height: 200px;
@@ -75,17 +75,28 @@ class HTMLportfolioTile {
 
     get parentElement() {
         return this.#parentElement;
-    };
+    }
+
     get templateTileElement() {
         return this.#templateTileElement;
-    };
+    }
+
+    set templateTileElement(value) {
+        this.#templateTileElement = value;
+    }
     get logoPath() {
         return this.#logoPath;
     };
 
-    renderToPage(projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages) {
-        const tile = document.createElement('div');
-        tile.innerHTML = this.templateTileElement;
+    renderToPage(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages) {
+        const tile = this.#templateTileElement.cloneNode(true);
+
+        tile.classList.add('tile', 'active');
+        // console.log(projectTags)
+
+        projectTags.forEach((tag, i) => {
+            tile.classList.add(tag);
+        });
 
         tile.querySelector('.projectName').textContent = projectName;
         tile.querySelector('.summarySmall').textContent = summarySmall;
@@ -104,15 +115,15 @@ class HTMLportfolioTile {
         });
         
 
-        // Tile changes colour when moused over
-        tile.addEventListener('mouseover', function () {
-            this.querySelector('.tile').classList.add('hover');
-        });
+        // // Tile changes colour when moused over
+        // tile.addEventListener('mouseover', function () {
+        //     this.querySelector('.tile').classList.add('hover');
+        // });
 
-        // Tile changes colour when moused over
-        tile.addEventListener('mouseout', function () {
-            this.querySelector('.tile').classList.remove('hover');
-        });
+        // // Tile changes colour when moused over
+        // tile.addEventListener('mouseout', function () {
+        //     this.querySelector('.tile').classList.remove('hover');
+        // });
 
         // More details of the project are displayed when tile is clicked
         tile.addEventListener('click', function () {
@@ -123,6 +134,33 @@ class HTMLportfolioTile {
 
         this.parentElement.appendChild(tile);
     };
+
+
+    filterTiles(searchTerm) {
+        const allTiles = document.querySelectorAll('#myPortfolio .tile');
+
+        allTiles.forEach(tile => {
+            tile.classList.remove('active');
+        });
+
+
+        allTiles.forEach(tile => {
+
+            // Get the tags of the div
+            var tags2 = Array.from(tile.classList)
+
+            // Print out the tags
+            // console.log("Tags of the div:", tags2);
+
+
+            // You should add data-tags attribute to your template
+            const tags = tile.dataset.tags ? tile.dataset.tags.split(' ') : [];
+
+            if (tags2.includes(searchTerm)) {
+                tile.classList.add('active');
+            }
+        });
+    }
 }
 
 export default HTMLportfolioTile;

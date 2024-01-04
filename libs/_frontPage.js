@@ -1,98 +1,16 @@
-
-
-
-// import ResumeData from "./factoryResumeData.js";
-// import HTMLcompetency from "./HTMLcompetency.js";
-// import HTMLskill from "./HTMLskill.js";
-// import HTMLeducation from "./HTMLeducation.js";
-// import HTMLportfolioTile from "./HTMLportfolioTile.js";
-// import HTMLexpTile from "./HTMLexpTile.js";
-
-
-
-
-
-// const section1 = document.createElement('section');
-// section1.id = `section1`
-// document.body.appendChild(section1)
-
-// const section2 = document.createElement('section');
-// section2.id = `section2`
-// document.body.appendChild(section2)
-
-// const section3 = document.createElement('section');
-// section3.id = `section3`
-// document.body.appendChild(section3)
-
-// const section4 = document.createElement('section');
-// section4.id = `section4`
-// document.body.appendChild(section4)
-
-// const section5 = document.createElement('section');
-// section5.id = `section5`
-// document.body.appendChild(section5)
-// tile.innerHTML = this.templateTileElement;
-
-// tile.querySelector('.projectName').textContent = projectName;
-// tile.querySelector('.summarySmall').textContent = summarySmall;
-
-
-// import HTMLSectionSlideshow  from './HTMLsectionSideshow.js';
-// const compSlideshow = new HTMLSectionSlideshow ("myCompetencies");
-// const skillsSlideshow = new HTMLSectionSlideshow ("mySkills");
-// const experienceSlideshow = new HTMLSectionSlideshow ("myExperience");
-// const educationSlideshow = new HTMLSectionSlideshow ("myEducation");
-// const portfolioSlideshow = new HTMLSectionSlideshow ("myPortfolio");
-
-
-
-// Import the HTMLSectionSlideshow class
-import HTMLSectionSlideshow  from './HTMLsectionSideshow.js';
-
-// // Create an instance of HTMLSectionSlideshow
-// const slideshow = new HTMLSectionSlideshow();
-
-// // Append the slideshow to the body or any other container element
-// document.body.appendChild(slideshow.parentElement);
-
-// // Call the renderToDom method to set up event listeners and other functionalities
-// slideshow.renderToDom();
-
-
-
-
-
-
-
-
-// const classResumeData = new ResumeData;
-// const classComp = new HTMLcompetency;
-// const classSkill = new HTMLskill;
-// const classEdu = new HTMLeducation;
-// const classExpTile = new HTMLexpTile;
-// const classPortTile = new HTMLportfolioTile;
-
-// compSlideshow.renderToDom()
-// skillsSlideshow.renderToDom()
-// experienceSlideshow.renderToDom()
-// educationSlideshow.renderToDom()
-// portfolioSlideshow.renderToDom()
-
-
-const slideshow = new HTMLSectionSlideshow('slideshow');
-document.body.appendChild(slideshow.parentElement);
-console.log(document.querySelector("#myCompetencies"))
-
-console.log(document.querySelector("#myExperience"))
-
-
-
-
 import ResumeData from "./factoryResumeData.js";
 import HTMLskill from "./HTMLskill.js";
 import HTMLeducation from "./HTMLeducation.js";
 import HTMLportfolioTile from "./HTMLportfolioTile.js";
 import HTMLexpTile from "./HTMLexpTile.js";
+
+import HTMLSectionSlideshow  from './HTMLsectionSideshow.js';
+
+
+const wrapperElement = document.getElementById('wrapper')
+const slideshowNEW = new HTMLSectionSlideshow(wrapperElement);
+slideshowNEW.constructNavBarElement();
+
 
 
 const classResumeData = new ResumeData;
@@ -100,7 +18,6 @@ const classSkill = new HTMLskill;
 const classEdu = new HTMLeducation;
 const classExpTile = new HTMLexpTile(document.querySelector("#myExperience"));
 const classPortTile = new HTMLportfolioTile(document.querySelector("#myPortfolio"));
-
 
 
 
@@ -123,16 +40,15 @@ classResumeData.getJSONdata()
     };
 
 
-    for (const {projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
-        classPortTile.renderToPage(projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages);
+    for (const {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
+        classPortTile.renderToPage(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages);
     };
 
 
-
-
+    //
+    // Experience Tile Filters
+    //
     const allfilter = document.querySelectorAll("#myExperience .filter li")
-    console.log(allfilter)
-
 
     // Filters on the Exp tiles
     allfilter[0].addEventListener('click', function () {
@@ -144,7 +60,6 @@ classResumeData.getJSONdata()
     });
 
     allfilter[2].addEventListener('click', function () {
-        console.log(allfilter[2].dataset.filter)
         classExpTile.filterTiles(allfilter[2].dataset.filter)
     });
 
@@ -153,6 +68,45 @@ classResumeData.getJSONdata()
     });
 
 
+    //
+    // Portfolio Tile Filters
+    //
+    const allfilterPortfolio = document.querySelectorAll("#myPortfolio .filter li")
+    allfilterPortfolio[0].addEventListener('click', function () {
+        classPortTile.filterTiles("tile")
+    });
+
+    allfilterPortfolio[1].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[1].dataset.filter)
+    });
+
+    allfilterPortfolio[2].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[2].dataset.filter)
+    });
+
+    allfilterPortfolio[3].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[3].dataset.filter)
+    });
+
+    allfilterPortfolio[4].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[4].dataset.filter)
+    });
+
+    allfilterPortfolio[5].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[5].dataset.filter)
+    });
+
+    allfilterPortfolio[6].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[6].dataset.filter)
+    });
+
+    allfilterPortfolio[7].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[7].dataset.filter)
+    });
+
+    allfilterPortfolio[8].addEventListener('click', function () {
+        classPortTile.filterTiles(allfilterPortfolio[8].dataset.filter)
+    });
 });
 
 

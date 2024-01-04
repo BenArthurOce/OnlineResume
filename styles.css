@@ -1,32 +1,144 @@
+/* h2 {
+    height: 0%;
+    padding: 0;  
+    margin: 0;
+    background-color: #FF6F61;
+} */
+
 
 #wrapper {
     padding-left: 10%;
     padding-right: 10%;
-    display: flex;
 }
 
 
 main {
     /* min-height: 700px; */
-    min-height: 85vh;
+    height: 100vh;
     background-color: #FF6F61;
 }
 
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-
-
-.title p {
-    margin: 0; /* Remove default margin for the position text */
-    align-items: center;
-    text-align: center;
-
+main {
+    flex-shrink: 0;
 }
 
 
-.title i {
-    margin: 30px; /* Remove default margin for the position text */
-    height: 30px;
-    width: 30px;
+/* ----------------------------- */
+/* ------ NAVIGATION BAR ------- */
+/* ----------------------------- */  
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;                  /* Background color for the navigation bar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   /* Add a subtle box shadow for depth */
+    height: 60px;
+    width: 100%;                                /* Takes up 100% of the screen width */
+    position: sticky;
+    top: 0;
+    z-index: 1000;                              /* Ensure the navigation bar appears above other elements */
+}
 
+nav a {
+    text-decoration: none;                      /*  */
+    color: #333333;                             /*  */
+    padding: 15px 20px;                         /* Spacing between words in the nav */
+    font-weight: bold;                          /* Make the text bold for emphasis */
+    transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
+}
+
+nav a:hover {
+    color: #ff5733;                             /* Change text color on hover */
+}
+
+nav a.active {
+    color: #ff5733;                             /* Active = relevant section element is active */
+}
+
+
+/* ----------------------------- */
+/* ------ RESUME CONTENT ------- */
+/* ----------------------------- */  
+section {
+    display: none;                              /* Default display is none. Only one section is to be active */
+    flex-direction: row;                        /* Tile elements are to display horizontally */
+    flex-wrap: wrap;                            /* wrap the tiles in the element */
+    gap: 20px;                                  /* each tile seperated by 20pixels */
+}
+
+section h2 {
+    flex-basis: 100%;
+}
+
+section.active {
+    display: flex;                              /* Only one section element is active. */
+}
+
+
+/* ----------------------------- */
+/* --- SPECIAL SIDE ARTICLES --- */
+/* ----------------------------- */
+#myIntroduction article,
+#myEducationSkills article {
+    flex-basis:45%;
+    text-align: center;
+}
+
+
+/* ----------------------------- */
+/* -- SECTION NEXT/PREV ARROWS - */
+/* ----------------------------- */            
+.arrow {
+    position: absolute;                     /* Taken out of normal flow of document */
+    top: 50%;                               /* Positions the top of the element at the vertical center of its containing element. */
+    transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
+    font-size: 24px;                        /* Size of the arrow */
+    cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
+    color: #ffffff;                         /* Arrows are white*/
+    background-color: rgba(0, 0, 0, 0.5);   /* semi-transparent black with 50% opacity*/
+    padding: 10px;                     
+    border: none;                           /* No border  */
+    outline: none;                          /* Removes the outline, typically added as a default focus style. */
+}
+
+#prev { left: 0; }                          /* positions it to the left edge of its containing element. */
+#next { right: 0; }                         /* positions it to the right edge of its containing element. */
+
+
+/* ----------------------------- */
+/* ---- TILE FILTER BUTTONS ---- */
+/* ----------------------------- */
+.filter {
+    list-style: none;                   /* Prevents the list from displaying as a dot point list. */
+    font-size: 0;                       /* Removes extra spacing between inline-block elements. */
+    flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
+    background-color: #FF6F61;          /* In place to alert of any incorrect CSS placement */
+    height: 0%;                         /* Removes automatic padding of filter element */
+    margin-bottom: 20px;                /* Margin */
+}
+
+.filter li {
+    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
+    display: inline-block;              /* Keeps the list items next to each other in a horizontal way*/
+    height: 35px;                       /* Increased Size to give button feel */
+    padding: 10px;                      /* Increased Size to give button feel */
+    color: #666666;                     /* Grey text */
+    font-size: 13px;                    /* If omitted, no text displays*/
+    text-transform: uppercase;          /* Sets all text in element to be uppercase*/
+    border: 1px solid #FF6F61;          /* Button Boarder*/
+    background: #ffffff;                /* White background */
+    transition: all 0.3s ease-in-out;   /* Applies a smooth transition effect to all style changes */
+}
+
+.filter li:hover,
+.filter li.filter-active {
+    background: #FF6F61;                /* Style change for when filter button is either clicked or moused over */
+    color: #222222;
 }

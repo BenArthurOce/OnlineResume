@@ -23,12 +23,14 @@ class HTMLexpTile {
             gap: 10px;
             display: flex;
             align-items: center; /* Align items vertically */
+            margin-right: 20px;
         }
     
         .title i {
             margin: 30px; /* Remove default margin for the position text */
             height: 30px;
             width: 30px;
+            font-size: 30px;
         }
     
         .title p {
