@@ -5,71 +5,28 @@
     display: flex;
 }
 
+
 main {
-    min-height: 700px;
+    /* min-height: 700px; */
+    min-height: 85vh;
+    background-color: #FF6F61;
 }
 
 
 
-/* body {
-    display: flex;
-    justify-content: center;
+
+
+.title p {
+    margin: 0; /* Remove default margin for the position text */
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+    text-align: center;
 
-#wrapper {
-    padding-left: 10%;
-    padding-right: 10%;
 }
 
 
+.title i {
+    margin: 30px; /* Remove default margin for the position text */
+    height: 30px;
+    width: 30px;
 
-
-
-
-
-
-#myPortfolio #portfolio-flters {
-    padding: 0;
-    margin: -15px 0 30px 0;
-    list-style: none;
-    font-size: 0;
 }
-
-#myPortfolio #portfolio-flters li {
-    cursor: pointer;
-    margin: 15px -1px 0 0;
-    display: inline-block;
-    height: 35px;
-    padding: 10px;
-    color: #666666;
-    font-size: 13px;
-    line-height: 15px;
-    text-transform: uppercase;
-    border: 1px solid #FF6F61;
-    background: #ffffff;
-    transition: all 0.3s ease-in-out;
-}
-
-#myPortfolio #portfolio-flters li:hover,
-#myPortfolio #portfolio-flters li.filter-active {
-    background: #FF6F61;
-    color: #222222;
-}
-
-#myPortfolio .portfolio-item {
-    position: relative;
-    height: 250px;
-    overflow: hidden;
-}
-
-#myPortfolio .portfolio-item figure {
-    background: #ffffff;
-    overflow: hidden;
-    height: 220px;
-    position: relative;
-    border-radius: 0;
-    margin: 0; 
-} */

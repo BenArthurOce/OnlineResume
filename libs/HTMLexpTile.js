@@ -1,24 +1,43 @@
-import HTMLexpOverlay from './HTMLexpOverlay.js'
+import HTMLexpOverlay from './HTMLexpOverlay.js';
 
 class HTMLexpTile {
     #parentElement;
     #templateTileElement;
-    // #logoPath = "imgLogos/";
-    
+
     constructor(parentElement) {
-        this.#parentElement = parentElement
-        this.#templateTileElement = `
-            <div class="tile"">
-                <h3 class="company"></h3>
-                <p class="position">dskdfdsm dsfn,.we fdslewjring ,ds,sd f dfde rqw</p>
-                </div>
+        this.#parentElement = parentElement;
+        this.#templateTileElement = document.createElement('div');
+
+        this.#templateTileElement.innerHTML = `
+            <div class="title">
+                <i></i>
+                <p class="position"></p>
             </div>
+            <h3 class="company"></h3>
         `;
 
-        // Add CSS styles dynamically
         const style = document.createElement('style');
         style.textContent = `
-            
+
+        .title {
+            gap: 10px;
+            display: flex;
+            align-items: center; /* Align items vertically */
+        }
+    
+        .title i {
+            margin: 30px; /* Remove default margin for the position text */
+            height: 30px;
+            width: 30px;
+        }
+    
+        .title p {
+            margin: 0; /* Remove default margin for the position text */
+            align-items: center;
+            text-align: center;
+        }
+
+
             /* Tile styles */
             .tile {
                 width: 200px;
@@ -29,20 +48,24 @@ class HTMLexpTile {
                 padding: 10px;
                 box-sizing: border-box;
                 transition: background-color 0.3s ease, color 0.3s ease;
-                display: flex;
+                display: none;
                 flex-direction: column; 
-                justify-content: flex-start; /* Align items at the top */
+                justify-content: flex-start;
                 align-items: center;
                 font-weight: bold;
-                position: relative; /* relative positioning for absolute positioning of icons */
+                position: relative;
             }
-            
+
+            .tile.active {
+                display: flex;
+            }
+
             /* Title styles */
             .projectName {
                 padding: 0;
-                margin-bottom: 10px; /* distance between the title of the project, and the description below it */
+                margin-bottom: 10px;
             }
-            
+
             /* Container for language icons */
             .tile .icon-container {
                 position: absolute;
@@ -51,68 +74,118 @@ class HTMLexpTile {
                 margin-bottom: 5px;
                 margin-left: 10px;
             }
-            
+
             /* Language icons */
             .lang-logo {
                 height: 32px;
                 width: 32px;
-                margin-right: 10px; /* space between each icon */
+                margin-right: 10px;
             }
-            
+
             /* Hover effect */
             .tile:hover {
                 background-color: #2980b9;
                 color: #000;
             }
-            
+
             /* Responsive design */
             @media screen and (max-width: 600px) {
                 .tile {
                     width: 100%;
                 }
             }
-                    
         `;
         document.head.appendChild(style);
-    };
+    }
+
     get parentElement() {
         return this.#parentElement;
-    };
+    }
+
     get templateTileElement() {
         return this.#templateTileElement;
-    };
-    // get logoPath() {
-    //     return this.#logoPath;
-    // };
+    }
 
-    renderToPage(company, address, position, period, softwares, duties) {
-        const tile = document.createElement('div');
-        tile.innerHTML = this.templateTileElement;
+    set templateTileElement(value) {
+        this.#templateTileElement = value;
+    }
+
+    renderToPage(company, address, position, period, tags, softwares, duties) {
+        const tile = this.#templateTileElement.cloneNode(true);
+
+        tile.classList.add('tile', 'active');
+
+        tags.forEach((tag, i) => {
+            tile.classList.add(tag);
+        });
 
         tile.querySelector('.company').textContent = company;
-        tile.querySelector('.position').textContent = address;
-  
+        tile.querySelector('.position').textContent = position;
 
-        // Tile changes colour when moused over
-        tile.addEventListener('mouseover', function () {
-            this.querySelector('.tile').classList.add('hover');
-        });
+        switch (tags[0]) {
+            case "Programming":
+                tile.querySelector('i').className = 'sidebar-icon fa fa-github';
+                break;
+            case "Accounting":
+                tile.querySelector('i').className = 'sidebar-icon fa fa-money';
+                break;
+            case "CustomerService":
+                tile.querySelector('i').className = 'sidebar-icon fa fa-bell';
+                break;
+            default:
+                break;
+        }
+
+
+
+        // tile.querySelector('i').classList.add('sidebar-icon fa fa-money')
+
         
-        // Tile changes colour when moused over
-        tile.addEventListener('mouseout', function () {
-            this.querySelector('.tile').classList.remove('hover');
+
+
+        tile.addEventListener('mouseover', function () {
+            this.classList.add('hover');
         });
 
-        // More details of the project are displayed when tile is clicked
+        tile.addEventListener('mouseout', function () {
+            this.classList.remove('hover');
+        });
+
         tile.addEventListener('click', function () {
-            const overlayClass = new HTMLexpOverlay(company, address, position, period, softwares, duties);
-            overlayClass.createElement()
-            overlayClass.renderToPage()
+            const overlayClass = new HTMLexpOverlay(company, address, position, period, tags, softwares, duties);
+            overlayClass.createElement();
+            overlayClass.renderToPage();
         });
 
         this.parentElement.appendChild(tile);
     }
 
+    filterTiles(searchTerm) {
+        const allTiles = document.querySelectorAll('#myExperience .tile');
+
+        allTiles.forEach(tile => {
+            tile.classList.remove('active');
+        });
+
+
+
+        allTiles.forEach(tile => {
+
+            // Get the tags of the div
+            var tags2 = Array.from(tile.classList)
+
+            // Print out the tags
+            console.log("Tags of the div:", tags2);
+
+
+            // You should add data-tags attribute to your template
+            const tags = tile.dataset.tags ? tile.dataset.tags.split(' ') : [];
+
+            if (tags2.includes(searchTerm)) {
+                tile.classList.add('active');
+            }
+        });
+    }
 }
 
 export default HTMLexpTile;

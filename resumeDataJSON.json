@@ -51,7 +51,7 @@
         {
             "company": "Interfi Systems",
             "address": "Yarra Street, Geelong \n(Fintech company providing banking infrastructure to small/medium sized lenders)",
-            "position": "Application Support Developer (Support Team)",
+            "position": "Application Support Developer",
             "period": "Jun-2022 to Nov-2022",
             "tags": [
                 "Programming",
@@ -80,11 +80,11 @@
         {
             "company": "Parsons Charactered Accountant",
             "address": "Fenwick Street, Geelong",
-            "position": "Accountant",
+            "position": "Application Support Developer",
             "period": "Aug 2020 to Dec 2021",
             "tags": [
                 "Accounting"
-                ,"Customer Service"
+                ,"CustomerService"
             ],
             "softwares":  [
                 "Xero",
@@ -151,7 +151,7 @@
             "period": "Jan 2017 to Oct 2017",
             "tags": [
                 "Accounting"
-                ,"Customer Service"
+                ,"CustomerService"
             ],
             "softwares": [
                 "Xero",
@@ -171,7 +171,7 @@
             "position": "Taxation Officer, APS3",
             "period": "Sept 2016 to Jan 2017 (Contract)",
             "tags": [
-                "Customer Service"
+                "CustomerService"
             ],
             "softwares": [
                 "ATO in-house software"

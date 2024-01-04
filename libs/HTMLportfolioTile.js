@@ -5,12 +5,12 @@ class HTMLportfolioTile {
     #templateTileElement;
     #logoPath = "imgLogos/";
     
-    constructor() {
-        this.#parentElement = document.querySelector("#myPortfolio");
+    constructor(parentElement) {
+        this.#parentElement = parentElement
         this.#templateTileElement = `
             <div class="tile"">
                 <h3 class="projectName"></h3>
-                <p class="summarySmall">dskdfdsm dsfn,.we fdslewjring ,d s,sd f dfde rqw</p>
+                <p class="summarySmall"></p>
                 <div class="icon-container">
                 </div>
             </div>
@@ -28,12 +28,16 @@ class HTMLportfolioTile {
                 padding: 10px;
                 box-sizing: border-box;
                 transition: background-color 0.3s ease, color 0.3s ease;
-                display: flex;
+                display: none;
                 flex-direction: column; 
                 justify-content: flex-start; /* Align items at the top */
                 align-items: center;
                 font-weight: bold;
                 position: relative; /* relative positioning for absolute positioning of icons */
+            }
+
+            .tile.active {
+                display: flex;
             }
             
             .projectName {
@@ -98,6 +102,7 @@ class HTMLportfolioTile {
 
             iconContainer.appendChild(langLogo);
         });
+        
 
         // Tile changes colour when moused over
         tile.addEventListener('mouseover', function () {
@@ -117,7 +122,7 @@ class HTMLportfolioTile {
         });
 
         this.parentElement.appendChild(tile);
-    }
+    };
 }
 
 export default HTMLportfolioTile;

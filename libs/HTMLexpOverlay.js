@@ -5,11 +5,12 @@ class HTMLexpOverlay {
     #address;
     #position;
     #period;
+    #tags;
     #softwares;
     #duties
 
 
-    constructor(company, address, position, period, softwares, duties) {
+    constructor(company, address, position, period, tags, softwares, duties) {
         this.#parentElement = document.querySelector("#myExperience");
         this.#templateOverlayElement = `
         <dialog id="expDiag">
@@ -38,6 +39,7 @@ class HTMLexpOverlay {
         this.#address = address;
         this.#position = position;
         this.#period = period;
+        this.#tags = tags;
         this.#softwares = softwares;
         this.#duties = duties;
         
@@ -121,6 +123,9 @@ class HTMLexpOverlay {
     };
     get period() {
         return this.#period;
+    };
+    get tags() {
+        return this.#tags;
     };
     get softwares() {
         return this.#softwares;

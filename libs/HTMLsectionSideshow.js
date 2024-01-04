@@ -35,19 +35,27 @@ class HTMLSectionSlideshow {
 
             <section id="myExperience" class="">
                 <h2>myExperience:</h2>
+                <div class="filter">
+                    <ul class="filter-options">
+                        <li data-filter="*" class="filterItem">All</li>
+                        <li data-filter="Programming" class="filterItem">Programming Tech</li>
+                        <li data-filter="Accounting" class="filterItem">Accounting</li>
+                        <li data-filter="CustomerService" class="filterItem">Customer Service</li>
+                    </ul>
+                </div>
             </section>
+        
 
             <section id="myPortfolio" class="">
                 <h2>myPortfolio:</h2>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".web-des">Design</li>
-                            <li data-filter=".web-dev">Development</li>
-                            <li data-filter=".dig-mar">Marketing</li>
-                        </ul>
-                    </div>
+
+                <div class="filter">
+                    <ul class="filter-options">
+                        <li data-filter="*" class="filterItem active">All</li>
+                        <li data-filter=".web-desd" class="filterItem">Design</li>
+                        <li data-filter=".web-devd" class="filterItem">Development</li>
+                        <li data-filter=".dig-mard" class="filterItem">Marketing</li>
+                    </ul>
                 </div>
             </section>
             <button id="prev" class="arrow">❮</button>
@@ -143,6 +151,11 @@ class HTMLSectionSlideshow {
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 20px;
+                height: 100vh;
+            }
+
+            section h2 {
+                flex-basis: 100%;
             }
             
             section.active {
@@ -174,6 +187,32 @@ class HTMLSectionSlideshow {
             
             #prev { left: 0; }
             #next { right: 0; }
+
+
+            .filter {
+                list-style: none;                   /* Prevents the list from displaying as a dot point list. */
+                font-size: 0;                       /* Removes extra spacing between inline-block elements. */
+                flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
+            }
+            
+            .filter li {
+                cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
+                display: inline-block;              /* Keeps the list items next to each other in a horizontal way*/
+                height: 35px;                       /* Increased Size to give button feel */
+                padding: 10px;                      /* Increased Size to give button feel */
+                color: #666666;                     /* Grey text */
+                font-size: 13px;                    /* If omitted, no text displays*/
+                text-transform: uppercase;          /* Sets all text in element to be uppercase*/
+                border: 1px solid #FF6F61;          /* Button Boarder*/
+                background: #ffffff;                /* White background */
+                transition: all 0.3s ease-in-out;   /* Applies a smooth transition effect to all style changes */
+            }
+            
+            .filter li:hover,
+            .filter li.filter-active {
+                background: #FF6F61;    /* Style change for when filter button is either clicked or moused over */
+                color: #222222;
+            }
         
         `;
         document.head.appendChild(style);
@@ -193,9 +232,8 @@ class HTMLSectionSlideshow {
         });
     
         this.showSlide(this.currentImageIndex, this.listofSections);
-    }
+    };
     
-
     showSlide(index, listOfSections) {
         // Remove the active state of each resume section
         listOfSections.forEach(section => {
@@ -211,19 +249,19 @@ class HTMLSectionSlideshow {
         // Set the active class
         listOfSections[index].classList.add('active');
         navbarLinks[index].classList.add('active');
-    }
+    };
 
     nextSlide(listofSections) {
         this.currentImageIndex++
         if (this.currentImageIndex > listofSections.length - 1 ) {this.currentImageIndex = 0}
         this.showSlide(this.currentImageIndex, listofSections);
-    }
+    };
 
     prevSlide(listOfSections) {
         this.currentImageIndex--
         if (this.currentImageIndex < 0) {this.currentImageIndex = listOfSections.length - 1}
         this.showSlide(this.currentImageIndex, listOfSections);
-    }
+    };
 
     navigateToSlide(listOfSections, navbarLinks, event) {
         const index = event.target.dataset.index;

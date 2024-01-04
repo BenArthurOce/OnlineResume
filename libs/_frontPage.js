@@ -99,7 +99,7 @@ const classResumeData = new ResumeData;
 const classSkill = new HTMLskill;
 const classEdu = new HTMLeducation;
 const classExpTile = new HTMLexpTile(document.querySelector("#myExperience"));
-const classPortTile = new HTMLportfolioTile;
+const classPortTile = new HTMLportfolioTile(document.querySelector("#myPortfolio"));
 
 
 
@@ -118,14 +118,39 @@ classResumeData.getJSONdata()
     // };
 
 
-    for (const {company, address, position, period, softwares, duties} of myExperience) {
-        classExpTile.renderToPage(company, address, position, period, softwares, duties);
+    for (const {company, address, position, period, tags, softwares, duties} of myExperience) {
+        classExpTile.renderToPage(company, address, position, period, tags, softwares, duties);
     };
 
 
     for (const {projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
         classPortTile.renderToPage(projectName, projectLangs, summarySmall, summaryLarge, projectUrl, projectImages);
     };
+
+
+
+
+    const allfilter = document.querySelectorAll("#myExperience .filter li")
+    console.log(allfilter)
+
+
+    // Filters on the Exp tiles
+    allfilter[0].addEventListener('click', function () {
+        classExpTile.filterTiles("tile")
+    });
+
+    allfilter[1].addEventListener('click', function () {
+        classExpTile.filterTiles(allfilter[1].dataset.filter)
+    });
+
+    allfilter[2].addEventListener('click', function () {
+        console.log(allfilter[2].dataset.filter)
+        classExpTile.filterTiles(allfilter[2].dataset.filter)
+    });
+
+    allfilter[3].addEventListener('click', function () {
+        classExpTile.filterTiles(allfilter[3].dataset.filter)
+    });
 
 
 });
