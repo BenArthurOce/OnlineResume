@@ -34,10 +34,13 @@ class HTMLportfolioTile {
                 align-items: center;
                 font-weight: bold;
                 position: relative; /* relative positioning for absolute positioning of icons */
+                opacity: 0; /* Initially set opacity to 0 */
+                transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
             }
 
             .tile.active {
                 display: flex;
+                opacity: 1;
             }
             
             .projectName {

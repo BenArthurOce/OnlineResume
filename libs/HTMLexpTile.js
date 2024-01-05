@@ -155,7 +155,7 @@ class HTMLexpTile {
 
         tile.addEventListener('click', function () {
             const overlayClass = new HTMLexpOverlay(company, address, position, period, tags, softwares, duties);
-            overlayClass.createElement();
+            overlayClass.constructOverlayElement();
             overlayClass.renderToPage();
         });
 
@@ -163,7 +163,7 @@ class HTMLexpTile {
     }
 
     filterTiles(searchTerm) {
-        const allTiles = document.querySelectorAll('#myExperience .tile');
+        const allTiles = document.querySelectorAll('#myExperiences .tile');
 
         allTiles.forEach(tile => {
             tile.classList.remove('active');

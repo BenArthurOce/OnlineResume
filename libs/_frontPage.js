@@ -16,7 +16,7 @@ slideshowNEW.constructNavBarElement();
 const classResumeData = new ResumeData;
 const classSkill = new HTMLskill;
 const classEdu = new HTMLeducation;
-const classExpTile = new HTMLexpTile(document.querySelector("#myExperience"));
+const classExpTile = new HTMLexpTile(document.querySelector("#myExperiences"));
 const classPortTile = new HTMLportfolioTile(document.querySelector("#myPortfolio"));
 
 
@@ -26,16 +26,16 @@ classResumeData.getJSONdata()
 .then(resumeData => {
 
     // Get the headers of the JSON file, and then render each section to the page
-    const {aboutMe, myCompetencies, myEducation, myExperience, myPortfolio} = resumeData
+    const {aboutMe, myCompetencies, myEducations, myExperiences, myPortfolio} = resumeData
 
     // classSkill.renderToPage()
 
-    // for (const {degree, institution} of myEducation) {
+    // for (const {degree, institution} of myEducations) {
     //     classEdu.renderToPage(degree, institution);
     // };
 
 
-    for (const {company, address, position, period, tags, softwares, duties} of myExperience) {
+    for (const {company, address, position, period, tags, softwares, duties} of myExperiences) {
         classExpTile.renderToPage(company, address, position, period, tags, softwares, duties);
     };
 
@@ -48,7 +48,7 @@ classResumeData.getJSONdata()
     //
     // Experience Tile Filters
     //
-    const allfilter = document.querySelectorAll("#myExperience .filter li")
+    const allfilter = document.querySelectorAll("#myExperiences .filter li")
 
     // Filters on the Exp tiles
     allfilter[0].addEventListener('click', function () {
@@ -191,7 +191,7 @@ classResumeData.getJSONdata()
 // .then(resumeData => {
 
 //     // Get the headers of the JSON file, and then render each section to the page
-//     const {aboutMe, myCompetencies, myEducation, myExperience, myPortfolio} = resumeData
+//     const {aboutMe, myCompetencies, myEducations, myExperiences, myPortfolio} = resumeData
 
 //     for (const {competencySoftware, competencyScore} of myCompetencies) {
 //         classComp.renderToPage(competencySoftware, competencyScore);
@@ -199,12 +199,12 @@ classResumeData.getJSONdata()
 
 //     classSkill.renderToPage()
 
-//     for (const {degree, institution} of myEducation) {
+//     for (const {degree, institution} of myEducations) {
 //         classEdu.renderToPage(degree, institution);
 //     };
 
 
-//     for (const {company, address, position, period, softwares, duties} of myExperience) {
+//     for (const {company, address, position, period, softwares, duties} of myExperiences) {
 //         classExpTile.renderToPage(company, address, position, period, softwares, duties);
 //     };
 

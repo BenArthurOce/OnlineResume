@@ -21,11 +21,11 @@ class HTMLsectionSlideshow {
              ,sections: {
                   myIntroduction: document.querySelector('#myIntroduction')
                  ,mySkillsEducation: document.querySelector('#mySkillsEducation')
-                 ,myExperience: document.querySelector('#myExperience')
+                 ,myExperiences: document.querySelector('#myExperiences')
                  ,myPortfolio: document.querySelector('#myPortfolio')
              }
              ,filters: {
-                  experienceFilters: document.querySelector('#myExperience .filter')
+                  experienceFilters: document.querySelector('#myExperiences .filter')
                  ,portfolioFilters: document.querySelector('#myPortfolio .filter')
              }
          };
@@ -111,18 +111,51 @@ class HTMLsectionSlideshow {
              </article>
          </section>
  
-         <section id="myEducationSkills" class="">
-             <h2>myEducationSkills:</h2>
+         <section id="myEducationsSkills" class="">
+             <h2>myEducationsSkills:</h2>
+
+             
              <article>
                 <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
              </article>
              <article>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+             <div class="skills">
+             <i class="fas fa-cogs"></i> <span>Software Support</span>
+             <i class="fas fa-database"></i> <span>Database Management</span>
+             <i class="fas fa-users"></i> <span>Collaboration and Teamwork</span>
+             <i class="fas fa-file-alt"></i> <span>Documentation and Communication</span>
+             <i class="fas fa-headset"></i> <span>Client Services</span>
+             <i class="fas fa-check"></i> <span>Focused Attention to Detail</span>
+             <i class="fas fa-code"></i> <span>Critical and Creative Thinking</span>
+             <i class="fas fa-clock"></i> <span>Task and Deadline Management</span>
+             <i class="fas fa-tools"></i> <span>Technical Tools</span>
+             <i class="fas fa-building"></i> <span>Workplace Adaptability</span>
+             <i class="fas fa-graduation-cap"></i> <span>Continuous Learning and Growth</span>
+             <i class="fas fa-chart-line"></i> <span>Task and Deadline Management</span>
+         </div>
+         
+         <div class="competencies">
+             <i class="fas fa-code"></i> <span>C#/.Net Framework</span>
+             <i class="fas fa-map"></i> <span>Modeling, Mapping with Dapper</span>
+             <i class="fas fa-file-excel"></i> <span>Microsoft Excel</span>
+             <i class="fab fa-js"></i> <span>XML, Javascript</span>
+             <i class="fas fa-database"></i> <span>Database Design</span>
+             <i class="fab fa-microsoft"></i> <span>VBA (Visual Basic for Applications)</span>
+             <i class="fab fa-git"></i> <span>GIT Version Control</span>
+             <i class="fas fa-search"></i> <span>Transact-SQL Queries</span>
+             <i class="fab fa-xero"></i> <span>Xero Accounting Software</span>
+             <i class="fab fa-atlassian"></i> <span>Atlassian JIRA/Confluence</span>
+             <i class="fas fa-database"></i> <span>SQL Server Reporting Services</span>
+             <i class="fab fa-myob"></i> <span>MYOB</span>
+             <i class="fab fa-python"></i> <span>Python (PANDAS, tkinter)</span>
+             <i class="fas fa-chart-bar"></i> <span>Power BI</span>
+             <i class="fab fa-intuit"></i> <span>
+         
              </article>
          </section>
  
-         <section id="myExperience" class="">
-             <h2>myExperience:</h2>
+         <section id="myExperiences" class="">
+             <h2>myExperiences:</h2>
              <div class="filter">
                  <ul class="filter-options">
                      <li data-filter="*" class="filterItem">All</li>
@@ -134,7 +167,9 @@ class HTMLsectionSlideshow {
          </section>
  
          <section id="myPortfolio" class="">
-             <h2>myPortfolio:</h2>
+
+        <h2>myPortfolio</h2>
+
              <div class="filter">
                  <ul class="filter-options">
                      <li data-filter="*" class="filterItem">All</li>

@@ -2,7 +2,7 @@ class HTMLeducation {
     #parentElement;
     #templateEduElement;
     constructor() {
-        this.#parentElement = document.querySelector("#myEducation");
+        this.#parentElement = document.querySelector("#myEducations");
         this.#templateEduElement = `
         <article>
             <span class="institution"></span>
