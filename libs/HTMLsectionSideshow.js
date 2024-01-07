@@ -4,32 +4,12 @@ class HTMLsectionSlideshow {
     #elementNavbar
     #elementMainDiv
     #currentSectionIndex;
-    #pageElements;
+
     constructor(wrapperElement) {
          this.#elementWrapper = wrapperElement;
          this.#elementNavbar = ''
          this.#elementMainDiv = ''
          this.#currentSectionIndex = 0;
- 
-         this.pageElements = {
-             navBar: {
-                  navIntroduction: document.querySelectorAll('nav')[0]
-                 ,navSkillsEducation: document.querySelectorAll('nav')[1]
-                 ,navExperience: document.querySelectorAll('nav')[2]
-                 ,navPortfolio: document.querySelectorAll('nav')[3]
-             }
-             ,sections: {
-                  myIntroduction: document.querySelector('#myIntroduction')
-                 ,mySkillsEducation: document.querySelector('#mySkillsEducation')
-                 ,myExperiences: document.querySelector('#myExperiences')
-                 ,myPortfolio: document.querySelector('#myPortfolio')
-             }
-             ,filters: {
-                  experienceFilters: document.querySelector('#myExperiences .filter')
-                 ,portfolioFilters: document.querySelector('#myPortfolio .filter')
-             }
-         };
- 
  
          // Call the method to construct the navigation bar and the main body content
          this.constructNavBarElement();
@@ -66,12 +46,6 @@ class HTMLsectionSlideshow {
      set currentSectionIndex(value) {
          this.#currentSectionIndex = value;
      };
-     get pageElements() {
-         return this.#pageElements;
-     };
-     set pageElements(value) {
-         this.#pageElements = value;
-     };
      get listofNavs() {
          return this.elementNavbar.querySelectorAll('nav a');
      };
@@ -84,9 +58,6 @@ class HTMLsectionSlideshow {
      get rightArrow() {
          return this.elementMainDiv.querySelector('#next');
      };
- 
- 
- 
  
      constructNavBarElement() {
          this.elementNavbar = document.createElement('nav');
@@ -101,78 +72,113 @@ class HTMLsectionSlideshow {
      constructMainDivElement() {
          this.elementMainDiv = document.createElement('main');
          this.elementMainDiv.innerHTML = `
-         <section id="myIntroduction" class="active">
-             <h2>myIntroduction:</h2>
-             <article>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
-             </article>
-             <article>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
-             </article>
-         </section>
- 
-         <section id="myEducationsSkills" class="">
-             <h2>myEducationsSkills:</h2>
+            <section id="myIntroduction" class="active">
+                <h2>myIntroduction:</h2>
 
-             
-             <article>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
-             </article>
-             <article>
-             <div class="skills">
-             <i class="fas fa-cogs"></i> <span>Software Support</span>
-             <i class="fas fa-database"></i> <span>Database Management</span>
-             <i class="fas fa-users"></i> <span>Collaboration and Teamwork</span>
-             <i class="fas fa-file-alt"></i> <span>Documentation and Communication</span>
-             <i class="fas fa-headset"></i> <span>Client Services</span>
-             <i class="fas fa-check"></i> <span>Focused Attention to Detail</span>
-             <i class="fas fa-code"></i> <span>Critical and Creative Thinking</span>
-             <i class="fas fa-clock"></i> <span>Task and Deadline Management</span>
-             <i class="fas fa-tools"></i> <span>Technical Tools</span>
-             <i class="fas fa-building"></i> <span>Workplace Adaptability</span>
-             <i class="fas fa-graduation-cap"></i> <span>Continuous Learning and Growth</span>
-             <i class="fas fa-chart-line"></i> <span>Task and Deadline Management</span>
-         </div>
-         
-         <div class="competencies">
-             <i class="fas fa-code"></i> <span>C#/.Net Framework</span>
-             <i class="fas fa-map"></i> <span>Modeling, Mapping with Dapper</span>
-             <i class="fas fa-file-excel"></i> <span>Microsoft Excel</span>
-             <i class="fab fa-js"></i> <span>XML, Javascript</span>
-             <i class="fas fa-database"></i> <span>Database Design</span>
-             <i class="fab fa-microsoft"></i> <span>VBA (Visual Basic for Applications)</span>
-             <i class="fab fa-git"></i> <span>GIT Version Control</span>
-             <i class="fas fa-search"></i> <span>Transact-SQL Queries</span>
-             <i class="fab fa-xero"></i> <span>Xero Accounting Software</span>
-             <i class="fab fa-atlassian"></i> <span>Atlassian JIRA/Confluence</span>
-             <i class="fas fa-database"></i> <span>SQL Server Reporting Services</span>
-             <i class="fab fa-myob"></i> <span>MYOB</span>
-             <i class="fab fa-python"></i> <span>Python (PANDAS, tkinter)</span>
-             <i class="fas fa-chart-bar"></i> <span>Power BI</span>
-             <i class="fab fa-intuit"></i> <span>
-         
-             </article>
-         </section>
+                <!-- Left side article-->
+                <article>
+                    <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                </article>
+
+                <!-- Right side article-->
+                <article>
+                    <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                </article>
+            </section>
+ 
+
+            <section id="myEducationsSkills" class="">
+                <h2>myEducationsSkills:</h2>
+
+                <!-- Left side article-->
+                <article>
+                <h3>Education</h3>
+                    <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                </article>
+
+                <!-- Middle article-->
+                <article>
+                    <h2>Hard Skills</h2>
+                    <ul>
+                        <li>Key Skills:
+                            <ul>
+                                <li>Database design and management</li>
+                                <li>Transact-SQL Queries</li>
+                                <li>Extremely high knowledge of Microsoft Excel</li>
+                                <li>Process automation</li>
+                                <li>Technical documentation and maintaining</li>
+                                <li>User Interface design</li> 
+                            </ul>
+                        </li>
+                        <br>
+                        <li>Programming Languages:
+                            <ul>
+                                <li>React</li>
+                                <li>Python</li>
+                                <li>SQL</li>
+                                <li>C#</li>
+                                <li>Javascript</li>
+                                <li>VBA</li>
+                            </ul>
+                        </li>
+                        <br>
+                        <li>Software and Tools:
+                            <ul>
+                                <li>Microsoft SQL Server Manager Studio 2019</li>
+                                <li>Microsoft Excel</li>
+                                <li>Microsoft Visual Studio 2019</li>
+                                <li>Visual Studio Code</li>
+                                <li>Atlassian JIRA</li>
+                                <li>Atlassian Confluence</li>
+                                <li>Citrix Desktops</li>
+                                <li>Office365, Sharepoint, Teams</li>
+                                <li>Github</li>
+                                <li>Slack</li>
+                                <li>React, NodeJs, HTML, CSS (Web Development)</li>
+                                <li>Various cloud accounting softwares</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Right side article-->
+                <article>
+                    <h2>Soft Skills</h2>
+                    <ul>
+                        <li>Software Support</li>
+                        <li>Database Management</li>
+                        <li>Collaboration and Teamwork</li>
+                        <li>Documentation and Communication</li>
+                        <li>Client Services</li>
+                        <li>Focused Attention to Detail</li>
+                        <li>Critical and Creative Thinking</li>
+                        <li>Task and Deadline Management</li>
+                        <li>Technical Tools</li>
+                        <li>Workplace Adaptability</li>
+                        <li>Continuous Learning and Growth</li>
+                        <li>Task and Deadline Management</li>
+                    </ul>
+                </article>
+            </section>
  
          <section id="myExperiences" class="">
              <h2>myExperiences:</h2>
-             <div class="filter">
+             <menu class="filter">
                  <ul class="filter-options">
-                     <li data-filter="*" class="filterItem">All</li>
+                     <li data-filter="tile" class="filterItem">All</li>
                      <li data-filter="Programming" class="filterItem">Programming</li>
                      <li data-filter="Accounting" class="filterItem">Accounting</li>
                      <li data-filter="CustomerService" class="filterItem">Customer Service</li>
                  </ul>
-             </div>
+             </menu>
          </section>
  
          <section id="myPortfolio" class="">
 
         <h2>myPortfolio</h2>
-
-             <div class="filter">
+             <menu class="filter">
                  <ul class="filter-options">
-                     <li data-filter="*" class="filterItem">All</li>
+                     <li data-filter="tile" class="filterItem">All</li>
                      <li data-filter="UserInterface" class="filterItem">User Interfaces</li>
                      <li data-filter="Web" class="filterItem">Web</li>
                      <li data-filter="Database" class="filterItem">Databases</li>
@@ -182,67 +188,78 @@ class HTMLsectionSlideshow {
                      <li data-filter="DataSets" class="filterItem">DataSets</li>
                      <li data-filter="Finance" class="filterItem">Finance</li>
                  </ul>
-             </div>
+             </menu>
          </section>
          <button id="prev" class="arrow">❮</button>
          <button id="next" class="arrow">❯</button>
          `;
      };
  
-     constructStyles() {}
- 
-     addEventListeners() {  
- 
- 
- 
-         this.leftArrow.addEventListener('click', () => {
-             this.adjustDisplayedSection("-1");
-         });
- 
-         this.rightArrow.addEventListener('click', () => {
-             this.adjustDisplayedSection("+1");
-         });
- 
- 
-         this.listofNavs[0].addEventListener('click', () => {
-             this.adjustDisplayedSection(0);
-         });
- 
-         this.listofNavs[1].addEventListener('click', () => {
-             this.adjustDisplayedSection(1);
-         });
- 
-         this.listofNavs[2].addEventListener('click', () => {
-             this.adjustDisplayedSection(2);
-         });
- 
-         this.listofNavs[3].addEventListener('click', () => {
-             this.adjustDisplayedSection(3);
-         });
-         
- ;
-     };
- 
+
+     applyInfoToElement() {}
+
+
+     addEventListeners() {
+        // Add event listeners for navigation links
+        this.listofNavs.forEach((nav, index) => {
+            nav.addEventListener('click', () => {
+                this.adjustDisplayedSection(index);
+            });
+        });
+
+        // Add event listeners for arrow buttons
+        this.leftArrow.addEventListener('click', () => {
+            this.adjustDisplayedSection("-1");
+        });
+
+        this.rightArrow.addEventListener('click', () => {
+            this.adjustDisplayedSection("+1");
+        });
+
+        // Add event listeners for experience tile filters
+        document.body.querySelectorAll('#myExperiences .filter li').forEach((filter, index) => {
+            filter.addEventListener('click', () => {
+                this.filterTiles('myExperiences', filter.dataset.filter);
+            });
+        });
+
+        // Add event listeners for portfolio tile filters
+        document.body.querySelectorAll('#myPortfolio .filter li').forEach((filter, index) => {
+            filter.addEventListener('click', () => {
+                this.filterTiles('myPortfolio', filter.dataset.filter);
+            });
+        });
+    };
+
+    filterTiles(sectionId, filter) {
+        console.log(sectionId);
+        console.log(filter);
+    
+        const tiles = document.body.querySelectorAll(`#${sectionId} .tile`);
+        
+        tiles.forEach(tile => {
+            let tags2 = Array.from(tile.classList)
+            const tags = tile.dataset.tags ? tile.dataset.tags.split(' ') : [];
+            if (tags2.includes(filter)) {
+                console.log(tags2)
+                tile.classList.add('active');
+            } else {
+                tile.classList.remove('active');
+            }
+        })
+    }
+
  
      showSlide() {
  
-         const index = this.currentSectionIndex
-         const listOfSections = this.elementMainDiv.querySelectorAll('section');
- 
-         // Remove the active state of each resume section
-         listOfSections.forEach(section => {
-             section.classList.remove('active');
-         });
- 
-         // Remove the active state of each navigation link
-         this.listofNavs.forEach(link => {
-             link.classList.remove('active');
-         });
- 
- 
-         // Set the active class
-         listOfSections[index].classList.add('active');
-         this.listofNavs[index].classList.add('active');
+        const index = this.currentSectionIndex;
+        const listOfSections = this.elementMainDiv.querySelectorAll('section');
+        
+        // Hide all sections
+        listOfSections.forEach(section => section.classList.remove('active'));
+        
+        // Show the active section
+        listOfSections[index].classList.add('active');
      };
  
  
@@ -255,7 +272,7 @@ class HTMLsectionSlideshow {
                  break;
              case '-1':
                  // Loops back to the last index is the prev button goes too far
-                 if (--this.currentSectionIndex < 0) {this.currentSectionIndex = this.listOfSections.length - 1}
+                 if (--this.currentSectionIndex < 0) {this.currentSectionIndex = this.listofSections.length - 1}
                  this.showSlide();
                  break;
              default:

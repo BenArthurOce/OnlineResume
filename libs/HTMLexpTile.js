@@ -1,21 +1,22 @@
 import HTMLexpOverlay from './HTMLexpOverlay.js';
 
 class HTMLexpTile {
+    #tile;
+    #data;
     #parentElement;
-    #templateTileElement;
 
-    constructor(parentElement) {
-        this.#parentElement = parentElement;
-        this.#templateTileElement = document.createElement('div');
-
-        this.#templateTileElement.innerHTML = `
-            <div class="title">
-                <i></i>
-                <p class="position"></p>
-            </div>
-            <h3 class="company"></h3>
-        `;
-
+    constructor(company, address, position, period, tags, softwares, duties) {
+        this.#tile = ''
+        this.#data = {
+            company,
+            address,
+            position,
+            period,
+            tags,
+            softwares,
+            duties
+        }
+        this.#parentElement = document.querySelector("#myExperiences");
         const style = document.createElement('style');
         style.textContent = `
 
@@ -40,23 +41,7 @@ class HTMLexpTile {
         }
 
 
-            /* Tile styles */
-            .tile {
-                width: 200px;
-                height: 200px;
-                background-color: #3498db;
-                color: #fff;
-                cursor: pointer;
-                padding: 10px;
-                box-sizing: border-box;
-                transition: background-color 0.3s ease, color 0.3s ease;
-                display: none;
-                flex-direction: column; 
-                justify-content: flex-start;
-                align-items: center;
-                font-weight: bold;
-                position: relative;
-            }
+
 
             .tile.active {
                 display: flex;
@@ -88,6 +73,7 @@ class HTMLexpTile {
             .tile:hover {
                 background-color: #2980b9;
                 color: #000;
+                transform: scale(1.05);
             }
 
             /* Responsive design */
@@ -97,97 +83,111 @@ class HTMLexpTile {
                 }
             }
         `;
-        document.head.appendChild(style);
-    }
-
+        // document.head.appendChild(style);
+    };
+    get tile() {
+        return this.#tile;
+    };
+    set tile(value) {
+        this.#tile = value;
+    };
+    get data() {
+        return this.#data;
+    };
     get parentElement() {
         return this.#parentElement;
-    }
+    };
+    get company() {
+        return this.#data.company;
+    };
+    get address() {
+        return this.#data.address;
+    };
+    get position() {
+        return this.#data.position;
+    };
+    get period() {
+        return this.#data.period;
+    };
+    get tags() {
+        return this.#data.tags;
+    };
+    get softwares() {
+        return this.#data.softwares;
+    };
+    get duties() {
+        return this.#data.duties;
+    };
 
-    get templateTileElement() {
-        return this.#templateTileElement;
-    }
+    createElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <div class="title">
+                <i></i>
+                <h4 class="position"></h4>
+            </div>
+            <h3 class="company"></h3>
+        `;
+        this.tile = newElement.cloneNode(true);
+    };
 
-    set templateTileElement(value) {
-        this.#templateTileElement = value;
-    }
+    applyInfoToElement() {
+        // Add Tags for active classes
+        this.tile.classList.add('tile', 'active');
 
-    renderToPage(company, address, position, period, tags, softwares, duties) {
-        const tile = this.#templateTileElement.cloneNode(true);
-
-        tile.classList.add('tile', 'active');
-
-        tags.forEach((tag, i) => {
-            tile.classList.add(tag);
+        // Add tags for job types
+        this.tags.forEach((tag, i) => {
+            this.tile.classList.add(tag);
         });
 
-        tile.querySelector('.company').textContent = company;
-        tile.querySelector('.position').textContent = position;
+        this.tile.querySelector('.company').textContent = this.company;
+        this.tile.querySelector('.position').textContent = this.position;
 
-        switch (tags[0]) {
-            case "Programming":
-                tile.querySelector('i').className = 'sidebar-icon fa fa-github';
-                break;
-            case "Accounting":
-                tile.querySelector('i').className = 'sidebar-icon fa fa-money';
-                break;
-            case "CustomerService":
-                tile.querySelector('i').className = 'sidebar-icon fa fa-bell';
-                break;
-            default:
-                break;
-        }
+        // Add small icon in top left
+        const iconClass = this.getIconClassBasedOnTag(this.tags[0]);
+        this.tile.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
+    };
 
-
-
-        // tile.querySelector('i').classList.add('sidebar-icon fa fa-money')
-
-        
-
-
-        tile.addEventListener('mouseover', function () {
-            this.classList.add('hover');
+    addEventListeners(){
+        // Tile lights up when hovered over
+        this.tile.addEventListener('mouseover', () => {
+            this.tile.classList.add('hover');
         });
 
-        tile.addEventListener('mouseout', function () {
-            this.classList.remove('hover');
+        // Tile returns to normal when mouse unhovers
+        this.tile.addEventListener('mouseout', () => {
+            this.tile.classList.remove('hover');
         });
 
-        tile.addEventListener('click', function () {
-            const overlayClass = new HTMLexpOverlay(company, address, position, period, tags, softwares, duties);
-            overlayClass.constructOverlayElement();
+        // When tile is clicked, an Overlay() will appear
+        this.tile.addEventListener('click', () => {
+            const overlayClass = new HTMLexpOverlay(this.tile, this.data);
+            overlayClass.createElement();
             overlayClass.renderToPage();
         });
+    };
 
-        this.parentElement.appendChild(tile);
-    }
+    renderToPage() {
+        this.createElement();
+        this.applyInfoToElement();
+        this.addEventListeners();
+        this.parentElement.appendChild(this.tile);
+    };
 
-    filterTiles(searchTerm) {
-        const allTiles = document.querySelectorAll('#myExperiences .tile');
+    // Helper method to get icon class based on the tag
+    getIconClassBasedOnTag(tag) {
+        switch (tag) {
+            case "Programming":
+                return 'fa-github';
+            case "Accounting":
+                return 'fa-money';
+            case "CustomerService":
+                return 'fa-bell';
+            default:
+                return '';
+        }
+    };
 
-        allTiles.forEach(tile => {
-            tile.classList.remove('active');
-        });
-
-
-
-        allTiles.forEach(tile => {
-
-            // Get the tags of the div
-            var tags2 = Array.from(tile.classList)
-
-            // Print out the tags
-            console.log("Tags of the div:", tags2);
-
-
-            // You should add data-tags attribute to your template
-            const tags = tile.dataset.tags ? tile.dataset.tags.split(' ') : [];
-
-            if (tags2.includes(searchTerm)) {
-                tile.classList.add('active');
-            }
-        });
-    }
 }
 
 export default HTMLexpTile;

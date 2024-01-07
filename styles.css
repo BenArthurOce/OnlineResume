@@ -5,30 +5,107 @@
     background-color: #FF6F61;
 } */
 
+h4 {
+    /* height: 0%; */
+    padding: 0;  
+    margin: 0;
+}
+
 
 #wrapper {
     padding-left: 10%;
     padding-right: 10%;
-
 }
-
 
 main {
     /* min-height: 700px; */
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #FF6F61;
+    flex-shrink: 0;
 }
-
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-
 }
 
-main {
-    flex-shrink: 0;
+p {
+    font-size: 10px;
+}
+
+
+
+/* ----------------------------- */
+/* ----------- Tiles ----------- */
+/* ----------------------------- */
+
+.tile {
+    width: 150px;
+    height: 150px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    flex-direction: column; 
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    position: relative;
+
+    display: none;
+}
+
+.title {
+    gap: 10px;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-right: 20px;
+}
+
+.title i {
+    margin: 30px; /* Remove default margin for the position text */
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+}
+
+.title p {
+    margin: 0; /* Remove default margin for the position text */
+    align-items: center;
+    text-align: center;
+}
+
+.tile.active {
+    display: flex;
+}
+
+
+/* Container for language icons */
+.tile .icon-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    display:flex;
+    gap: 5px;
+}
+
+/* Language icons */
+.lang-logo {
+    height: 20px;
+    width: 20px;
+}
+
+/* Hover effect */
+.tile:hover {
+    background-color: #2980b9;
+    color: #000;
+    transform: scale(1.05);
 }
 
 
@@ -37,21 +114,19 @@ main {
 /* ----------------------------- */  
 nav {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between;               /* Keeps nav a spaced out and in line */
     background-color: #ffffff;                  /* Background color for the navigation bar */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   /* Add a subtle box shadow for depth */
     height: 60px;
     width: 100%;                                /* Takes up 100% of the screen width */
-    position: sticky;
-    top: 0;
+    position: sticky;                           /* Keeps the navigation bar at top of screen */
     z-index: 1000;                              /* Ensure the navigation bar appears above other elements */
 }
 
 nav a {
-    text-decoration: none;                      /*  */
-    color: #333333;                             /*  */
-    padding: 15px 20px;                         /* Spacing between words in the nav */
+    text-decoration: none;                      /* Removes all natural formatting ie: underlines */
+    color: #333333;                           /*  */
+    margin: 10px;
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
 }
@@ -67,12 +142,13 @@ nav a.active {
 
 /* ----------------------------- */
 /* ------ RESUME CONTENT ------- */
-/* ----------------------------- */  
+/* ----------------------------- */
 section {
     display: none;                              /* Default display is none. Only one section is to be active */
     flex-direction: row;                        /* Tile elements are to display horizontally */
     flex-wrap: wrap;                            /* wrap the tiles in the element */
     gap: 20px;                                  /* each tile seperated by 20pixels */
+    padding: 20px;
     /* margin-left: 3%;
     margin-right: 2%; */
 }
@@ -89,11 +165,11 @@ section.active {
 /* ----------------------------- */
 /* --- SPECIAL SIDE ARTICLES --- */
 /* ----------------------------- */
-#myIntroduction article,
+/* #myIntroduction article,
 #myEducationsSkills article {
     flex-basis:45%;
     text-align: center;
-}
+} */
 
 
 /* ----------------------------- */
@@ -110,6 +186,10 @@ section.active {
     padding: 10px;                     
     border: none;                           /* No border  */
     outline: none;                          /* Removes the outline, typically added as a default focus style. */
+}
+
+.arrow.disabled {
+    display: none;
 }
 
 #prev { left: 0; }                          /* positions it to the left edge of its containing element. */
@@ -163,13 +243,13 @@ dialog {
     position: fixed;  /* Positions the overlay relative to the browser window and does not scroll with the page */
     top: 0;
     left: 0;
-    margin-left: 20%;   /* navigation sidebar is currently at 20%. The overlay does not overlap the sidebar*/
-    width: 80%;         /* navigation sidebar is currently at 20%. The overlay does not overlap the sidebar*/
-    height: 95%;        /* Set at 100% to cover whole screen. Reduced by 5% to include the "Close" button at the bottom */
+    min-width: 100%;
+    min-height: 100%;        /* Set at 100% to cover whole screen. Reduced by 5% to include the "Close" button at the bottom */
     background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
-    color: #fff;
+    color: #fff;                /* White text */
     justify-content: center;    /* Centers the child elements horizontally */
     align-items: center;        /* Centers the child elements vertically */
+    z-index: 9999;              /* Must be most front facing forward since its an overlay */
     
 }
 
@@ -177,7 +257,7 @@ dialog.active {
     display: flex;      /* Overlay becomes visible when is active*/
 }
 
-#infoWrapper {
+.infoWrapper {
     font-family: 'Arial', sans-serif;
     padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
     gap: 40px;
@@ -188,91 +268,69 @@ dialog.active {
     flex: 1 1 0px;
 }
 
-
-#expInfoOverlay, #expDutiesOverlay, #expSoftwaresOverlay {
+article {
     padding: 20px;
-    /* min-height: 300px; */
     flex-basis: 30%;
-
-}
-
-
-#expInfoOverlay, #expDutiesOverlay, #expSoftwaresOverlay {
-    padding: 20px;
     background-color: #2ecc71;
     flex: 1; /* Updated to make all child elements take up equal space */
-}   
+}
 
 
-#closeBtn {
-    cursor: pointer;
+.closeBtn {
+    cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
+    padding: 10px; 
+    font-weight: bold;
+    font-size: 20px;                        /* Visual Details of Close Wording*/
     color: #e74c3c;
+    position: absolute;                     /* Taken out of normal flow of document */
+    top: 85%;                               /* Positions the close button at the bottom of its containing element*/
+    left: 50%;                              /* Positions the close button in the middle of its containing element*/
+    transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
+    transform: translateX(-50%);            /* Centers the button horizontally.*/
+}
+
+
+
+
+/* ----------------------------- */
+/* ---- PORTFOLIO OVERLAY ---- */
+/* ----------------------------- */
+
+
+.slideshowContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#port-prev, #port-next {
+    cursor: pointer;
     position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translateX(-50%);         /* Centers the button horizontally.*/
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: black;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+#port-next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-i {
-    font-size: 24px;
+#port-prev:hover, #port-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
 }
 
-.fa {
-    font-size: 24px;
-}
-
-.skills,
-.competencies {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.skills i,
-.competencies i {
-    font-size: 24px;
-    margin-right: 10px;
-    color: #3498db; /* Blue color */
-}
-
-.skills span,
-.competencies span {
-    display: block;
-    margin-bottom: 10px;
-}
-
-.skills span {
-    font-weight: bold;
-}
-
-/* Add some spacing between the sections */
-.skills {
-    margin-bottom: 20px;
-}
-
-/* Add a subtle border between sections */
-.skills::after {
-    content: '';
-    display: block;
-    height: 1px;
-    background-color: #ccc;
-    margin-top: 20px;
-}
+@media (max-width: 600px) {
+    .tile {
+        max-width: calc(50% - 20px); /* Tiles take full width with margin adjustment */
+        max-height: calc(50% - 20px); /* Tiles take full height with margin adjustment */
+      }
+  }
