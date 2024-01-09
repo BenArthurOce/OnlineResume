@@ -26,8 +26,6 @@ class HTMLsectionSlideshow {
         this.renderToPage();
     };
 
-
-
     get elementWrapper() {
         return this.#elementWrapper;
     };

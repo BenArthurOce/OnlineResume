@@ -1,35 +1,74 @@
+/* Import Google Font - Raleway 300 & 700 */
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
-#wrapper {
-    padding-left: 10%;
-    padding-right: 10%;
-}
+/* ----------------------------- */
+/* -------- GENERAL CSS -------- */
+/* ----------------------------- */ 
 
-body, h2, h3, h4, img, menu, menu ul{
+:root {
+     /* Fonts */
+    --sans-serif: 'Raleway', sans-serif;
+    --font-light: 300;
+    --font-bold: 700;
+    
+    /* Colors */
+    --black: #353535;
+    --gray: #4f4f4f;
+    --medium-gray: #737373;
+    --light-gray: #c4c4c4;
+    --orange: #f96855;
+    --white: #ffffff;
+    
+    /* Semantic color names */
+    --accent: var(--orange);
+    
+    --body-background: var(--black);
+    --menu-background: var(--gray);
+    
+    --main-font-color: var(--white);
+    --menu-active-color: var(--light-gray);
+    --menu-font-color: var(--medium-gray);
+  }
+
+  /* Add Var for:
+  Nav Colour
+  Nav Colour Active
+  Tile Background Colour
+  Overlay Colour
+  Article Colour
+  Active Filter 
+  Non Active Filter
+
+  */
+
+
+* {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
     font-family: Arial, sans-serif;
-}
+    border: none;
+  }
 
-menu, h2 {
-    height: 0%  ;
+body {
+    background: var(--body-background);
+    color: var(--main-font-color);
+    font-family: var(--sans-serif);
+    font-size: 1.2rem;
+    line-height: 1.45;
+    display: flex;
+    flex-wrap: wrap;
 }
-
-h2 {
-    background-color: #FF6F61;
-}
-
 
 
 main {
     min-height: 700px;
     /* height: 100vh; */
-    background-color: #FF6F61;
     flex-shrink: 0;
 }
 
-
 p {
-    font-size: 10px;
+    font-size: 0.6rem;
 }
 
 article {
@@ -39,7 +78,7 @@ article {
     flex: 1; /* Updated to make all child elements take up equal space */
 }
 
-/* Icon Styles */
+/* img: refers to icons */
 img {
     height: 30px;
     width: 30px;
@@ -47,7 +86,7 @@ img {
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
-/* Left Right Arrows */
+/* button: refers to left/right arrows */
 button {
     width: auto;
 }
@@ -59,7 +98,6 @@ button {
 nav {
     display: flex;
     justify-content: space-between;               /* Keeps nav a spaced out and in line */
-    background-color: #ffffff;                  /* Background color for the navigation bar */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   /* Add a subtle box shadow for depth */
     height: 60px;
     width: 100%;                                /* Takes up 100% of the screen width */
@@ -67,20 +105,19 @@ nav {
     z-index: 1000;                              /* Ensure the navigation bar appears above other elements */
 }
 
-nav a {
+nav > a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
-    color: #333333;                           /*  */
     margin: 10px;
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
 }
 
-nav a:hover {
-    color: #ff5733;                             /* Change text color on hover */
+nav > a:hover {
+    color: var(--menu-active-color);                             /* Change text color on hover */
 }
 
-nav a.active {
-    color: #ff5733;                             /* Active = relevant section element is active */
+nav > a.active {
+    color: var(--menu-active-color);                            /* Active = relevant section element is active */
 }
 
 
@@ -109,38 +146,30 @@ main > section.active {
 /* ----------------------------- */
 /* ---- TILE FILTER BUTTONS ---- */
 /* ----------------------------- */
-
+/* menu: refers to the filters for tiles */
 section > menu {
-    display: block;
-    font-size: 0;                       /* Removes extra spacing between inline-block elements. */
     flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
-    background-color: #FF6F61;          /* In place to alert of any incorrect CSS placement */
-}
-
-section > menu > ul {
-    list-style: none;  /* Prevents the list from displaying as a dot point list. Also removes padding */
+    margin-bottom: 10px;
 }
 
 section > menu > ul > li {
     cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
-    height: 35px;                       /* Increased Size to give button feel */
-    padding: 10px;                      /* Increased Size to give button feel */
+    
     color: #666666;                     /* Grey text */
-    font-size: 24px;                    /* If omitted, no text displays*/
+    font-size: 24px;                    /* Increase size of icons*/
 
-    border: 1px solid #FF6F61;          /* Button Boarder*/
     background: #ffffff;                /* White background */
     transition: all 0.3s ease-in-out;   /* Applies a smooth transition effect to all style changes */
 
+    /* All Filter Icons to be the same square size, and contents to center */
     align-items: center;                /* Center vertically */
     justify-content: center;            /* Center horizontally */
-    min-width: 30px;                    /* Keeps all filter tiles same size */
+    min-width: 70px;                    /* Keeps all filter tiles same size */
+    min-height: 70px;                   /* Keeps all filter tiles same size */
 
-    margin-left: 5px;
     margin-right: 5px;
-
-    position: relative; /* Added for positioning the tooltip */
+    position: relative;                 /* Added for positioning the tooltip */
 }
 
 
@@ -150,85 +179,10 @@ section > menu li.filter-active {
     color: #222222;
 }
 
-
-
-/* ----------------------------- */
-/* ----------- Tiles ----------- */
-/* ----------------------------- */
-
-/* Tile Styles */
-.tile {
-    width: 150px;
-    height: 150px;
-    background-color: #3498db;
-    color: #fff;
-    cursor: pointer;
-    padding: 5px;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    display: none;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    font-weight: bold;
-    position: relative;
-}
-
-/* Active Tile Styles */
-.tile.active {
-    display: flex;
-}
-
-/* Hover Styles */
-.tile:hover {
-    background-color: #2980b9;
-    color: #000;
-    transform: scale(1.05);
-}
-
-/* Icon Container Styles */
-.tile .icon-container {
-    position: relative;
-    top: 0;
-    left: 0;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    display: flex;
-    text-align: left;
-    min-height: 50px;
-    align-items: center;
-    gap: 20px;
-}
-
-
-/* ----------------------------- */
-/* -- SECTION NEXT/PREV ARROWS - */
-/* ----------------------------- */            
-.arrow {
-    position: absolute;                     /* Taken out of normal flow of document */
-    top: 50%;                               /* Positions the top of the element at the vertical center of its containing element. */
-    transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
-    font-size: 24px;                        /* Size of the arrow */
-    cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
-    color: #ffffff;                         /* Arrows are white*/
-    background-color: rgba(0, 0, 0, 0.5);   /* semi-transparent black with 50% opacity*/
-    padding: 10px;                     
-    border: none;                           /* No border  */
-    outline: none;                          /* Removes the outline, typically added as a default focus style. */
-}
-
-.arrow.disabled {
-    display: none;
-}
-
-main > .arrow:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
-main > .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
-
-
 /* ----------------------------- */
 /* ---- TILE FILTER TOOLTIPS --- */
 /* ----------------------------- */
-.filter-options li:hover::before {
+section > menu li:hover::before {
     content: attr(title);               /* The overlay content is the "title" attribute of the li element */
     position: absolute;
     background: #333;
@@ -243,13 +197,93 @@ main > .arrow:last-of-type { right: 0; }                         /* positions it
     transition: 0.6s ease;
 }
 
-.filter-options li:hover::before {
+section > menu li:hover::before {
     visibility: visible;
     opacity: 1;                         /* How seethrough the tooltip is */
     margin-bottom: 20px;                /* Space away the tooltip from the filter button */
     margin-left: -15px;                 /* Off center the tooltip a bit */
 }
 
+
+
+/* ----------------------------- */
+/* ----------- Tiles ----------- */
+/* ----------------------------- */
+section > .tile {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    display: none;
+    text-align: center;
+}
+
+/* Div: .icon-container */
+section > .tile.active {
+    display: inline-block;
+}
+
+/* Div: .icon-container */
+section > .tile:hover {
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Div: .icon-container */
+section > .tile > div {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    font-size: 15px;
+    padding: 10px;
+    padding-top: 5px;
+    min-height: 80px;
+    max-height: 150px;
+    gap: 20px;
+}
+
+/* Div: .icon-container */
+section > .tile > div > i {
+    width: 20%
+}
+
+/* Div: .icon-container */
+section > .tile > div > h4 {
+    width: 80%;
+    text-align: right;
+}
+
+/* Div: .icon-container */
+#myPortfolio > .tile > div {
+    min-height: 50px;
+    max-height: 150px;
+    justify-content: left;            /* Center to left hand side */
+}
+
+
+/* ----------------------------- */
+/* -- SECTION NEXT/PREV ARROWS - */
+/* ----------------------------- */            
+button {
+    position: absolute;                     /* Taken out of normal flow of document */
+    top: 50%;                               /* Positions the top of the element at the vertical center of its containing element. */
+    transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
+    font-size: 24px;                        /* Size of the arrow */
+    cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
+    color: #ffffff;                         /* Arrows are white*/
+    padding: 10px;                     
+    outline: none;                          /* Removes the outline, typically added as a default focus style. */
+}
+
+button.disabled {
+    display: none;
+}
+
+main > button:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
+main > button:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 
 /* ----------------------------- */
 /* ---- EXPERIENCE OVERLAY ---- */
@@ -272,7 +306,8 @@ dialog.active {
     display: flex;      /* Overlay becomes visible when is active*/
 }
 
-dialog .infoWrapper {
+/* Div = .infoWrapper */
+dialog > div {
     font-family: 'Arial', sans-serif;
     padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
     gap: 40px;
@@ -283,7 +318,7 @@ dialog .infoWrapper {
     flex: 1 1 0px;
 }
 
-.closeBtn {
+dialog .closeBtn {
     cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
     padding: 10px; 
     font-weight: bold;
@@ -302,11 +337,11 @@ dialog .infoWrapper {
 /* ---- PORTFOLIO OVERLAY ---- */
 /* ----------------------------- */
 
-.slideshowContainer {
+dialog .slideshowContainer {
     position: relative; /* Set the container as a positioning context for absolute positioning */
 }
 
-.slideshowContainer img {
+dialog .slideshowContainer img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -317,6 +352,12 @@ dialog .arrow:first-of-type { left: 0; }                          /* positions i
 dialog .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 dialog .arrow {
     background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
+}
+
+
+#wrapper {
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 
