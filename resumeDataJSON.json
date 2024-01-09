@@ -7,28 +7,6 @@
         "background": "Background: Programming, Accounting, Finance",
         "introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
     },
-    "myCompetencies": [
-        {
-            "competencySoftware": "Excel, VBA",
-            "competencyScore": "10"
-        },
-        {
-            "competencySoftware": "Python",
-            "competencyScore": "9"
-        },
-        {
-            "competencySoftware": "SQL",
-            "competencyScore": "7"
-        },
-        {
-            "competencySoftware": "C#",
-            "competencyScore": "6"
-        },
-        {
-            "competencySoftware": "HTML, Javascript",
-            "competencyScore": "5"
-        }
-    ],
     "myEducations": [
     {
         "degree": "Javascript Course",
@@ -51,6 +29,45 @@
         "institution": "Gordon TAFE - Geelong campus"
     }
     ],
+    "mySkills": {
+        "skillsLangages":        [    
+                                "Software Support"
+                                ,"Database Management"
+                                ,"Collaboration and Teamwork"
+                                ,"Documentation and Communication"
+                                ,"Client Services"
+                                ,"Focused Attention to Detail"
+                                ,"Critical and Creative Thinking"
+                                ,"Task and Deadline Management"
+                                ,"Technical Tools"
+                                ,"Workplace Adaptability"
+                                ,"Continuous Learning and Growth"
+                                ,"Task and Deadline Management"
+                                ]
+        ,"skillsTechincal":     [
+                                 "a"
+                                ,"empty"
+                                ,"empty"
+                                ,"empty"
+                                ,"empty"
+                                ]
+                         
+        ,"skillsSoft":          [
+                                 "a"
+                                ,"empty"
+                                ,"empty"
+                                ,"empty"
+                                ,"empty"
+                                ]
+                                
+                                
+
+
+
+
+    },
+
+
     "myExperiences": [
     {
          "company":         "Shire of Queenscliffe"
@@ -127,9 +144,9 @@
                             ]
     },
     {
-         "company":         "The Accountant Group / Platinum Institute Australia"
+         "company":         "The Accountant Group"
         ,"address":         "Moorabool Street, Geelong"
-        ,"position":        "Accountant / Admin Assistant"
+        ,"position":        "Accountant"
         ,"period":          "Feb 2020 to Jun 2020 (Temp COVID support)"
         ,"tags":            ["Accounting"]
         ,"softwares":       [

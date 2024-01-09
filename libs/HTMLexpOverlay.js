@@ -22,23 +22,23 @@ class HTMLexpOverlay {
     createElement() {
         const newElement = document.createElement('dialog');
         newElement.innerHTML = `
-            <div class="infoWrapper">
-                <article>
+            <div class="infoWrapper" id="experience-overlay-wrapper">
+                <article class="overlay-article" id="experience-information">
                     <h3">JobTitle</h3>
                     <span class="period"></span>
                     <h3 class="company"></h3>
                     <h4 class="address"></h4>
                     <h5 class="position"></h5>
                 </article>
-                <article>
+                <article class="overlay-article" id="experience-duties">
                     <h3">Duties</h3>
                     <ul class="duties"></ul> 
                 </article>
-                <article>
+                <article class="overlay-article" id="experience-softwares">
                     <h3">Softwares</h3>
                     <ul class="softwares"></ul> 
                 </article>
-                <span class="closeBtn">Close</span>
+                <span class="closeBtn" id="experience-close-btn">Close</span>
             </div>
         `;
         this.overlay = newElement.cloneNode(true);
@@ -71,8 +71,8 @@ class HTMLexpOverlay {
     addEventListeners() {
         // On pressing the close button, deletes the overlay
         this.overlay.querySelector('.closeBtn').onclick = () => {
-            document.body.querySelector('#prev').classList.remove('disabled');
-            document.body.querySelector('#next').classList.remove('disabled');
+            document.body.querySelector('#section-prev').classList.remove('disabled');
+            document.body.querySelector('#section-next').classList.remove('disabled');
             this.overlay.remove();
         };
     };
@@ -84,8 +84,8 @@ class HTMLexpOverlay {
         document.body.appendChild(this.overlay);
 
         // Change the display attribute to show the overlay over the screen
-        document.body.querySelector('#prev').classList.add('disabled');
-        document.body.querySelector('#next').classList.add('disabled');
+        document.body.querySelector('#section-prev').classList.add('disabled');
+        document.body.querySelector('#section-next').classList.add('disabled');
         document.body.querySelector('dialog').classList.add('active');
     };  
 };

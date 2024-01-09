@@ -1,5 +1,7 @@
+"use strict"
+
 import ResumeData from "./factoryResumeData.js";
-import HTMLskill from "./HTMLskill.js";
+import HTMLskillTile from "./HTMLskillTile.js";
 import HTMLeducation from "./HTMLeducation.js";
 import HTMLportfolioTile from "./HTMLportfolioTile.js";
 import HTMLexpTile from "./HTMLexpTile.js";
@@ -10,7 +12,6 @@ import HTMLSectionSlideshow  from './HTMLsectionSideshow.js';
 
 const wrapperElement = document.getElementById('wrapper')
 const slideshowNEW = new HTMLSectionSlideshow(wrapperElement);
-slideshowNEW.constructNavBarElement();
 
 
 
@@ -23,9 +24,10 @@ classResumeData.getJSONdata()
     // Get the headers of the JSON file, and then render each section to the page
     const {aboutMe, myCompetencies, myEducations, myExperiences, myPortfolio} = resumeData
 
-    // for (const {degree, institution} of myEducations) {
-    //     classEdu.renderToPage(degree, institution);
-    // };
+    for (const {degree, institution} of myEducations) {
+        const eduTile = new HTMLeducation(degree, institution)
+        eduTile.renderToPage();
+    };
 
     // Code to Add Education
     // Code to Add Skills

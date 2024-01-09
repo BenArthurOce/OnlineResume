@@ -1,111 +1,55 @@
-/* h2 {
-    height: 0%;
-    padding: 0;  
-    margin: 0;
-    background-color: #FF6F61;
-} */
-
-h4 {
-    /* height: 0%; */
-    padding: 0;  
-    margin: 0;
-}
-
 
 #wrapper {
     padding-left: 10%;
     padding-right: 10%;
 }
 
+body, h2, h3, h4, img, menu, menu ul{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+menu, h2 {
+    height: 0%  ;
+}
+
+h2 {
+    background-color: #FF6F61;
+}
+
+
+
 main {
-    /* min-height: 700px; */
+    min-height: 700px;
     /* height: 100vh; */
     background-color: #FF6F61;
     flex-shrink: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
 p {
     font-size: 10px;
 }
 
-
-
-/* ----------------------------- */
-/* ----------- Tiles ----------- */
-/* ----------------------------- */
-
-.tile {
-    width: 150px;
-    height: 150px;
-    background-color: #3498db;
-    color: #fff;
-    cursor: pointer;
-    padding: 10px;
-    box-sizing: border-box;
-    transition: background-color 0.3s ease, color 0.3s ease;
-
-    flex-direction: column; 
-    justify-content: flex-start;
-    align-items: center;
-    font-weight: bold;
-    position: relative;
-
-    display: none;
+article {
+    padding: 20px;
+    flex-basis: 30%;
+    background-color: #2ecc71;
+    flex: 1; /* Updated to make all child elements take up equal space */
 }
 
-.title {
-    gap: 10px;
-    display: flex;
-    align-items: center; /* Align items vertically */
-    margin-right: 20px;
-}
-
-.title i {
-    margin: 30px; /* Remove default margin for the position text */
+/* Icon Styles */
+img {
     height: 30px;
     width: 30px;
     font-size: 30px;
+    flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
-.title p {
-    margin: 0; /* Remove default margin for the position text */
-    align-items: center;
-    text-align: center;
-}
-
-.tile.active {
-    display: flex;
-}
-
-
-/* Container for language icons */
-.tile .icon-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin-bottom: 5px;
-    margin-left: 10px;
-    display:flex;
-    gap: 5px;
-}
-
-/* Language icons */
-.lang-logo {
-    height: 20px;
-    width: 20px;
-}
-
-/* Hover effect */
-.tile:hover {
-    background-color: #2980b9;
-    color: #000;
-    transform: scale(1.05);
+/* Left Right Arrows */
+button {
+    width: auto;
 }
 
 
@@ -143,7 +87,7 @@ nav a.active {
 /* ----------------------------- */
 /* ------ RESUME CONTENT ------- */
 /* ----------------------------- */
-section {
+main > section {
     display: none;                              /* Default display is none. Only one section is to be active */
     flex-direction: row;                        /* Tile elements are to display horizontally */
     flex-wrap: wrap;                            /* wrap the tiles in the element */
@@ -153,23 +97,108 @@ section {
     margin-right: 2%; */
 }
 
-section h2 {
+main > section > h2 {
     flex-basis: 100%;
 }
 
-section.active {
+main > section.active {
     display: flex;                              /* Only one section element is active. */
 }
 
 
 /* ----------------------------- */
-/* --- SPECIAL SIDE ARTICLES --- */
+/* ---- TILE FILTER BUTTONS ---- */
 /* ----------------------------- */
-/* #myIntroduction article,
-#myEducationsSkills article {
-    flex-basis:45%;
-    text-align: center;
-} */
+
+section > menu {
+    display: block;
+    font-size: 0;                       /* Removes extra spacing between inline-block elements. */
+    flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
+    background-color: #FF6F61;          /* In place to alert of any incorrect CSS placement */
+}
+
+section > menu > ul {
+    list-style: none;  /* Prevents the list from displaying as a dot point list. Also removes padding */
+}
+
+section > menu > ul > li {
+    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
+    display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
+    height: 35px;                       /* Increased Size to give button feel */
+    padding: 10px;                      /* Increased Size to give button feel */
+    color: #666666;                     /* Grey text */
+    font-size: 24px;                    /* If omitted, no text displays*/
+
+    border: 1px solid #FF6F61;          /* Button Boarder*/
+    background: #ffffff;                /* White background */
+    transition: all 0.3s ease-in-out;   /* Applies a smooth transition effect to all style changes */
+
+    align-items: center;                /* Center vertically */
+    justify-content: center;            /* Center horizontally */
+    min-width: 30px;                    /* Keeps all filter tiles same size */
+
+    margin-left: 5px;
+    margin-right: 5px;
+
+    position: relative; /* Added for positioning the tooltip */
+}
+
+
+section > menu li:hover,
+section > menu li.filter-active {
+    background: #FF6F61;                /* Style change for when filter button is either clicked or moused over */
+    color: #222222;
+}
+
+
+
+/* ----------------------------- */
+/* ----------- Tiles ----------- */
+/* ----------------------------- */
+
+/* Tile Styles */
+.tile {
+    width: 150px;
+    height: 150px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Active Tile Styles */
+.tile.active {
+    display: flex;
+}
+
+/* Hover Styles */
+.tile:hover {
+    background-color: #2980b9;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Icon Container Styles */
+.tile .icon-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    text-align: left;
+    min-height: 50px;
+    align-items: center;
+    gap: 20px;
+}
 
 
 /* ----------------------------- */
@@ -192,47 +221,34 @@ section.active {
     display: none;
 }
 
-#prev { left: 0; }                          /* positions it to the left edge of its containing element. */
-#next { right: 0; }                         /* positions it to the right edge of its containing element. */
+main > .arrow:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
+main > .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 
 
 /* ----------------------------- */
-/* ---- TILE FILTER BUTTONS ---- */
+/* ---- TILE FILTER TOOLTIPS --- */
 /* ----------------------------- */
-.filter {
-    list-style: none;                   /* Prevents the list from displaying as a dot point list. */
-    font-size: 0;                       /* Removes extra spacing between inline-block elements. */
-    flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
-    background-color: #FF6F61;          /* In place to alert of any incorrect CSS placement */
-    height: 0%;                         /* Removes automatic padding of filter element */
-    margin-bottom: 20px;                /* Margin */
+.filter-options li:hover::before {
+    content: attr(title);               /* The overlay content is the "title" attribute of the li element */
+    position: absolute;
+    background: #333;
+    color: #fff;
+    white-space: nowrap;
+    padding: 5px;
+    font-size: 14px;
+    bottom: 70%;                        /* Position the tooltip above the icon */
+    left: 50%;                          /* Center the tooltip horizontally */
+    transform: translateX(-50%);        /* Center the tooltip horizontally */
+    visibility: hidden;
+    transition: 0.6s ease;
 }
 
-.filter li {
-    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
-    display: inline-block;              /* Keeps the list items next to each other in a horizontal way*/
-    height: 35px;                       /* Increased Size to give button feel */
-    padding: 10px;                      /* Increased Size to give button feel */
-    color: #666666;                     /* Grey text */
-    font-size: 13px;                    /* If omitted, no text displays*/
-    text-transform: uppercase;          /* Sets all text in element to be uppercase*/
-    border: 1px solid #FF6F61;          /* Button Boarder*/
-    background: #ffffff;                /* White background */
-    transition: all 0.3s ease-in-out;   /* Applies a smooth transition effect to all style changes */
+.filter-options li:hover::before {
+    visibility: visible;
+    opacity: 1;                         /* How seethrough the tooltip is */
+    margin-bottom: 20px;                /* Space away the tooltip from the filter button */
+    margin-left: -15px;                 /* Off center the tooltip a bit */
 }
-
-.filter li:hover,
-.filter li.filter-active {
-    background: #FF6F61;                /* Style change for when filter button is either clicked or moused over */
-    color: #222222;
-}
-
-
-
-
-
-
-
 
 
 /* ----------------------------- */
@@ -249,15 +265,14 @@ dialog {
     color: #fff;                /* White text */
     justify-content: center;    /* Centers the child elements horizontally */
     align-items: center;        /* Centers the child elements vertically */
-    z-index: 9999;              /* Must be most front facing forward since its an overlay */
-    
+    z-index: 9999;              /* Must be most front facing forward since its an overlay */ 
 }
 
 dialog.active {
     display: flex;      /* Overlay becomes visible when is active*/
 }
 
-.infoWrapper {
+dialog .infoWrapper {
     font-family: 'Arial', sans-serif;
     padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
     gap: 40px;
@@ -267,14 +282,6 @@ dialog.active {
     align-items: center;        /* Centers the child elements vertically */
     flex: 1 1 0px;
 }
-
-article {
-    padding: 20px;
-    flex-basis: 30%;
-    background-color: #2ecc71;
-    flex: 1; /* Updated to make all child elements take up equal space */
-}
-
 
 .closeBtn {
     cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
@@ -291,11 +298,13 @@ article {
 
 
 
-
 /* ----------------------------- */
 /* ---- PORTFOLIO OVERLAY ---- */
 /* ----------------------------- */
 
+.slideshowContainer {
+    position: relative; /* Set the container as a positioning context for absolute positioning */
+}
 
 .slideshowContainer img {
     width: 100%;
@@ -303,30 +312,13 @@ article {
     object-fit: contain;
 }
 
-#port-prev, #port-next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: black;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-}
-
-#port-next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-
-#port-prev:hover, #port-next:hover {
+/* Arrows*/
+dialog .arrow:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
+dialog .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
+dialog .arrow {
     background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
 }
+
 
 @media (max-width: 600px) {
     .tile {

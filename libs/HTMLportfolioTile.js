@@ -38,12 +38,15 @@ class HTMLportfolioTile {
         return this.#logoPath;
     };
 
+    // Maybe add an active/inactive toggle?
+
     createElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
+            <div class="icon-container"></div>
             <h4 class="projectName"></h4>
             <p class="projectSumSmall"></p>
-            <div class="icon-container">
+
         `;
         this.tile = newElement.cloneNode(true);
     };
@@ -69,7 +72,8 @@ class HTMLportfolioTile {
             const langLogo = document.createElement('img');
             langLogo.src = logoPath;
             langLogo.alt = lang; // You can set alt text as the language name
-            langLogo.classList.add('lang-logo');
+            // langLogo.classList.add('lang-logo');
+            langLogo.classList.add('icon');
 
             iconContainer.appendChild(langLogo);
         });

@@ -1,32 +1,47 @@
-class HTMLeducation {
+class HTMLeducationTile {
     #parentElement;
     #templateEduElement;
-    constructor() {
-        this.#parentElement = document.querySelector("#myEducations");
-        this.#templateEduElement = `
-        <article>
-            <span class="institution"></span>
-            <h3 class="degree"></h3>
-        </article> 
-      `;
+    #institution;
+    #degree
+    constructor(institution, degree) {
+        this.#parentElement = document.querySelector("#education");
+        this.#institution = institution;
+        this.#degree = degree
     };
     get parentElement() {
         return this.#parentElement;
     };
-    get templateEduElement() {
-        return this.#templateEduElement;
+    get institution() {
+        return this.#institution;
+    };
+    get degree() {
+        return this.#degree;
     };
 
-    renderToPage(degree, institution) {
-        const newEduElement = document.createElement('div');
-        newEduElement.innerHTML = this.templateEduElement;
-
-        newEduElement.querySelector('.degree').textContent = degree;
-        newEduElement.querySelector('.institution').textContent = institution;
-
-
-        this.parentElement.appendChild(newEduElement);
+    createElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+        <span class="institution"></span>
+        <h3 class="degree"></h3>
+        `;
+        this.tile = newElement.cloneNode(true);
     };
+
+    applyInfoToElement() {
+        // Add Tags for active classes
+        this.tile.classList.add('tile', 'active');
+
+        this.tile.querySelector('.institution').textContent = this.institution;
+        this.tile.querySelector('.degree').textContent = this.degree;
+    };
+
+    renderToPage() {
+        this.createElement();
+        this.applyInfoToElement();
+        // this.addEventListeners();
+        this.parentElement.appendChild(this.tile);
+    };
+
 };
 
-export default HTMLeducation
+export default HTMLeducationTile

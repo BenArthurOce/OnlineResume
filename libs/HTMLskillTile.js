@@ -1,6 +1,6 @@
-import HTMLexpOverlay from './HTMLexpOverlay.js';
 
-class HTMLexpTile {
+
+class HTMLskillTile {
     #tile;
     #data;
     #parentElement;
@@ -17,6 +17,8 @@ class HTMLexpTile {
             duties
         }
         this.#parentElement = document.querySelector("#myExperiences");
+        const style = document.createElement('style');
+
     };
     get tile() {
         return this.#tile;
@@ -55,8 +57,8 @@ class HTMLexpTile {
     createElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="icon-container">
-                <i class="icon"></i>
+            <div class="title">
+                <i></i>
                 <h4 class="position"></h4>
             </div>
             <h3 class="company"></h3>
@@ -79,8 +81,6 @@ class HTMLexpTile {
         // Add small icon in top left
         const iconClass = this.getIconClassBasedOnTag(this.tags[0]);
         this.tile.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
-        this.tile.querySelector('i').classList.add('icon');
-        // langLogo.classList.add('icon');
     };
 
     addEventListeners(){
@@ -113,9 +113,9 @@ class HTMLexpTile {
     getIconClassBasedOnTag(tag) {
         switch (tag) {
             case "Programming":
-                return 'fa-desktop';
+                return 'fa-github';
             case "Accounting":
-                return 'fa-dollar';
+                return 'fa-money';
             case "CustomerService":
                 return 'fa-bell';
             default:
@@ -125,4 +125,4 @@ class HTMLexpTile {
 
 }
 
-export default HTMLexpTile;
+export default HTMLskillTile;

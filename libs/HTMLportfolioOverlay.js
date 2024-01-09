@@ -36,20 +36,20 @@ class HTMLportfolioOverlay {
     createElement() {
         const newElement = document.createElement('dialog');
         newElement.innerHTML = `
-            <div class="infoWrapper">
-                <article>
+            <div class="infoWrapper" id="portfolio-overlay-wrapper">
+                <article class="overlay-article" id="project-information">
                     <h2 class="projectTitleOlay"></h2>
                     <p class="projectLangsOlay"></p>
                     <p class="projectSummaryOlay"></p>
                 </article>
 
-                <article>
+                <article class="overlay-article" id="project-slideshow">
                     <div class="slideshowContainer">
-                        <a id="port-prev">❮</a>
-                        <a id="port-next">❯</a>
+                        <button class="arrow" id="overlay-prev">❮</button>
+                        <button class="arrow" id="overlay-next">❯</button>
                     </div>
                 </article>
-                <span class="closeBtn">Close</span>
+                <span class="closeBtn" id="portfolio-close-btn">Close</span>
             </div>
         `;
         this.overlay = newElement.cloneNode(true);
@@ -94,8 +94,8 @@ class HTMLportfolioOverlay {
             showImage(this.currentImageIndex);
         };
 
-        this.overlay.querySelector('#port-prev').addEventListener('click', prevImage);
-        this.overlay.querySelector('#port-next').addEventListener('click', nextImage);
+        this.overlay.querySelector('#overlay-prev').addEventListener('click', prevImage);
+        this.overlay.querySelector('#overlay-next').addEventListener('click', nextImage);
 
         this.portData.projectImages.forEach((image, index) => {
             const img = document.createElement('img');
@@ -108,8 +108,8 @@ class HTMLportfolioOverlay {
     addEventListeners() {
         // On pressing the close button, deletes the overlay
         this.overlay.querySelector('.closeBtn').onclick = () => {
-            document.body.querySelector('#prev').classList.remove('disabled');
-            document.body.querySelector('#next').classList.remove('disabled');
+            document.body.querySelector('#section-prev').classList.remove('disabled');
+            document.body.querySelector('#section-next').classList.remove('disabled');
             this.overlay.remove();
         };
     };
@@ -121,8 +121,8 @@ class HTMLportfolioOverlay {
         document.body.appendChild(this.overlay);
 
         // Change the display attribute to show the overlay over the screen
-        document.body.querySelector('#prev').classList.add('disabled');
-        document.body.querySelector('#next').classList.add('disabled');
+        document.body.querySelector('#section-prev').classList.add('disabled');
+        document.body.querySelector('#section-next').classList.add('disabled');
         document.body.querySelector('dialog').classList.add('active');
     };
 };
