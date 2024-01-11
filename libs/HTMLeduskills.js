@@ -1,10 +1,10 @@
-class HTMLeducationTile {
+class HTMLeduskills {
     #parentElement;
     #templateEduElement;
     #institution;
     #degree
-    constructor(institution, degree) {
-        this.#parentElement = document.querySelector("#education");
+    constructor(institution, degree, hardskills, softskills) {
+        this.#parentElement = document.querySelector("#myEducationsSkills");
         this.#institution = institution;
         this.#degree = degree
     };
@@ -41,7 +41,6 @@ class HTMLeducationTile {
         // this.addEventListeners();
         this.parentElement.appendChild(this.tile);
     };
-
 };
 
-export default HTMLeducationTile
+export default HTMLeduskills

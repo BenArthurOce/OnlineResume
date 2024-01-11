@@ -1,3 +1,6 @@
+/* https://www.youtube.com/watch?v=plRcoRqLriw
+https://codepen.io/kevinpowell/pen/mMeJEW */
+
 /* Import Google Font - Raleway 300 & 700 */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
@@ -39,7 +42,15 @@
   Active Filter 
   Non Active Filter
 
+
+
+  HOW TO DO SECOND TAB
+  Have a hoverable element
+  When hovered, display the article
   */
+
+
+
 
 
 * {
@@ -62,9 +73,12 @@ body {
 
 
 main {
-    min-height: 700px;
+    /* min-height: 100%;
+    min-width: 100%; */
     /* height: 100vh; */
     flex-shrink: 0;
+    height: 100%;
+    width: 100%;
 }
 
 p {
@@ -73,9 +87,9 @@ p {
 
 article {
     padding: 20px;
-    flex-basis: 30%;
     background-color: #2ecc71;
-    flex: 1; /* Updated to make all child elements take up equal space */
+    flex: 1; /* All child elements take up equal space */
+
 }
 
 /* img: refers to icons */
@@ -203,6 +217,31 @@ section > menu li:hover::before {
     margin-bottom: 20px;                /* Space away the tooltip from the filter button */
     margin-left: -15px;                 /* Off center the tooltip a bit */
 }
+
+
+
+
+/* menu: refers to the filters for tiles */
+#myEducationsSkills > menu {
+    flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
+    margin-bottom: 10px;
+}
+
+#myEducationsSkills > menu > ul {
+    display: flex;
+    width:100%;
+    
+}
+
+#myEducationsSkills > menu > ul > li {
+
+
+    padding: 20px;
+    background-color: #2ecc71;
+    flex: 1; /* All child elements take up equal space */
+    height: 20px
+}
+
 
 
 
@@ -337,9 +376,19 @@ dialog .closeBtn {
 /* ---- PORTFOLIO OVERLAY ---- */
 /* ----------------------------- */
 
-dialog .slideshowContainer {
-    position: relative; /* Set the container as a positioning context for absolute positioning */
+/* wrapper */
+dialog > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the start of the container */
+    height: 100vh; /* Set height to 100% of the viewport height */
 }
+
+dialog > div > article {
+    position: relative; /* Set the container as a positioning context for absolute positioning */
+    /* max-height: 300px */
+}
+
 
 dialog .slideshowContainer img {
     width: 100%;
@@ -355,9 +404,49 @@ dialog .arrow {
 }
 
 
+
+
+
+#myExperiences article {
+    width: 30%; /* Adjust the percentage as needed */
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 5%;
+}
+
+#myExperiences article :not(:first-child) {
+    margin-top: 25%; /* Adjust the top margin for the second and third articles */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 #wrapper {
     padding-left: 10%;
     padding-right: 10%;
+    padding-bottom: 5%;
+    /* padding: 10%; */
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+    padding-bottom: 10%;
+
+}
+
+main {
+    background-color: red;
+
 }
 
 
@@ -366,4 +455,9 @@ dialog .arrow {
         max-width: calc(50% - 20px); /* Tiles take full width with margin adjustment */
         max-height: calc(50% - 20px); /* Tiles take full height with margin adjustment */
       }
+      /* #wrapper {
+        height: 100vh;
+        overflow-y: scroll;
+        for some reason, this kills the tile icons in the portfolio section
+    } */
   }

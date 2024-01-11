@@ -1,131 +1,71 @@
 "use strict"
 
+
+
 class HTMLsectionSlideshow {
     #elementWrapper;
-    #elementNavbar
     #elementMainDiv
     #currentSectionIndex;
     #slideshowElements;
+    #elementSlideshow;
 
-    constructor(wrapperElement) {
-        this.#elementWrapper = wrapperElement;
-        this.#elementNavbar = ''
+    constructor() {
+        this.#elementWrapper = document.querySelector("#wrapper");
+        this.#elementSlideshow = ''
         this.#elementMainDiv = ''
         this.#currentSectionIndex = 0;
         this.#slideshowElements = {}
 
-        // Call the method to construct the navigation bar and the main body content
-        this.constructNavBarElement();
+        // Call the method to construct the main body content
         this.constructMainDivElement();
 
         // Initialize slideshow elements after constructing the elements
-        this.initSlideshowElements();
+        // this.initSlideshowElements();
 
         // Add event listeners and render to the page
-        this.addEventListeners();
+        // this.addEventListeners();
         this.renderToPage();
     };
+    // elementSlideshow
+    get elementSlideshow() {
+        return this.#elementSlideshow;
+    };
+    set elementSlideshow(value) {
+        this.#elementSlideshow = value;
+    };
 
-    get elementWrapper() {
-        return this.#elementWrapper;
-    };
-    get elementNavbar() {
-        return this.#elementNavbar;
-    };
-    set elementNavbar(value) {
-        this.#elementNavbar = value;
-    };
-    get elementMainDiv() {
-        return this.#elementMainDiv;
-    };
-    set elementMainDiv(value) {
-        this.#elementMainDiv = value;
-    };
-    get currentSectionIndex() {
-        return this.#currentSectionIndex;
-    };
-    set currentSectionIndex(value) {
-        this.#currentSectionIndex = value;
-    };
-    get slideshowElements() {
-        return this.#slideshowElements;
-    };
-    get allNavs() {
-        return this.slideshowElements.all.navs
-    };
     get allSections() {
-        return this.slideshowElements.all.sections
-    };
-    get leftArrow() {
-        return this.slideshowElements.single.arrow.prev
-    };
-    get rightArrow() {
-        return this.slideshowElements.single.arrow.next
-    };
+        return this.elementSlideshow.querySelectorAll(`section`)
+    }
+    get prevArrow() {
+        return this.elementSlideshow.querySelector(`#section-prev`)
+    }
+    get nextArrow() {
+        return this.elementSlideshow.querySelector(`#section-next`)
+    }
+    get allFilters() {
+        return this.elementSlideshow.querySelectorAll('menu')
+    }
     get experienceTiles() {
-        return this.slideshowElements.all.tiles.experience
-    };
+        return this.elementSlideshow.querySelectorAll('#myExperiences .tile')
+    }
     get portfolioTiles() {
-        return this.slideshowElements.all.tiles.portfolio
-    };
+        return this.elementSlideshow.querySelectorAll('#myPortfolio .tile')
+    }
     get experienceFilter() {
-        return this.slideshowElements.single.filter.experience
-    };
+        return this.elementSlideshow.querySelector(`#myExperiences menu`)
+    }
     get portfolioFilter() {
-        return this.slideshowElements.single.filter.portfolio
+        return this.elementSlideshow.querySelector(`#myPortfolio menu`)
+    }
+    get allButtons() {
+        return this.elementSlideshow.querySelectorAll('button')
     }
 
-    initSlideshowElements() {
-        this.#slideshowElements = {
-            "all": {
-                 "navs": this.elementNavbar.querySelectorAll('nav a')
-                ,"sections": this.elementMainDiv.querySelectorAll('section')
-                ,"arrows": this.elementMainDiv.querySelectorAll('button')
-                ,"tiles": {
-                     "experience": this.elementMainDiv.querySelector('#myExperiences .tile')
-                    ,"portfolio": this.elementMainDiv.querySelector('#myPortfolio .tile')
-                }
-                ,"filters": this.elementMainDiv.querySelectorAll('menu')
-            }
-            ,"single": {
-                 "navbar": this.elementNavbar.querySelector('nav')
-                ,"nav": {
-                    "introduction": this.elementNavbar.querySelectorAll('nav a')[0]
-                    ,"educationSkills": this.elementNavbar.querySelectorAll('nav a')[1]
-                    ,"experience": this.elementNavbar.querySelectorAll('nav a')[2]
-                    ,"portfolio": this.elementNavbar.querySelectorAll('nav a')[3]
-                }
-                ,"section": {
-                     "introduction": this.elementMainDiv.querySelector('#myIntroduction')
-                    ,"educationSkills": this.elementMainDiv.querySelector('#myEducationsSkills')
-                    ,"experience": this.elementMainDiv.querySelector('#myExperiences')
-                    ,"portfolio": this.elementMainDiv.querySelector('#myPortfolio')
-                }
-                ,"arrow": {
-                     "prev": this.elementMainDiv.querySelector('#section-prev')
-                    ,"next": this.elementMainDiv.querySelector('#section-next')
-                }
-                ,"filter": {
-                     "experience": this.elementMainDiv.querySelector('#myExperiences menu')
-                    ,"portfolio": this.elementMainDiv.querySelector('#myPortfolio menu')
-                }
-            }
-        }
-    };
-
-    constructNavBarElement() {
-        this.elementNavbar = document.createElement('nav');
-        this.elementNavbar.innerHTML = `
-             <a href="#" data-index="0" class="active">Introduction</a>
-             <a href="#" data-index="1" class="">Education and Skills</a>
-             <a href="#" data-index="2" class="">Experience</a>
-             <a href="#" data-index="3" class="">Portfolio</a>
-         `;
-    };
 
     constructMainDivElement() {
-        this.elementMainDiv = document.createElement('main');
-        this.elementMainDiv.innerHTML = `
+        const newElement = document.createElement('main');
+        newElement.innerHTML = `
             <section id="myIntroduction" class="active">
                 <h2>myIntroduction:</h2>
 
@@ -145,6 +85,16 @@ class HTMLsectionSlideshow {
 
             <section id="myEducationsSkills" class="">
                 <h2>myEducationsSkills:</h2>
+                <menu class="filter" id="educationSkills-filter">
+                    <ul class="filter-options">
+                        <li role="button" data-filter="Education" class="filterItem">Education</li>
+                        <li role="button" data-filter="Hard Skills" class="filterItem">HardSkills</li>
+                        <li role="button" data-filter="Soft Skills" class="filterItem">SoftSkills</li>
+                    </ul>
+                </menu>
+
+                <div id="section-wrapper">
+                </div>
 
                 <!-- Left side article-->
                 <article class="full-column" id="education">
@@ -249,98 +199,12 @@ class HTMLsectionSlideshow {
          <button class="arrow" id="section-prev">❮</button>
          <button class="arrow" id="section-next">❯</button>
          `;
-    };
-
-
-    addEventListeners() {
-        // Add event listeners for navigation links
-        this.allNavs.forEach((nav, index) => {
-            nav.addEventListener('click', () => {
-                this.adjustDisplayedSection(index);
-            });
-        });
-
-        // Add event listeners for arrow buttons
-        this.leftArrow.addEventListener('click', () => {
-            this.adjustDisplayedSection("-1");
-        });
-
-        this.rightArrow.addEventListener('click', () => {
-            this.adjustDisplayedSection("+1");
-        });
-
-        // Add event listeners for experience tile filters
-        this.experienceFilter.querySelectorAll('li').forEach((filter, index) => {
-            filter.addEventListener('click', () => {
-                this.filterTiles('myExperiences', filter.dataset.filter);
-            });
-        });
-
-        // Add event listeners for portfolio tile filters
-        this.portfolioFilter.querySelectorAll('li').forEach((filter, index) => {
-            filter.addEventListener('click', () => {
-                this.filterTiles('myPortfolio', filter.dataset.filter);
-            });
-        });
+         this.elementSlideshow = newElement.cloneNode(true);
     };
 
     renderToPage() {
         // Append the created elements to the wrapper
-        this.elementWrapper.appendChild(this.elementNavbar);
-        this.elementWrapper.appendChild(this.elementMainDiv);
-    };
-
-    filterTiles(sectionId, filter) {
-        // TODO: use the this.experienceTiles to make a filter
-        const tiles = this.elementMainDiv.querySelectorAll(`#${sectionId} .tile`);
-        tiles.forEach(tile => {
-            let tags = Array.from(tile.classList)
-            if (tags.includes(filter)) {
-                tile.classList.add('active');
-            } else {
-                tile.classList.remove('active');
-            }
-        })
-    };
-
-    showSlide() {
-        // Remove the active state of each resume section
-        this.allSections.forEach(section => {
-            section.classList.remove('active');
-        });
-
-        // Remove the active state of each navigation link
-        this.allNavs.forEach(link => {
-            link.classList.remove('active');
-        });
-
-        // Set the active class
-        this.allSections[this.currentSectionIndex].classList.add('active');
-        this.allNavs[this.currentSectionIndex].classList.add('active');
-    };
-
-    adjustDisplayedSection(action) {
-        switch (action) {
-            case '+1':
-                // Loops back to index 0 if the forward arrow goes too far
-                if (++this.currentSectionIndex > this.allSections.length - 1) {
-                    this.currentSectionIndex = 0
-                }
-                this.showSlide();
-                break;
-            case '-1':
-                // Loops back to the last index is the prev button goes too far
-                if (--this.currentSectionIndex < 0) {
-                    this.currentSectionIndex = this.allSections.length - 1
-                }
-                this.showSlide();
-                break;
-            default:
-                // If this function by a navlink clicking and deciding the slide number
-                this.currentSectionIndex = action
-                this.showSlide();
-                break;
-        };
+        this.#elementWrapper.appendChild(this.elementSlideshow);
     };
 };
 
