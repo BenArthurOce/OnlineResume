@@ -30,7 +30,37 @@
     }
     ],
     "mySkills": {
-        "skillsLangages":        [    
+        "skillsKey":            [
+                                "Database design and management"
+                                ,"Transact-SQL Queries"
+                                ,"Extremely high knowledge of Microsoft Excel"
+                                ,"Process automation"
+                                ,"Technical documentation and maintaining"
+                                ,"User Interface design"
+                                ]
+        ,"skillsLangages":      [
+                                "React"
+                                ,"Python"
+                                ,"SQL"
+                                ,"C#"
+                                ,"Javascript"
+                                ,"VBA"
+                                ]
+        ,"skillsTechincal":     [
+                                "Microsoft SQL Server Manager Studio 2019"
+                                ,"Microsoft Excel"
+                                ,"Microsoft Visual Studio 2019"
+                                ,"Visual Studio Code"
+                                ,"Atlassian JIRA"
+                                ,"Atlassian Confluence"
+                                ,"Citrix Desktops"
+                                ,"Office365, Sharepoint, Teams"
+                                ,"Github"
+                                ,"Slack"
+                                ,"React, NodeJs, HTML, CSS (Web Development)"
+                                ,"Various cloud accounting softwares"
+                                ]
+        ,"skillsSoft":          [
                                 "Software Support"
                                 ,"Database Management"
                                 ,"Collaboration and Teamwork"
@@ -43,21 +73,6 @@
                                 ,"Workplace Adaptability"
                                 ,"Continuous Learning and Growth"
                                 ,"Task and Deadline Management"
-                                ]
-        ,"skillsTechincal":     [
-                                 "a"
-                                ,"empty"
-                                ,"empty"
-                                ,"empty"
-                                ,"empty"
-                                ]
-                         
-        ,"skillsSoft":          [
-                                 "a"
-                                ,"empty"
-                                ,"empty"
-                                ,"empty"
-                                ,"empty"
                                 ]
     },
 

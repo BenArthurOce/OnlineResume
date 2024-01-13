@@ -79,7 +79,9 @@ main {
     flex-shrink: 0;
     height: 100%;
     width: 100%;
+    background-color: red;
 }
+
 
 p {
     font-size: 0.6rem;
@@ -103,6 +105,14 @@ img {
 /* button: refers to left/right arrows */
 button {
     width: auto;
+}
+
+section.inactive {
+    display: none;
+}
+
+section.active {
+    display: flex;
 }
 
 
@@ -138,23 +148,16 @@ nav > a.active {
 /* ----------------------------- */
 /* ------ RESUME CONTENT ------- */
 /* ----------------------------- */
-main > section {
-    display: none;                              /* Default display is none. Only one section is to be active */
-    flex-direction: row;                        /* Tile elements are to display horizontally */
+section {
     flex-wrap: wrap;                            /* wrap the tiles in the element */
     gap: 20px;                                  /* each tile seperated by 20pixels */
     padding: 20px;
-    /* margin-left: 3%;
-    margin-right: 2%; */
 }
 
-main > section > h2 {
+section > h2 {
     flex-basis: 100%;
 }
 
-main > section.active {
-    display: flex;                              /* Only one section element is active. */
-}
 
 
 /* ----------------------------- */
@@ -218,30 +221,12 @@ section > menu li:hover::before {
     margin-left: -15px;                 /* Off center the tooltip a bit */
 }
 
-
-
-
-/* menu: refers to the filters for tiles */
-#myEducationsSkills > menu {
-    flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
-    margin-bottom: 10px;
+.column {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px;
 }
-
-#myEducationsSkills > menu > ul {
-    display: flex;
-    width:100%;
-    
-}
-
-#myEducationsSkills > menu > ul > li {
-
-
-    padding: 20px;
-    background-color: #2ecc71;
-    flex: 1; /* All child elements take up equal space */
-    height: 20px
-}
-
 
 
 
@@ -306,7 +291,7 @@ section > .tile > div > h4 {
 /* ----------------------------- */
 /* -- SECTION NEXT/PREV ARROWS - */
 /* ----------------------------- */            
-button {
+main > button {
     position: absolute;                     /* Taken out of normal flow of document */
     top: 50%;                               /* Positions the top of the element at the vertical center of its containing element. */
     transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
@@ -323,6 +308,7 @@ button.disabled {
 
 main > button:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
 main > button:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
+
 
 /* ----------------------------- */
 /* ---- EXPERIENCE OVERLAY ---- */
@@ -341,9 +327,7 @@ dialog {
     z-index: 9999;              /* Must be most front facing forward since its an overlay */ 
 }
 
-dialog.active {
-    display: flex;      /* Overlay becomes visible when is active*/
-}
+
 
 /* Div = .infoWrapper */
 dialog > div {
@@ -355,6 +339,24 @@ dialog > div {
     justify-content: center;    /* Centers the child elements horizontally */
     align-items: center;        /* Centers the child elements vertically */
     flex: 1 1 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the start of the container */
+    height: 100vh; /* Set height to 100% of the viewport height */
+}
+
+
+dialog > div > article {
+    position: relative; /* Set the container as a positioning context for absolute positioning */
+    /* max-height: 300px */
+}
+
+dialog.active {
+    display: flex;      /* Overlay becomes visible when is active*/
+}
+
+dialog.inactive {
+    display: none;      /* Overlay becomes invis when is inactive*/
 }
 
 dialog .closeBtn {
@@ -370,24 +372,9 @@ dialog .closeBtn {
     transform: translateX(-50%);            /* Centers the button horizontally.*/
 }
 
-
-
 /* ----------------------------- */
 /* ---- PORTFOLIO OVERLAY ---- */
 /* ----------------------------- */
-
-/* wrapper */
-dialog > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Align items to the start of the container */
-    height: 100vh; /* Set height to 100% of the viewport height */
-}
-
-dialog > div > article {
-    position: relative; /* Set the container as a positioning context for absolute positioning */
-    /* max-height: 300px */
-}
 
 
 dialog .slideshowContainer img {
@@ -397,39 +384,11 @@ dialog .slideshowContainer img {
 }
 
 /* Arrows*/
-dialog .arrow:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
-dialog .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 dialog .arrow {
     background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
 }
-
-
-
-
-
-#myExperiences article {
-    width: 30%; /* Adjust the percentage as needed */
-    text-align: center;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-top: 5%;
-}
-
-#myExperiences article :not(:first-child) {
-    margin-top: 25%; /* Adjust the top margin for the second and third articles */
-}
-
-
-
-
-
-
-
-
-
-
-
+dialog .arrow:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
+dialog .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 
 
 #wrapper {
@@ -444,10 +403,6 @@ dialog .arrow {
 
 }
 
-main {
-    background-color: red;
-
-}
 
 
 @media (max-width: 600px) {
@@ -461,3 +416,6 @@ main {
         for some reason, this kills the tile icons in the portfolio section
     } */
   }
+
+  /* mobile navbar css
+  https://www.w3schools.com/howto/howto_js_topnav_responsive.asp */
