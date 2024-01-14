@@ -12,10 +12,21 @@ classResumeData.getJSONdata()
 .then(resumeData => {
 
     // Get the headers of the JSON file, and then render each section to the page
-    const {aboutMe, myCompetencies, myEducations, myExperiences, myPortfolio} = resumeData
+    const {aboutMe, myEducations, mySkills, myExperiences, myPortfolio} = resumeData
 
     // Code to Add Education
     // Code to Add Skills
+
+    // const {degree, institution} = myEducations
+    // frontpage.addEducations(degree, institution);
+
+
+    for (const {degree, institution} of myEducations) {
+        frontpage.addEducations(degree, institution);
+    };
+
+    const {skillsKey, skillsLangages, skillsTechincal, skillsSoft} = mySkills
+    frontpage.addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft);
 
 
     for (const {company, address, position, period, tags, softwares, duties} of myExperiences) {

@@ -160,10 +160,6 @@ class FrontPageNEW {
         }
     };
 
-    constructNavigationBar() {
-
-    };
-
     constructMainDivElement() {
         const newElement = document.createElement("main");
         newElement.innerHTML = `
@@ -177,15 +173,11 @@ class FrontPageNEW {
     createSections() {
         const sections = [
             new IntroductionSection(0),
-            new EducationSection(1),
-            new SkillsSection(2),
+            new SkillsSection(1),
+            new EducationSection(2),
             new ExperiencesSection(3),
             new PortfolioSection(4)
         ];
-
-        sections.forEach(section => {
-            section.initSection();
-        });
 
         return sections;
     };
@@ -198,7 +190,6 @@ class FrontPageNEW {
         this.navBarObj.allNavLinks.forEach((nav, index) => {
             nav.addEventListener('click', () => {
                 this.adjustDisplayedSection(index);
-                this.navBarObj.setActiveSection(index)
             });
         });
 
@@ -217,7 +208,7 @@ class FrontPageNEW {
             this.currentIndex === i ? section.setActiveSection() : section.setInactiveSection()
         });
 
-        this.navBarObj.setActiveSection();
+        this.navBarObj.setActiveElement(this.currentIndex);
     };
 
     adjustDisplayedSection(action) {
@@ -242,6 +233,60 @@ class FrontPageNEW {
                 this.showSlide();
                 break;
         };
+    };
+
+
+    addEducations(degree, institution) {
+        const parentEl1 = this.mainEl.querySelectorAll('#myEducations article')[0]; // First Article
+        const parentEl2 = this.mainEl.querySelectorAll('#myEducations article')[1]; // Second Article
+    
+        // Function to create a list item and append it to the specified parent element
+        const createListItemAndAppend = (parentElement, textContent) => {
+            const li = document.createElement('li');
+            li.textContent = textContent;
+            parentElement.appendChild(li);
+        };
+    
+        // Determine which article to add the education to based on the existing children
+        const targetParent = parentEl1.children.length <= parentEl2.children.length ? parentEl1 : parentEl2;
+    
+        // Populate the section with education data
+        createListItemAndAppend(targetParent, `${degree} - ${institution}`);
+    };
+
+    addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft) {
+        const parentIntro = this.mainEl.querySelectorAll('#myIntroduction article')[1]
+        const parentEl1 = this.mainEl.querySelectorAll('#mySkills article')[0] // Programming Languages
+        const parentEl2 = this.mainEl.querySelectorAll('#mySkills article')[1] // Hard Skills
+        const parentEl3 = this.mainEl.querySelectorAll('#mySkills article')[2] // Soft Skills
+        const parentIntro2 = this.mainEl.querySelectorAll('#myIntroduction article')[3]
+        const parentEl4 = this.mainEl.querySelectorAll('#mySkills article')[3] // Programming Languages
+        const parentEl5 = this.mainEl.querySelectorAll('#mySkills article')[4] // Hard Skills
+        const parentEl6 = this.mainEl.querySelectorAll('#mySkills article')[5] // Soft Skills
+
+        console.log(parentEl2)
+        // Function to create a list and append it to the specified parent element
+        const createListAndAppend = (parentElement, skillsArray) => {
+            const ul = document.createElement('ul');
+            skillsArray.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                ul.appendChild(li);
+            });
+            parentElement.appendChild(ul);
+        };
+
+        // Populate the sections with skills
+        createListAndAppend(parentIntro, skillsKey);
+        createListAndAppend(parentEl1, skillsLangages);
+        createListAndAppend(parentEl2, skillsTechincal);
+        createListAndAppend(parentEl3, skillsSoft);
+
+        createListAndAppend(parentIntro2, skillsKey);
+        createListAndAppend(parentEl4, skillsLangages);
+        createListAndAppend(parentEl5, skillsTechincal);
+        createListAndAppend(parentEl6, skillsSoft);
+
     };
 
     addExperienceTile(company, address, position, period, tags, softwares, duties) {

@@ -3,14 +3,20 @@
 class Section {
     #wrapperElement;
     #sectionContainer;
-    #sectionNumber
-    #section
+    #sectionNumber;
+    #section;
+    #id;
+    #title;
 
     constructor(sectionNumber) {
         this.#wrapperElement = document.querySelector("#wrapper");
         this.#sectionContainer = document.body.querySelector('#section-container');
         this.#sectionNumber = sectionNumber;
         this.#section = ''
+        this.id = ''
+        this.title = ''
+
+        this.initSection();
     };
     get sectionContainer() {
         return this.#sectionContainer;
@@ -27,20 +33,20 @@ class Section {
     set section(value) {
         this.#section = value;
     };
-    // get tiles() {
-    //     this.#section.querySelectorAll(`.tile`)
-    //     // return this
-    // };
-    // get filters() {
-    //     this.#section.querySelectorAll(`.menu a`)
-    // };
-
-    constructSectionContainer() {
-        const newElement = document.createElement("div");
-        newElement.id = "section-container"
-        document.querySelector("#wrapper").appendChild(newElement)
-        this.#sectionContainer = document.querySelector("#section-container")
+    get id() {
+        return this.#id;
     };
+    set id(value) {
+        this.#id = value;
+    };
+    get title() {
+        return this.#title;
+    };
+    set title(value) {
+        this.#title = value;
+    };
+
+
 
     setActiveSection() {
         this.section.classList.add('active');
@@ -52,8 +58,44 @@ class Section {
         this.section.classList.add('inactive');
     };
 
-    renderSectionNew(sectionToRender) {
+    renderToPage(sectionToRender) {
         this.sectionContainer.appendChild(sectionToRender);
+    };
+
+    addFilterEvents(filterButtons, callbackFunction) {
+        this.section.addEventListener('click', (event) => {
+            const filterButton = event.target.closest('.filterItem');
+            if (filterButton) {
+                const filterValue = filterButton.dataset.filter;
+                callbackFunction(filterValue);
+            }
+        });
+    };
+
+    showArticle(filter) {
+        // Hide all articles
+        const articles = this.section.querySelectorAll('.mobile-article');
+        articles.forEach(article => article.classList.remove('active'));
+        articles.forEach(article => article.classList.add('inactive'));
+
+        // Show the selected article based on the clicked filter
+        const selectedArticle = this.section.querySelector(`#mobile-${filter}`);
+        if (selectedArticle) {
+            selectedArticle.classList.remove('inactive');
+            selectedArticle.classList.add('active');
+        }
+    };
+
+
+    filterTilesNew(filter) {
+        const tiles = this.section.querySelectorAll(`#${this.id} .tile`);
+        tiles.forEach(tile => tile.classList.remove('active'));
+    
+        tiles.forEach(tile => {
+            const tags = Array.from(tile.classList);
+            const shouldShow = tags.includes(filter);
+            tile.classList.toggle('active', shouldShow);
+        });
     };
 };
 
@@ -61,28 +103,43 @@ class Section {
 class IntroductionSection extends Section {
     constructor() {
         super();
-        this.section = '';
-        this.name = 'myIntroduction'
     };
 
     initSection() {
-        this.section = this.createSection(this.name, 'Introduction', 'Introduction2');
-        this.renderSectionNew(this.section);
+        this.id = 'myIntroduction'
+        this.title = 'About Me'
+        this.section = '';
+        this.section = this.createSection(this.id, 'Introduction', 'KeySkills');
+        this.renderToPage(this.section);
+        this.addFilterEvents(this.section.querySelectorAll(`#${this.id} li`), this.showArticle.bind(this));
     };
 
     createSection(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
             <section id="${id}" class="active">
-                <h2>${id}:</h2>
-                <article class="full-column" id="${id.toLowerCase()}1">
-                    <h2>${heading1}</h2>
-                    <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                <h2>${this.title}:</h2>
+                <menu class="filter" id="${id.toLowerCase()}-filter">
+                    <ul class="filter-options">
+                        <li role="button" data-filter="${heading1.toLowerCase()}" class="filterItem">${heading1}</li>
+                        <li role="button" data-filter="${heading2.toLowerCase()}" class="filterItem">${heading2}</li>
+                    </ul>
+                </menu>
+
+                <article class="pc-article" id="pc-${heading1.toLowerCase()}">
+                    <h2>${heading1}:</h2>
                 </article>
-                <article class="full-column" id="${id.toLowerCase()}2">
-                    <h2>${heading2}</h2>
-                    <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                <article class="pc-article" id="pc-${heading2.toLowerCase()}">
+                    <h2>${heading2}:</h2>
                 </article>
+
+                <article class="mobile-article inactive" id="mobile-${heading1.toLowerCase()}">
+                    <h2>${heading1}:</h2>
+                </article>
+                <article class="mobile-article inactive" id="mobile-${heading2.toLowerCase()}">
+                    <h2>${heading2}:</h2>
+                </article>
+
             </section>
         `.trim();
         return tempEl.firstChild;
@@ -93,27 +150,26 @@ class IntroductionSection extends Section {
 class EducationSection extends Section {
     constructor() {
         super();
-        this.section = '';
-        this.name = 'myEducations'
     };
 
     initSection() {
-        this.section = this.createSection(this.name, 'education1', 'education2');
-        this.renderSectionNew(this.section);
+        this.section = '';
+        this.id = 'myEducations'
+        this.title = 'Education'
+        this.section = this.createSection(this.id, 'education1', 'education2');
+        this.renderToPage(this.section);
     };
 
     createSection(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${id}" class="inactive">
-            <h2>${id}:</h2>
+            <h2>${this.title}:</h2>
             <article class="full-column" id="${id.toLowerCase()}1">
-                <h2>${heading1}</h2>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                <h2></h2>
             </article>
             <article class="full-column" id="${id.toLowerCase()}2">
-                <h2>${heading2}</h2>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+                <h2></h2>
             </article>
         </section>
         `.trim();
@@ -125,28 +181,48 @@ class EducationSection extends Section {
 class SkillsSection extends Section {
     constructor() {
         super();
-        this.section = '';
-        this.name = 'mySkills'
     };
 
     initSection() {
-        this.section = this.createSection(this.name, 'keySkills', 'technicalSkills', 'softSkills');
-        this.renderSectionNew(this.section);
+        this.id = 'mySkills'
+        this.title = 'Skills'
+        this.section = this.createSection(this.id, 'Languages', 'Technical', 'Soft');
+        this.renderToPage(this.section);
+        this.addFilterEvents(this.section.querySelectorAll(`#${this.id} li`), this.showArticle.bind(this));
     };
 
-    createSection(id, heading1, heading2) {
+    createSection(id, heading1, heading2, heading3) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${id}" class="inactive">
-            <h2>${id}:</h2>
-            <article class="full-column" id="${id.toLowerCase()}1">
-                <h2>${heading1}</h2>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+            <h2>${this.title}:</h2>
+            <menu class="filter" id="${id.toLowerCase()}-filter">
+                <ul class="filter-options">
+                    <li role="button" data-filter="${heading1.toLowerCase()}" class="filterItem">${heading1}</li>
+                    <li role="button" data-filter="${heading2.toLowerCase()}" class="filterItem">${heading2}</li>
+                    <li role="button" data-filter="${heading3.toLowerCase()}" class="filterItem">${heading3}</li>
+                </ul>
+            </menu>
+            <article class="pc-article" id="pc-${heading1.toLowerCase()}">
+                <h2>${heading1}:</h2>
             </article>
-            <article class="full-column" id="${id.toLowerCase()}2">
-                <h2>${heading2}</h2>
-                <p> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </p>
+            <article class="pc-article" id="pc-${heading2.toLowerCase()}">
+                <h2>${heading2}:</h2>
             </article>
+            <article class="pc-article" id="pc-${heading3.toLowerCase()}">
+                <h2>${heading3}:</h2>
+            </article>
+
+            <article class="mobile-article inactive" id="mobile-${heading1.toLowerCase()}">
+                <h2>${heading1}:</h2>
+            </article>
+            <article class="mobile-article inactive" id="mobile-${heading2.toLowerCase()}">
+                <h2>${heading2}:</h2>
+            </article>
+            <article class="mobile-article inactive" id="mobile-${heading3.toLowerCase()}">
+                <h2>${heading3}:</h2>
+            </article>
+
         </section>
         `.trim();
         return tempEl.firstChild;
@@ -157,26 +233,23 @@ class SkillsSection extends Section {
 class ExperiencesSection extends Section {
     constructor() {
         super();
-        this.section = '';
-        this.name = 'myExperiences'
-    };
-
-    get filter() {
-        return this.section.querySelector(`menu`)
     };
 
     initSection() {
-        this.section = this.createSection(this.name);
-        this.addEventListeners()
-        this.renderSectionNew(this.section);
+        this.section = '';
+        this.id = 'myExperiences'
+        this.title = 'Experience'
+        this.section = this.createSection(this.id);
+        this.renderToPage(this.section);
+        this.addFilterEvents(this.section.querySelectorAll(`#${this.id} li`), filterValue => this.filterTilesNew(filterValue));
     };
 
-    createSection(id) {
+    createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${id}" class="inactive">
-            <h2>${id}:</h2>
-            <menu class="filter" id="${id.toLowerCase()}-filter">
+        <section id="${this.id}" class="inactive">
+            <h2>${this.title}:</h2>
+            <menu class="filter" id="${this.id.toLowerCase()}-filter">
                 <ul class="filter-options">
                     <li role="button" data-filter="tile" class="filterItem" title="All">All</li>
                     <li role="button" data-filter="Programming" class="filterItem" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
@@ -184,60 +257,32 @@ class ExperiencesSection extends Section {
                     <li role="button" data-filter="CustomerService" class="filterItem" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
                 </ul>
             </menu>
-            <div class="tile-container" id="${this.name.toLowerCase()}-tile-container"></div>
+            <div class="tile-container" id="${this.id.toLowerCase()}-tile-container"></div>
         </section>
         `.trim();
         return tempEl.firstChild;
-    };
-
-    addEventListeners() {
-        this.addFilterEventListeners();    
-    };
-
-    addFilterEventListeners() {
-        this.section.querySelectorAll('li').forEach((filter, index) => {
-            filter.addEventListener('click', () => {
-                this.filterTiles(filter.dataset.filter);
-            });
-        });
-    };
-
-    filterTiles(filter) {
-        const tiles = document.body.querySelectorAll(`#${this.name} .tile`)
-        tiles.forEach(tile => {
-            const tags = Array.from(tile.classList);
-            if (tags.includes(filter)) {
-                tile.classList.add('active');
-            } else {
-                tile.classList.remove('active');
-            }
-        });
     };
 };
 
 class PortfolioSection extends Section {
     constructor() {
         super();
-        this.section = ''
-        this.name = 'myPortfolio'
-    };
-
-    get filter() {
-        return this.section.querySelector(`menu`)
     };
 
     initSection() {
+        this.id = 'myPortfolio'
+        this.title = 'Portfolio'
         this.section = this.createSection();
-        this.addEventListeners()
-        this.renderSectionNew(this.section);
+        this.renderToPage(this.section);
+        this.addFilterEvents(this.section.querySelectorAll(`#${this.id} li`), filterValue => this.filterTilesNew(filterValue));
     };
 
     createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${this.name}" class="inactive">
-            <h2>${this.name}</h2>
-            <menu class="filter" id="${this.name.toLowerCase()}-filter">
+        <section id="${this.id}" class="inactive">
+            <h2>${this.title}:</h2>
+            <menu class="filter" id="${this.id.toLowerCase()}-filter">
                 <ul class="filter-options">
                     <li role="button" data-filter="tile" class="filterItem" title="All">All</li>
                     <li role="button" data-filter="UserInterface" class="filterItem" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>
@@ -250,34 +295,10 @@ class PortfolioSection extends Section {
                     <li role="button" data-filter="Finance" class="filterItem" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>
                 </ul>
             </menu>
-            <div class="tile-container" id="${this.name.toLowerCase()}-tile-container"></div>
+            <div class="tile-container" id="${this.id.toLowerCase()}-tile-container"></div>
         </section>
         `.trim();
         return tempEl.firstChild;
-    };
-
-    addEventListeners() {
-        this.addFilterEventListeners();    
-    };
-
-    addFilterEventListeners() {
-        this.section.querySelectorAll('li').forEach((filter, index) => {
-            filter.addEventListener('click', () => {
-                this.filterTiles(filter.dataset.filter);
-            });
-        });
-    };
-
-    filterTiles(filter) {
-        const tiles = document.body.querySelectorAll(`#${this.name} .tile`)
-        tiles.forEach(tile => {
-            const tags = Array.from(tile.classList);
-            if (tags.includes(filter)) {
-                tile.classList.add('active');
-            } else {
-                tile.classList.remove('active');
-            }
-        });
     };
 };
 

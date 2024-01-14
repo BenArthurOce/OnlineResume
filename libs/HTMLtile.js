@@ -160,9 +160,6 @@ class HTMLPortfolioTile2 extends HTMLTile {
     applyInfoToElement() {
         this.tile.classList.add('tile', 'active');
 
-        console.log(this.tile)
-
-
         this.data.projectTags.forEach(tag => this.tile.classList.add(tag));
 
         this.tile.querySelector('.projectName').textContent = this.data.projectName;

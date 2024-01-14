@@ -114,6 +114,30 @@ section.active {
     display: flex;
 }
 
+h2 {
+    height: 45px;
+}
+
+article > ul {
+    overflow: visible;
+    margin-left: 20px;
+}
+
+article > li {
+    overflow: visible;
+}
+
+.mobile-article {
+    display: none
+}
+
+#mySkills > menu, 
+#myIntroduction > menu {
+    display: none;
+}
+
+
+
 
 /* ----------------------------- */
 /* ------ NAVIGATION BAR ------- */
@@ -174,6 +198,8 @@ section > menu {
     margin-bottom: 10px;
 }
 
+
+
 section > menu > ul > li {
     cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
@@ -188,7 +214,7 @@ section > menu > ul > li {
     height: 5vw;
 
     margin-top: 5px;                    /* High level of zoom in makes filter buttons go to second row */
-    margin-right: 5px;
+    margin-right: 10px;
     position: relative;                 /* Added for positioning the tooltip */
     align-items: center;
     justify-content: center;
@@ -345,16 +371,22 @@ dialog {
 
 /* div: infoWrapper */
 dialog > .infoWrapper {
-    column-count: 3;
-    column-gap: 20px; /* Optional: Set the gap between columns */
-    margin: 20px auto;
-    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
+    gap: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    /* Centers the child elements horizontally */
+    align-items: center;        /* Centers the child elements vertically */
+    flex: 1 1 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the start of the container */
     height: 100vh; /* Set height to 100% of the viewport height */
 }
 
 
 dialog > div > article {
-    break-inside: avoid; /* Allows the articles in the overlay to start on a fresh column */
     position: relative; /* Set the container as a positioning context for absolute positioning */
     /* max-height: 300px */
 }
@@ -402,9 +434,18 @@ dialog .arrow:first-of-type { left: 0; }                          /* positions i
 dialog .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 
 
+#myIntroduction > menu > ul > li,
+#mySkills > menu > ul > li{
+    width: 30%;
+    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
+    display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
+    font-size: 12px;
+    height: 30px;
+}
+
 #wrapper {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 15%;
+    padding-right: 15%;
     padding-bottom: 5%;
     /* padding: 10%; */
     height: 100vh;
@@ -416,11 +457,39 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
 
 @media (max-width: 600px) {
 
+    /* #myIntroduction article {
+        display: none;
+      }
+    
+      #myIntroduction.active article {
+        display: block;
+      } */
+
+    #mySkills > menu, 
+    #myIntroduction > menu {
+        display: block;
+    }
+
+    .pc-article {
+        display: none;
+    }
+
+    .mobile-article.inactive {
+        display: none;
+    }
+
+    .mobile-article.active {
+        display: block;
+    }
+    
+    
+
     /* Menu buttons */
     section > menu > ul > li {
         font-size: 3vh;  
         width: 5vh;
         height: 5vh;
+        margin-right: 5px;
     }
 
     .tile-container > .tile {
@@ -437,6 +506,17 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
         height: 20px;
         width: 20px;
     }
+
+    /* Overlay */
+    dialog > .infoWrapper {
+        flex-direction: column;
+    }
+
+    #wrapper {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
 }
 
   /* mobile navbar css
