@@ -8,7 +8,7 @@ class Section {
 
     constructor(sectionNumber) {
         this.#wrapperElement = document.querySelector("#wrapper");
-        this.#sectionContainer = document.body.querySelector('#slideshowContainer');
+        this.#sectionContainer = document.body.querySelector('#section-container');
         this.#sectionNumber = sectionNumber;
         this.#section = ''
     };
@@ -37,9 +37,9 @@ class Section {
 
     constructSectionContainer() {
         const newElement = document.createElement("div");
-        newElement.id = "slideshowContainer"
+        newElement.id = "section-container"
         document.querySelector("#wrapper").appendChild(newElement)
-        this.#sectionContainer = document.querySelector("#slideshowContainer")
+        this.#sectionContainer = document.querySelector("#section-container")
     };
 
     setActiveSection() {
@@ -178,12 +178,13 @@ class ExperiencesSection extends Section {
             <h2>${id}:</h2>
             <menu class="filter" id="${id.toLowerCase()}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-filter="tile" class="filterItem">All</li>
-                    <li role="button" data-filter="Programming" class="filterItem">Programming</li>
-                    <li role="button" data-filter="Accounting" class="filterItem">Accounting</li>
-                    <li role="button" data-filter="CustomerService" class="filterItem">Customer Service</li>
+                    <li role="button" data-filter="tile" class="filterItem" title="All">All</li>
+                    <li role="button" data-filter="Programming" class="filterItem" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
+                    <li role="button" data-filter="Accounting" class="filterItem" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
+                    <li role="button" data-filter="CustomerService" class="filterItem" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
                 </ul>
             </menu>
+            <div class="tile-container" id="${this.name.toLowerCase()}-tile-container"></div>
         </section>
         `.trim();
         return tempEl.firstChild;
@@ -226,17 +227,17 @@ class PortfolioSection extends Section {
     };
 
     initSection() {
-        this.section = this.createSection(this.name);
+        this.section = this.createSection();
         this.addEventListeners()
         this.renderSectionNew(this.section);
     };
 
-    createSection(id) {
+    createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${id}" class="inactive">
-            <h2>${id}</h2>
-            <menu class="filter" id="${id.toLowerCase()}-filter">
+        <section id="${this.name}" class="inactive">
+            <h2>${this.name}</h2>
+            <menu class="filter" id="${this.name.toLowerCase()}-filter">
                 <ul class="filter-options">
                     <li role="button" data-filter="tile" class="filterItem" title="All">All</li>
                     <li role="button" data-filter="UserInterface" class="filterItem" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>
@@ -249,6 +250,7 @@ class PortfolioSection extends Section {
                     <li role="button" data-filter="Finance" class="filterItem" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>
                 </ul>
             </menu>
+            <div class="tile-container" id="${this.name.toLowerCase()}-tile-container"></div>
         </section>
         `.trim();
         return tempEl.firstChild;

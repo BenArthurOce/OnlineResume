@@ -102,11 +102,11 @@ class HTMLExperienceTile2 extends HTMLTile {
         });
     };
 
-    renderToPage() {
+    renderToPage(parentEl) {
         this.createElement();
         this.applyInfoToElement();
         this.addEventListeners();
-        this.parentElement.appendChild(this.tile);
+        parentEl.appendChild(this.tile);
     };
 
     // Helper method to get icon class based on the tag
@@ -195,11 +195,11 @@ class HTMLPortfolioTile2 extends HTMLTile {
         });
     };
 
-    renderToPage() {
+    renderToPage(parentEl) {
         this.createElement();
         this.applyInfoToElement();
         this.addEventListeners();
-        this.parentElement.appendChild(this.tile);
+        parentEl.appendChild(this.tile);
     };
 
 }

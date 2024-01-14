@@ -41,20 +41,21 @@ class HTMLExperienceOverlay extends HTMLOverlay {
         this.overlay = ''
         this.experienceTile = experienceTile
         this.experienceData = experienceData
+        this.name = 'ExperienceOverlay'
     };
 
     initOverlay() {
-        this.createElement('expOverlay');
+        this.createElement();
         this.addEventListeners();
         this.applyInfoToElement();
         this.renderOverlay();
     };
 
-    createElement(id) {
+    createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="${id} class="inactive">
-            <div class="infoWrapper" id="${id.toLowerCase()}-overlay-wrapper">
+        <dialog id="${this.name} class="inactive">
+            <div class="infoWrapper" id="${this.name.toLowerCase()}-wrapper">
                 <article class="overlay-article" id="experience-information">
                     <h3">JobTitle</h3>
                     <span class="period"></span>
@@ -129,6 +130,7 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
         this.overlay = ''
         this.portfolioTile = portfolioTile
         this.portfolioData = portfolioData
+        this.name = 'PortfolioOverlay'
         this.#currentImageIndex = 0
     };
     get currentImageIndex() {
@@ -139,17 +141,17 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
     };
 
     initOverlay() {
-        this.createElement('portOverlay');
+        this.createElement();
         this.addEventListeners();
         this.applyInfoToElement();
         this.renderOverlay();
     };
 
-    createElement(id) {
+    createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="${id} class="inactive">
-            <div class="infoWrapper" id="${id.toLowerCase()}-overlay-wrapper">
+        <dialog id="${this.name} class="inactive">
+            <div class="infoWrapper" id="${this.name.toLowerCase()}-wrapper">
                 <article class="overlay-article" id="project-information">
                     <h2 class="projectTitleOlay"></h2>
                     <p class="projectLangsOlay"></p>
@@ -157,7 +159,7 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
                 </article>
 
                 <article class="overlay-article" id="project-slideshow">
-                    <div class="slideshowContainer">
+                    <div class="section-container">
                         <button class="arrow" id="overlay-prev">❮</button>
                         <button class="arrow" id="overlay-next">❯</button>
                     </div>
@@ -189,7 +191,7 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
 
 
         // Prepare slideshow images
-        const imageContainer = this.overlay.querySelector('.slideshowContainer');
+        const imageContainer = this.overlay.querySelector('.section-container');
 
         const showImage = (index) => {
             const images = imageContainer.querySelectorAll('img');

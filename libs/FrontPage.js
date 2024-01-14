@@ -169,7 +169,7 @@ class FrontPageNEW {
         newElement.innerHTML = `
          <button class="arrow" id="section-prev">❮</button>
          <button class="arrow" id="section-next">❯</button>
-         <div id="slideshowContainer"></div>
+         <div id="section-container"></div>
          `;
          this.#wrapperElement.appendChild(newElement) 
     };
@@ -245,13 +245,15 @@ class FrontPageNEW {
     };
 
     addExperienceTile(company, address, position, period, tags, softwares, duties) {
+        const parentEl = document.body.querySelector('#myExperiences .tile-container')
         const experienceTile = new HTMLExperienceTile2(company, address, position, period, tags, softwares, duties)
-        experienceTile.renderToPage()
+        experienceTile.renderToPage(parentEl)
     };
 
     addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages) {
+        const parentEl = document.body.querySelector('#myPortfolio .tile-container')
         const portfolioTile = new HTMLPortfolioTile2(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages);
-        portfolioTile.renderToPage()
+        portfolioTile.renderToPage(parentEl)
     };
 };
 
