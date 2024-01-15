@@ -55,9 +55,9 @@ class HTMLExperienceTile2 extends HTMLTile {
         <div class="active">
             <div class="icon-container">
                 <i class="icon"></i>
-                <h4 class="position"></h4>
+                <p class="position"></p>
             </div>
-            <h3 class="company"></h3>
+            <p class="company"></p>
         </div>
         `.trim();
         this.tile = tempEl.firstChild;
@@ -150,7 +150,7 @@ class HTMLPortfolioTile2 extends HTMLTile {
         tempEl.innerHTML = `
             <div class="active">
                 <div class="icon-container"></div>
-                <h4 class="projectName"></h4>
+                <p class="projectName"></p>
                 <p class="projectSumSmall"></p>
             </div>
         `.trim();
@@ -177,7 +177,7 @@ class HTMLPortfolioTile2 extends HTMLTile {
             langLogo.src = logoPath;
             langLogo.alt = lang; // You can set alt text as the language name
             // langLogo.classList.add('lang-logo');
-            langLogo.classList.add('icon');
+            langLogo.classList.add('program-icon');
 
             iconContainer.appendChild(langLogo);
         });

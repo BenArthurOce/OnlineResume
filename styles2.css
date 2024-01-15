@@ -62,8 +62,6 @@ https://codepen.io/kevinpowell/pen/mMeJEW */
     overflow: hidden;
   }
 
-html {height: 100vh;}
-body {height: 100vh;}
 body {
     background: var(--body-background);
     color: var(--main-font-color);
@@ -77,9 +75,11 @@ body {
 
 main {
     /* flex-shrink: 0; */
-    min-height: 90vh;
+    height: 100%;
     /* width: 100%; */
-    background-color: purple;
+    background-color: red;
+    overflow: hidden;
+    padding-bottom: 10%;
 }
 
 
@@ -95,7 +95,7 @@ article {
 }
 
 /* img: refers to icons */
-.img2 {
+img {
     height: 30px;
     width: 30px;
     font-size: 30px;
@@ -147,7 +147,7 @@ nav {
     display: flex;
     justify-content: space-between;               /* Keeps nav a spaced out and in line */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   /* Add a subtle box shadow for depth */
-    max-height: 10vh;
+    height: 60px;
     width: 100%;                                /* Takes up 100% of the screen width */
     position: sticky;                           /* Keeps the navigation bar at top of screen */
     z-index: 1000;                              /* Ensure the navigation bar appears above other elements */
@@ -180,7 +180,7 @@ nav > a.active {
 
 section {
     flex-wrap: wrap;                            /* wrap the tiles in the element */
-    gap: 20px;                                  /* each.tile2 seperated by 20pixels */
+    gap: 20px;                                  /* each tile seperated by 20pixels */
     padding: 20px;
 }
 
@@ -196,7 +196,7 @@ section > h2 {
 /* menu: refers to the filters for tiles */
 section > menu {
     flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
-    /* margin-bottom: 10px; */
+    margin-bottom: 10px;
 }
 
 
@@ -239,7 +239,7 @@ section > menu li:hover::before {
     white-space: nowrap;
     padding: 5px;
     font-size: 14px;
-    bottom: 70%;                        /* Position the tooltip above the.program-program-icon2 */
+    bottom: 70%;                        /* Position the tooltip above the icon */
     left: 50%;                          /* Center the tooltip horizontally */
     transform: translateX(-50%);        /* Center the tooltip horizontally */
     visibility: hidden;
@@ -266,13 +266,13 @@ section > menu li:hover::before {
 /* ----------- Tiles ----------- */
 /* ----------------------------- */
 
-.tile-container2 {
+.tile-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     height: 100%
 }
-.tile-container2 > .tile2 {
+.tile-container > .tile {
     display: inline-block;
     /* width: 150px;
     height: 150px; */
@@ -290,17 +290,17 @@ section > menu li:hover::before {
 }
 
 
-.tile-container2 > .tile.active {
+.tile-container > .tile.active {
     display: inline-block;
 }
 
-.tile-container2 > .tile:hover {
+.tile-container > .tile:hover {
     color: #000;
     transform: scale(1.05);
 }
 
-/* Div: .icon-container2 */
-.tile-container2 > .tile2 > .icon-container2 {
+/* Div: .icon-container */
+.tile-container > .tile > .icon-container {
     display: flex;
     justify-content: center; /* Center the content horizontally */
     align-items: center; /* Center the content vertically */
@@ -312,17 +312,17 @@ section > menu li:hover::before {
     gap: 10px;
 }
 
-.tile-container2 > .tile2 > .icon-container2 > i {
+.tile-container > .tile > .icon-container > i {
     width: 20%
 }
 
-.tile-container2 > .tile2 > .icon-container2 > h4 {
+.tile-container > .tile > .icon-container > h4 {
     width: 80%;
     text-align: right;
 }
 
-/* Div: .icon-container2 */
-#myPortfolio > .tile-container2 > .tile2 > .icon-container2 {
+/* Div: .icon-container */
+#myPortfolio > .tile-container > .tile > .icon-container {
     min-height: 50px;
     max-height: 150px;
     justify-content: left;            /* Center to left hand side */
@@ -421,7 +421,7 @@ dialog .closeBtn {
     column-count: 2;
 }
 
-dialog .section-container .img2 {
+dialog .section-container img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -444,60 +444,14 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
     height: 30px;
 }
 
-
 #wrapper {
     padding-left: 15%;
     padding-right: 15%;
-    min-height: 100vh;
+    padding-bottom: 5%;
+    /* padding: 10%; */
+    height: 100vh;
     overflow-y: hidden;
     background-color: pink;
-    display: flex;
-    flex-direction: column;
-}
-
-
-
-.tile-container {
-    column-count: 3;
-    column-width: 30%;
-    /* top: 0;
-    height: 90%; */
-}
-
-.tile {
-    margin-bottom: 10px;
-    padding: 5px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    height: 100px;
-    
-    background-color: #3498db;
-    color: #fff;
-    cursor: pointer;
-
-    display: flex;
-    flex-direction: column;
-
-    /* text-align: right; */
-}
-
-.icon-container {
-    display: flex;
-    flex-direction: row;
-    width: 40px;
-    gap: 10%;
-    justify-content: left;
-    margin-bottom: 10%;
-}
-
-.program-icon {
-    width: 20px;
-    height: 20px
-}
-
-.tile > p {
-    text-wrap: wrap;
 }
 
 
@@ -511,14 +465,6 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
       #myIntroduction.active article {
         display: block;
       } */
-
-    nav {
-        max-height: 6vh;
-    }
-
-    section {
-        padding: 3%;
-    }
 
     #mySkills > menu, 
     #myIntroduction > menu {
@@ -536,13 +482,7 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
     .mobile-article.active {
         display: block;
     }
-
-    /* Tile */
-/* 
-    .tile2 {
-        transform: scale(0.8);
-    }
-     */
+    
     
 
     /* Menu buttons */
@@ -553,17 +493,17 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
         margin-right: 5px;
     }
 
-    .tile-container2 > .tile2 {
+    .tile-container > .tile {
         width: 14vh;
         height: 14vh;
     }
 
     /* Icon Container */
-    .tile-container2 > .tile2 > .icon-container2 {
+    .tile-container > .tile > .icon-container {
         gap: 5px;
     }
 
-    .tile-container2 > .tile2 > .icon-container2 > .program-program-icon2 {
+    .tile-container > .tile > .icon-container > .icon {
         height: 20px;
         width: 20px;
     }
@@ -577,25 +517,6 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
         padding-left: 7%;
         padding-right: 7%;
     }
-
-    .projectSumSmall {
-        display: none;
-    }
-
-    .tile-container2 {
-        display: block;
-        column-count: 3;
-        column-gap: 20px;
-        column-fill: balance;
-    }
-
-    .icon-container {
-        width: 100%;
-    }
-
-    /* menu {
-        min-height: 20%;
-    } */
 
 }
 
