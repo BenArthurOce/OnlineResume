@@ -1,6 +1,3 @@
-/* https://www.youtube.com/watch?v=plRcoRqLriw
-https://codepen.io/kevinpowell/pen/mMeJEW */
-
 /* Import Google Font - Raleway 300 & 700 */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
@@ -21,6 +18,10 @@ https://codepen.io/kevinpowell/pen/mMeJEW */
     --light-gray: #c4c4c4;
     --orange: #f96855;
     --white: #ffffff;
+    --purple: purple;
+    --green: green;
+    --other-gray: #666666;
+    --blue: #3498db;
     
     /* Semantic color names */
     --accent: var(--orange);
@@ -29,8 +30,17 @@ https://codepen.io/kevinpowell/pen/mMeJEW */
     --menu-background: var(--gray);
     
     --main-font-color: var(--white);
+    --main-background-color: var(--purple);
     --menu-active-color: var(--light-gray);
     --menu-font-color: var(--medium-gray);
+
+    --filter-button-color: var(--white);
+    --filter-font-color: var(--other-gray);
+
+    --tile-background-color: var(--blue);
+    --tile-font-color: var(--white);
+
+    --article-background-color: var(--green);
   }
 
   /* Add Var for:
@@ -41,16 +51,7 @@ https://codepen.io/kevinpowell/pen/mMeJEW */
   Article Colour
   Active Filter 
   Non Active Filter
-
-
-
-  HOW TO DO SECOND TAB
-  Have a hoverable element
-  When hovered, display the article
   */
-
-
-
 
 
 * {
@@ -60,81 +61,41 @@ https://codepen.io/kevinpowell/pen/mMeJEW */
     font-family: Arial, sans-serif;
     border: none;
     overflow: hidden;
-  }
+}
 
 html {height: 100vh;}
 body {height: 100vh;}
+main {min-height: 90vh;}
+
+
 body {
     background: var(--body-background);
     color: var(--main-font-color);
     font-family: var(--sans-serif);
     font-size: 1.2rem;
     line-height: 1.45;
-    /* display: flex;
-    flex-wrap: wrap; */
-}
-
-
-main {
-    /* flex-shrink: 0; */
-    min-height: 90vh;
-    /* width: 100%; */
-    background-color: purple;
-}
-
-
-p {
-    font-size: 0.6rem;
 }
 
 article {
     padding: 20px;
     background-color: #2ecc71;
     flex: 1; /* All child elements take up equal space */
-
 }
 
+
 /* img: refers to icons */
-.img2 {
+.program-icon {
     height: 30px;
     width: 30px;
     font-size: 30px;
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
-/* button: refers to left/right arrows */
-button {
-    width: auto;
-}
-
-section.inactive {
-    display: none;
-}
-
-section.active {
-    display: flex;
-}
-
-h2 {
-    height: 45px;
-}
-
-article > ul {
-    overflow: visible;
-    margin-left: 20px;
-}
-
-article > li {
-    overflow: visible;
-}
-
-.mobile-article {
-    display: none
-}
-
-#mySkills > menu, 
-#myIntroduction > menu {
-    display: none;
+.projectLangsOlay > img {
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+    flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
 
@@ -151,11 +112,11 @@ nav {
     width: 100%;                                /* Takes up 100% of the screen width */
     position: sticky;                           /* Keeps the navigation bar at top of screen */
     z-index: 1000;                              /* Ensure the navigation bar appears above other elements */
+
 }
 
 nav > a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
-    margin: 10px;
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
 }
@@ -174,14 +135,11 @@ nav > a.active {
 /* ----------------------------- */
 
 #section-container {
-    /* height: 100%; */
     background-color: purple;
 }
 
 section {
     flex-wrap: wrap;                            /* wrap the tiles in the element */
-    gap: 20px;                                  /* each.tile2 seperated by 20pixels */
-    padding: 20px;
 }
 
 section > h2 {
@@ -189,150 +147,123 @@ section > h2 {
 }
 
 
+section.active {display: flex;}
+section.inactive {display: none;}
+
+section {
+    flex-wrap: wrap;                            /* wrap the tiles in the element */
+    gap: 20px;                                  /* each.tile2 seperated by 20pixels */
+    padding: 20px;
+}
+
 
 /* ----------------------------- */
 /* ---- TILE FILTER BUTTONS ---- */
 /* ----------------------------- */
-/* menu: refers to the filters for tiles */
-section > menu {
-    flex-basis: 100%;                   /* Keeps the width at 100% so it isnt lined up with other flex items */
-    /* margin-bottom: 10px; */
+
+.filter {
+    flex-basis: 100%;
 }
 
+.filter-options {
+    display:flex;
+    flex-direction: row;
+}
 
+.filterItem {
+    cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
+    display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
+    background: var(--filter-button-color);    /* White background */
+    transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
+    color: var(--filter-font-color);           /* Gray font colour */
 
-section > menu > ul > li {
-    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
-    display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
-    
-    background: #ffffff;                /* White background */
-    transition: all 0.3s ease-in-out;   /* Applies a smooth transition effect to all style changes */
-
-
-    color: #666666;                     /* Grey text */
     font-size: 3vw;  
     width: 5vw;
     height: 5vw;
 
-    margin-top: 5px;                    /* High level of zoom in makes filter buttons go to second row */
-    margin-right: 10px;
-    position: relative;                 /* Added for positioning the tooltip */
-    align-items: center;
-    justify-content: center;
+    margin-right: 10px;                         /* Spacing between tiles*/
+    margin-top: 5px;                            /* High level of zoom in makes filter buttons go to second row */
+
+    align-items: center;                        /* Center content */
+    justify-content: center;                    /* Center content */
+
+    position: relative;                         /* Added for positioning the tooltip */
 }
 
-
-section > menu li:hover,
-section > menu li.filter-active {
+.filterItem:hover,
+.filterItem.filter-active {
     background: #FF6F61;                /* Style change for when filter button is either clicked or moused over */
     color: #222222;
 }
 
 /* ----------------------------- */
-/* ---- TILE FILTER TOOLTIPS --- */
-/* ----------------------------- */
-section > menu li:hover::before {
-    content: attr(title);               /* The overlay content is the "title" attribute of the li element */
-    position: absolute;
-    background: #333;
-    color: #fff;
-    white-space: nowrap;
-    padding: 5px;
-    font-size: 14px;
-    bottom: 70%;                        /* Position the tooltip above the.program-program-icon2 */
-    left: 50%;                          /* Center the tooltip horizontally */
-    transform: translateX(-50%);        /* Center the tooltip horizontally */
-    visibility: hidden;
-    transition: 0.6s ease;
-}
-
-section > menu li:hover::before {
-    visibility: visible;
-    opacity: 1;                         /* How seethrough the tooltip is */
-    margin-bottom: 20px;                /* Space away the tooltip from the filter button */
-    margin-left: -15px;                 /* Off center the tooltip a bit */
-}
-
-.column {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin: 5px;
-}
-
-
-
-/* ----------------------------- */
 /* ----------- Tiles ----------- */
 /* ----------------------------- */
 
-.tile-container2 {
+.tile-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     height: 100%
 }
-.tile-container2 > .tile2 {
+
+.tile {
     display: inline-block;
-    /* width: 150px;
-    height: 150px; */
-    
     width: 10vw;
     height: 10vw;
-    background-color: #3498db;
-    color: #fff;
+    background-color: var(--tile-background-color);
+    color: var(--tile-font-color);
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    transition: var(--tile-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
     display: none;
     text-align: center;
-
-    flex-shrink: 0.5;
 }
 
-
-.tile-container2 > .tile.active {
-    display: inline-block;
+.tile.active {
+    display: grid;
+    /* grid-template-rows: repeat(1, 1fr); */
 }
 
-.tile-container2 > .tile:hover {
+.tile:hover {
     color: #000;
     transform: scale(1.05);
 }
 
-/* Div: .icon-container2 */
-.tile-container2 > .tile2 > .icon-container2 {
+.icon-container {
     display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
+    justify-content: space-evenly;        /* Center the content horizontally */
+    align-items: center;            /* Center the content vertically */
     font-size: 15px;
     padding: 10px;
-    padding-top: 5px;
-    min-height: 80px;
-    max-height: 150px;
     gap: 10px;
+    /* min-height: 130px; */
+    height: 100%;
+
 }
 
-.tile-container2 > .tile2 > .icon-container2 > i {
-    width: 20%
-}
+/* .icon-container > i {
 
-.tile-container2 > .tile2 > .icon-container2 > h4 {
-    width: 80%;
-    text-align: right;
+    height:50%;
+    width: 30%;
+    margin:0;
+    transform: translateY(-50%);
 }
+.icon-container > p {
 
-/* Div: .icon-container2 */
-#myPortfolio > .tile-container2 > .tile2 > .icon-container2 {
-    min-height: 50px;
-    max-height: 150px;
-    justify-content: left;            /* Center to left hand side */
-    width: 100%
-}
+    height:50%;
+    transform: translateY(-50%);
+    margin:0;
+} */
 
 
 /* ----------------------------- */
 /* -- SECTION NEXT/PREV ARROWS - */
-/* ----------------------------- */            
+/* ----------------------------- */
+
+button {
+    width: auto;
+}
+
 main > button {
     position: absolute;                     /* Taken out of normal flow of document */
     top: 50%;                               /* Positions the top of the element at the vertical center of its containing element. */
@@ -350,6 +281,8 @@ button.disabled {
 
 main > button:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
 main > button:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
+
+
 
 
 /* ----------------------------- */
@@ -445,159 +378,26 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
 }
 
 
+
+
+
+
+.mobile-article {
+    display: none
+}
+
+#mySkills > menu, 
+#myIntroduction > menu {
+    display: none;
+}
+
+
 #wrapper {
     padding-left: 15%;
     padding-right: 15%;
     min-height: 100vh;
     overflow-y: hidden;
-    background-color: pink;
+    background-color: var(--body-background);
     display: flex;
     flex-direction: column;
 }
-
-
-
-.tile-container {
-    column-count: 3;
-    column-width: 30%;
-    /* top: 0;
-    height: 90%; */
-}
-
-.tile {
-    margin-bottom: 10px;
-    padding: 5px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    height: 100px;
-    
-    background-color: #3498db;
-    color: #fff;
-    cursor: pointer;
-
-    display: flex;
-    flex-direction: column;
-
-    /* text-align: right; */
-}
-
-.icon-container {
-    display: flex;
-    flex-direction: row;
-    width: 40px;
-    gap: 10%;
-    justify-content: left;
-    margin-bottom: 10%;
-}
-
-.program-icon {
-    width: 20px;
-    height: 20px
-}
-
-.tile > p {
-    text-wrap: wrap;
-}
-
-
-
-@media (max-width: 600px) {
-
-    /* #myIntroduction article {
-        display: none;
-      }
-    
-      #myIntroduction.active article {
-        display: block;
-      } */
-
-    nav {
-        max-height: 6vh;
-    }
-
-    section {
-        padding: 3%;
-    }
-
-    #mySkills > menu, 
-    #myIntroduction > menu {
-        display: block;
-    }
-
-    .pc-article {
-        display: none;
-    }
-
-    .mobile-article.inactive {
-        display: none;
-    }
-
-    .mobile-article.active {
-        display: block;
-    }
-
-    /* Tile */
-/* 
-    .tile2 {
-        transform: scale(0.8);
-    }
-     */
-    
-
-    /* Menu buttons */
-    section > menu > ul > li {
-        font-size: 3vh;  
-        width: 5vh;
-        height: 5vh;
-        margin-right: 5px;
-    }
-
-    .tile-container2 > .tile2 {
-        width: 14vh;
-        height: 14vh;
-    }
-
-    /* Icon Container */
-    .tile-container2 > .tile2 > .icon-container2 {
-        gap: 5px;
-    }
-
-    .tile-container2 > .tile2 > .icon-container2 > .program-program-icon2 {
-        height: 20px;
-        width: 20px;
-    }
-
-    /* Overlay */
-    dialog > .infoWrapper {
-        flex-direction: column;
-    }
-
-    #wrapper {
-        padding-left: 7%;
-        padding-right: 7%;
-    }
-
-    .projectSumSmall {
-        display: none;
-    }
-
-    .tile-container2 {
-        display: block;
-        column-count: 3;
-        column-gap: 20px;
-        column-fill: balance;
-    }
-
-    .icon-container {
-        width: 100%;
-    }
-
-    /* menu {
-        min-height: 20%;
-    } */
-
-}
-
-  /* mobile navbar css
-  https://www.w3schools.com/howto/howto_js_topnav_responsive.asp */
