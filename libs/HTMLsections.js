@@ -126,19 +126,23 @@ class IntroductionSection extends Section {
                     </ul>
                 </menu>
 
-                <article class="pc-article" id="pc-${heading1.toLowerCase()}">
-                    <h2>${heading1}:</h2>
-                </article>
-                <article class="pc-article" id="pc-${heading2.toLowerCase()}">
-                    <h2>${heading2}:</h2>
-                </article>
+                <div class="article-container">
 
-                <article class="mobile-article inactive" id="mobile-${heading1.toLowerCase()}">
-                    <h2>${heading1}:</h2>
-                </article>
-                <article class="mobile-article inactive" id="mobile-${heading2.toLowerCase()}">
-                    <h2>${heading2}:</h2>
-                </article>
+                    <article class="pc-article" id="pc-${heading1.toLowerCase()}">
+                        <h2>${heading1}:</h2>
+                    </article>
+                    <article class="pc-article" id="pc-${heading2.toLowerCase()}">
+                        <h2>${heading2}:</h2>
+                    </article>
+
+                    <article class="mobile-article inactive" id="mobile-${heading1.toLowerCase()}">
+                        <h2>${heading1}:</h2>
+                    </article>
+                    <article class="mobile-article inactive" id="mobile-${heading2.toLowerCase()}">
+                        <h2>${heading2}:</h2>
+                    </article>
+
+                </div>
 
             </section>
         `.trim();
@@ -165,12 +169,14 @@ class EducationSection extends Section {
         tempEl.innerHTML = `
         <section id="${id}" class="inactive">
             <h2>${this.title}:</h2>
-            <article class="full-column" id="${id.toLowerCase()}1">
-                <h2></h2>
-            </article>
-            <article class="full-column" id="${id.toLowerCase()}2">
-                <h2></h2>
-            </article>
+            <div class="article-container">
+                <article class="full-column" id="${id.toLowerCase()}1">
+                    <h2></h2>
+                </article>
+                <article class="full-column" id="${id.toLowerCase()}2">
+                    <h2></h2>
+                </article>
+            </div>
         </section>
         `.trim();
         return tempEl.firstChild;
@@ -203,25 +209,28 @@ class SkillsSection extends Section {
                     <li role="button" data-filter="${heading3.toLowerCase()}" class="filterItem">${heading3}</li>
                 </ul>
             </menu>
-            <article class="pc-article" id="pc-${heading1.toLowerCase()}">
-                <h2>${heading1}:</h2>
-            </article>
-            <article class="pc-article" id="pc-${heading2.toLowerCase()}">
-                <h2>${heading2}:</h2>
-            </article>
-            <article class="pc-article" id="pc-${heading3.toLowerCase()}">
-                <h2>${heading3}:</h2>
-            </article>
 
-            <article class="mobile-article inactive" id="mobile-${heading1.toLowerCase()}">
-                <h2>${heading1}:</h2>
-            </article>
-            <article class="mobile-article inactive" id="mobile-${heading2.toLowerCase()}">
-                <h2>${heading2}:</h2>
-            </article>
-            <article class="mobile-article inactive" id="mobile-${heading3.toLowerCase()}">
-                <h2>${heading3}:</h2>
-            </article>
+            <div class="article-container">
+                <article class="pc-article" id="pc-${heading1.toLowerCase()}">
+                    <h2>${heading1}:</h2>
+                </article>
+                <article class="pc-article" id="pc-${heading2.toLowerCase()}">
+                    <h2>${heading2}:</h2>
+                </article>
+                <article class="pc-article" id="pc-${heading3.toLowerCase()}">
+                    <h2>${heading3}:</h2>
+                </article>
+
+                <article class="mobile-article inactive" id="mobile-${heading1.toLowerCase()}">
+                    <h2>${heading1}:</h2>
+                </article>
+                <article class="mobile-article inactive" id="mobile-${heading2.toLowerCase()}">
+                    <h2>${heading2}:</h2>
+                </article>
+                <article class="mobile-article inactive" id="mobile-${heading3.toLowerCase()}">
+                    <h2>${heading3}:</h2>
+                </article>
+            </div>
 
         </section>
         `.trim();

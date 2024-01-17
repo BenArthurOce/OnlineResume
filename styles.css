@@ -22,6 +22,13 @@
     --green: green;
     --other-gray: #666666;
     --blue: #3498db;
+    --red: red;
+
+    /* Tile Size */
+    --declare-tile-size: 24vh;
+    --declare-icon-size-small: 20px;
+    --declare-icon-size-medium: 30px;
+    --declare-icon-size-large: 50px;
     
     /* Semantic color names */
     --accent: var(--orange);
@@ -37,10 +44,21 @@
     --filter-button-color: var(--white);
     --filter-font-color: var(--other-gray);
 
+    --filter-active-color: var(--orange);
+    --filter-active-font-color: var(--black);
+
     --tile-background-color: var(--blue);
     --tile-font-color: var(--white);
 
+    --section-background-color: var(--purple);
     --article-background-color: var(--green);
+
+    --tile-size: var(--declare-tile-size);
+    --icon-size: var(--declare-icon-size);
+
+    --icon-size-small: var(--declare-icon-size-small);
+    --icon-size-medium: var(--declare-icon-size-medium);
+    --icon-size-large: var(--declare-icon-size-large);
   }
 
   /* Add Var for:
@@ -61,44 +79,54 @@
     font-family: Arial, sans-serif;
     border: none;
     overflow: hidden;
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+h2 {
+    font-size: 1.6rem;
+}
+h3 {
+    font-size: 1.3rem;
 }
 
 html {height: 100vh;}
 body {height: 100vh;}
 main {min-height: 90vh;}
+/* main {max-width: 40rem;} */
 
+/* font-size of the page scales with the size of the browser window */
+html {font-size: calc(60% + 0.8vmin);}
 
 body {
     background: var(--body-background);
     color: var(--main-font-color);
     font-family: var(--sans-serif);
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
     line-height: 1.45;
 }
 
 article {
     padding: 20px;
-    background-color: #2ecc71;
-    flex: 1; /* All child elements take up equal space */
+    background-color: var(--article-background-color);
+    flex: 1;                                /* All child elements take up equal/whole space in a row */
 }
 
-
-/* img: refers to icons */
 .program-icon {
-    height: 30px;
-    width: 30px;
-    font-size: 30px;
+    height: var(--icon-size-medium);
+    width: var(--icon-size-medium);
+    /* font-size: 30px; */
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
 .projectLangsOlay > img {
-    height: 30px;
-    width: 30px;
-    font-size: 30px;
+    height: var(--icon-size-medium);
+    width: var(--icon-size-medium);
+    /* font-size: 30px; */
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
-
-
 
 
 /* ----------------------------- */
@@ -108,25 +136,21 @@ nav {
     display: flex;
     justify-content: space-between;               /* Keeps nav a spaced out and in line */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   /* Add a subtle box shadow for depth */
-    max-height: 10vh;
+    min-height: 5vh;
     width: 100%;                                /* Takes up 100% of the screen width */
-    position: sticky;                           /* Keeps the navigation bar at top of screen */
-    z-index: 1000;                              /* Ensure the navigation bar appears above other elements */
-
 }
 
 nav > a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
+    font-size: large;
+    color: var(--menu-font-color)               /* Standard inactive colour of nav text */
 }
 
-nav > a:hover {
-    color: var(--menu-active-color);                             /* Change text color on hover */
-}
-
+nav > a:hover,
 nav > a.active {
-    color: var(--menu-active-color);                            /* Active = relevant section element is active */
+    color: var(--menu-active-color);            /* Change text color on hover or click */
 }
 
 
@@ -135,26 +159,30 @@ nav > a.active {
 /* ----------------------------- */
 
 #section-container {
-    background-color: purple;
+    background-color: var(--section-background-color);
 }
 
 section {
-    flex-wrap: wrap;                            /* wrap the tiles in the element */
+    padding: 20px;
+    min-height: 90vh;                           /* Allows the sections to remain the same height on every screen */
 }
 
 section > h2 {
     flex-basis: 100%;
+    /* height: 100%; */
 }
 
 
-section.active {display: flex;}
+section.active {display: block;}
 section.inactive {display: none;}
 
-section {
-    flex-wrap: wrap;                            /* wrap the tiles in the element */
-    gap: 20px;                                  /* each.tile2 seperated by 20pixels */
-    padding: 20px;
+
+.article-container {
+    display: flex;
+    gap: 20px;
 }
+
+
 
 
 /* ----------------------------- */
@@ -162,20 +190,18 @@ section {
 /* ----------------------------- */
 
 .filter {
-    flex-basis: 100%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
-.filter-options {
-    display:flex;
-    flex-direction: row;
-}
 
 .filterItem {
     cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
     background: var(--filter-button-color);    /* White background */
-    transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
     color: var(--filter-font-color);           /* Gray font colour */
+    transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
+
 
     font-size: 3vw;  
     width: 5vw;
@@ -192,68 +218,77 @@ section {
 
 .filterItem:hover,
 .filterItem.filter-active {
-    background: #FF6F61;                /* Style change for when filter button is either clicked or moused over */
-    color: #222222;
+    background: var(--filter-active-color);     /* Style change for when filter button is either clicked or moused over */
+    color: var(--filter-active-font-color)
 }
+
 
 /* ----------------------------- */
 /* ----------- Tiles ----------- */
 /* ----------------------------- */
 
 .tile-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    height: 100%
+    display: flex;                      /* Vertical spacing between tiles */
+    gap: 20px;                          /* Horizontal spacing between tiles */
+    flex-flow: row wrap;                /* Spreads tiles over multiple rows*/
 }
 
+
 .tile {
-    display: inline-block;
-    width: 10vw;
-    height: 10vw;
+    display: none;
+    flex-flow: row wrap;                /* Spreads out tile information */
+    flex-shrink: 1;
+    width: var(--tile-size);
+    height: var(--tile-size);
     background-color: var(--tile-background-color);
     color: var(--tile-font-color);
     cursor: pointer;
     transition: var(--tile-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    display: none;
     text-align: center;
+    padding: 5px;
 }
 
 .tile.active {
-    display: grid;
-    /* grid-template-rows: repeat(1, 1fr); */
+    display: flex;
 }
 
 .tile:hover {
-    color: #000;
+    color: var(--filter-active-font-color);
     transform: scale(1.05);
 }
 
 .icon-container {
     display: flex;
     justify-content: space-evenly;        /* Center the content horizontally */
-    align-items: center;            /* Center the content vertically */
-    font-size: 15px;
-    padding: 10px;
+    align-items: center;                /* Center the content vertically */
     gap: 10px;
-    /* min-height: 130px; */
-    height: 100%;
-
+    height: 40%;
+    width: 100%;
+    /* maybe put a flex 1 */
 }
 
-/* .icon-container > i {
-
-    height:50%;
+.icon-container > i {
+    display:flex;
     width: 30%;
     margin:0;
-    transform: translateY(-50%);
+    height: 100%;
+    align-items: center;            /* Center the content vertically */
+    justify-content: center;        /* Center the content horizontally */
+    /* transform: translateY(-50%); */
 }
 .icon-container > p {
+    display:flex;
+    margin: 0;
+    height: 100%;
+    align-items: center;            /* Center the content vertically */
+    justify-content: center;        /* Center the content horizontally */
+    width: 100%;
+}
 
-    height:50%;
-    transform: translateY(-50%);
-    margin:0;
-} */
+.tile > p {
+    text-align: center;
+    width: 100%;
+}
 
 
 /* ----------------------------- */
@@ -292,31 +327,36 @@ dialog {
     display: none;   /* Default display is non visible. Display is modified when class becomes "active" */
     position: fixed;  /* Positions the overlay relative to the browser window and does not scroll with the page */
     top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;        
+    left: 0;      
     background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
     color: #fff;                /* White text */
     justify-content: center;    /* Centers the child elements horizontally */
     align-items: center;        /* Centers the child elements vertically */
     z-index: 9999;              /* Must be most front facing forward since its an overlay */ 
+    min-width: 100vw;           /* To cover the entire viewscreen */ 
+    min-height: 100vh;          /* To cover the entire viewscreen */ 
 }
 
 
 /* div: infoWrapper */
 dialog > .infoWrapper {
+    display: flex;
     font-family: 'Arial', sans-serif;
     padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
     gap: 40px;
-    display: flex;
     flex-direction: row;
     justify-content: center;    /* Centers the child elements horizontally */
     align-items: center;        /* Centers the child elements vertically */
-    flex: 1 1 0px;
-    display: flex;
-    justify-content: space-between;
+    /* flex: 1 1 0px; */
+
     align-items: flex-start; /* Align items to the start of the container */
-    height: 100vh; /* Set height to 100% of the viewport height */
+
+    width: 100vw;           /* To cover the entire viewscreen */ 
+    height: 90vh;          /* To cover the entire viewscreen minus space for close button*/ 
+}
+
+dialog .infoWrapper article:first-of-type {
+    max-width: 20%
 }
 
 
@@ -337,13 +377,17 @@ dialog .closeBtn {
     cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
     padding: 10px; 
     font-weight: bold;
-    font-size: 20px;                        /* Visual Details of Close Wording*/
+
     color: #e74c3c;
     position: absolute;                     /* Taken out of normal flow of document */
     top: 85%;                               /* Positions the close button at the bottom of its containing element*/
     left: 50%;                              /* Positions the close button in the middle of its containing element*/
     transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
     transform: translateX(-50%);            /* Centers the button horizontally.*/
+
+    background-color: #fff;
+    font-size: 30px;
+
 }
 
 /* ----------------------------- */
@@ -368,14 +412,6 @@ dialog .arrow:first-of-type { left: 0; }                          /* positions i
 dialog .arrow:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
 
 
-#myIntroduction > menu > ul > li,
-#mySkills > menu > ul > li{
-    width: 30%;
-    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
-    display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
-    font-size: 12px;
-    height: 30px;
-}
 
 
 
@@ -386,11 +422,21 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
     display: none
 }
 
+
+#myIntroduction > menu > ul > li,
+#mySkills > menu > ul > li{
+    width: 30%;
+    cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
+    display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
+    font-size: 12px;
+    height: 30px;
+}
+
+
 #mySkills > menu, 
 #myIntroduction > menu {
     display: none;
 }
-
 
 #wrapper {
     padding-left: 15%;
@@ -400,4 +446,93 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
     background-color: var(--body-background);
     display: flex;
     flex-direction: column;
+}
+
+
+
+@media (max-width: 600px) {
+
+    html {font-size: calc(40% + 0.6vmin);}
+
+    nav {
+        max-height: 6vh;
+    }
+
+    section {
+        padding: 3%;
+    }
+
+    .filterItem {
+        font-size: 3vh;  
+        width: 5vh;
+        height: 5vh;
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+
+dialog > .infoWrapper {
+        flex-direction: column;
+    }
+
+    /* .filterItem  {
+  text-align: justify;
+}
+
+.filterItem ::after {
+  content: "";
+  display: inline-block;
+  width: 100%;
+} */
+
+    #mySkills > menu, 
+    #myIntroduction > menu {
+        display: block;
+    }
+
+    .pc-article {
+        display: none;
+    }
+
+    .mobile-article.inactive {
+        display: none;
+    }
+
+    .mobile-article.active {
+        display: block;
+    }
+
+    #myIntroduction .filterItem ,
+    #mySkills .filterItem  {
+        width: 30%;
+        cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
+        display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
+        height: 30px;
+    }
+
+    .tile-container {
+        column-count: 3;
+        column-fill: balance;
+        height: 100%;
+    }
+
+    .tile-container > .tile {
+        width: 12.4vh;
+        height: 12.4vh;
+    }
+
+    .icon-container {
+        gap: 0;
+        max-height: 40%;
+        gap: 5px;
+    }
+
+    .program-icon {
+        transform: scale(0.5);
+    }
+
+    #wrapper {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
 }
