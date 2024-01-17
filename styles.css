@@ -228,10 +228,19 @@ section.inactive {display: none;}
 /* ----------------------------- */
 
 .tile-container {
-    display: flex;                      /* Vertical spacing between tiles */
-    gap: 20px;                          /* Horizontal spacing between tiles */
-    flex-flow: row wrap;                /* Spreads tiles over multiple rows*/
+
+    display: grid;
+    grid-column-gap: 5%;
+    grid-template-columns: repeat(auto-fit, minmax(22%, 1fr));
+    gap: 15px
 }
+
+/* .tile-container {
+    display: grid;
+    grid-column-gap: 5%;
+    grid-template-columns: repeat(auto-fit, minmax(22%, 1fr));
+    gap: 15px
+  } */
 
 
 .tile {
@@ -261,10 +270,9 @@ section.inactive {display: none;}
     display: flex;
     justify-content: space-evenly;        /* Center the content horizontally */
     align-items: center;                /* Center the content vertically */
-    gap: 10px;
+    gap: 5px;
     height: 40%;
     width: 100%;
-    /* maybe put a flex 1 */
 }
 
 .icon-container > i {
@@ -339,7 +347,7 @@ dialog {
 
 
 /* div: infoWrapper */
-dialog > .infoWrapper {
+.infoWrapper {
     display: flex;
     font-family: 'Arial', sans-serif;
     padding: 2% 5%;     /* padding on the top/bottom and left/right of the wrapper.*/
@@ -355,7 +363,7 @@ dialog > .infoWrapper {
     height: 90vh;          /* To cover the entire viewscreen minus space for close button*/ 
 }
 
-dialog .infoWrapper article:first-of-type {
+.infoWrapper article:first-of-type {
     max-width: 20%
 }
 
@@ -428,7 +436,7 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
     width: 30%;
     cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;              /* Keeps the list items next to each other in a horizontal way*/
-    font-size: 12px;
+    /* font-size: 12px; */
     height: 30px;
 }
 
@@ -450,6 +458,8 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
 
 
 
+
+/* add another query for 300 to 400 for a 2 column grid */
 @media (max-width: 600px) {
 
     html {font-size: calc(40% + 0.6vmin);}
@@ -470,8 +480,13 @@ dialog .arrow:last-of-type { right: 0; }                         /* positions it
         margin-bottom: 10px;
     }
 
-dialog > .infoWrapper {
-        flex-direction: column;
+    dialog > .infoWrapper {
+            flex-direction: column;
+        }
+
+    .infoWrapper article:first-of-type {
+        width: 100%;
+        max-width: fit-content;
     }
 
     /* .filterItem  {
@@ -509,25 +524,31 @@ dialog > .infoWrapper {
         height: 30px;
     }
 
-    .tile-container {
+    /* .tile-container {
         column-count: 3;
         column-fill: balance;
         height: 100%;
-    }
+    } */
+
+    /* .tile-container {
+        display: grid;
+        grid-column-gap: 5%;
+        grid-template-columns: repeat(auto-fit, minmax(22%, 1fr));
+        gap: 15px
+      } */
 
     .tile-container > .tile {
-        width: 12.4vh;
-        height: 12.4vh;
+        width: 25vw;
+        height: 25vw;
     }
 
     .icon-container {
-        gap: 0;
         max-height: 40%;
-        gap: 5px;
+        gap: 0px;
     }
 
     .program-icon {
-        transform: scale(0.5);
+        transform: scale(0.7);
     }
 
     #wrapper {
@@ -535,4 +556,27 @@ dialog > .infoWrapper {
         padding-right: 7%;
     }
 
+}
+
+@media (max-height: 600px) { 
+    .tile-container {
+        grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
+      }
+}
+
+
+
+@media (max-width: 800px), 
+       (max-height: 600px) {
+    .tile-container {
+        grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
+        }
+}
+
+
+
+@media (max-width: 1000px) { 
+    .tile-container {
+        grid-template-columns: repeat(auto-fit, minmax(22%, 1fr));
+      }
 }
