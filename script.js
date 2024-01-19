@@ -20,6 +20,8 @@ classResumeData.getJSONdata()
     // const {degree, institution} = myEducations
     // frontpage.addEducations(degree, institution);
 
+    const {email, phone, linkedin, github, background, introduction} = aboutMe
+    frontpage.addIntro(email, phone, linkedin, github, background, introduction)
 
     for (const {degree, institution} of myEducations) {
         frontpage.addEducations(degree, institution);

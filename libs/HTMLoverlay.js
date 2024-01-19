@@ -1,61 +1,79 @@
 // Base class
 class HTMLOverlay {
-    #parentElement;
-    #tile;
-    #data;
     #overlay;
+    #data;
+    #parentElement;
 
-    constructor(tile, data, parentElementId) {
+    constructor(data, parentElementId) {
         this.overlay = '';
-        this.#parentElement = document.querySelector(parentElementId);
-        this.#tile = tile;
         this.#data = data;
-    }
-
-    get parentElement() {
-        return this.#parentElement;
-    }
-
-    get tile() {
-        return this.#tile;
-    }
+        this.#parentElement = document.querySelector(parentElementId);
+    };
 
     get data() {
         return this.#data;
-    }
+    };
 
     get overlay() {
         return this.#overlay;
-    }
+    };
 
     set overlay(value) {
         this.#overlay = value;
-    }
+    };
 
+    get parentElement() {
+        return this.#parentElement;
+    };
+
+    set parentElement(value) {
+        value = this.#parentElement;
+    };
+
+    renderToPage(overlayToRender, parentElement) {
+        // Render to webpage (needs adjustment to include parentElement from FrontPage)
+        document.body.appendChild(overlayToRender);
+
+        // Change the display attribute to show the overlay over the screen
+        document.body.querySelector('#section-prev').classList.add('disabled');
+        document.body.querySelector('#section-next').classList.add('disabled');
+        document.body.querySelector('dialog').classList.add('active');
+    };
+
+
+    addEventListeners() {
+        console.log("addEventListeners")
+        // On pressing the close button, deletes the overlay
+        this.overlay.querySelector('.closeBtn').onclick = () => {
+            document.body.querySelector('#section-prev').classList.remove('disabled');
+            document.body.querySelector('#section-next').classList.remove('disabled');
+            this.overlay.remove();
+        };
+    };
 };
 
-// Subclass 1
+
 class HTMLExperienceOverlay extends HTMLOverlay {
-    constructor(experienceTile, experienceData) {
-        super(experienceTile, experienceData, "#myExperiences");
+    constructor(experienceData) {
+        super(experienceData, "#myExperiences");
         this.overlay = ''
-        this.experienceTile = experienceTile
         this.experienceData = experienceData
         this.name = 'ExperienceOverlay'
     };
 
     initOverlay() {
+        this.overlay = '';
         this.createElement();
-        this.addEventListeners();
         this.applyInfoToElement();
-        this.renderOverlay();
+        this.renderToPage(this.overlay, this.parentElement);
+        this.addEventListeners()
     };
 
     createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="${this.name} class="inactive">
-            <div class="infoWrapper" id="${this.name.toLowerCase()}-wrapper">
+        <dialog id="${this.name}" class="">
+            <div class="overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
                 <article class="overlay-article" id="experience-information">
                     <h3">JobTitle</h3>
                     <span class="period"></span>
@@ -101,34 +119,14 @@ class HTMLExperienceOverlay extends HTMLOverlay {
             dutiesUl.appendChild(li);
         });
     };
+};
 
-    addEventListeners() {
-        // On pressing the close button, deletes the overlay
-        this.overlay.querySelector('.closeBtn').onclick = () => {
-            document.body.querySelector('#section-prev').classList.remove('disabled');
-            document.body.querySelector('#section-next').classList.remove('disabled');
-            this.overlay.remove();
-        };
-    };
 
-    renderOverlay() {
-        document.body.appendChild(this.overlay);
-        this.overlay.classList.remove('inactive');
-        this.overlay.classList.add('active');
-        // Change the display attribute to show the overlay over the screen
-        document.body.querySelector('#section-prev').classList.add('disabled');
-        document.body.querySelector('#section-next').classList.add('disabled');
-        document.body.querySelector('dialog').classList.add('active');
-    }
-}
-
-// Subclass 2
 class HTMLPortfolioOverlay extends HTMLOverlay {
     #currentImageIndex
-    constructor(portfolioTile, portfolioData) {
-        super(portfolioTile, portfolioData, "#myPortfolio");
+    constructor(portfolioData) {
+        super(portfolioData, "#myPortfolio");
         this.overlay = ''
-        this.portfolioTile = portfolioTile
         this.portfolioData = portfolioData
         this.name = 'PortfolioOverlay'
         this.#currentImageIndex = 0
@@ -141,25 +139,26 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
     };
 
     initOverlay() {
+        this.overlay = '';
         this.createElement();
-        this.addEventListeners();
         this.applyInfoToElement();
-        this.renderOverlay();
+        this.renderToPage(this.overlay, this.parentElement);
+        this.addEventListeners()
     };
 
     createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="${this.name} class="inactive">
-            <div class="infoWrapper" id="${this.name.toLowerCase()}-wrapper">
+        <dialog id="${this.name}" class="">
+            <div class="overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
                 <article class="overlay-article" id="project-information">
-                    <h2 class="projectTitleOlay"></h2>
-                    <p class="projectLangsOlay"></p>
-                    <p class="projectSummaryOlay"></p>
+                    <h2 class="portfolio-project-title"></h2>
+                    <div class="portfolio-icon-container"></div>
+                    <p class="portfolio-project-summary"></p>
                 </article>
 
                 <article class="overlay-article" id="project-slideshow">
-                    <div class="section-container">
+                    <div class="image-container">
                         <button class="arrow" id="overlay-prev">❮</button>
                         <button class="arrow" id="overlay-next">❯</button>
                     </div>
@@ -172,8 +171,8 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
     };
 
     applyInfoToElement() {
-        this.overlay.querySelector('.projectTitleOlay').textContent = this.portfolioData.projectName;
-        this.overlay.querySelector('.projectSummaryOlay').textContent = this.portfolioData.projectSumLarge;
+        this.overlay.querySelector('.portfolio-project-title').textContent = this.portfolioData.projectName;
+        this.overlay.querySelector('.portfolio-project-summary').textContent = this.portfolioData.projectSumLarge;
 
 
         // Prepare programming language logos
@@ -186,12 +185,12 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
             langLogo.alt = lang; // You can set alt text as the language name
             langLogo.classList.add('lang-logo');
 
-            this.overlay.querySelector('.projectLangsOlay').appendChild(langLogo);
+            this.overlay.querySelector('.portfolio-icon-container').appendChild(langLogo);
         });
 
 
         // Prepare slideshow images
-        const imageContainer = this.overlay.querySelector('.section-container');
+        const imageContainer = this.overlay.querySelector('.image-container');
 
         const showImage = (index) => {
             const images = imageContainer.querySelectorAll('img');
@@ -219,25 +218,6 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
             img.style.display = index === 0 ? 'block' : 'none';
             imageContainer.appendChild(img);
         });
-    };
-
-    addEventListeners() {
-        // On pressing the close button, deletes the overlay
-        this.overlay.querySelector('.closeBtn').onclick = () => {
-            document.body.querySelector('#section-prev').classList.remove('disabled');
-            document.body.querySelector('#section-next').classList.remove('disabled');
-            this.overlay.remove();
-        };
-    };
-
-    renderOverlay() {
-        document.body.appendChild(this.overlay);
-        this.overlay.classList.remove('inactive');
-        this.overlay.classList.add('active');
-        // Change the display attribute to show the overlay over the screen
-        document.body.querySelector('#section-prev').classList.add('disabled');
-        document.body.querySelector('#section-next').classList.add('disabled');
-        document.body.querySelector('dialog').classList.add('active');
     };
 };
 

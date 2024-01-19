@@ -12,6 +12,10 @@ class HTMLTile {
         this.#parentElement = document.querySelector(parentElementId);
     };
 
+    get data() {
+        return this.#data;
+    };
+
     get tile() {
         return this.#tile;
     };
@@ -20,18 +24,48 @@ class HTMLTile {
         this.#tile = value;
     };
 
-    get data() {
-        return this.#data;
-    };
-
     get parentElement() {
         return this.#parentElement;
     };
 
+    set parentElement(value) {
+        this.#parentElement = value;
+    };
+
+    renderToPage(tileToRender, parentElement) {
+        this.parentElement.appendChild(tileToRender);
+    };
+
+    addEventListeners(){
+        // Tile lights up when hovered over
+        this.tile.addEventListener('mouseover', () => {
+            this.tile.classList.add('hover');
+        });
+
+        // Tile returns to normal when mouse unhovers
+        this.tile.addEventListener('mouseout', () => {
+            this.tile.classList.remove('hover');
+        });
+
+        // When tile is clicked, an Overlay() will appear
+        if (this.parentElement.id == `myexperiences-tile-container`){
+            this.tile.addEventListener('click', () => {
+                const overlayClass = new HTMLExperienceOverlay(this.data);
+                overlayClass.initOverlay()
+            });
+        };
+
+        if (this.parentElement.id == `myportfolio-tile-container`){
+            this.tile.addEventListener('click', () => {
+                const overlayClass = new HTMLPortfolioOverlay(this.data);
+                overlayClass.initOverlay()
+            });
+        };
+    };
 };
 
-// Subclass 1
-class HTMLExperienceTile2 extends HTMLTile {
+
+class HTMLExperienceTile extends HTMLTile {
     #data;
     constructor(company, address, position, period, tags, softwares, duties) {
         super("#myExperiences");
@@ -48,6 +82,15 @@ class HTMLExperienceTile2 extends HTMLTile {
     get data() {
         return this.#data;
     };
+
+    initTile() {
+        this.tile = '';
+        this.parentElement = document.body.querySelector(`#myexperiences-tile-container`) 
+        this.createElement();
+        this.applyInfoToElement();
+        this.renderToPage(this.tile, this.parentElement);
+        this.addEventListeners()
+    }
 
     createElement() {
         const tempEl = document.createElement('div');
@@ -79,34 +122,6 @@ class HTMLExperienceTile2 extends HTMLTile {
         const iconClass = this.getIconClassBasedOnTag(this.data.tags[0]);
         this.tile.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
         this.tile.querySelector('i').classList.add('icon');
-        // langLogo.classList.add('icon');
-    };
-
-    addEventListeners(){
-        // Tile lights up when hovered over
-        this.tile.addEventListener('mouseover', () => {
-            this.tile.classList.add('hover');
-        });
-
-        // Tile returns to normal when mouse unhovers
-        this.tile.addEventListener('mouseout', () => {
-            this.tile.classList.remove('hover');
-        });
-
-        // When tile is clicked, an Overlay() will appear
-        this.tile.addEventListener('click', () => {
-            // const overlayClass = new HTMLexpOverlay(this.tile, this.data);
-            const overlayClass = new HTMLExperienceOverlay(this.tile, this.data);
-            overlayClass.initOverlay()
-
-        });
-    };
-
-    renderToPage(parentEl) {
-        this.createElement();
-        this.applyInfoToElement();
-        this.addEventListeners();
-        parentEl.appendChild(this.tile);
     };
 
     // Helper method to get icon class based on the tag
@@ -126,7 +141,7 @@ class HTMLExperienceTile2 extends HTMLTile {
 };
 
 // Subclass 2
-class HTMLPortfolioTile2 extends HTMLTile {
+class HTMLPortfolioTile extends HTMLTile {
     #data;
     constructor(projectName, projectLangs, projectTags, projectSumSmall, projectSumLarge, projectUrl, projectImages, iconContainer) {
         super("#myPortfolio");
@@ -144,6 +159,15 @@ class HTMLPortfolioTile2 extends HTMLTile {
     get data() {
         return this.#data;
     };
+
+    initTile() {
+        this.tile = '';
+        this.parentElement = document.body.querySelector(`#myportfolio-tile-container`)
+        this.createElement();
+        this.applyInfoToElement();
+        this.renderToPage(this.tile, this.parentElement);
+        this.addEventListeners()
+    }
 
     createElement() {
         const tempEl = document.createElement('div');
@@ -182,23 +206,6 @@ class HTMLPortfolioTile2 extends HTMLTile {
             iconContainer.appendChild(langLogo);
         });
     };
-
-    addEventListeners() {
-        // More details of the project are displayed when tile is clicked
-        this.tile.addEventListener('click', () => {
-            // const overlayClass = new HTMLportfolioOverlay(this.tile, this.data);
-            const overlayClass = new HTMLPortfolioOverlay(this.tile, this.data);
-            overlayClass.initOverlay()
-        });
-    };
-
-    renderToPage(parentEl) {
-        this.createElement();
-        this.applyInfoToElement();
-        this.addEventListeners();
-        parentEl.appendChild(this.tile);
-    };
-
 }
 
-export { HTMLExperienceTile2, HTMLPortfolioTile2 };
+export { HTMLExperienceTile, HTMLPortfolioTile };

@@ -8,6 +8,7 @@ class NavBar {
 
         this.createElement();
         this.renderToPage();
+        this.setupEventListeners();
     }
 
     get parentElement() {
@@ -22,18 +23,31 @@ class NavBar {
         this.#elementNavbar = value;
     }
 
+    get hamburgerIcon() {
+        return this.elementNavbar.querySelector('.mobile-nav-icon');
+    }
+
+    get navLinkContainer() {
+        return this.elementNavbar.querySelector('.nav-links-container');
+    }
+
     get allNavLinks() {
-        return this.elementNavbar.querySelectorAll('nav a');
+        return this.elementNavbar.querySelectorAll('nav > .nav-links-container > a');
     }
 
     createElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
-             <a href="#" data-index="0" class="active">About Me</a>
-             <a href="#" data-index="1" class="inactive">Skills</a>
-             <a href="#" data-index="2" class="inactive">Education</a>
-             <a href="#" data-index="3" class="inactive">Experience</a>
-             <a href="#" data-index="4" class="inactive">Portfolio</a>
+            <div class="nav-links-container">
+                <a href="#" data-index="0" class="active">About Me</a>
+                <a href="#" data-index="1" class="">Skills</a>
+                <a href="#" data-index="2" class="">Education</a>
+                <a href="#" data-index="3" class="">Experience</a>
+                <a href="#" data-index="4" class="">Portfolio</a>
+            </div>
+            <a href="#" class="mobile-nav-icon">
+                <i class="fa fa-bars"></i>
+            </a>
          `;
         this.elementNavbar = newElement.cloneNode(true);
     }
@@ -47,13 +61,30 @@ class NavBar {
         this.allNavLinks.forEach((link, index) => {
             if (index === sectionIndex) {
                 link.classList.add('active');
-                link.classList.remove('inactive');
+                // link.classList.remove('inactive');
             } else {
                 link.classList.remove('active');
-                link.classList.add('inactive');
+                // link.classList.add('inactive');
             }
         });
     };
+
+    displayHamburgerMenu() {
+        if (this.navLinkContainer.style.display === "block") {
+            this.navLinkContainer.style.display = "none";
+        } else {
+            this.navLinkContainer.style.display = "block";
+        }
+    }
+
+    setupEventListeners() {
+        this.hamburgerIcon.addEventListener('click', () => {
+            this.displayHamburgerMenu();
+        });
+    }
+
 }
+
+
 
 export default NavBar;

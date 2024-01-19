@@ -119,7 +119,7 @@ class IntroductionSection extends Section {
         tempEl.innerHTML = `
             <section id="${id}" class="active">
                 <h2>${this.title}:</h2>
-                <menu class="filter" id="${id.toLowerCase()}-filter">
+                <menu class="mobile-filter" id="${id.toLowerCase()}-filter">
                     <ul class="filter-options">
                         <li role="button" data-filter="${heading1.toLowerCase()}" class="filterItem">${heading1}</li>
                         <li role="button" data-filter="${heading2.toLowerCase()}" class="filterItem">${heading2}</li>
@@ -130,6 +130,7 @@ class IntroductionSection extends Section {
 
                     <article class="pc-article" id="pc-${heading1.toLowerCase()}">
                         <h2>${heading1}:</h2>
+                        <p class="introduction"></p>
                     </article>
                     <article class="pc-article" id="pc-${heading2.toLowerCase()}">
                         <h2>${heading2}:</h2>
@@ -202,7 +203,7 @@ class SkillsSection extends Section {
         tempEl.innerHTML = `
         <section id="${id}" class="inactive">
             <h2>${this.title}:</h2>
-            <menu class="filter" id="${id.toLowerCase()}-filter">
+            <menu class="mobile-filter" id="${id.toLowerCase()}-filter">
                 <ul class="filter-options">
                     <li role="button" data-filter="${heading1.toLowerCase()}" class="filterItem">${heading1}</li>
                     <li role="button" data-filter="${heading2.toLowerCase()}" class="filterItem">${heading2}</li>

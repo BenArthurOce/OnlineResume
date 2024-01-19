@@ -3,7 +3,7 @@ import NavBar from './HTMLnavbar.js';
 import ResumeData from './factoryResumeData.js';
 // import HTMLexperienceTile from './HTMLexperienceTile.js';
 // import HTMLportfolioTile from './HTMLportfolioTile.js';
-import {HTMLExperienceTile2, HTMLPortfolioTile2 } from './HTMLtile.js';
+import {HTMLExperienceTile, HTMLPortfolioTile } from './HTMLtile.js';
 
 class FrontPageNEW {
     #sectionsEl;
@@ -235,6 +235,11 @@ class FrontPageNEW {
         };
     };
 
+    addIntro(email, phone, linkedin, github, background, introduction) {
+        const parentEl = this.mainEl.querySelectorAll('#myIntroduction article')[0]
+        parentEl.querySelector('.introduction').textContent = introduction;
+    }
+
 
     addEducations(degree, institution) {
         const parentEl1 = this.mainEl.querySelectorAll('#myEducations article')[0]; // First Article
@@ -291,14 +296,14 @@ class FrontPageNEW {
 
     addExperienceTile(company, address, position, period, tags, softwares, duties) {
         const parentEl = document.body.querySelector('#myExperiences .tile-container')
-        const experienceTile = new HTMLExperienceTile2(company, address, position, period, tags, softwares, duties)
-        experienceTile.renderToPage(parentEl)
+        const experienceTile = new HTMLExperienceTile(company, address, position, period, tags, softwares, duties)
+        experienceTile.initTile(parentEl)
     };
 
     addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages) {
         const parentEl = document.body.querySelector('#myPortfolio .tile-container')
-        const portfolioTile = new HTMLPortfolioTile2(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages);
-        portfolioTile.renderToPage(parentEl)
+        const portfolioTile = new HTMLPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages);
+        portfolioTile.initTile(parentEl)
     };
 };
 
