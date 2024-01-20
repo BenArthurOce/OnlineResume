@@ -24,6 +24,32 @@
     --blue: #3498db;
     --red: red;
 
+    /* "Cool and Fresh" */
+    --style-cool-shade1: #EDF5E1;
+    --style-cool-shade2: #8EE4AF;
+    --style-cool-shade3: #5CDB95;
+    --style-cool-shade4: #379683;
+    --style-cool-shade5: #063f77;
+    --style-cool-shade6: #042e58;
+    --style-cool-black:  black;
+
+    /* "Vermillion and Russian Green" */
+    --style-verm-shade1: #8EE4AF;
+    --style-verm-shade2: #EDF5E1;
+    --style-verm-shade3: #5CDB95;
+    --style-verm-shade4: #907163;
+    --style-verm-shade5: #379683;
+    /* --style-verm-shade6: #042e58; */
+
+    /* "Stylish and Sophisticated" */
+    --style-clean-shade1: #5D5C61;
+    --style-clean-shade2: #379683;
+    --style-clean-shade3: #7395AE;
+    --style-clean-shade4: #557A95;
+    --style-clean-shade5: #B1A296;
+    /* --style-clean-shade5: #B1A296; */
+
+
     /* Tile Size */
     --declare-tile-size: 24vh;
     --declare-icon-size-small: 20px;
@@ -33,25 +59,39 @@
     /* Semantic color names */
     --accent: var(--orange);
     
-    --body-background: var(--black);
-    --menu-background: var(--gray);
+
+
+
+    /* Font Colours */
+    --all-basic-font-color: var(--style-cool-shade1);
+    --all-basic-head-color: var(--style-cool-shade6);
+
+    /* Nav Colours */
+    --nav-basic-font-color: var(--style-cool-shade3);
+    --nav-active-font-color: var(--style-cool-shade6);
+
+    /* Filter Colours */
+    --filter-basic-font-color: var(--style-cool-shade1);
+    --filter-active-font-color: var(--style-cool-shade6);
+    --filter-basic-background-color: var(--style-cool-shade4);
+    --filter-active-background-color: var(--style-cool-shade4);
+
+
+    /* Tile Colours */
+    --tile-basic-font-color: var(--style-cool-shade5);
+    --tile-active-font-color: var(--style-cool-black);
+    --tile-basic-background-color: var(--style-cool-shade2);
+    --tile-active-background-color: var(--style-cool-shade3);
+
+
+    /* General Background Colours */
+    --body-background-color: var(--style-cool-black);
+    --main-background-color: var(--style-cool-shade4);
+    --nav-background-color: var(--style-cool-shade4);
+    --section-background-color: var(--style-cool-shade4);
+    --article-background-color: var(--style-cool-shade4);
+
     
-    --main-font-color: var(--white);
-    --main-background-color: var(--purple);
-    --menu-active-color: var(--light-gray);
-    --menu-font-color: var(--medium-gray);
-
-    --filter-button-color: var(--purple);
-    --filter-font-color: var(--other-gray);
-
-    --filter-active-color: var(--purple);
-    --filter-active-font-color: var(--black);
-
-    --tile-background-color: var(--blue);
-    --tile-font-color: var(--white);
-
-    --section-background-color: var(--purple);
-    --article-background-color: var(--green);
 
     --closebtn-font-color: var(--red);
 
@@ -85,28 +125,28 @@
 }
 
 h1 {
-    font-size: 2.2rem;
+    font-size: 2.0rem;
+    color: var(--all-basic-head-color)
 }
 h2 {
     font-size: 1.6rem;
+    color: var(--all-basic-head-color)
 }
 h3 {
     font-size: 1.3rem;
+    color: var(--all-basic-head-color)
 }
 
 html {height: 100vh;}
 body {height: 100vh;}
 main {min-height: 90vh;}
-/* main {max-width: 40rem;} */
 
 /* font-size of the page scales with the size of the browser window */
 html {font-size: calc(60% + 0.8vmin);}
 
 body {
-    background: var(--body-background);
-    color: var(--main-font-color);
+    color: var(--all-basic-font-color);
     font-family: var(--sans-serif);
-    /* font-size: 1.2rem; */
     line-height: 1.45;
 }
 
@@ -114,6 +154,15 @@ article {
     padding: 20px;
     background-color: var(--article-background-color);
     flex: 1;                                /* All child elements take up equal/whole space in a row */
+    
+}
+
+li {
+    overflow: initial;
+}
+
+ul {
+    overflow: initial;
 }
 
 .program-icon {
@@ -134,11 +183,14 @@ article {
 /* ----------------------------- */
 /* ------ NAVIGATION BAR ------- */
 /* ----------------------------- */  
+nav > .mobile-nav-icon {display:none}
+
 nav {
-    /* display: flex;
-    justify-content: stretch;
-    min-height: 5vh; */
     min-height: 50px;
+    background-color: var(--nav-background-color);
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
 }
 
 nav > .nav-links-container {
@@ -147,16 +199,14 @@ nav > .nav-links-container {
     height: 100%
 }
 
-nav > .mobile-nav-icon {display:none}
 
-nav > .nav-links-container > a {
+nav > .nav-links-container a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
     font-size: large;
-    color: var(--menu-font-color);               /* Standard inactive colour of nav text */
+    color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
 }
-
 
 
 
@@ -179,9 +229,6 @@ section > h2 {
     flex-basis: 100%;
 }
 
-
-
-
 section > .article-container {
     display: flex;
     gap: 20px;
@@ -202,8 +249,8 @@ section .filter {
 .tile-filter-button {
     cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
-    background: var(--filter-button-color);    /* White background */
-    color: var(--filter-font-color);           /* Gray font colour */
+    background: var(--filter-basic-background-color);    /* White background */
+    color: var(--filter-basic-font-color);           /* Gray font colour */
     transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
 
 
@@ -239,10 +286,10 @@ section > .tile-container {
     flex-shrink: 1;
     width: var(--tile-size);
     height: var(--tile-size);
-    background-color: var(--tile-background-color);
-    color: var(--tile-font-color);
+    background-color: var(--tile-basic-background-color);
+    color: var(--tile-basic-font-color);
     cursor: pointer;
-    transition: var(--tile-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    transition: var(--tile-basic-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
     text-align: center;
     padding: 5px;
 }
@@ -256,7 +303,8 @@ section > .tile-container {
 
 .tile.activated {display: flex;}
 .tile:hover {
-    color: var(--filter-active-font-color);
+    color: var(--tile-active-font-color);
+    background-color: var(--tile-active-background-color);
     transform: scale(1.05);
 }
 
@@ -317,7 +365,7 @@ dialog {
     top: 0;
     left: 0;      
     background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
-    color: #fff;                /* White text */
+    color: var(--all-basic-font-color);                /* White text */
     justify-content: center;    /* Centers the child elements horizontally */
     align-items: center;        /* Centers the child elements vertically */
     z-index: 9999;              /* Must be most front facing forward since its an overlay */ 
@@ -370,7 +418,7 @@ dialog .closeBtn {
     transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
     transform: translateX(-50%);            /* Centers the button horizontally.*/
 
-    background-color: var(--tile-font-color);
+    background-color: var(--tile-basic-font-color);
     font-size: 30px;
 
 }
@@ -406,7 +454,7 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
     padding-right: 15%;
     min-height: 100vh;
     overflow-y: hidden;
-    background-color: var(--body-background);
+    background-color: var(--body-background-color);
     display: flex;
     flex-direction: column;
 }
@@ -418,17 +466,17 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
 
 section.activated {
     display: block;
-    background-color: palevioletred;
+    background-color: var(--section-background-color)
 }
 
 nav > .nav-links-container > a:hover,
 nav > .nav-links-container > a.activated {
-    color: var(--menu-active-color);            /* Change text color on hover or click */
+    color: var(--nav-active-font-color);            /* Change text color on hover or click */
 }
 
-menu a.activated {
+/* menu a.activated {
     background-color: palevioletred;
-}
+} */
 
 .mobile-article.activated {
     display: block;
@@ -437,7 +485,7 @@ menu a.activated {
 
 .filter .tile-filter-button:hover,
 .filter .tile-filter-button.activated {
-    background: var(--filter-active-color);     /* Style change for when filter button is either clicked or moused over */
+    background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
     color: var(--filter-active-font-color)
 }
 
@@ -466,7 +514,7 @@ menu a.activated {
     .mobile-article.inactive {display: none;}
     .mobile-article.active {display: block;}
     .pc-article {display: none;}
-    
+
 
     .filter .tile-filter-button {
         font-size: 3vh;  
@@ -490,7 +538,8 @@ menu a.activated {
         min-width: 30%;
         font-size: 2vh;
         font-weight: bold;
-        width: initial
+        width: initial;
+        height: 5vh;
     }
 
 
@@ -542,7 +591,7 @@ menu a.activated {
     /* Style the navigation menu */
     nav {
         overflow: hidden;
-        background-color: #333;
+        background-color: var(--nav-background-color);
         position: relative;
         display: flex;             /* Gives space for the hamburger icon */
     }
@@ -563,7 +612,7 @@ menu a.activated {
 
     /* Style the hamburger menu */
     nav > .mobile-nav-icon {
-        background: black;
+        background-color: var(--nav-background-color);
         display: block;
         position: absolute;
         right: 0;
@@ -572,13 +621,13 @@ menu a.activated {
 
     /* Add a grey background color on mouse-over */
     nav > .nav-links-container > a:hover {
-        background-color: #ddd;
+        background-color: var(--nav-active-font-color);
         color: black;
     }
 
     /* Active link */
     nav > .nav-links-container > a.active {
-        background-color: #ddd;
+        background-color: var(--nav-active-font-color);
         color: black;
     }
 }

@@ -53,7 +53,7 @@ class IntroductionSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
             <section id="${this.id}" class="activated">
-                <h2>AboutMe:</h2>
+                <h1>AboutMe:</h1>
                 <div class="filter-container" id="${this.id}-filter-container"></div>
                 <div class="article-container" id="${this.id}-article-container">
                     <article class="pc-article" id="pc-${heading1}">
@@ -93,7 +93,7 @@ class EducationSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${id}" class="">
-            <h2>Education:</h2>
+            <h1>Education:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="article-container" id="${this.id}-article-container">
                 <article class="full-column" id="${this.id}1">
@@ -125,7 +125,7 @@ class SkillsSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="">
-            <h2>Skills:</h2>
+            <h1>Skills:</h1>
 
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="article-container" id="${this.id}-article-container">
@@ -171,7 +171,7 @@ class ExperiencesSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="">
-            <h2>Experience:</h2>
+            <h1>Experience:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="tile-container" id="${this.id}-tile-container"></div>
         </section>
@@ -194,7 +194,7 @@ class PortfolioSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="">
-            <h2>Portfolio:</h2>
+            <h1>Portfolio:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="tile-container" id="${this.id}-tile-container"></div>
         </section>
