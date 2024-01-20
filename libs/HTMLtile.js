@@ -2,63 +2,58 @@ import {HTMLExperienceOverlay, HTMLPortfolioOverlay} from './HTMLoverlay.js';
 
 // Base class
 class HTMLTile {
-    #tile;
+    #element;
     #data;
-    #parentElement;
+    #parentEl;
 
-    constructor(parentElementId) {
-        this.#tile = '';
-        this.#data = {};
-        this.#parentElement = document.querySelector(parentElementId);
+    constructor(data, parentEl) {
+        this.#element = '';
+        this.#data = data;
+        this.#parentEl = parentEl
+        this.initTile();
     };
-
+    get element() {
+        return this.#element;
+    };
+    set element(value) {
+        this.#element = value;
+    };
     get data() {
         return this.#data;
     };
-
-    get tile() {
-        return this.#tile;
+    get parentEl() {
+        return this.#parentEl;
     };
 
-    set tile(value) {
-        this.#tile = value;
+    toggleActive() {
+        this.element.classList.toggle('activated');
     };
 
-    get parentElement() {
-        return this.#parentElement;
-    };
-
-    set parentElement(value) {
-        this.#parentElement = value;
-    };
-
-    renderToPage(tileToRender, parentElement) {
-        this.parentElement.appendChild(tileToRender);
+    renderToPage() {
+        this.parentEl.appendChild(this.element);
     };
 
     addEventListeners(){
         // Tile lights up when hovered over
-        this.tile.addEventListener('mouseover', () => {
-            this.tile.classList.add('hover');
+        this.element.addEventListener('mouseover', () => {
+            this.element.classList.add('hover');
         });
 
         // Tile returns to normal when mouse unhovers
-        this.tile.addEventListener('mouseout', () => {
-            this.tile.classList.remove('hover');
+        this.element.addEventListener('mouseout', () => {
+            this.element.classList.remove('hover');
         });
 
         // When tile is clicked, an Overlay() will appear
-        if (this.parentElement.id == `myexperiences-tile-container`){
-            this.tile.addEventListener('click', () => {
-                const overlayClass = new HTMLExperienceOverlay(this.data);
-                overlayClass.initOverlay()
+        if (this.parentEl.id == `myExperience-tile-container`){
+            this.element.addEventListener('click', () => {
+                const overlayClass = new HTMLExperienceOverlay(this.data, document.querySelector(`#wrapper`));
             });
         };
 
-        if (this.parentElement.id == `myportfolio-tile-container`){
-            this.tile.addEventListener('click', () => {
-                const overlayClass = new HTMLPortfolioOverlay(this.data);
-                overlayClass.initOverlay()
+        if (this.parentEl.id == `myPortfolio-tile-container`){
+            this.element.addEventListener('click', () => {
+                const overlayClass = new HTMLPortfolioOverlay(this.data, document.querySelector(`#wrapper`));
             });
         };
     };
@@ -66,36 +61,21 @@ class HTMLTile {
 
 
 class HTMLExperienceTile extends HTMLTile {
-    #data;
-    constructor(company, address, position, period, tags, softwares, duties) {
-        super("#myExperiences");
-        this.#data = {
-            company,
-            address,
-            position,
-            period,
-            tags,
-            softwares,
-            duties
-        };
-    };
-    get data() {
-        return this.#data;
+    constructor(data, parentEl) {
+        super(data, parentEl);
     };
 
     initTile() {
-        this.tile = '';
-        this.parentElement = document.body.querySelector(`#myexperiences-tile-container`) 
-        this.createElement();
+        this.createTileElement();
         this.applyInfoToElement();
-        this.renderToPage(this.tile, this.parentElement);
-        this.addEventListeners()
-    }
+        this.renderToPage();
+        this.addEventListeners();
+    };
 
-    createElement() {
+    createTileElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <div class="active">
+        <div class="tile activated">
             <div class="icon-container">
                 <i class="icon"></i>
                 <p class="position"></p>
@@ -103,25 +83,22 @@ class HTMLExperienceTile extends HTMLTile {
             <p class="company"></p>
         </div>
         `.trim();
-        this.tile = tempEl.firstChild;
+        this.element = tempEl.firstChild;
     };
 
     applyInfoToElement() {
-        // Add Tags for active classes
-        this.tile.classList.add('tile', 'active');
-
         // Add tags for job types
-        this.#data.tags.forEach((tag, i) => {
-            this.tile.classList.add(tag);
+        this.data.tags.forEach((tag, i) => {
+            this.element.classList.add(tag);
         });
 
-        this.tile.querySelector('.company').textContent = this.data.company;
-        this.tile.querySelector('.position').textContent = this.data.position;
+        this.element.querySelector('.company').textContent = this.data.company;
+        this.element.querySelector('.position').textContent = this.data.position;
 
         // Add small icon in top left
         const iconClass = this.getIconClassBasedOnTag(this.data.tags[0]);
-        this.tile.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
-        this.tile.querySelector('i').classList.add('icon');
+        this.element.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
+        this.element.querySelector('i').classList.add('icon');
     };
 
     // Helper method to get icon class based on the tag
@@ -142,55 +119,38 @@ class HTMLExperienceTile extends HTMLTile {
 
 // Subclass 2
 class HTMLPortfolioTile extends HTMLTile {
-    #data;
-    constructor(projectName, projectLangs, projectTags, projectSumSmall, projectSumLarge, projectUrl, projectImages, iconContainer) {
-        super("#myPortfolio");
-        this.#data = {
-            projectName,
-            projectLangs,
-            projectTags,
-            projectSumSmall,
-            projectSumLarge,
-            projectUrl,
-            projectImages,
-            iconContainer
-        };
-    };
-    get data() {
-        return this.#data;
+    constructor(data, parentEl) {
+        super(data, parentEl);
     };
 
     initTile() {
-        this.tile = '';
-        this.parentElement = document.body.querySelector(`#myportfolio-tile-container`)
-        this.createElement();
+        this.createTileElement();
         this.applyInfoToElement();
-        this.renderToPage(this.tile, this.parentElement);
-        this.addEventListeners()
-    }
+        this.renderToPage();
+        this.addEventListeners();
+    };
 
-    createElement() {
+    createTileElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <div class="active">
+            <div class="tile activated">
                 <div class="icon-container"></div>
                 <p class="projectName"></p>
                 <p class="projectSumSmall"></p>
             </div>
         `.trim();
-        this.tile = tempEl.firstChild;
+        this.element = tempEl.firstChild;
     };
 
     applyInfoToElement() {
-        this.tile.classList.add('tile', 'active');
+        // Add tags for each portfolio
+        this.data.projectTags.forEach(tag => this.element.classList.add(tag));
 
-        this.data.projectTags.forEach(tag => this.tile.classList.add(tag));
-
-        this.tile.querySelector('.projectName').textContent = this.data.projectName;
-        this.tile.querySelector('.projectSumSmall').textContent = this.data.projectSumSmall;
+        this.element.querySelector('.projectName').textContent = this.data.projectName;
+        this.element.querySelector('.projectSumSmall').textContent = this.data.summarySmall;
 
         // Add programming icons
-        const iconContainer = this.tile.querySelector('.icon-container');
+        const iconContainer = this.element.querySelector('.icon-container');
         this.data.projectLangs.forEach(lang => {
 
             // Get SVG of programming logo
@@ -199,8 +159,7 @@ class HTMLPortfolioTile extends HTMLTile {
             // Create a new image element for each language
             const langLogo = document.createElement('img');
             langLogo.src = logoPath;
-            langLogo.alt = lang; // You can set alt text as the language name
-            // langLogo.classList.add('lang-logo');
+            langLogo.alt = lang;
             langLogo.classList.add('program-icon');
 
             iconContainer.appendChild(langLogo);

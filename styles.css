@@ -157,10 +157,7 @@ nav > .nav-links-container > a {
     color: var(--menu-font-color);               /* Standard inactive colour of nav text */
 }
 
-nav > .nav-links-container > a:hover,
-nav > .nav-links-container > a.active {
-    color: var(--menu-active-color);            /* Change text color on hover or click */
-}
+
 
 
 /* ----------------------------- */
@@ -170,6 +167,8 @@ nav > .nav-links-container > a.active {
 #section-container {
     background-color: var(--section-background-color);
 }
+
+section {display: none}
 
 section {
     padding: 20px;
@@ -181,8 +180,6 @@ section > h2 {
 }
 
 
-section.active {display: block;}
-section.inactive {display: none;}
 
 
 section > .article-container {
@@ -192,16 +189,17 @@ section > .article-container {
 
 
 /* ----------------------------- */
-/* ---- TILE FILTER BUTTONS ---- */
+/* ------ FILTER BUTTONS ------- */
 /* ----------------------------- */
 
-section > .filter {
+.mobile-filter,
+section .filter {
     padding-top: 3%;
     padding-bottom: 3%;
 }
 
-
-section > .filter .filterItem {
+.mobile-article-filter,
+.tile-filter-button {
     cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
     background: var(--filter-button-color);    /* White background */
@@ -220,12 +218,6 @@ section > .filter .filterItem {
     justify-content: center;                    /* Center content */
 
     position: relative;                         /* Added for positioning the tooltip */
-}
-
-.filter .filterItem:hover,
-.filter .filterItem.filter-active {
-    background: var(--filter-active-color);     /* Style change for when filter button is either clicked or moused over */
-    color: var(--filter-active-font-color)
 }
 
 
@@ -262,7 +254,7 @@ section > .tile-container {
     width: 100%;
 }
 
-.tile.active {display: flex;}
+.tile.activated {display: flex;}
 .tile:hover {
     color: var(--filter-active-font-color);
     transform: scale(1.05);
@@ -420,6 +412,37 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
 }
 
 
+/* .activated {
+    background-color: #3498db;
+} */
+
+section.activated {
+    display: block;
+    background-color: palevioletred;
+}
+
+nav > .nav-links-container > a:hover,
+nav > .nav-links-container > a.activated {
+    color: var(--menu-active-color);            /* Change text color on hover or click */
+}
+
+menu a.activated {
+    background-color: palevioletred;
+}
+
+.mobile-article.activated {
+    display: block;
+}
+
+
+.filter .tile-filter-button:hover,
+.filter .tile-filter-button.activated {
+    background: var(--filter-active-color);     /* Style change for when filter button is either clicked or moused over */
+    color: var(--filter-active-font-color)
+}
+
+
+
 
 
 /* add another query for 300 to 400 for a 2 column grid */
@@ -435,7 +458,17 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         padding: 3%;
     }
 
-    section > .filter .filterItem {
+    /* ----------------------------- */
+    /* ------ FILTER BUTTONS ------- */
+    /* ----------------------------- */
+    .projectSumSmall {display: none;}
+    .mobile-filter {display: inline-flex;}
+    .mobile-article.inactive {display: none;}
+    .mobile-article.active {display: block;}
+    .pc-article {display: none;}
+    
+
+    .filter .tile-filter-button {
         font-size: 3vh;  
         width: 5vh;
         height: 5vh;
@@ -443,10 +476,30 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         margin-bottom: 10px;
     }
 
+    .mobile-filter {
+        width: 100%;
+    }
+
+
+    .mobile-filter .filter-options{
+        display: flex;
+        width: 100%;
+    }
+
+    .mobile-article-filter {
+        min-width: 30%;
+        font-size: 2vh;
+        font-weight: bold;
+        width: initial
+    }
+
+
+    /* ----------------------------- */
+    /* ---------- OVERLAY ---------- */
+    /* ----------------------------- */
     .overlay-wrapper {
             flex-direction: column;
     }
-
 
     .overlay-wrapper article:first-of-type {
         width: 100%;
@@ -458,18 +511,9 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         flex: initial;
     }
 
-    .projectSumSmall {display: none;}
-    .mobile-filter {display: inline-flex;}
-    .pc-article {display: none;}
-    .mobile-article.inactive {display: none;}
-    .mobile-article.active {display: block;}
 
-    .mobile-filter {
-        width: 30%;
-        cursor: pointer;                    /* Mouse pointer turns into a pointer when hovering over li*/
-        font-size: 12px;
-        height: 30px;
-    }
+
+
 
     .tile-container > .tile {
         width: 25vw;

@@ -35,11 +35,15 @@ class NavBar {
         return this.elementNavbar.querySelectorAll('nav > .nav-links-container > a');
     }
 
+    toggleActive(index) {
+        this.allNavLinks[index].classList.toggle('activated');
+    };
+
     createElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
             <div class="nav-links-container">
-                <a href="#" data-index="0" class="active">About Me</a>
+                <a href="#" data-index="0" class="activated">About Me</a>
                 <a href="#" data-index="1" class="">Skills</a>
                 <a href="#" data-index="2" class="">Education</a>
                 <a href="#" data-index="3" class="">Experience</a>
@@ -60,11 +64,9 @@ class NavBar {
     setActiveElement(sectionIndex) {
         this.allNavLinks.forEach((link, index) => {
             if (index === sectionIndex) {
-                link.classList.add('active');
-                // link.classList.remove('inactive');
+                link.classList.add('activated');
             } else {
-                link.classList.remove('active');
-                // link.classList.add('inactive');
+                link.classList.remove('activated');
             }
         });
     };

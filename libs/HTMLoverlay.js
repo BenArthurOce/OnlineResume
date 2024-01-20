@@ -1,38 +1,38 @@
 // Base class
 class HTMLOverlay {
-    #overlay;
+    #element;
     #data;
-    #parentElement;
-
-    constructor(data, parentElementId) {
-        this.overlay = '';
+    #parentEl;
+    #name;
+    constructor(data, parentEl) {
+        this.element = '';
         this.#data = data;
-        this.#parentElement = document.querySelector(parentElementId);
+        this.#parentEl = parentEl;
+        this.#name = ''
+        this.initOverlay();
     };
-
+    get element() {
+        return this.#element;
+    };
+    set element(value) {
+        this.#element = value;
+    };
     get data() {
         return this.#data;
     };
-
-    get overlay() {
-        return this.#overlay;
+    get parentEl() {
+        return this.#parentEl;
+    };
+    get name() {
+        return this.#name;
+    };
+    set name(value) {
+        this.#name = value;
     };
 
-    set overlay(value) {
-        this.#overlay = value;
-    };
-
-    get parentElement() {
-        return this.#parentElement;
-    };
-
-    set parentElement(value) {
-        value = this.#parentElement;
-    };
-
-    renderToPage(overlayToRender, parentElement) {
-        // Render to webpage (needs adjustment to include parentElement from FrontPage)
-        document.body.appendChild(overlayToRender);
+    renderToPage() {
+        // Render to webpage (needs adjustment to include parentEl from FrontPage)
+        this.parentEl.appendChild(this.element);
 
         // Change the display attribute to show the overlay over the screen
         document.body.querySelector('#section-prev').classList.add('disabled');
@@ -42,34 +42,30 @@ class HTMLOverlay {
 
 
     addEventListeners() {
-        console.log("addEventListeners")
         // On pressing the close button, deletes the overlay
-        this.overlay.querySelector('.closeBtn').onclick = () => {
+        this.element.querySelector('.closeBtn').onclick = () => {
             document.body.querySelector('#section-prev').classList.remove('disabled');
             document.body.querySelector('#section-next').classList.remove('disabled');
-            this.overlay.remove();
+            this.element.remove();
         };
     };
 };
 
 
 class HTMLExperienceOverlay extends HTMLOverlay {
-    constructor(experienceData) {
-        super(experienceData, "#myExperiences");
-        this.overlay = ''
-        this.experienceData = experienceData
-        this.name = 'ExperienceOverlay'
+    constructor(data, parentEl) {
+        super(data, parentEl);
+        this.name = "HTMLExperienceOverlay"
     };
 
     initOverlay() {
-        this.overlay = '';
-        this.createElement();
+        this.createOverlayElement();
         this.applyInfoToElement();
-        this.renderToPage(this.overlay, this.parentElement);
-        this.addEventListeners()
+        this.renderToPage();
+        this.addEventListeners();
     };
 
-    createElement() {
+    createOverlayElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <dialog id="${this.name}" class="">
@@ -93,27 +89,27 @@ class HTMLExperienceOverlay extends HTMLOverlay {
             </div>
         </dialog>
         `.trim();
-        this.overlay = tempEl.firstChild;
+        this.element = tempEl.firstChild;
     };
 
     applyInfoToElement() {
-        this.overlay.querySelector('.company').textContent = this.experienceData.company;
-        this.overlay.querySelector('.address').textContent = this.experienceData.address;
-        this.overlay.querySelector('.position').textContent = this.experienceData.position;
-        this.overlay.querySelector('.period').textContent = this.experienceData.period;   
+        this.element.querySelector('.company').textContent = this.data.company;
+        this.element.querySelector('.address').textContent = this.data.address;
+        this.element.querySelector('.position').textContent = this.data.position;
+        this.element.querySelector('.period').textContent = this.data.period;   
         
         // Select the ul elements
-        const softwaresUl = this.overlay.querySelector('.softwares');
-        const dutiesUl = this.overlay.querySelector('.duties');
+        const softwaresUl = this.element.querySelector('.softwares');
+        const dutiesUl = this.element.querySelector('.duties');
 
         // Loop through each software and duty and create li elements
-        this.experienceData.softwares.forEach((software) => {
+        this.data.softwares.forEach((software) => {
             const li = document.createElement('li');
             li.textContent = software;
             softwaresUl.appendChild(li);
         });
 
-        this.experienceData.duties.forEach((duty) => {
+        this.data.duties.forEach((duty) => {
             const li = document.createElement('li');
             li.textContent = duty;
             dutiesUl.appendChild(li);
@@ -124,11 +120,9 @@ class HTMLExperienceOverlay extends HTMLOverlay {
 
 class HTMLPortfolioOverlay extends HTMLOverlay {
     #currentImageIndex
-    constructor(portfolioData) {
-        super(portfolioData, "#myPortfolio");
-        this.overlay = ''
-        this.portfolioData = portfolioData
-        this.name = 'PortfolioOverlay'
+    constructor(data, parentEl) {
+        super(data, parentEl);
+        this.name = "HTMLPortfolioOverlay"
         this.#currentImageIndex = 0
     };
     get currentImageIndex() {
@@ -139,14 +133,13 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
     };
 
     initOverlay() {
-        this.overlay = '';
-        this.createElement();
+        this.createOverlayElement();
         this.applyInfoToElement();
-        this.renderToPage(this.overlay, this.parentElement);
-        this.addEventListeners()
+        this.renderToPage();
+        this.addEventListeners();
     };
 
-    createElement() {
+    createOverlayElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <dialog id="${this.name}" class="">
@@ -167,16 +160,16 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
             </div>
         </dialog>
         `.trim();
-        this.overlay = tempEl.firstChild;
+        this.element = tempEl.firstChild;
     };
 
     applyInfoToElement() {
-        this.overlay.querySelector('.portfolio-project-title').textContent = this.portfolioData.projectName;
-        this.overlay.querySelector('.portfolio-project-summary').textContent = this.portfolioData.projectSumLarge;
+        this.element.querySelector('.portfolio-project-title').textContent = this.data.projectName;
+        this.element.querySelector('.portfolio-project-summary').textContent = this.data.summaryLarge;
 
 
         // Prepare programming language logos
-        this.portfolioData.projectLangs.forEach(lang => {
+        this.data.projectLangs.forEach(lang => {
             const logoPath = `imgLogos/${lang}.svg`;
 
             // Create a new image element for each language
@@ -185,12 +178,12 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
             langLogo.alt = lang; // You can set alt text as the language name
             langLogo.classList.add('lang-logo');
 
-            this.overlay.querySelector('.portfolio-icon-container').appendChild(langLogo);
+            this.element.querySelector('.portfolio-icon-container').appendChild(langLogo);
         });
 
 
         // Prepare slideshow images
-        const imageContainer = this.overlay.querySelector('.image-container');
+        const imageContainer = this.element.querySelector('.image-container');
 
         const showImage = (index) => {
             const images = imageContainer.querySelectorAll('img');
@@ -200,19 +193,19 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
         };
 
         const nextImage = () => {
-            this.currentImageIndex = (this.currentImageIndex + 1) % this.portfolioData.projectImages.length;
+            this.currentImageIndex = (this.currentImageIndex + 1) % this.data.projectImages.length;
             showImage(this.currentImageIndex);
         };
 
         const prevImage = () => {
-            this.currentImageIndex = (this.currentImageIndex - 1 + this.portfolioData.projectImages.length) % this.portfolioData.projectImages.length;
+            this.currentImageIndex = (this.currentImageIndex - 1 + this.data.projectImages.length) % this.data.projectImages.length;
             showImage(this.currentImageIndex);
         };
 
-        this.overlay.querySelector('#overlay-prev').addEventListener('click', prevImage);
-        this.overlay.querySelector('#overlay-next').addEventListener('click', nextImage);
+        this.element.querySelector('#overlay-prev').addEventListener('click', prevImage);
+        this.element.querySelector('#overlay-next').addEventListener('click', nextImage);
 
-        this.portfolioData.projectImages.forEach((image, index) => {
+        this.data.projectImages.forEach((image, index) => {
             const img = document.createElement('img');
             img.src = image;
             img.style.display = index === 0 ? 'block' : 'none';

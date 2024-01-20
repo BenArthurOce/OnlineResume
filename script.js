@@ -4,6 +4,7 @@ import ResumeData from "./libs/factoryResumeData.js";
 import {FrontPageNEW, FrontPageWithResumeData} from "./libs/FrontPage.js";
 
 
+
 const classResumeData = new ResumeData;
 const frontpage = new FrontPageNEW();
 
@@ -34,6 +35,7 @@ classResumeData.getJSONdata()
     for (const {company, address, position, period, tags, softwares, duties} of myExperiences) {
         frontpage.addExperienceTile(company, address, position, period, tags, softwares, duties)
     };
+
 
     for (const {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
         frontpage.addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages)
