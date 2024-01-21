@@ -4,7 +4,6 @@ import ResumeData from "./libs/factoryResumeData.js";
 import {FrontPageNEW, FrontPageWithResumeData} from "./libs/FrontPage.js";
 
 
-
 const classResumeData = new ResumeData;
 const frontpage = new FrontPageNEW();
 

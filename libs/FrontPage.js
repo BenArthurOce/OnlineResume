@@ -5,6 +5,7 @@ import ResumeData from './factoryResumeData.js';
 // import HTMLportfolioTile from './HTMLportfolioTile.js';
 import {HTMLExperienceTile, HTMLPortfolioTile } from './HTMLtile.js';
 import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter} from "./HTMLFilter.js";
+import HTMLPalette from "./HTMLPalette.js";
 
 class FrontPageNEW {
     #sectionNames;
@@ -13,9 +14,12 @@ class FrontPageNEW {
     #previousIndex;
     #wrapperElement;
     #navBarObj;
+    #paletteObj
+    #paletteEl
     #fiilterObjs;
     #sectionsObj;
     #frontPageElements
+
 
     constructor() {
 
@@ -30,8 +34,11 @@ class FrontPageNEW {
         this.constructMainDivElement();
     
         // Render the sections
+        this.#paletteObj = this.createPalette()
         this.#sectionsObj = this.createSections()
         this.#fiilterObjs = this.createFilters()
+
+        this.#paletteEl = document.body.querySelector(`#paletteSelector`)
         this.#sectionsEl = document.body.querySelectorAll(`section`)
 
         // this.addEventListeners()
@@ -50,7 +57,13 @@ class FrontPageNEW {
     //
     get mainEl() {return document.querySelector(`main`)}
     //
-    // xxxxxxxx
+    // Palette
+    //
+    get paletteObj() {return this.#paletteObj;};
+    set paletteObj(value) {this.#paletteObj = value;};
+    get paletteEl() {return this.#paletteEl;};
+    //
+    // Sections
     //
     get sectionsObj() {return this.#sectionsObj;};
     set sectionsObj(value) {this.#sectionsObj = value;};
@@ -203,6 +216,12 @@ class FrontPageNEW {
         return menus;
     };
 
+    createPalette(){
+        const paletteInstance = new HTMLPalette(document.body.querySelector('#palette-container'));
+        this.updateColorScheme("forest"); //default colour scheme
+        return paletteInstance;
+    };
+
     addFilterEvents(elements, callbackFunction) {
         // filterTiles() / showArticle() is the callback function
         elements.forEach((filterButton, i) => {
@@ -278,7 +297,21 @@ class FrontPageNEW {
                 this.addFilterEvents(filterObject.element.querySelectorAll(`li`), this.filterTiles.bind(this, filterObject));
             };
         });
+
+        // ColourPalette
+        this.paletteEl.addEventListener('change', () => {
+            const newColour = document.body.querySelector(`#paletteSelector`).value;
+            this.updateColorScheme(newColour);
+        });
     };
+
+
+    updateColorScheme(newColour) {
+        // const selectedPalette = document.getElementById('paletteSelector').value;
+        const root = document.documentElement;
+        root.setAttribute('data-style', newColour);
+    };
+
 
     showSlide() {
         // Adjust the section to be displayed
