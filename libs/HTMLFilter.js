@@ -3,21 +3,17 @@ class Filter {
     #element;
     #id;
     #parentEl;
+    #activeIndex
     constructor(refNum, id, parentEl) {
         this.#refNum = refNum;
+        this.#element = '';
         this.#id = id;
         this.#parentEl = parentEl;
-        this.#element = '';
+        this.#activeIndex = 0
         this.initFilter();
     };
     get refNum() {
         return this.#refNum;
-    };
-    get id() {
-        return this.#id;
-    };
-    get parentEl() {
-        return this.#parentEl;
     };
     get element() {
         return this.#element;
@@ -25,9 +21,42 @@ class Filter {
     set element(value) {
         this.#element = value;
     };
+    get id() {
+        return this.#id;
+    };
+    get parentEl() {
+        return this.#parentEl;
+    };
+    get activeIndex() {
+        return this.#activeIndex;
+    };
+    set activeIndex(value) {
+        this.#activeIndex = value;
+    };
+    get allFilterEl() {
+        return this.element.querySelectorAll('li');
+    };
 
     renderToPage() {
         this.parentEl.appendChild(this.element);
+    };
+
+    addLocalEventListeners() {
+        // Update the colour style of a filter button when clicked (Don't actually filter)
+        this.allFilterEl.forEach((buttonEl, i) => {
+            buttonEl.addEventListener('click', () => {
+                const dataIndex = buttonEl.getAttribute('data-index');
+                this.updateActiveFilter(dataIndex)
+            })
+        });
+    }
+
+    updateActiveFilter(dataIndex) {
+        // Reset all
+        this.allFilterEl.forEach((button, i) => {button.classList.remove('activated')});
+
+        // Activate the current filter
+        this.allFilterEl[dataIndex].classList.add('activated')
     };
 };
 
@@ -40,6 +69,7 @@ class IntroductionFilter extends Filter {
     initFilter() {
         this.element = this.createFilterElement(this.id, 'Introduction', 'KeySkills');
         this.renderToPage();
+        this.addLocalEventListeners();
     };
 
     createFilterElement(id, heading1, heading2)  {
@@ -47,8 +77,8 @@ class IntroductionFilter extends Filter {
         tempEl.innerHTML = `
             <menu class="mobile-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
+                    <li role="button" data-index="0" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
+                    <li role="button" data-index="1" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
                 </ul>
             </menu>
         `.trim();
@@ -56,29 +86,6 @@ class IntroductionFilter extends Filter {
     };
 };
 
-class EducationFilter extends Filter {
-    constructor(refNum, id, parentEl) {
-        super(refNum, id, parentEl);
-    };
-
-    initFilter() {
-        this.element = this.createFilterElement();
-        this.renderToPage();
-    };
-
-    createFilterElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
-            <menu class="mobile-filter activated" id="${this.id}-filter">
-                <ul class="filter-options">
-                    <li role="button" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
-                </ul>
-            </menu>
-        `.trim();
-        return tempEl.firstChild;
-    };
-};
 
 class SkillsFilter extends Filter {
     constructor(refNum, id, parentEl) {
@@ -86,8 +93,9 @@ class SkillsFilter extends Filter {
     };
 
     initFilter() {
-        this.element = this.createFilterElement(this.id, 'Languages', 'Technical', 'Soft');;
+        this.element = this.createFilterElement(this.id, 'Languages', 'Technical', 'Soft');
         this.renderToPage();
+        this.addLocalEventListeners();
     };
 
     createFilterElement(id, heading1, heading2, heading3) {
@@ -95,15 +103,42 @@ class SkillsFilter extends Filter {
         tempEl.innerHTML = `
             <menu class="mobile-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
-                    <li role="button" data-filter="${heading3}" class="mobile-article-filter">${heading3}</li>
+                    <li role="button" data-index="0" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
+                    <li role="button" data-index="1" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
+                    <li role="button" data-index="2" data-filter="${heading3}" class="mobile-article-filter">${heading3}</li>
                 </ul>
             </menu>
         `.trim();
         return tempEl.firstChild;
     };
 };
+
+
+class EducationFilter extends Filter {
+    constructor(refNum, id, parentEl) {
+        super(refNum, id, parentEl);
+    };
+
+    initFilter() {
+        this.element = this.createFilterElement(this.id, 'IT', 'Accounting');
+        this.renderToPage();
+        this.addLocalEventListeners();
+    };
+
+    createFilterElement(id, heading1, heading2) {
+        const tempEl = document.createElement('div');
+        tempEl.innerHTML = `
+            <menu class="mobile-filter activated" id="${this.id}-filter">
+                <ul class="filter-options">
+                    <li role="button" data-index="0" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
+                    <li role="button" data-index="1" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
+                </ul>
+            </menu>
+        `.trim();
+        return tempEl.firstChild;
+    };
+};
+
 
 class ExperienceFilter extends Filter {
     constructor(refNum, id, parentEl) {
@@ -113,6 +148,7 @@ class ExperienceFilter extends Filter {
     initFilter() {
         this.element = this.createFilterElement();
         this.renderToPage();
+        this.addLocalEventListeners();
     };
 
     createFilterElement() {
@@ -120,10 +156,10 @@ class ExperienceFilter extends Filter {
         tempEl.innerHTML = `
             <menu class="filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-filter="tile" class="tile-filter-button" title="All">All</li>
-                    <li role="button" data-filter="Programming" class="tile-filter-button" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
-                    <li role="button" data-filter="Accounting" class="tile-filter-button" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
-                    <li role="button" data-filter="CustomerService" class="tile-filter-button" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
+                    <li role="button" data-index="0" data-filter="tile" class="tile-filter-button" title="All">All</li>
+                    <li role="button" data-index="1" data-filter="Programming" class="tile-filter-button" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
+                    <li role="button" data-index="2" data-filter="Accounting" class="tile-filter-button" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
+                    <li role="button" data-index="3" data-filter="CustomerService" class="tile-filter-button" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
                 </ul>
             </menu>
         `.trim();
@@ -140,6 +176,7 @@ class PortfolioFilter extends Filter {
     initFilter() {
         this.element = this.createFilterElement();
         this.renderToPage();
+        this.addLocalEventListeners();
     };
 
     createFilterElement() {

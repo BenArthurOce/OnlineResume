@@ -2,15 +2,17 @@
 
 class Section {
     #sectionNum;
-    #section;
+    #element;
     #id;
     #parentEl;
+    #name;
 
-    constructor(sectionNum, id, parentEl) {
+    constructor(sectionNum, id, parentEl, name) {
         this.#sectionNum = sectionNum;
         this.#id = id;
         this.#parentEl = parentEl;
-        this.#section = '';
+        this.#name = name;
+        this.#element = '';
         this.initSection();
     };
     get sectionNum() {
@@ -22,38 +24,41 @@ class Section {
     get parentEl() {
         return this.#parentEl;
     };
-    get section() {
-        return this.#section;
+    get element() {
+        return this.#element;
     };
-    set section(value) {
-        this.#section = value;
+    set element(value) {
+        this.#element = value;
+    };
+    get name() {
+        return this.#name;
     };
 
     toggleActive() {
-        this.section.classList.toggle('activated');
+        this.element.classList.toggle('activated');
     };
 
     renderToPage() {
-        this.parentEl.appendChild(this.section);
+        this.parentEl.appendChild(this.element);
     };
 };
 
 
 class IntroductionSection extends Section {
-    constructor(sectionNum, id, parentEl) {
-        super(sectionNum, id, parentEl);
+    constructor(sectionNum, id, parentEl, name) {
+        super(sectionNum, id, parentEl, name);
     };
 
     initSection() {
-        this.section = this.createSection(this.id, 'Introduction', 'KeySkills');
-        this.renderToPage(this.section);
+        this.element = this.createSection(this.id, 'Introduction', 'KeySkills');
+        this.renderToPage(this.element);
     };
 
     createSection(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
             <section id="${this.id}" class="activated">
-                <h1>AboutMe:</h1>
+                <h1 class="pc-section-title">${this.name}:</h1>
                 <div class="filter-container" id="${this.id}-filter-container"></div>
                 <div class="article-container" id="${this.id}-article-container">
                     <article class="pc-article" id="pc-${heading1}">
@@ -80,27 +85,34 @@ class IntroductionSection extends Section {
 
 
 class EducationSection extends Section {
-    constructor(sectionNum, id, parentEl) {
-        super(sectionNum, id, parentEl);
+    constructor(sectionNum, id, parentEl, name) {
+        super(sectionNum, id, parentEl, name);
     };
 
     initSection() {
-        this.section = this.createSection(this.id, 'education1', 'education2');
-        this.renderToPage(this.section);
+        this.element = this.createSection(this.id, 'IT', 'Accounting');
+        this.renderToPage(this.element);
     };
 
     createSection(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${id}" class="">
-            <h1>Education:</h1>
+        <section id="${this.id}" class="">
+            <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="article-container" id="${this.id}-article-container">
-                <article class="full-column" id="${this.id}1">
-                    <h2></h2>
+                <article class="pc-article" id="pc-${heading1}">
+                    <h2>${heading1}:</h2>
                 </article>
-                <article class="full-column" id="${this.id}2">
-                    <h2></h2>
+                <article class="pc-article" id="pc-${heading2}">
+                    <h2>${heading2}:</h2>
+                </article>
+
+                <article class="mobile-article" id="mobile-${heading1}">
+                    <h2>${heading1}:</h2>
+                </article>
+                <article class="mobile-article" id="mobile-${heading2}">
+                    <h2>${heading2}:</h2>
                 </article>
             </div>
          
@@ -112,21 +124,20 @@ class EducationSection extends Section {
 
 
 class SkillsSection extends Section {
-    constructor(sectionNum, id, parentEl) {
-        super(sectionNum, id, parentEl);
+    constructor(sectionNum, id, parentEl, name) {
+        super(sectionNum, id, parentEl, name);
     };
 
     initSection() {
-        this.section = this.createSection(this.id, 'Languages', 'Technical', 'Soft');
-        this.renderToPage(this.section);
+        this.element = this.createSection(this.id, 'Languages', 'Technical', 'Soft');
+        this.renderToPage(this.element);
     };
 
     createSection(id, heading1, heading2, heading3) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="">
-            <h1>Skills:</h1>
-
+            <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="article-container" id="${this.id}-article-container">
                 <article class="pc-article" id="pc-${heading1}">
@@ -158,20 +169,20 @@ class SkillsSection extends Section {
 
 
 class ExperiencesSection extends Section {
-    constructor(sectionNum, id, parentEl) {
-        super(sectionNum, id, parentEl);
+    constructor(sectionNum, id, parentEl, name) {
+        super(sectionNum, id, parentEl, name);
     };
 
     initSection() {
-        this.section = this.createSection(this.id);
-        this.renderToPage(this.section);
+        this.element = this.createSection(this.id);
+        this.renderToPage(this.element);
     };
 
     createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="">
-            <h1>Experience:</h1>
+            <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="tile-container" id="${this.id}-tile-container"></div>
         </section>
@@ -181,20 +192,20 @@ class ExperiencesSection extends Section {
 };
 
 class PortfolioSection extends Section {
-    constructor(sectionNum, id, parentEl) {
-        super(sectionNum, id, parentEl);
+    constructor(sectionNum, id, parentEl, name) {
+        super(sectionNum, id, parentEl, name);
     };
 
     initSection() {
-        this.section = this.createSection();
-        this.renderToPage(this.section);
+        this.element = this.createSection();
+        this.renderToPage(this.element);
     };
 
     createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="">
-            <h1>Portfolio:</h1>
+            <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="tile-container" id="${this.id}-tile-container"></div>
         </section>

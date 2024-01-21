@@ -61,8 +61,6 @@ class HTMLPalette {
     };
 
     renderToPage() {
-        console.log("renderToPage")
-        console.log(this.element)
         this.parentEl.appendChild(this.element);
     };
 

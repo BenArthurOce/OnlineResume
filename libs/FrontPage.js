@@ -8,12 +8,14 @@ import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, Por
 import HTMLPalette from "./HTMLPalette.js";
 
 class FrontPageNEW {
+    #sectionIDs;
     #sectionNames;
     #sectionsEl;
     #currentIndex;
     #previousIndex;
     #wrapperElement;
     #navBarObj;
+    #navBarEl;
     #paletteObj
     #paletteEl
     #fiilterObjs;
@@ -23,12 +25,14 @@ class FrontPageNEW {
 
     constructor() {
 
-        this.#sectionNames = ["aboutMe", "mySkills", "myEducation", "myExperience", "myPortfolio"]
+        this.#sectionIDs = ["aboutMe", "mySkills", "myEducation", "myExperience", "myPortfolio"]
+        this.#sectionNames = ["About Me", "My Skills", "Education", "Experience", "Portfolio"]
         
         this.#currentIndex = 0;
         this.#previousIndex = 0;
         this.#wrapperElement = document.querySelector("#wrapper");
-        this.#navBarObj = new NavBar;
+        this.#navBarObj = this.createNavBar()
+        this.#navBarEl = document.querySelector("nav");
     
         // Construct the main div element
         this.constructMainDivElement();
@@ -41,11 +45,14 @@ class FrontPageNEW {
         this.#paletteEl = document.body.querySelector(`#paletteSelector`)
         this.#sectionsEl = document.body.querySelectorAll(`section`)
 
-        // this.addEventListeners()
+        this.#frontPageElements = this.initSlideshowElements();
+
+        this.showSlide();
     };
     //
-    // All Elements (Dictionary Object)
+    // All Names
     //
+    get sectionIDs() {return this.#sectionIDs;};
     get sectionNames() {return this.#sectionNames;};
     //
     // All Elements (Dictionary Object)
@@ -72,6 +79,7 @@ class FrontPageNEW {
     // NavBar
     //
     get navBarObj() {return this.#navBarObj;};
+    get navBarEl() {return this.#navBarEl;};
     //
     // Current Section Display
     //
@@ -133,9 +141,9 @@ class FrontPageNEW {
 
     
     initSlideshowElements() {
-        this.#frontPageElements = {
+        const tempObj = {
             "all": {
-                 "navs": this.navBarObj.allNavLinks
+                 "navs": this.navBarObj.allLinkEl
                 ,"sections": this.sectionsObj
                 ,"menus": this.menuObj
                 ,"arrows": this.mainEl.allButtons
@@ -152,11 +160,11 @@ class FrontPageNEW {
             ,"single": {
                  "navbar": this.navBarObj.elementNavbar
                 ,"nav": {
-                    "introduction": this.navBarObj.allNavLinks[0]
-                    ,"educations": this.navBarObj.allNavLinks[1]
-                    ,"skills": this.navBarObj.allNavLinks[2]
-                    ,"experience": this.navBarObj.allNavLinks[3]
-                    ,"portfolio": this.navBarObj.allNavLinks[4]
+                    "introduction": this.navBarObj.allLinkEl[0]
+                    ,"educations": this.navBarObj.allLinkEl[1]
+                    ,"skills": this.navBarObj.allLinkEl[2]
+                    ,"experience": this.navBarObj.allLinkEl[3]
+                    ,"portfolio": this.navBarObj.allLinkEl[4]
                 }
                 ,"section": {
                      "introduction": this.sectionsObj[0]
@@ -181,37 +189,43 @@ class FrontPageNEW {
                     ,"portfolio": this.mainEl.portfolioFilter
                 }
             }
-        }
+        };
+        return tempObj;
     };
 
     constructMainDivElement() {
         const newElement = document.createElement("main");
         newElement.innerHTML = `
-         <button class="arrow" id="section-prev">❮</button>
-         <button class="arrow" id="section-next">❯</button>
-         <div id="section-container"></div>
-         `;
-         this.#wrapperElement.appendChild(newElement) 
+            <button class="arrow" id="section-prev">❮</button>
+            <button class="arrow" id="section-next">❯</button>
+            <div id="section-container"></div>
+        `;
+        this.#wrapperElement.appendChild(newElement) 
+    };
+
+    createNavBar() {
+        const navBar = new NavBar(document.querySelector("#wrapper"));
+        return navBar;
     };
 
     createSections() {
         const sections = [
-             new IntroductionSection(0, this.sectionNames[0], document.body.querySelector('#section-container'))
-            ,new SkillsSection(1, this.sectionNames[1], document.body.querySelector('#section-container'))
-            ,new EducationSection(2, this.sectionNames[2], document.body.querySelector('#section-container'))
-            ,new ExperiencesSection(3, this.sectionNames[3], document.body.querySelector('#section-container'))
-            ,new PortfolioSection(4, this.sectionNames[4], document.body.querySelector('#section-container'))
+             new IntroductionSection(0, this.sectionIDs[0], document.body.querySelector('#section-container'), this.sectionNames[0])
+            ,new SkillsSection(1, this.sectionIDs[1], document.body.querySelector('#section-container'), this.sectionNames[1])
+            ,new EducationSection(2, this.sectionIDs[2], document.body.querySelector('#section-container'), this.sectionNames[2])
+            ,new ExperiencesSection(3, this.sectionIDs[3], document.body.querySelector('#section-container'), this.sectionNames[3])
+            ,new PortfolioSection(4, this.sectionIDs[4], document.body.querySelector('#section-container'), this.sectionNames[4])
         ];
         return sections;
     };
 
     createFilters() {
         const menus = [
-             new IntroductionFilter(0, this.sectionNames[0], document.body.querySelector(`#${this.sectionNames[0]}-filter-container`))
-            ,new SkillsFilter(1, this.sectionNames[1], document.body.querySelector(`#${this.sectionNames[1]}-filter-container`))
-            // ,new EducationFilter(2, this.sectionNames[2], document.body.querySelector(`#${this.sectionNames[2]}-filter-container`))
-            ,new ExperienceFilter(3, this.sectionNames[3], document.body.querySelector(`#${this.sectionNames[3]}-filter-container`))
-            ,new PortfolioFilter(4, this.sectionNames[4], document.body.querySelector(`#${this.sectionNames[4]}-filter-container`))
+             new IntroductionFilter(0, this.sectionIDs[0], document.body.querySelector(`#${this.sectionIDs[0]}-filter-container`))
+            ,new SkillsFilter(1, this.sectionIDs[1], document.body.querySelector(`#${this.sectionIDs[1]}-filter-container`))
+            ,new EducationFilter(2, this.sectionIDs[2], document.body.querySelector(`#${this.sectionIDs[2]}-filter-container`))
+            ,new ExperienceFilter(3, this.sectionIDs[3], document.body.querySelector(`#${this.sectionIDs[3]}-filter-container`))
+            ,new PortfolioFilter(4, this.sectionIDs[4], document.body.querySelector(`#${this.sectionIDs[4]}-filter-container`))
         ];
         return menus;
     };
@@ -271,10 +285,10 @@ class FrontPageNEW {
         const nextArrow = document.querySelector("#section-next");
 
         // Navbar links
-        this.navBarObj.allNavLinks.forEach((nav, index) => {
+        this.navBarObj.allLinkEl.forEach((nav, index) => {
             nav.addEventListener('click', () => {
                 this.adjustDisplayedSection(index);
-                nav.classList.toggle('activated');
+                this.currentIndex = index
             });
         });
 
@@ -307,7 +321,6 @@ class FrontPageNEW {
 
 
     updateColorScheme(newColour) {
-        // const selectedPalette = document.getElementById('paletteSelector').value;
         const root = document.documentElement;
         root.setAttribute('data-style', newColour);
     };
@@ -318,10 +331,14 @@ class FrontPageNEW {
         this.sectionsObj[this.previousIndex].toggleActive()
         this.sectionsObj[this.currentIndex].toggleActive()
 
-        // Change the navbar link to be highlighted
-        this.navBarObj.toggleActive(this.previousIndex)
-        this.navBarObj.toggleActive(this.currentIndex)
+        // Transfer this information to NavBar()
+        this.navBarObj.activeIndex = this.currentIndex
+
+        // Change the navbar link to be highlighted. Change the active section name (for mobile)
+        this.navBarObj.updateActiveLink();
+        this.navBarObj.updateActiveName(this.sectionNames);
     };
+
 
     adjustDisplayedSection(action) {
         this.previousIndex = this.currentIndex;
@@ -349,14 +366,20 @@ class FrontPageNEW {
     };
 
     addIntro(email, phone, linkedin, github, background, introduction) {
-        const articleList = this.mainEl.querySelectorAll(`#${this.sectionNames[0]} article`)
-        articleList[0].querySelector('.introduction').textContent = introduction;   //Pc
-        articleList[2].querySelector('.introduction').textContent = introduction;   //Mobile
+        // const articleList = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)
+        // articleList[0].querySelector('.introduction').textContent = introduction;   //Pc
+        // articleList[2].querySelector('.introduction').textContent = introduction;   //Mobile
+        const articleEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[0]; // Pc
+        console.log(articleEl1)
+        const articleEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[2]; // Mobile
+        articleEl1.querySelector('.introduction').textContent = introduction;
+        articleEl2.querySelector('.introduction').textContent = introduction;
+
     };
 
     addEducations(degree, institution) {
-        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionNames[2]} article`)[0]; // First Article
-        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionNames[2]} article`)[1]; // Second Article
+        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[0]; // First Article
+        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[1]; // Second Article
     
         // Function to create a list item and append it to the specified parent element
         const createListItemAndAppend = (parentElement, textContent) => {
@@ -373,14 +396,14 @@ class FrontPageNEW {
     };
 
     addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft) {
-        const parentIntro = this.mainEl.querySelectorAll(`#${this.sectionNames[0]} article`)[1]
-        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionNames[1]} article`)[0] // Programming Languages
-        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionNames[1]} article`)[1] // Hard Skills
-        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionNames[1]} article`)[2] // Soft Skills
-        const parentIntro2 = this.mainEl.querySelectorAll(`#${this.sectionNames[0]} article`)[3]
-        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionNames[1]} article`)[3] // Programming Languages
-        const parentEl5 = this.mainEl.querySelectorAll(`#${this.sectionNames[1]} article`)[4] // Hard Skills
-        const parentEl6 = this.mainEl.querySelectorAll(`#${this.sectionNames[1]} article`)[5] // Soft Skills
+        const parentIntro = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[1]
+        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[0] // Programming Languages
+        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[1] // Hard Skills
+        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[2] // Soft Skills
+        const parentIntro2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[3]
+        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[3] // Programming Languages
+        const parentEl5 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[4] // Hard Skills
+        const parentEl6 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[5] // Soft Skills
 
         // Function to create a list and append it to the specified parent element
         const createListAndAppend = (parentElement, skillsArray) => {
@@ -408,13 +431,13 @@ class FrontPageNEW {
 
     addExperienceTile(company, address, position, period, tags, softwares, duties) {
         const data = {company, address, position, period, tags, softwares, duties}
-        const parentEl = document.body.querySelector(`#${this.sectionNames[3]} .tile-container`);
+        const parentEl = document.body.querySelector(`#${this.sectionIDs[3]} .tile-container`);
         const experienceTile = new HTMLExperienceTile(data, parentEl)
     };
 
     addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages) {
         const data = {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages}
-        const parentEl = document.body.querySelector(`#${this.sectionNames[4]} .tile-container`);
+        const parentEl = document.body.querySelector(`#${this.sectionIDs[4]} .tile-container`);
         const portfolioTile = new HTMLPortfolioTile(data, parentEl);
     };
 };

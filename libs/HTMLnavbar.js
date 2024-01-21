@@ -1,91 +1,110 @@
 class NavBar {
-    #elementNavbar;
-    #parentElement;
-
-    constructor() {
-        this.#parentElement = document.querySelector("#wrapper");
-        this.#elementNavbar = '';
+    #element;
+    #parentEl;
+    #activeIndex
+    #activeElName
+    constructor(parentEl) {
+        this.name = "NavBar";
+        this.#parentEl = parentEl;
+        this.#element = '';
+        this.#activeIndex = 0
+        this.#activeElName = ''
 
         this.createElement();
         this.renderToPage();
-        this.setupEventListeners();
+        this.addLocalEventListeners();
     }
-
-    get parentElement() {
-        return this.#parentElement;
-    }
-
-    get elementNavbar() {
-        return this.#elementNavbar;
-    }
-
-    set elementNavbar(value) {
-        this.#elementNavbar = value;
-    }
-
-    get hamburgerIcon() {
-        return this.elementNavbar.querySelector('.mobile-nav-icon');
-    }
-
-    get navLinkContainer() {
-        return this.elementNavbar.querySelector('.nav-links-container');
-    }
-
-    get allNavLinks() {
-        return this.elementNavbar.querySelectorAll('nav > .nav-links-container > a');
-    }
-
-    toggleActive(index) {
-        this.allNavLinks[index].classList.toggle('activated');
+    get element() {
+        return this.#element;
     };
+    set element(value) {
+        this.#element = value;
+    };
+    get parentEl() {
+        return this.#parentEl;
+    };
+    get activeIndex() {
+        return this.#activeIndex;
+    };
+    set activeIndex(value) {
+        this.#activeIndex = value;
+    };
+    get activeElName() {
+        return this.#activeElName;
+    };
+    set activeElName(value) {
+        this.#activeElName = value;
+    };
+    get headerEl() {
+        return this.element.querySelector(`.mob-section-title`)
+    }
+    get hamburgerIcon() {
+        return this.element.querySelector('.mobile-nav-icon');
+    }
+    get linkContainerEl() {
+        return this.element.querySelector('.nav-links-container');
+    };
+    get allLinkEl() {
+        return this.element.querySelectorAll('nav > .nav-links-container > a');
+    };
+
 
     createElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
+            <h1 class="mob-section-title activated"></h1>
             <div class="nav-links-container">
-                <a href="#" data-index="0" class="activated">About Me</a>
-                <a href="#" data-index="1" class="">Skills</a>
-                <a href="#" data-index="2" class="">Education</a>
-                <a href="#" data-index="3" class="">Experience</a>
-                <a href="#" data-index="4" class="">Portfolio</a>
+                <a href="#" data-index="0" class="nav-link activated">About Me</a>
+                <a href="#" data-index="1" class="nav-link">Skills</a>
+                <a href="#" data-index="2" class="nav-link">Education</a>
+                <a href="#" data-index="3" class="nav-link">Experience</a>
+                <a href="#" data-index="4" class="nav-link">Portfolio</a>
             </div>
             <a href="#" class="mobile-nav-icon">
                 <i class="fa fa-bars"></i>
             </a>
          `;
-        this.elementNavbar = newElement.cloneNode(true);
-    }
+        this.element = newElement.cloneNode(true);
+    };
 
     renderToPage() {
         // Append the created elements to the wrapper
-        this.parentElement.appendChild(this.elementNavbar);
+        this.parentEl.appendChild(this.element);
     };
 
-    setActiveElement(sectionIndex) {
-        this.allNavLinks.forEach((link, index) => {
-            if (index === sectionIndex) {
-                link.classList.add('activated');
-            } else {
-                link.classList.remove('activated');
-            }
+    addLocalEventListeners() {
+        this.hamburgerIcon.addEventListener('click', () => { 
+            // The mobile navbar grows to show all links
+            this.linkContainerEl.classList.toggle('activated')
+
+            // The mobile h1 header is temp removed while hamburger is open
+            this.headerEl.classList.toggle('activated')
+        });
+
+        // When a navlink is clicked, close the hamburger menu
+        this.allLinkEl.forEach((link, i) => {
+            link.addEventListener('click', () => { 
+                this.linkContainerEl.classList.remove('activated')
+                this.headerEl.classList.add('activated')
+            });  
         });
     };
 
-    displayHamburgerMenu() {
-        if (this.navLinkContainer.style.display === "block") {
-            this.navLinkContainer.style.display = "none";
-        } else {
-            this.navLinkContainer.style.display = "block";
-        }
-    }
+    updateActiveLink() {
+        // Reset all
+        this.allLinkEl.forEach((link, i) => {link.classList.remove('activated')});
 
-    setupEventListeners() {
-        this.hamburgerIcon.addEventListener('click', () => {
-            this.displayHamburgerMenu();
-        });
-    }
+        // Activate the current link
+        this.allLinkEl[this.activeIndex].classList.add('activated')
+    };
 
-}
+    updateActiveName(sectionNames) {
+        this.activeElName = sectionNames[this.activeIndex];
+        this.headerEl.innerHTML = this.activeElName;
+    };
+
+
+};
 
 
 

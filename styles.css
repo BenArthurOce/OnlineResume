@@ -23,13 +23,15 @@
   
     /* Nav Colours */
     --nav-basic-font-color: var(--style-shade3);
-    --nav-active-font-color: var(--style-shade6);
+    --nav-active-font-color: var(--style-black);
+    --nav-basic-background-color: var(--style-shade4);
+    --nav-active-background-color: var(--style-shade4);
   
     /* Filter Colours */
     --filter-basic-font-color: var(--style-shade1);
-    --filter-active-font-color: var(--style-shade6);
     --filter-basic-background-color: var(--style-shade4);
-    --filter-active-background-color: var(--style-shade4);
+    --filter-active-font-color: var(--style-shade1);
+    --filter-active-background-color: var(--style-shade5);
   
     /* Tile Colours */
     --tile-basic-font-color: var(--style-shade5);
@@ -37,10 +39,13 @@
     --tile-basic-background-color: var(--style-shade2);
     --tile-active-background-color: var(--style-shade3);
   
+    --arrow-basic-font-color: var(--style-shade1);
+    --arrow-basic-background-color: var(--style-shade3);
+
     /* General Background Colours */
     --body-background-color: var(--style-black);
     --main-background-color: var(--style-shade4);
-    --nav-background-color: var(--style-shade4);
+
     --section-background-color: var(--style-shade4);
     --article-background-color: var(--style-shade4);
   
@@ -92,8 +97,8 @@
     --style-shade1: #3498DB;
     --style-shade2: #40E0D0;
     --style-shade3: #6C7A89;
-    --style-shade4: #095256;
-    --style-shade5: #87CEEB;
+    --style-shade4: #0b5b5f;
+    --style-shade5: #011720;
     --style-black: black;
 }
   
@@ -343,10 +348,11 @@ ul {
 /* ------ NAVIGATION BAR ------- */
 /* ----------------------------- */  
 nav > .mobile-nav-icon {display:none}
+nav > .mob-section-title {display:none}
 
 nav {
     min-height: 50px;
-    background-color: var(--nav-background-color);
+    background-color: var(--nav-basic-background-color);
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 2%;
@@ -503,7 +509,8 @@ main > button {
     transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
     font-size: 24px;                        /* Size of the arrow */
     cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
-    color: #ffffff;                         /* Arrows are white*/
+    color: var(--arrow-basic-font-color);
+    background-color: var(--arrow-background-font-color);
     padding: 10px;                     
     outline: none;                          /* Removes the outline, typically added as a default focus style. */
 }
@@ -632,9 +639,6 @@ nav > .nav-links-container > a.activated {
     color: var(--nav-active-font-color);            /* Change text color on hover or click */
 }
 
-.mobile-article.activated {
-    display: block;
-}
 
 .filter .tile-filter-button:hover,
 .filter .tile-filter-button.activated {
@@ -651,12 +655,88 @@ nav > .nav-links-container > a.activated {
 
     html {font-size: calc(40% + 0.6vmin);}
 
-    /* nav {
-        max-height: 6vh;
-    } */
+    .pc-section-title {display: none;}
 
     section {
         padding: 3%;
+    }
+
+    .mobile-article p,
+    .mobile-article li {
+        font-size: calc(100% + 0.8vmin)
+    }
+
+    /* ----------------------------- */
+    /* ------ NAVIGATION BAR ------- */
+    /* ----------------------------- */ 
+    nav > .mobile-nav-icon {display:initial}
+    /* nav > .mob-section-title {display:flex} */
+
+    nav > .mob-section-title {
+        align-items: center;
+        justify-content: center;
+        color: var(--nav-basic-font-color)
+    }
+
+    .mob-section-title.activated{ 
+        display: flex;
+        flex-direction: column;  
+        color: var(--nav-active-font-color)  
+    }
+
+    /* Style the navigation menu */
+    nav {
+        overflow: hidden;
+        background-color: var(--nav-basic-background-color);
+        position: relative;
+        display: flex;             /* Gives space for the hamburger icon */
+    }
+
+    .nav-link.activated {
+        background-color: var(--nav-active-background-color);
+        color: var(--nav-active-font-color)
+    }
+
+    /* Hide the links inside the navigation menu (except for logo/home) */
+    nav > .nav-links-container {
+        display: none;
+    }
+
+    nav > .nav-links-container.activated {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+
+    /* Style navigation menu links */
+    nav  a {
+        color: var(--nav-basic-font-color);
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        display: block;
+    }
+
+    /* Style the hamburger menu */
+    nav > .mobile-nav-icon {
+        background-color: var(--nav-basic-background-color);
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    /* Add a grey background color on mouse-over */
+    nav > .nav-links-container > a:hover {
+        background-color: var(--nav-active-background-color);
+        color: var(--nav-active-font-color)
+    }
+
+    /* Active link */
+    nav > .nav-links-container > a.activated {
+        background-color: var(--nav-active-background-color);
+        color: var(--nav-active-font-color)
     }
 
     /* ----------------------------- */
@@ -664,8 +744,8 @@ nav > .nav-links-container > a.activated {
     /* ----------------------------- */
     .projectSumSmall {display: none;}
     .mobile-filter {display: inline-flex;}
-    .mobile-article.inactive {display: none;}
-    .mobile-article.active {display: block;}
+    /* .mobile-article.inactive {display: none;} */
+    .mobile-article.activated {display: block;}
     .pc-article {display: none;}
 
 
@@ -693,6 +773,11 @@ nav > .nav-links-container > a.activated {
         font-weight: bold;
         width: initial;
         height: 5vh;
+    }
+
+    .mobile-article-filter.activated {
+        background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
+        color: var(--filter-active-font-color);
     }
 
 
@@ -736,53 +821,7 @@ nav > .nav-links-container > a.activated {
         padding-right: 7%;
     }
 
-    /* ----------------------------- */
-    /* ------ NAVIGATION BAR ------- */
-    /* ----------------------------- */ 
-    nav > .mobile-nav-icon {display:initial}
 
-    /* Style the navigation menu */
-    nav {
-        overflow: hidden;
-        background-color: var(--nav-background-color);
-        position: relative;
-        display: flex;             /* Gives space for the hamburger icon */
-    }
-
-    /* Hide the links inside the navigation menu (except for logo/home) */
-    nav > .nav-links-container {
-        display: none;
-    }
-
-    /* Style navigation menu links */
-    nav  a {
-        color: var(--nav-basic-font-color);
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        display: block;
-    }
-
-    /* Style the hamburger menu */
-    nav > .mobile-nav-icon {
-        background-color: var(--nav-background-color);
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
-    /* Add a grey background color on mouse-over */
-    nav > .nav-links-container > a:hover {
-        background-color: var(--nav-active-font-color);
-        color: var(--nav-active-font-color)
-    }
-
-    /* Active link */
-    nav > .nav-links-container > a.active {
-        background-color: var(--nav-active-font-color);
-        color: var(--nav-active-font-color)
-    }
 }
 
 @media (max-height: 600px) { 
