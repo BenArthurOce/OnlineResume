@@ -366,15 +366,10 @@ class FrontPageNEW {
     };
 
     addIntro(email, phone, linkedin, github, background, introduction) {
-        // const articleList = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)
-        // articleList[0].querySelector('.introduction').textContent = introduction;   //Pc
-        // articleList[2].querySelector('.introduction').textContent = introduction;   //Mobile
         const articleEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[0]; // Pc
-        console.log(articleEl1)
         const articleEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[2]; // Mobile
         articleEl1.querySelector('.introduction').textContent = introduction;
         articleEl2.querySelector('.introduction').textContent = introduction;
-
     };
 
     addEducations(degree, institution) {
@@ -397,13 +392,15 @@ class FrontPageNEW {
 
     addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft) {
         const parentIntro = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[1]
-        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[0] // Programming Languages
-        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[1] // Hard Skills
-        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[2] // Soft Skills
+
+        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[0] // Hard Skills
+        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[1] // Soft Skills
+        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[2] // Programming Languages
         const parentIntro2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[3]
-        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[3] // Programming Languages
-        const parentEl5 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[4] // Hard Skills
-        const parentEl6 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[5] // Soft Skills
+        
+        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[3] // Hard Skills
+        const parentEl5 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[4] // Soft Skills
+        const parentEl6 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[5] // Programming Languages
 
         // Function to create a list and append it to the specified parent element
         const createListAndAppend = (parentElement, skillsArray) => {
@@ -418,15 +415,14 @@ class FrontPageNEW {
 
         // Populate the sections with skills
         createListAndAppend(parentIntro, skillsKey);
-        createListAndAppend(parentEl1, skillsLangages);
-        createListAndAppend(parentEl2, skillsTechincal);
-        createListAndAppend(parentEl3, skillsSoft);
+        createListAndAppend(parentEl1, skillsTechincal);
+        createListAndAppend(parentEl2, skillsSoft);
+        createListAndAppend(parentEl3, skillsLangages);
 
         createListAndAppend(parentIntro2, skillsKey);
-        createListAndAppend(parentEl4, skillsLangages);
-        createListAndAppend(parentEl5, skillsTechincal);
-        createListAndAppend(parentEl6, skillsSoft);
-
+        createListAndAppend(parentEl4, skillsTechincal);
+        createListAndAppend(parentEl5, skillsSoft);
+        createListAndAppend(parentEl6, skillsLangages);
     };
 
     addExperienceTile(company, address, position, period, tags, softwares, duties) {

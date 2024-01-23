@@ -54,6 +54,7 @@ class HTMLPalette {
                     <option value="elegant-plum">Elegant Plum</option>
                     <option value="citrus-splash">Citrus Splash</option>
                     <option value="dark-mystery">Dark Mystery</option>
+                    <option value="striking-citrus">Striking Citrus</option>
             </select>
         </div>
         `.trim();

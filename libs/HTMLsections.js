@@ -57,7 +57,7 @@ class IntroductionSection extends Section {
     createSection(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <section id="${this.id}" class="activated">
+            <section id="${this.id}" class="section-display activated">
                 <h1 class="pc-section-title">${this.name}:</h1>
                 <div class="filter-container" id="${this.id}-filter-container"></div>
                 <div class="article-container" id="${this.id}-article-container">
@@ -97,7 +97,7 @@ class EducationSection extends Section {
     createSection(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${this.id}" class="">
+        <section id="${this.id}" class="section-display">
             <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="article-container" id="${this.id}-article-container">
@@ -129,14 +129,14 @@ class SkillsSection extends Section {
     };
 
     initSection() {
-        this.element = this.createSection(this.id, 'Languages', 'Technical', 'Soft');
+        this.element = this.createSection(this.id, 'Technical', 'Soft', 'Languages');
         this.renderToPage(this.element);
     };
 
     createSection(id, heading1, heading2, heading3) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${this.id}" class="">
+        <section id="${this.id}" class="section-display">
             <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="article-container" id="${this.id}-article-container">
@@ -160,7 +160,6 @@ class SkillsSection extends Section {
                     <h2>${heading3}:</h2>
                 </article>
             </div>
-            
         </section>
         `.trim();
         return tempEl.firstChild;
@@ -181,7 +180,7 @@ class ExperiencesSection extends Section {
     createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${this.id}" class="">
+        <section id="${this.id}" class="section-display">
             <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="tile-container" id="${this.id}-tile-container"></div>
@@ -204,7 +203,7 @@ class PortfolioSection extends Section {
     createSection() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <section id="${this.id}" class="">
+        <section id="${this.id}" class="section-display">
             <h1 class="pc-section-title">${this.name}:</h1>
             <div class="filter-container" id="${this.id}-filter-container"></div>
             <div class="tile-container" id="${this.id}-tile-container"></div>

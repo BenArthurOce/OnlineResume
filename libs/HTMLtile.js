@@ -33,7 +33,7 @@ class HTMLTile {
         this.parentEl.appendChild(this.element);
     };
 
-    addEventListeners(){
+    addLocalEventListeners(){
         // Tile lights up when hovered over
         this.element.addEventListener('mouseover', () => {
             this.element.classList.add('hover');
@@ -69,7 +69,7 @@ class HTMLExperienceTile extends HTMLTile {
         this.createTileElement();
         this.applyInfoToElement();
         this.renderToPage();
-        this.addEventListeners();
+        this.addLocalEventListeners();
     };
 
     createTileElement() {
@@ -77,9 +77,9 @@ class HTMLExperienceTile extends HTMLTile {
         tempEl.innerHTML = `
         <div class="tile activated">
             <div class="icon-container">
-                <i class="icon"></i>
-                <p class="position"></p>
-            </div>
+		        <i class="icon"></i>
+		    </div>
+            <p class="position"></p>
             <p class="company"></p>
         </div>
         `.trim();
@@ -127,7 +127,7 @@ class HTMLPortfolioTile extends HTMLTile {
         this.createTileElement();
         this.applyInfoToElement();
         this.renderToPage();
-        this.addEventListeners();
+        this.addLocalEventListeners();
     };
 
     createTileElement() {

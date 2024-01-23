@@ -1,0 +1,263 @@
+:root {
+    --current-style: cool; /* Change this variable to switch styles */
+  
+    /* Tile Size */
+    --declare-tile-size: 28vh;
+    --declare-icon-size-small: 20px;
+    --declare-icon-size-medium: 30px;
+    --declare-icon-size-large: 50px;
+  
+    /* Semantic color names */
+    --accent: var(--orange);
+  
+    /* Font Colours */
+    --all-basic-font-color: var(--style-shade1);
+    --all-basic-head-color: var(--style-shade6);
+  
+    /* Nav Colours */
+    --nav-basic-font-color: var(--style-shade3);
+    --nav-active-font-color: var(--style-black);
+    --nav-basic-background-color: var(--style-shade4);
+    --nav-active-background-color: var(--style-shade4);
+  
+    /* Filter Colours */
+    --filter-basic-font-color: var(--style-shade1);
+    --filter-basic-background-color: var(--style-shade4);
+    --filter-active-font-color: var(--style-shade1);
+    --filter-active-background-color: var(--style-shade5);
+  
+    /* Tile Colours */
+    --tile-basic-font-color: var(--style-shade5);
+    --tile-active-font-color: var(--style-black);
+    --tile-basic-background-color: var(--style-shade2);
+    --tile-active-background-color: var(--style-shade3);
+  
+    --arrow-basic-font-color: var(--style-shade1);
+    --arrow-basic-background-color: var(--style-shade3);
+
+    /* General Background Colours */
+    --body-background-color: var(--style-black);
+    --main-background-color: var(--style-shade4);
+
+    --section-background-color: var(--style-shade4);
+    --article-background-color: var(--style-shade4);
+  
+    --closebtn-font-color: var(--red);
+  
+    --tile-size: var(--declare-tile-size);
+    --icon-size: var(--declare-icon-size);
+  
+    --icon-size-small: var(--declare-icon-size-small);
+    --icon-size-medium: var(--declare-icon-size-medium);
+    --icon-size-large: var(--declare-icon-size-large);
+  }
+  
+
+/* "Forest Style" */
+:root[data-style="forest"] {
+    --style-shade1: #EDF5E1;
+    --style-shade2: #8EE4AF;
+    --style-shade3: #5CDB95;
+    --style-shade4: #379683;
+    --style-shade5: #063f77;
+    --style-shade6: #042e58;
+    --style-black: black;
+}
+
+/* Modern Neutrals */
+:root[data-style="neutrals"] {
+    --style-shade1: #36454F;
+    --style-shade2: #C0C0C0;
+    --style-shade3: #6B8EAE;
+    --style-shade4: #987654;
+    --style-shade5: #6A7F7C;
+    --style-black: black;
+}
+
+/* Light Tones */
+:root[data-style="light"] {
+    --style-shade1: #F0F4F8;
+    --style-shade2: #D9E2EC;
+    --style-shade3: #BCCCDC;
+    --style-shade4: #9FB3C8;
+    --style-shade5: #829AB1;
+    --style-shade6: #637280;
+    --style-black: black;
+}
+  
+/* Ocean Blues */
+:root[data-style="ocean"] {
+    --style-shade1: #3498DB;
+    --style-shade2: #40E0D0;
+    --style-shade3: #6C7A89;
+    --style-shade4: #0b5b5f;
+    --style-shade5: #011720;
+    --style-black: black;
+}
+  
+/* Pastel Delight */
+:root[data-style="pastel"] {
+    --style-shade1: #FCE0C3;
+    --style-shade2: #FAD79A;
+    --style-shade3: #F8C471;
+    --style-shade4: #F5B14C;
+    --style-shade5: #F39E2E;
+    --style-shade6: #D38235;
+    --style-black: black;
+}
+  
+/* Earthy Warmth */
+:root[data-style="earthy-warm"] {
+    --style-shade1: #D8C3A5;
+    --style-shade2: #BC9B7E;
+    --style-shade3: #A57C5A;
+    --style-shade4: #8C6140;
+    --style-shade5: #774A36;
+    --style-shade6: #5C3B2E;
+    --style-black: black;
+}
+  
+/* Neutral Grays */
+:root[data-style="neutral-gray"] {
+    --style-shade1: #EDEDED;
+    --style-shade2: #CFCFCF;
+    --style-shade3: #B1B1B1;
+    --style-shade4: #939393;
+    --style-shade5: #777777;
+    --style-shade6: #5B5B5B;
+    --style-black: black;
+}
+  
+  
+/* Cool Blues */
+:root[data-style="cool-blue"] {
+    --style-shade1: #B3C5E6;
+    --style-shade2: #8FA8DC;
+    --style-shade3: #6B8CD3;
+    --style-shade4: #4C73B0;
+    --style-shade5: #325A91;
+    --style-shade6: #1F3D6C;
+    --style-black: black;
+}
+
+/* Sunset Glow */
+:root[data-style="sunset-glow"] {
+    --style-shade1: #FFD4AA;
+    --style-shade2: #FFB383;
+    --style-shade3: #FF8E5C;
+    --style-shade4: #FF6933;
+    --style-shade5: #E64627;
+    --style-shade6: #B53523;
+    --style-black: black;
+}
+  
+/* Royal Elegance */
+:root[data-style="royal-elegance"] {
+    --style-shade1: #D5D8DC;
+    --style-shade2: #B2BABB;
+    --style-shade3: #85929E;
+    --style-shade4: #5D6D7E;
+    --style-shade5: #34495E;
+    --style-shade6: #1F2833;
+    --style-black: black;
+}
+  
+/* Vintage Charm */
+:root[data-style="vintage-charm"] {
+    --style-shade1: #F0E4D7;
+    --style-shade2: #D2B4A9;
+    --style-shade3: #B39077;
+    --style-shade4: #936C49;
+    --style-shade5: #6D4C2A;
+    --style-shade6: #4C3521;
+    --style-black: black;
+}
+  
+/* Deep Ocean */
+:root[data-style="deep-ocean"] {
+    --style-shade1: #A9CCE3;
+    --style-shade2: #7FB3D5;
+    --style-shade3: #5499C7;
+    --style-shade4: #2980B9;
+    --style-shade5: #1F618D;
+    --style-shade6: #154360;
+    --style-black: black;
+}
+  
+/* Romantic Reds */
+:root[data-style="romantic-reds"] {
+    --style-shade1: #F4D03F;
+    --style-shade2: #F5B041;
+    --style-shade3: #F2784B;
+    --style-shade4: #D35400;
+    --style-shade5: #BA4A00;
+    --style-shade6: #A04000;
+    --style-black: black;
+}
+  
+/* Mystic Mauves */
+:root[data-style="mystic-mauves"] {
+    --style-shade1: #DCC6E0;
+    --style-shade2: #C39BD3;
+    --style-shade3: #A569BD;
+    --style-shade4: #884EA0;
+    --style-shade5: #6C3483;
+    --style-shade6: #4A235A;
+    --style-black: black;
+}
+  
+/* Coastal Breeze */
+:root[data-style="coastal-breeze"] {
+    --style-shade1: #B2BABB;
+    --style-shade2: #7D8A8B;
+    --style-shade3: #566573;
+    --style-shade4: #273746;
+    --style-shade5: #17202A;
+    --style-shade6: #0E151A;
+    --style-black: black;
+}
+  
+/* Elegant Plum */
+:root[data-style="elegant-plum"] {
+    --style-shade1: #C39BD3;
+    --style-shade2: #9B59B6;
+    --style-shade3: #7D3C98;
+    --style-shade4: #6C3483;
+    --style-shade5: #4A235A;
+    --style-shade6: #2C3E50;
+    --style-black: black;
+}
+  
+/* Citrus Splash */
+:root[data-style="citrus-splash"] {
+    --style-shade1: #F4D03F;
+    --style-shade2: #F5B041;
+    --style-shade3: #F2784B;
+    --style-shade4: #D35400;
+    --style-shade5: #BA4A00;
+    --style-shade6: #A04000;
+    --style-black: black;
+}
+  
+/* Dark Mystery */
+:root[data-style="dark-mystery"] {
+    --style-shade1: #717D7E;
+    --style-shade2: #57606F;
+    --style-shade3: #3A4045;
+    --style-shade4: #2C3E50;
+    --style-shade5: #1F2833;
+    --style-shade6: #0E151A;
+    --style-black: black;
+}
+
+/* Striking Citrus */
+:root[data-style="striking-citrus"] {
+    --style-shade1: #B2BABB;
+    --style-shade2: #D6CE15;
+    --style-shade3: #A4A71E;
+    --style-shade4: #53900F;
+    --style-shade5: #1F6521;
+    --style-shade6: #1F2605;
+    --style-black: black;
+}
+  

@@ -5,273 +5,10 @@
 /* -------- GENERAL CSS -------- */
 /* ----------------------------- */ 
 
-:root {
-    --current-style: cool; /* Change this variable to switch styles */
-  
-    /* Tile Size */
-    --declare-tile-size: 24vh;
-    --declare-icon-size-small: 20px;
-    --declare-icon-size-medium: 30px;
-    --declare-icon-size-large: 50px;
-  
-    /* Semantic color names */
-    --accent: var(--orange);
-  
-    /* Font Colours */
-    --all-basic-font-color: var(--style-shade1);
-    --all-basic-head-color: var(--style-shade6);
-  
-    /* Nav Colours */
-    --nav-basic-font-color: var(--style-shade3);
-    --nav-active-font-color: var(--style-black);
-    --nav-basic-background-color: var(--style-shade4);
-    --nav-active-background-color: var(--style-shade4);
-  
-    /* Filter Colours */
-    --filter-basic-font-color: var(--style-shade1);
-    --filter-basic-background-color: var(--style-shade4);
-    --filter-active-font-color: var(--style-shade1);
-    --filter-active-background-color: var(--style-shade5);
-  
-    /* Tile Colours */
-    --tile-basic-font-color: var(--style-shade5);
-    --tile-active-font-color: var(--style-black);
-    --tile-basic-background-color: var(--style-shade2);
-    --tile-active-background-color: var(--style-shade3);
-  
-    --arrow-basic-font-color: var(--style-shade1);
-    --arrow-basic-background-color: var(--style-shade3);
 
-    /* General Background Colours */
-    --body-background-color: var(--style-black);
-    --main-background-color: var(--style-shade4);
-
-    --section-background-color: var(--style-shade4);
-    --article-background-color: var(--style-shade4);
-  
-    --closebtn-font-color: var(--red);
-  
-    --tile-size: var(--declare-tile-size);
-    --icon-size: var(--declare-icon-size);
-  
-    --icon-size-small: var(--declare-icon-size-small);
-    --icon-size-medium: var(--declare-icon-size-medium);
-    --icon-size-large: var(--declare-icon-size-large);
-  }
-  
-
-/* "Forest Style" */
-:root[data-style="forest"] {
-    --style-shade1: #EDF5E1;
-    --style-shade2: #8EE4AF;
-    --style-shade3: #5CDB95;
-    --style-shade4: #379683;
-    --style-shade5: #063f77;
-    --style-shade6: #042e58;
-    --style-black: black;
-}
-
-/* Modern Neutrals */
-:root[data-style="neutrals"] {
-    --style-shade1: #36454F;
-    --style-shade2: #C0C0C0;
-    --style-shade3: #6B8EAE;
-    --style-shade4: #987654;
-    --style-shade5: #6A7F7C;
-    --style-black: black;
-}
-
-/* Light Tones */
-:root[data-style="light"] {
-    --style-shade1: #F0F4F8;
-    --style-shade2: #D9E2EC;
-    --style-shade3: #BCCCDC;
-    --style-shade4: #9FB3C8;
-    --style-shade5: #829AB1;
-    --style-shade6: #637280;
-    --style-black: black;
-}
-  
-/* Ocean Blues */
-:root[data-style="ocean"] {
-    --style-shade1: #3498DB;
-    --style-shade2: #40E0D0;
-    --style-shade3: #6C7A89;
-    --style-shade4: #0b5b5f;
-    --style-shade5: #011720;
-    --style-black: black;
-}
-  
-/* Pastel Delight */
-:root[data-style="pastel"] {
-    --style-shade1: #FCE0C3;
-    --style-shade2: #FAD79A;
-    --style-shade3: #F8C471;
-    --style-shade4: #F5B14C;
-    --style-shade5: #F39E2E;
-    --style-shade6: #D38235;
-    --style-black: black;
-}
-  
-/* Earthy Warmth */
-:root[data-style="earthy-warm"] {
-    --style-shade1: #D8C3A5;
-    --style-shade2: #BC9B7E;
-    --style-shade3: #A57C5A;
-    --style-shade4: #8C6140;
-    --style-shade5: #774A36;
-    --style-shade6: #5C3B2E;
-    --style-black: black;
-}
-  
-/* Neutral Grays */
-:root[data-style="neutral-gray"] {
-    --style-shade1: #EDEDED;
-    --style-shade2: #CFCFCF;
-    --style-shade3: #B1B1B1;
-    --style-shade4: #939393;
-    --style-shade5: #777777;
-    --style-shade6: #5B5B5B;
-    --style-black: black;
-}
-  
-  
-/* Cool Blues */
-:root[data-style="cool-blue"] {
-    --style-shade1: #B3C5E6;
-    --style-shade2: #8FA8DC;
-    --style-shade3: #6B8CD3;
-    --style-shade4: #4C73B0;
-    --style-shade5: #325A91;
-    --style-shade6: #1F3D6C;
-    --style-black: black;
-}
-
-/* Sunset Glow */
-:root[data-style="sunset-glow"] {
-    --style-shade1: #FFD4AA;
-    --style-shade2: #FFB383;
-    --style-shade3: #FF8E5C;
-    --style-shade4: #FF6933;
-    --style-shade5: #E64627;
-    --style-shade6: #B53523;
-    --style-black: black;
-}
-  
-/* Royal Elegance */
-:root[data-style="royal-elegance"] {
-    --style-shade1: #D5D8DC;
-    --style-shade2: #B2BABB;
-    --style-shade3: #85929E;
-    --style-shade4: #5D6D7E;
-    --style-shade5: #34495E;
-    --style-shade6: #1F2833;
-    --style-black: black;
-}
-  
-/* Vintage Charm */
-:root[data-style="vintage-charm"] {
-    --style-shade1: #F0E4D7;
-    --style-shade2: #D2B4A9;
-    --style-shade3: #B39077;
-    --style-shade4: #936C49;
-    --style-shade5: #6D4C2A;
-    --style-shade6: #4C3521;
-    --style-black: black;
-}
-  
-/* Deep Ocean */
-:root[data-style="deep-ocean"] {
-    --style-shade1: #A9CCE3;
-    --style-shade2: #7FB3D5;
-    --style-shade3: #5499C7;
-    --style-shade4: #2980B9;
-    --style-shade5: #1F618D;
-    --style-shade6: #154360;
-    --style-black: black;
-}
-  
-/* Romantic Reds */
-:root[data-style="romantic-reds"] {
-    --style-shade1: #F4D03F;
-    --style-shade2: #F5B041;
-    --style-shade3: #F2784B;
-    --style-shade4: #D35400;
-    --style-shade5: #BA4A00;
-    --style-shade6: #A04000;
-    --style-black: black;
-}
-  
-/* Mystic Mauves */
-:root[data-style="mystic-mauves"] {
-    --style-shade1: #DCC6E0;
-    --style-shade2: #C39BD3;
-    --style-shade3: #A569BD;
-    --style-shade4: #884EA0;
-    --style-shade5: #6C3483;
-    --style-shade6: #4A235A;
-    --style-black: black;
-}
-  
-/* Coastal Breeze */
-:root[data-style="coastal-breeze"] {
-    --style-shade1: #B2BABB;
-    --style-shade2: #7D8A8B;
-    --style-shade3: #566573;
-    --style-shade4: #273746;
-    --style-shade5: #17202A;
-    --style-shade6: #0E151A;
-    --style-black: black;
-}
-  
-/* Elegant Plum */
-:root[data-style="elegant-plum"] {
-    --style-shade1: #C39BD3;
-    --style-shade2: #9B59B6;
-    --style-shade3: #7D3C98;
-    --style-shade4: #6C3483;
-    --style-shade5: #4A235A;
-    --style-shade6: #2C3E50;
-    --style-black: black;
-}
-  
-/* Citrus Splash */
-:root[data-style="citrus-splash"] {
-    --style-shade1: #F4D03F;
-    --style-shade2: #F5B041;
-    --style-shade3: #F2784B;
-    --style-shade4: #D35400;
-    --style-shade5: #BA4A00;
-    --style-shade6: #A04000;
-    --style-black: black;
-}
-  
-/* Dark Mystery */
-:root[data-style="dark-mystery"] {
-    --style-shade1: #717D7E;
-    --style-shade2: #57606F;
-    --style-shade3: #3A4045;
-    --style-shade4: #2C3E50;
-    --style-shade5: #1F2833;
-    --style-shade6: #0E151A;
-    --style-black: black;
-}
   
   
   
-  
-
-
-  /* Add Var for:
-  Nav Colour
-  Nav Colour Active
-  Tile Background Colour
-  Overlay Colour
-  Article Colour
-  Active Filter 
-  Non Active Filter
-  */
-
 
 * {
     box-sizing: border-box;
@@ -283,7 +20,20 @@
     font-size: 1rem;
 }
 
+/* ----------------------------- */
+/* ------ REMOVE MOBILE  ------- */
+/* ----------------------------- */  
+nav > .mobile-nav-icon {display:none}
+nav > .mob-section-title {display:none}
+.mobile-filter {display:none}
+.mobile-article-filter {display:none}
+.mobile-article {display: none;}
+.mobile-filter {display: none;}
 
+
+/* ----------------------------- */
+/* ------- GENERAL CSS  -------- */
+/* ----------------------------- */  
 
 html {height: 100vh;}
 body {height: 100vh;}
@@ -299,59 +49,73 @@ body {
 }
 
 
-
-article {
-    padding: 20px;
-    background-color: var(--article-background-color);
-    flex: 1;                                /* All child elements take up equal/whole space in a row */
-}
-
-
   
 h1 {
-    font-size: 2.0rem;
-    color: var(--all-basic-head-color)
+    font-size: 2.5rem;
+    color: var(--all-basic-head-color);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--all-basic-head-color);
+    padding-bottom: 10px;
 }
+
 h2 {
     font-size: 1.6rem;
     color: var(--all-basic-head-color)
 }
+
 h3 {
     font-size: 1.3rem;
     color: var(--all-basic-head-color)
 }
 
-li {
+
+article {
+    padding-top: 20px;
+    background-color: var(--article-background-color);
+    flex: 1;                                /* All child elements take up equal/whole space in a row */
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 80px rgba(0, 0, 0, 0.1);
+}
+
+
+p, li {
+    line-height: calc(1ex / 0.32);
+    width: 60ch;
+    max-width: 100%;
+} 
+
+
+
+
+article li {
     overflow: initial;
 }
 
-ul {
+article ul {
     overflow: initial;
+    margin-left: 20px;
 }
 
-.program-icon {
-    height: var(--icon-size-medium);
-    width: var(--icon-size-medium);
-    /* font-size: 30px; */
-    flex-shrink: 0; /* Prevent icons from shrinking */
+article > h2 {
+    font-size: 2.5em;
+    line-height: calc(1ex / 0.42);
+    color: var(--all-basic-head-color);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--all-basic-head-color);
+    padding-bottom: 10px;
 }
 
-.portfolio-icon-container > img {
-    height: var(--icon-size-medium);
-    width: var(--icon-size-medium);
-    /* font-size: 30px; */
-    flex-shrink: 0; /* Prevent icons from shrinking */
-}
 
 
 /* ----------------------------- */
 /* ------ NAVIGATION BAR ------- */
 /* ----------------------------- */  
-nav > .mobile-nav-icon {display:none}
-nav > .mob-section-title {display:none}
+
 
 nav {
-    min-height: 50px;
     background-color: var(--nav-basic-background-color);
     padding-left: 2%;
     padding-right: 2%;
@@ -373,13 +137,18 @@ nav > .nav-links-container a {
     color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
 }
 
+nav > .nav-links-container > a:hover,
+nav > .nav-links-container > a.activated {
+    color: var(--nav-active-font-color);            /* Change text color on hover or click */
+}
+
 
 
 /* ----------------------------- */
 /* ------ RESUME CONTENT ------- */
 /* ----------------------------- */
 
-#section-container {
+.section-display {
     background-color: var(--section-background-color);
 }
 
@@ -388,25 +157,46 @@ section {display: none}
 section {
     padding: 20px;
     min-height: 90vh;                           /* Allows the sections to remain the same height on every screen */
+    min-width: 100%;
 }
 
-section > h2 {
+.section-display > h2 {
     flex-basis: 100%;
 }
 
-section > .article-container {
-    display: flex;
-    gap: 20px;
+.section-display.activated {
+    display: inline-block;
+    background-color: var(--section-background-color)
 }
+
+.section-display > .article-container {
+    min-height: 65vh;
+    gap: 2%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
 
 
 /* ----------------------------- */
 /* ------ FILTER BUTTONS ------- */
 /* ----------------------------- */
 
-.mobile-filter,
-section .filter {
-    padding-top: 3%;
+
+/* .section-container > .section-display > .filter-container
+.section-container > .section-display > .tile-container */
+
+
+.section-container > .section-display > .filter-container > .mobile-filter {
+    margin: 0;
+}
+
+.section-container > .section-display > .filter-container > .mobile-filter,
+.section-display .filter {
+    padding-top: 1%;
     padding-bottom: 3%;
 }
 
@@ -419,9 +209,9 @@ section .filter {
     transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
 
 
-    font-size: 3vw;  
-    width: 5vw;
-    height: 5vw;
+    font-size: 2vw;  
+    width: 4vw;
+    height: 4vw;
 
     margin-right: 10px;                         /* Spacing between tiles*/
     margin-top: 5px;                            /* High level of zoom in makes filter buttons go to second row */
@@ -432,69 +222,75 @@ section .filter {
     position: relative;                         /* Added for positioning the tooltip */
 }
 
-
-/* ----------------------------- */
-/* ----------- Tiles ----------- */
-/* ----------------------------- */
-
-section > .tile-container {
-    display: grid;
-    grid-column-gap: 5%;
-    grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
-    gap: 15px
+.filter .tile-filter-button:hover,
+.filter .tile-filter-button.activated {
+    background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
+    color: var(--filter-active-font-color)
 }
 
 
-.tile {
+/* ----------------------------- */
+/* ----------- TILES ----------- */
+/* ----------------------------- */
+
+.section-display > .tile-container {
+    display: grid;
+    min-height: 70vh;
+    grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
+    grid-template-rows: auto auto auto auto;
+    gap: 2%;
+}
+
+
+.section-display > .tile-container > .tile {
     display: none;
-    flex-flow: row wrap;                /* Spreads out tile information */
-    flex-shrink: 1;
-    width: var(--tile-size);
-    height: var(--tile-size);
+    grid-template-columns: min-content 1fr 1fr;
+    grid-template-rows: min-content 1fr 1fr;
+    gap: 10px;
     background-color: var(--tile-basic-background-color);
     color: var(--tile-basic-font-color);
     cursor: pointer;
     transition: var(--tile-basic-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 13vw;
+    max-height: 13vw;
+    box-shadow: 5px 10px;
 }
 
 
-
-.tile > p {
-    text-align: center;
-    width: 100%;
+.section-display > .tile-container >.tile p {
+    font-size: 10px;
 }
 
-.tile.activated {display: flex;}
-.tile:hover {
+
+.section-display > .tile-container >.tile.activated {display: grid;}
+.section-display > .tile-container >.tile:hover {
     color: var(--tile-active-font-color);
     background-color: var(--tile-active-background-color);
     transform: scale(1.05);
 }
 
-.tile > .icon-container {
-    display: flex;
-    gap: 5px;
-    height: 40%;
-    width: 100%;
+/* Logos */
+.section-display > .tile-container >.tile > div:first-child {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 3;
 }
 
-.tile > .icon-container > i,
-.tile > .icon-container > p {
-    display:flex;
-    height: 100%;
-    align-items: center;            /* Center the content vertically */
-    justify-content: center;        /* Center the content horizontally */
+/* Tile Header */
+.section-display > .tile-container >.tile > p:nth-child(2) {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 1;
+    font-weight: 900;
 }
 
-.tile > .icon-container > i {
-    width: 30%;
+/* Tile Desc */
+.section-display > .tile-container >.tile > p:nth-child(3) {
+    grid-column: 2 / span 2;
+    grid-row: 2 / span 2;
 }
 
-.tile > .icon-container > p {
-    width: 100%;
-}
 
 
 /* ----------------------------- */
@@ -611,13 +407,27 @@ dialog .arrow:first-of-type { left: 0; }            /* positions it to the left 
 dialog .arrow:last-of-type { right: 0; }            /* positions it to the right edge of its containing element. */
 
 
-.mobile-article {display: none;}
-.mobile-filter {display: none;}
+.program-icon {
+    height: var(--icon-size-medium);
+    width: var(--icon-size-medium);
+    /* font-size: 30px; */
+    flex-shrink: 0; /* Prevent icons from shrinking */
+}
+
+.portfolio-icon-container > img {
+    height: var(--icon-size-medium);
+    width: var(--icon-size-medium);
+    /* font-size: 30px; */
+    flex-shrink: 0; /* Prevent icons from shrinking */
+}
+
+
+
 
 
 #wrapper {
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
     min-height: 100vh;
     overflow-y: hidden;
     background-color: var(--body-background-color);
@@ -629,33 +439,20 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
     background-color: var(--body-background-color);
 }
 
-section.activated {
-    display: block;
-    background-color: var(--section-background-color)
-}
-
-nav > .nav-links-container > a:hover,
-nav > .nav-links-container > a.activated {
-    color: var(--nav-active-font-color);            /* Change text color on hover or click */
-}
-
-
-.filter .tile-filter-button:hover,
-.filter .tile-filter-button.activated {
-    background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
-    color: var(--filter-active-font-color)
-}
-
-
-
-
-
 /* add another query for 300 to 400 for a 2 column grid */
 @media (max-width: 600px) {
 
+    .projectSumSmall {display: none;}
+    .mobile-filter {display: inline-flex;}
+    /* .mobile-article.inactive {display: none;} */
+    .mobile-article.activated {display: block;}
+    .pc-article {display: none;}
+    nav > .mobile-nav-icon {display:initial}
+    .pc-section-title {display: none;}
+
     html {font-size: calc(40% + 0.6vmin);}
 
-    .pc-section-title {display: none;}
+    
 
     section {
         padding: 3%;
@@ -666,36 +463,28 @@ nav > .nav-links-container > a.activated {
         font-size: calc(100% + 0.8vmin)
     }
 
+    p, li {
+        width: initial;
+    } 
+
+    h1 {
+        margin-bottom: initial;
+        border-bottom: initial;
+    }
+
     /* ----------------------------- */
     /* ------ NAVIGATION BAR ------- */
     /* ----------------------------- */ 
-    nav > .mobile-nav-icon {display:initial}
-    /* nav > .mob-section-title {display:flex} */
-
-    nav > .mob-section-title {
-        align-items: center;
-        justify-content: center;
-        color: var(--nav-basic-font-color)
-    }
-
-    .mob-section-title.activated{ 
-        display: flex;
-        flex-direction: column;  
-        color: var(--nav-active-font-color)  
-    }
 
     /* Style the navigation menu */
     nav {
+        min-height: 50px;
         overflow: hidden;
         background-color: var(--nav-basic-background-color);
         position: relative;
         display: flex;             /* Gives space for the hamburger icon */
     }
 
-    .nav-link.activated {
-        background-color: var(--nav-active-background-color);
-        color: var(--nav-active-font-color)
-    }
 
     /* Hide the links inside the navigation menu (except for logo/home) */
     nav > .nav-links-container {
@@ -707,7 +496,22 @@ nav > .nav-links-container > a.activated {
         flex-direction: column;
     }
 
+    .nav-link.activated {
+        background-color: var(--nav-active-background-color);
+        color: var(--nav-active-font-color)
+    }
 
+    nav > .mob-section-title {
+        align-items: center;
+        justify-content: center;
+        color: var(--nav-basic-font-color)
+    }
+
+    nav > .mob-section-title.activated{ 
+        display: flex;
+        flex-direction: column;  
+        color: var(--nav-active-font-color)  
+    }
 
     /* Style navigation menu links */
     nav  a {
@@ -742,12 +546,6 @@ nav > .nav-links-container > a.activated {
     /* ----------------------------- */
     /* ------ FILTER BUTTONS ------- */
     /* ----------------------------- */
-    .projectSumSmall {display: none;}
-    .mobile-filter {display: inline-flex;}
-    /* .mobile-article.inactive {display: none;} */
-    .mobile-article.activated {display: block;}
-    .pc-article {display: none;}
-
 
     .filter .tile-filter-button {
         font-size: 3vh;  
@@ -780,6 +578,47 @@ nav > .nav-links-container > a.activated {
         color: var(--filter-active-font-color);
     }
 
+    /* ----------------------------- */
+    /* ----------- TILES ----------- */
+    /* ----------------------------- */
+
+    .section-display > .tile-container {
+        grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+        gap: 4%;
+    }
+
+    .section-display > .tile-container > .tile {
+        /* min-width: 25vw;
+        min-height: 25vw; */
+        min-width: 100%;
+        min-height: 100%;
+    }
+
+    /* Logos */
+    .section-display > .tile-container >.tile > div:first-child {
+        grid-column: 1 / span 3;
+        grid-row: 1 / span 1;
+    }
+
+    /* Tile Header */
+    .section-display > .tile-container >.tile > p:nth-child(2) {
+        grid-column: 1 / span 3;
+        grid-row: 2 / span 3;
+        font-weight: 900;
+    }
+
+    /* Tile Desc */
+    .section-display > .tile-container >.tile > p:nth-child(3) {
+        grid-column: 1 / span 3;
+        grid-row: 3 / span 3;
+    }
+
+    /* Logos */
+    #myExperience-tile-container >.tile > div:first-child {
+        display: none;
+        grid-column: 1 / span 3;
+        grid-row: 1 / span 1;
+    }
 
     /* ----------------------------- */
     /* ---------- OVERLAY ---------- */
@@ -798,20 +637,6 @@ nav > .nav-links-container > a.activated {
         flex: initial;
     }
 
-
-
-
-
-    .tile-container > .tile {
-        width: 25vw;
-        height: 25vw;
-    }
-
-    .tile > .icon-container {
-        max-height: 40%;
-        gap: 0px;
-    }
-
     .program-icon {
         transform: scale(0.7);
     }
@@ -820,8 +645,6 @@ nav > .nav-links-container > a.activated {
         padding-left: 7%;
         padding-right: 7%;
     }
-
-
 }
 
 @media (max-height: 600px) { 
@@ -842,7 +665,23 @@ nav > .nav-links-container > a.activated {
 
 
 @media (max-width: 1000px) { 
-    section > .tile-container {
-        grid-template-columns: repeat(auto-fit, minmax(22%, 1fr));
-      }
+
+
+
+}
+
+
+@supports (font-size-adjust: 1) {
+    article {
+        font-size-adjust: 0.5;
+    }
+}
+
+
+@media (prefers-color-scheme: dark) {
+    article {
+        --red: 30;
+        --green: 30;
+        --blue: 30;
+    }
 }
