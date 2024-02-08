@@ -45,7 +45,7 @@ class Filter {
         // Update the colour style of a filter button when clicked (Don't actually filter)
         this.allFilterEl.forEach((buttonEl, i) => {
             buttonEl.addEventListener('click', () => {
-                const dataIndex = buttonEl.getAttribute('data-index');
+                const dataIndex = parseInt(buttonEl.getAttribute('dataIndex'), 10);
                 this.updateActiveFilter(dataIndex)
             })
         });
@@ -77,8 +77,8 @@ class IntroductionFilter extends Filter {
         tempEl.innerHTML = `
             <menu class="mobile-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-index="0" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" data-index="1" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="mobile-article-filter">${heading1}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="mobile-article-filter">${heading2}</li>
                 </ul>
             </menu>
         `.trim();
@@ -103,9 +103,9 @@ class SkillsFilter extends Filter {
         tempEl.innerHTML = `
             <menu class="mobile-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-index="0" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" data-index="1" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
-                    <li role="button" data-index="2" data-filter="${heading3}" class="mobile-article-filter">${heading3}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="mobile-article-filter">${heading1}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="mobile-article-filter">${heading2}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="${heading3}" class="mobile-article-filter">${heading3}</li>
                 </ul>
             </menu>
         `.trim();
@@ -130,8 +130,8 @@ class EducationFilter extends Filter {
         tempEl.innerHTML = `
             <menu class="mobile-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-index="0" data-filter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" data-index="1" data-filter="${heading2}" class="mobile-article-filter">${heading2}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="mobile-article-filter">${heading1}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="mobile-article-filter">${heading2}</li>
                 </ul>
             </menu>
         `.trim();
@@ -154,12 +154,12 @@ class ExperienceFilter extends Filter {
     createFilterElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="filter activated" id="${this.id}-filter">
+            <menu class="pc-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-index="0" data-filter="tile" class="tile-filter-button" title="All">All</li>
-                    <li role="button" data-index="1" data-filter="Programming" class="tile-filter-button" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
-                    <li role="button" data-index="2" data-filter="Accounting" class="tile-filter-button" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
-                    <li role="button" data-index="3" data-filter="CustomerService" class="tile-filter-button" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="tile" class="pc-tile-filter" title="All">All</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="Programming" class="pc-tile-filter" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="Accounting" class="pc-tile-filter" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="3" dataFilter="CustomerService" class="pc-tile-filter" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
                 </ul>
             </menu>
         `.trim();
@@ -182,17 +182,17 @@ class PortfolioFilter extends Filter {
     createFilterElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="filter activated" id="${this.id}-filter">
+            <menu class="pc-filter activated" id="${this.id}-filter">
                 <ul class="filter-options">
-                    <li role="button" data-index="0" data-filter="tile" class="tile-filter-button" title="All">All</li>
-                    <li role="button" data-index="1" data-filter="UserInterface" class="tile-filter-button" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>
-                    <li role="button" data-index="2" data-filter="Web" class="tile-filter-button" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>
-                    <li role="button" data-index="3" data-filter="Database" class="tile-filter-button" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>
-                    <li role="button" data-index="4" data-filter="Logic" class="tile-filter-button" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>
-                    <li role="button" data-index="5" data-filter="Games" class="tile-filter-button" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>
-                    <li role="button" data-index="6" data-filter="Efficiency" class="tile-filter-button" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>
-                    <li role="button" data-index="7" data-filter="DataSets" class="tile-filter-button" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>
-                    <li role="button" data-index="8" data-filter="Finance" class="tile-filter-button" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="tile" class="pc-tile-filter" title="All">All</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="UserInterface" class="pc-tile-filter" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="Web" class="pc-tile-filter" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="3" dataFilter="Database" class="pc-tile-filter" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="4" dataFilter="Logic" class="pc-tile-filter" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="5" dataFilter="Games" class="pc-tile-filter" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="6" dataFilter="Efficiency" class="pc-tile-filter" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="7" dataFilter="DataSets" class="pc-tile-filter" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="8" dataFilter="Finance" class="pc-tile-filter" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>
                 </ul>
             </menu>
         `.trim();

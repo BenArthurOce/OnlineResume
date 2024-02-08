@@ -3,8 +3,8 @@
   
     /* Tile Size */
     --declare-tile-size: 28vh;
-    --declare-icon-size-small: 20px;
-    --declare-icon-size-medium: 30px;
+    --declare-icon-size-small: 10px;
+    --declare-icon-size-medium: 25px;
     --declare-icon-size-large: 50px;
   
     /* Semantic color names */
@@ -61,6 +61,58 @@
     --style-shade4: #379683;
     --style-shade5: #063f77;
     --style-shade6: #042e58;
+    --style-black: black;
+}
+
+
+
+/* Blue Refreshing */
+:root[data-style="blue-refreshing"] {
+    --style-shade1: #AAABB8;
+    --style-shade2: #2E9CCA;
+    --style-shade3: #2964BA;
+    --style-shade4: #464866;
+    --style-shade5: #25247D;
+    --style-black: black;
+}
+
+/* Modernity Bloom */
+:root[data-style="modernity-bloom"] {
+    --style-shade1: #F2F2F2;
+    --style-shade2: #65CCB8;
+    --style-shade3: #57BA98;
+    --style-shade4: #3B945E;
+    --style-shade5: #182628;
+    --style-black: black;
+}
+
+/* Pink Pastels*/
+:root[data-style="pink-pastels"] {
+    --style-shade1: #F0EBF4;
+    --style-shade2: #A1C3D1;
+    --style-shade3: #B39BC8;
+    --style-shade4: #F172A1;
+    --style-shade5: #E64398;
+    --style-black: black;
+}
+
+/* Pink and Blue Unique*/
+:root[data-style="pink-unique"] {
+    --style-shade1: #0677A1;
+    --style-shade2: #895061;
+    --style-shade3: #78244C;
+    --style-shade4: #59253A;
+    --style-shade5: #2D4159;     
+    --style-black: black;
+}
+
+/* Eclectic and Peaceful */
+:root[data-style="eclectic-peaceful"] {
+    --style-shade1: #844D36;
+    --style-shade2: #474853;
+    --style-shade3: #86B3D1;
+    --style-shade4: #AAA0A0;
+    --style-shade5: #8E8268;
     --style-black: black;
 }
 

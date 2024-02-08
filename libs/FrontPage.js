@@ -18,7 +18,7 @@ class FrontPageNEW {
     #navBarEl;
     #paletteObj
     #paletteEl
-    #fiilterObjs;
+    #filterBarObjs;
     #sectionsObj;
     #frontPageElements
 
@@ -40,7 +40,7 @@ class FrontPageNEW {
         // Render the sections
         this.#paletteObj = this.createPalette()
         this.#sectionsObj = this.createSections()
-        this.#fiilterObjs = this.createFilters()
+        this.#filterBarObjs = this.createFilters()
 
         this.#paletteEl = document.body.querySelector(`#paletteSelector`)
         this.#sectionsEl = document.body.querySelectorAll(`section`)
@@ -90,8 +90,9 @@ class FrontPageNEW {
     //
     // Menus (Filters) FiilterObjs
     //
-    get fiilterObjs() {return this.#fiilterObjs;};
-    set fiilterObjs(index) {this.#fiilterObjs = index;};
+    get filterBarObjs() {return this.#filterBarObjs;};
+    set filterBarObjs(index) {this.#filterBarObjs = index;};
+    
     //
     // xxxxxxxx
     //
@@ -105,6 +106,9 @@ class FrontPageNEW {
     // xxxxxxxx
     //
 
+    get filterBarObjs() {
+        return this.#filterBarObjs;
+    };
     get allFiltersEl() {
         return this.mainEl.querySelectorAll('menu')
     };
@@ -155,7 +159,7 @@ class FrontPageNEW {
                      "experience": this.sectionsObj[3].experienceTiles
                     ,"portfolio": this.sectionsObj[4].portfolioTiles
                 }
-                ,"filters": this.fiilterObjs
+                ,"filters": this.filterBarObjs
             }
             ,"single": {
                  "navbar": this.navBarObj.elementNavbar
@@ -174,11 +178,11 @@ class FrontPageNEW {
                     ,"portfolio": this.sectionsObj[4]
                 }
                 ,"filter": {
-                    "introduction": this.fiilterObjs[0]
-                   ,"educations": this.fiilterObjs[1]
-                   ,"skills": this.fiilterObjs[2]
-                   ,"experience": this.fiilterObjs[3]
-                   ,"portfolio": this.fiilterObjs[4]
+                    "introduction": this.filterBarObjs[0]
+                   ,"educations": this.filterBarObjs[1]
+                   ,"skills": this.filterBarObjs[2]
+                   ,"experience": this.filterBarObjs[3]
+                   ,"portfolio": this.filterBarObjs[4]
                }
                 ,"arrow": {
                      "prev": this.mainEl.prevArrow
@@ -198,7 +202,7 @@ class FrontPageNEW {
         newElement.innerHTML = `
             <button class="arrow" id="section-prev">❮</button>
             <button class="arrow" id="section-next">❯</button>
-            <div id="section-container"></div>
+            <div class="section-container"></div>
         `;
         this.#wrapperElement.appendChild(newElement) 
     };
@@ -210,11 +214,11 @@ class FrontPageNEW {
 
     createSections() {
         const sections = [
-             new IntroductionSection(0, this.sectionIDs[0], document.body.querySelector('#section-container'), this.sectionNames[0])
-            ,new SkillsSection(1, this.sectionIDs[1], document.body.querySelector('#section-container'), this.sectionNames[1])
-            ,new EducationSection(2, this.sectionIDs[2], document.body.querySelector('#section-container'), this.sectionNames[2])
-            ,new ExperiencesSection(3, this.sectionIDs[3], document.body.querySelector('#section-container'), this.sectionNames[3])
-            ,new PortfolioSection(4, this.sectionIDs[4], document.body.querySelector('#section-container'), this.sectionNames[4])
+             new IntroductionSection(0, this.sectionIDs[0], document.body.querySelector('.section-container'), this.sectionNames[0])
+            ,new SkillsSection(1, this.sectionIDs[1], document.body.querySelector('.section-container'), this.sectionNames[1])
+            ,new EducationSection(2, this.sectionIDs[2], document.body.querySelector('.section-container'), this.sectionNames[2])
+            ,new ExperiencesSection(3, this.sectionIDs[3], document.body.querySelector('.section-container'), this.sectionNames[3])
+            ,new PortfolioSection(4, this.sectionIDs[4], document.body.querySelector('.section-container'), this.sectionNames[4])
         ];
         return sections;
     };
@@ -236,49 +240,6 @@ class FrontPageNEW {
         return paletteInstance;
     };
 
-    addFilterEvents(elements, callbackFunction) {
-        // filterTiles() / showArticle() is the callback function
-        elements.forEach((filterButton, i) => {
-
-            filterButton.addEventListener('click', (event) => { 
-                const filterButton = event.target.closest('.tile-filter-button');
-                if (filterButton) {
-                    const filterValue = filterButton.dataset.filter;
-                    callbackFunction(filterValue);
-                };
-                const filterButtonMobile = event.target.closest('.mobile-article-filter');
-                if (filterButtonMobile) {
-                    const filterValue = filterButtonMobile.dataset.filter;
-                    callbackFunction(filterValue);
-                };
-            });
-        });
-    };
-
-    showArticle(filterObject, filterKeyword) {
-        // Hide all articles
-        const articles = document.body.querySelectorAll(`#${filterObject.id} article`);
-        articles.forEach(article => article.classList.remove('activated'));
-
-        // Show the selected article based on the clicked filter
-        const selectedArticle = document.body.querySelector(`#mobile-${filterKeyword}`);
-        if (selectedArticle) {
-            selectedArticle.classList.add('activated');
-        }
-    };
-
-    filterTiles(filterObject, filterKeyword) {
-        // using the id attribute of the menu item, get the tile objects
-        const tiles = document.body.querySelectorAll(`#${filterObject.id} .tile`);
-        tiles.forEach(tile => tile.classList.remove('activated'));
-    
-        // If a tile class attribute matches the filterKeyword, it becomes activated
-        tiles.forEach(tile => {
-            const tags = Array.from(tile.classList);
-            const shouldShow = tags.includes(filterKeyword);
-            tile.classList.toggle('activated', shouldShow);
-        });
-    };
 
     addEventListeners() {
         const prevArrow = document.querySelector("#section-prev");
@@ -302,13 +263,22 @@ class FrontPageNEW {
             this.adjustDisplayedSection("+1");
         });
 
-        // Attach showArticle and filterTiles functions to each of the filter/menu buttons
-        this.fiilterObjs.forEach((filterObject, i) => {
-            if (filterObject.refNum === 0 || filterObject.refNum === 1 || filterObject.refNum === 2) {
-                this.addFilterEvents(filterObject.element.querySelectorAll(`li`), this.showArticle.bind(this, filterObject));
+
+        // All buttons inside the menu bars
+        this.filterBarObjs.forEach((filterBarObject, i) => {
+            if (filterBarObject.refNum === 0 || filterBarObject.refNum === 1 || filterBarObject.refNum === 2) {
+                const filterButtons = filterBarObject.element.querySelectorAll(`li`)
+                filterButtons.forEach((button, i) => {
+                    const callbackFunction = this.showArticle.bind(this)
+                    button.addEventListener("click", callbackFunction);
+                });
             };
-            if (filterObject.refNum === 3 || filterObject.refNum === 4) {
-                this.addFilterEvents(filterObject.element.querySelectorAll(`li`), this.filterTiles.bind(this, filterObject));
+            if (filterBarObject.refNum === 3 || filterBarObject.refNum === 4) {
+                const filterButtons = filterBarObject.element.querySelectorAll(`li`)
+                filterButtons.forEach((button, i) => {
+                    const callbackFunction = this.filterTiles.bind(this)
+                    button.addEventListener("click", callbackFunction);
+                });
             };
         });
 
@@ -316,6 +286,45 @@ class FrontPageNEW {
         this.paletteEl.addEventListener('change', () => {
             const newColour = document.body.querySelector(`#paletteSelector`).value;
             this.updateColorScheme(newColour);
+        });
+    };
+
+
+    showArticle(event) {
+        // Code to handle if the button icon was pressed, or the background of the word
+        let { class: btnClass, role, dataParent, dataIndex, dataFilter, title } = event.target.parentElement.attributes;
+        if (dataIndex === undefined) {
+            ({ class: btnClass, role, dataParent, dataIndex, dataFilter, title } = event.target.attributes);
+        };
+
+        // Get a list of all the articles in the same section and remove all of them
+        const articles = document.body.querySelectorAll(`#${dataParent.value} article`);
+        articles.forEach(article => article.classList.remove('activated'));
+    
+        // Show the selected article based on the provided filterKeyword
+        const selectedArticle = document.body.querySelector(`#mobile-${dataFilter.value}`);
+        if (selectedArticle) {
+            selectedArticle.classList.add('activated');
+        };
+    };
+
+
+    filterTiles(event) {
+        // Code to handle if the button icon was pressed, or the background of the icon
+        let { class: btnClass, role, dataParent, dataIndex, dataFilter, title } = event.target.parentElement.attributes;
+        if (dataIndex === undefined) {
+            ({ class: btnClass, role, dataParent, dataIndex, dataFilter, title } = event.target.attributes);
+        };
+
+        // Get a list of all the tiles in the same section and remove all of them
+        const tiles = document.body.querySelectorAll(`#${dataParent.value} .tile`);
+        tiles.forEach(tile => tile.classList.remove('activated'));
+    
+        // If a tile class attribute matches the filterKeyword, it becomes activated
+        tiles.forEach(tile => {
+            const tags = Array.from(tile.classList);
+            const shouldShow = tags.includes(dataFilter.value);
+            tile.classList.toggle('activated', shouldShow);
         });
     };
 
@@ -372,22 +381,36 @@ class FrontPageNEW {
         articleEl2.querySelector('.introduction').textContent = introduction;
     };
 
-    addEducations(degree, institution) {
-        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[0]; // First Article
-        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[1]; // Second Article
-    
+    addEducations(degree, institution, tags) {
+        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[0]; // IT Article // PC
+        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[1]; // Accounting Article // PC
+
+        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[2]; // IT Article // Mobile
+        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[3]; // Accounting Article // Mobile
+
         // Function to create a list item and append it to the specified parent element
         const createListItemAndAppend = (parentElement, textContent) => {
             const li = document.createElement('li');
             li.textContent = textContent;
             parentElement.appendChild(li);
         };
+
+        if (tags.includes("IT")) {
+            createListItemAndAppend(parentEl1, `${degree} - ${institution}`);
+            createListItemAndAppend(parentEl3, `${degree} - ${institution}`);
+        }
+
+        if (tags.includes("Finance")) {
+            createListItemAndAppend(parentEl2, `${degree} - ${institution}`);
+            createListItemAndAppend(parentEl4, `${degree} - ${institution}`);
+        }
+
     
-        // Determine which article to add the education to based on the existing children
-        const targetParent = parentEl1.children.length <= parentEl2.children.length ? parentEl1 : parentEl2;
+        // // Determine which article to add the education to based on the existing children
+        // const targetParent = parentEl1.children.length <= parentEl2.children.length ? parentEl1 : parentEl2;
     
-        // Populate the section with education data
-        createListItemAndAppend(targetParent, `${degree} - ${institution}`);
+        // // Populate the section with education data
+        // createListItemAndAppend(targetParent, `${degree} - ${institution}`);
     };
 
     addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft) {
@@ -425,8 +448,8 @@ class FrontPageNEW {
         createListAndAppend(parentEl6, skillsLangages);
     };
 
-    addExperienceTile(company, address, position, period, tags, softwares, duties) {
-        const data = {company, address, position, period, tags, softwares, duties}
+    addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties) {
+        const data = {company, address, position, period, extraInfo, tags, softwares, duties}
         const parentEl = document.body.querySelector(`#${this.sectionIDs[3]} .tile-container`);
         const experienceTile = new HTMLExperienceTile(data, parentEl)
     };

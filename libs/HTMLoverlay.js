@@ -68,24 +68,26 @@ class HTMLExperienceOverlay extends HTMLOverlay {
     createOverlayElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="${this.name}" class="">
-            <div class="overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
+        <dialog id="HTMLExperienceOverlay" class="">
+            <div class="HTMLExperienceOverlay-overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
                 <article class="overlay-article" id="experience-information">
-                    <h3">JobTitle</h3>
-                    <span class="period"></span>
-                    <h3 class="company"></h3>
-                    <h4 class="address"></h4>
-                    <h5 class="position"></h5>
+                    <h3 class="position"></h3>
+                    <p class="JobTitle"></p>
+                    <p class="period"></p>
+                    <p class="company"></p>
+                    <p class="address"></p>
+                    <p class="extraInfo"></p>
+
                 </article>
                 <article class="overlay-article" id="experience-duties">
-                    <h3">Duties</h3>
+                    <h3>Duties</h3>
                     <ul class="duties"></ul> 
                 </article>
                 <article class="overlay-article" id="experience-softwares">
-                    <h3">Softwares</h3>
+                    <h3>Softwares</h3>
                     <ul class="softwares"></ul> 
                 </article>
-                <span class="closeBtn" id="experience-close-btn">Close</span>
+                <span class="closeBtn" id="experience-close-btn">x</span>
             </div>
         </dialog>
         `.trim();
@@ -96,7 +98,8 @@ class HTMLExperienceOverlay extends HTMLOverlay {
         this.element.querySelector('.company').textContent = this.data.company;
         this.element.querySelector('.address').textContent = this.data.address;
         this.element.querySelector('.position').textContent = this.data.position;
-        this.element.querySelector('.period').textContent = this.data.period;   
+        this.element.querySelector('.period').textContent = this.data.period;
+        this.element.querySelector('.extraInfo').textContent = this.data.extraInfo;  
         
         // Select the ul elements
         const softwaresUl = this.element.querySelector('.softwares');
@@ -142,10 +145,10 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
     createOverlayElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="${this.name}" class="">
-            <div class="overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
+        <dialog id="HTMLPortfolioOverlay" class="">
+            <div class="HTMLPortfolioOverlay-overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
                 <article class="overlay-article" id="project-information">
-                    <h2 class="portfolio-project-title"></h2>
+                    <h3 class="portfolio-project-title"></h3>
                     <div class="portfolio-icon-container"></div>
                     <p class="portfolio-project-summary"></p>
                 </article>
@@ -156,7 +159,7 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
                         <button class="arrow" id="overlay-next">❯</button>
                     </div>
                 </article>
-                <span class="closeBtn" id="portfolio-close-btn">Close</span>
+                <span class="closeBtn" id="portfolio-close-btn">x</span>
             </div>
         </dialog>
         `.trim();

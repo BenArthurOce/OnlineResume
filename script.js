@@ -23,16 +23,15 @@ classResumeData.getJSONdata()
     const {email, phone, linkedin, github, background, introduction} = aboutMe
     frontpage.addIntro(email, phone, linkedin, github, background, introduction)
 
-    for (const {degree, institution} of myEducations) {
-        frontpage.addEducations(degree, institution);
+    for (const {degree, institution, tags} of myEducations) {
+        frontpage.addEducations(degree, institution, tags);
     };
 
     const {skillsKey, skillsLangages, skillsTechincal, skillsSoft} = mySkills
     frontpage.addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft);
 
-
-    for (const {company, address, position, period, tags, softwares, duties} of myExperiences) {
-        frontpage.addExperienceTile(company, address, position, period, tags, softwares, duties)
+    for (const {company, address, position, period, extraInfo, tags, softwares, duties} of myExperiences) {
+        frontpage.addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties)
     };
 
 

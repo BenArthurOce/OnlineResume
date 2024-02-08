@@ -37,6 +37,14 @@ class HTMLPalette {
             <label for="paletteSelector">Select Color Palette:</label>
             <select id="paletteSelector">
                     <option value="forest">Forest Style</option>
+
+                    <option value="blue-refreshing">Blue Refreshing</option>
+                    <option value="modernity-bloom">Modernity Bloom</option>
+                    <option value="pink-pastels">Pink Pastels</option>
+                    <option value="pink-unique">Pink Unique</option>
+                    <option value="eclectic-peaceful">Eclectic Peaceful</option>
+
+
                     <option value="neutrals">Modern Neutrals</option>
                     <option value="light">Light Tones</option>
                     <option value="ocean">Ocean Blues</option>
@@ -73,6 +81,8 @@ class HTMLPalette {
             console.error(`Palette "${palette}" not found.`);
         };
     };
+
+    
 };
 
 export default HTMLPalette;

@@ -93,6 +93,7 @@
         ,"address":         "Learmonth Street, Queenscliffe"
         ,"position":        "Systems Accountant"
         ,"period":          "Jun-2023 to Jan-2024"
+        ,"extraInfo":       "Contract Part Time Basis"
         ,"tags":            ["Programming", "HelpDesk", "Accounting"]
         ,"softwares":       [
                                  "Software"
@@ -116,9 +117,10 @@
     },
     {
          "company":         "Interfi Systems"
-        ,"address":         "Yarra Street, Geelong \n(Fintech company providing banking infrastructure to small/medium sized lenders)"
+        ,"address":         "Yarra Street, Geelong"
         ,"position":        "Application Support Developer"
         ,"period":          "Jun-2022 to Nov-2022"
+        ,"extraInfo":       "Interfi Systems is a fintech company providing banking infrastructure to small/medium sized lenders"
         ,"tags":            ["Programming", "HelpDesk"]
         ,"softwares":       [
                                  "Capital Desktop - Proprietary Software"
@@ -145,6 +147,7 @@
         ,"address":         "Fenwick Street, Geelong"
         ,"position":        "Accountant"
         ,"period":          "Aug 2020 to Dec 2021"
+        ,"extraInfo":       ""
         ,"tags":            ["Accounting", "CustomerService"]
         ,"softwares":       [
                                  "Xero"
@@ -166,7 +169,8 @@
          "company":         "The Accountant Group"
         ,"address":         "Moorabool Street, Geelong"
         ,"position":        "Accountant"
-        ,"period":          "Feb 2020 to Jun 2020 (Temp COVID support)"
+        ,"period":          "Feb 2020 to Jun 2020"
+        ,"extraInfo":       "Temp COVID support"
         ,"tags":            ["Accounting"]
         ,"softwares":       [
                                 "Handisoft"
@@ -185,6 +189,7 @@
         ,"address":         "Yarra Street, Geelong"
         ,"position":        "Junior Accountant"
         ,"period":          "Nov 2017 to Mar 2019"
+        ,"extraInfo":       ""
         ,"tags":            ["Accounting"]
         ,"softwares":       [
                                  "Xero"
@@ -206,6 +211,7 @@
         ,"position":        "Assistant Accountant"
         ,"period":          "Jan 2017 to Oct 2017"
         ,"tags":            ["Accounting", "CustomerService"]
+        ,"extraInfo":       ""
         ,"softwares":       [
                                  "Xero"
                                 ,"MYOB"
@@ -223,6 +229,7 @@
         ,"address":         "Little Ryrie Street, Geelong"
         ,"position":        "Taxation Officer, APS3"
         ,"period":          "Sept 2016 to Jan 2017 (Contract)"
+        ,"extraInfo":       "Contracted short term through a recruitment agency"
         ,"tags":            ["CustomerService"]
         ,"softwares":       [
                                 "ATO in-house software"
@@ -238,6 +245,7 @@
         ,"address":         "Malop Street, Geelong"
         ,"position":        "Taxation Consultant"
         ,"period":          "Oct 2014 - Sept 2016 (Seasonally)"
+        ,"extraInfo":       "Three taxation seasons between July and October of each year"
         ,"tags":            ["CustomerService"]
         ,"softwares":       [
                                "Reckon Elite"

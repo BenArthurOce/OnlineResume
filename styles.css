@@ -1,24 +1,6 @@
 /* Import Google Font - Raleway 300 & 700 */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
-/* ----------------------------- */
-/* -------- GENERAL CSS -------- */
-/* ----------------------------- */ 
-
-
-  
-  
-  
-
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    border: none;
-    overflow: hidden;
-    font-size: 1rem;
-}
 
 /* ----------------------------- */
 /* ------ REMOVE MOBILE  ------- */
@@ -31,16 +13,30 @@ nav > .mob-section-title {display:none}
 .mobile-filter {display: none;}
 
 
+
 /* ----------------------------- */
-/* ------- GENERAL CSS  -------- */
-/* ----------------------------- */  
+/* -------- GENERAL CSS -------- */
+/* ----------------------------- */ 
 
-html {height: 100vh;}
-body {height: 100vh;}
-main {min-height: 90vh;}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    border: none;
+    font-size: 1rem;
+}
 
-/* font-size of the page scales with the size of the browser window */
+
+body, html {
+    height:  100%;
+    margin:  0px auto;
+    padding: 0px auto;
+}
+
+
 html {font-size: calc(60% + 0.8vmin);}
+
 
 body {
     color: var(--all-basic-font-color);
@@ -49,19 +45,18 @@ body {
 }
 
 
-  
 h1 {
     font-size: 2.5rem;
     color: var(--all-basic-head-color);
-    margin-bottom: 15px;
     border-bottom: 2px solid var(--all-basic-head-color);
-    padding-bottom: 10px;
 }
+
 
 h2 {
     font-size: 1.6rem;
     color: var(--all-basic-head-color)
 }
+
 
 h3 {
     font-size: 1.3rem;
@@ -71,226 +66,86 @@ h3 {
 
 article {
     padding-top: 20px;
+    padding-left: 4%;
     background-color: var(--article-background-color);
     flex: 1;                                /* All child elements take up equal/whole space in a row */
-    flex: 1;
-    margin: 10px;
-    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 10px 80px rgba(0, 0, 0, 0.1);
+    min-height: 100%;
+    max-height: 100%;
+    overflow: hidden;
 }
 
-
-p, li {
-    line-height: calc(1ex / 0.32);
-    width: 60ch;
-    max-width: 100%;
-} 
-
-
-
-
-article li {
-    overflow: initial;
-}
-
-article ul {
-    overflow: initial;
-    margin-left: 20px;
-}
-
-article > h2 {
-    font-size: 2.5em;
-    line-height: calc(1ex / 0.42);
-    color: var(--all-basic-head-color);
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--all-basic-head-color);
-    padding-bottom: 10px;
-}
-
-
-
-/* ----------------------------- */
-/* ------ NAVIGATION BAR ------- */
-/* ----------------------------- */  
-
-
-nav {
-    background-color: var(--nav-basic-background-color);
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 2%;
-}
-
-nav > .nav-links-container {
-    display: flex;
-    justify-content: space-between;
-    height: 100%
-}
-
-
-nav > .nav-links-container a {
-    text-decoration: none;                      /* Removes all natural formatting ie: underlines */
-    font-weight: bold;                          /* Make the text bold for emphasis */
-    transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
-    font-size: large;
-    color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
-}
-
-nav > .nav-links-container > a:hover,
-nav > .nav-links-container > a.activated {
-    color: var(--nav-active-font-color);            /* Change text color on hover or click */
-}
-
-
-
-/* ----------------------------- */
-/* ------ RESUME CONTENT ------- */
-/* ----------------------------- */
-
-.section-display {
-    background-color: var(--section-background-color);
+ul {
+    min-height: 100%;
+    max-height: 100%;
 }
 
 section {display: none}
 
-section {
-    padding: 20px;
-    min-height: 90vh;                           /* Allows the sections to remain the same height on every screen */
-    min-width: 100%;
-}
 
-.section-display > h2 {
-    flex-basis: 100%;
-}
+
+/* ----------------------------- */
+/* -------- CONTAINERS --------- */
+/* ----------------------------- */ 
+
+#wrapper {
+    display: grid;
+    grid-template-rows: auto auto 1fr; /* First row for buttons, second row for sections */
+    height: auto;
+    min-height: 100%;
+    margin: 0px auto;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 3%;
+    background-color: var(--body-background-color);
+ }
+
+
+ main, .section-container, .section-display {
+    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    background-color: var(--section-background-color)
+ }
+
+
+ .section-container {
+    padding-left: 2%;
+    padding-right: 2%;
+ }
+
 
 .section-display.activated {
-    display: inline-block;
-    background-color: var(--section-background-color)
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto 1fr; /* First row for buttons, second row for sections */
+    padding-top: 1%;
 }
 
-.section-display > .article-container {
-    min-height: 65vh;
-    gap: 2%;
 
+/* ----------------------------- */
+/* -- ARTICLE/TILE CONTAINERS -- */
+/* ----------------------------- */
+ .article-container, .tile-container {
+    min-width: 100%;
+    background-color: var(--section-background-color);
+    gap: 2%;
+ }
+
+
+ .section-display > .article-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
 
-
-
-/* ----------------------------- */
-/* ------ FILTER BUTTONS ------- */
-/* ----------------------------- */
-
-
-/* .section-container > .section-display > .filter-container
-.section-container > .section-display > .tile-container */
-
-
-.section-container > .section-display > .filter-container > .mobile-filter {
-    margin: 0;
-}
-
-.section-container > .section-display > .filter-container > .mobile-filter,
-.section-display .filter {
-    padding-top: 1%;
-    padding-bottom: 3%;
-}
-
-.mobile-article-filter,
-.tile-filter-button {
-    cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
-    display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
-    background: var(--filter-basic-background-color);    /* White background */
-    color: var(--filter-basic-font-color);           /* Gray font colour */
-    transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
-
-
-    font-size: 2vw;  
-    width: 4vw;
-    height: 4vw;
-
-    margin-right: 10px;                         /* Spacing between tiles*/
-    margin-top: 5px;                            /* High level of zoom in makes filter buttons go to second row */
-
-    align-items: center;                        /* Center content */
-    justify-content: center;                    /* Center content */
-
-    position: relative;                         /* Added for positioning the tooltip */
-}
-
-.filter .tile-filter-button:hover,
-.filter .tile-filter-button.activated {
-    background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
-    color: var(--filter-active-font-color)
-}
-
-
-/* ----------------------------- */
-/* ----------- TILES ----------- */
-/* ----------------------------- */
-
 .section-display > .tile-container {
     display: grid;
-    min-height: 70vh;
     grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
-    grid-template-rows: auto auto auto auto;
-    gap: 2%;
+    grid-template-rows: repeat(auto-fill, minmax(33%, 1fr));
 }
-
-
-.section-display > .tile-container > .tile {
-    display: none;
-    grid-template-columns: min-content 1fr 1fr;
-    grid-template-rows: min-content 1fr 1fr;
-    gap: 10px;
-    background-color: var(--tile-basic-background-color);
-    color: var(--tile-basic-font-color);
-    cursor: pointer;
-    transition: var(--tile-basic-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    text-align: center;
-    padding: 10px;
-    border-radius: 20px;
-    max-width: 13vw;
-    max-height: 13vw;
-    box-shadow: 5px 10px;
-}
-
-
-.section-display > .tile-container >.tile p {
-    font-size: 10px;
-}
-
-
-.section-display > .tile-container >.tile.activated {display: grid;}
-.section-display > .tile-container >.tile:hover {
-    color: var(--tile-active-font-color);
-    background-color: var(--tile-active-background-color);
-    transform: scale(1.05);
-}
-
-/* Logos */
-.section-display > .tile-container >.tile > div:first-child {
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 3;
-}
-
-/* Tile Header */
-.section-display > .tile-container >.tile > p:nth-child(2) {
-    grid-column: 2 / span 2;
-    grid-row: 1 / span 1;
-    font-weight: 900;
-}
-
-/* Tile Desc */
-.section-display > .tile-container >.tile > p:nth-child(3) {
-    grid-column: 2 / span 2;
-    grid-row: 2 / span 2;
-}
-
 
 
 /* ----------------------------- */
@@ -317,142 +172,385 @@ main > button:last-of-type { right: 0; }                         /* positions it
 
 
 
-
 /* ----------------------------- */
-/* ---- EXPERIENCE OVERLAY ---- */
-/* ----------------------------- */
-dialog {
-    display: none;   /* Default display is non visible. Display is modified when class becomes "active" */
-    position: fixed;  /* Positions the overlay relative to the browser window and does not scroll with the page */
-    top: 0;
-    left: 0;      
-    background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
-    color: var(--all-basic-font-color);                /* White text */
-    justify-content: center;    /* Centers the child elements horizontally */
-    align-items: center;        /* Centers the child elements vertically */
-    z-index: 9999;              /* Must be most front facing forward since its an overlay */ 
-    min-width: 100vw;           /* To cover the entire viewscreen */ 
-    min-height: 100vh;          /* To cover the entire viewscreen */ 
-    
+/* ------ NAVIGATION BAR ------- */
+/* ----------------------------- */  
+nav {
+    background-color: var(--nav-basic-background-color);
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
 }
 
-
-/* div: overlay-wrapper */
-.overlay-wrapper {
+nav > .nav-links-container {
     display: flex;
-    font-family: 'Arial', sans-serif;
-    padding: 1% 3%;     /* padding on the top/bottom and left/right of the wrapper.*/
-    gap: 4%;
-    flex-direction: row;
-    justify-content: center;    /* Centers the child elements horizontally */
-    align-items: center;        /* Centers the child elements vertically */
-    flex: 1 1 0px;
+    justify-content: space-between;
+    height: 100%
+}
 
-    align-items: flex-start; /* Align items to the start of the container */
+nav > .nav-links-container a {
+    text-decoration: none;                      /* Removes all natural formatting ie: underlines */
+    font-weight: bold;                          /* Make the text bold for emphasis */
+    transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
+    font-size: large;
+    color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
+}
 
-    width: 100vw;           /* To cover the entire viewscreen */ 
-    height: 90vh;          /* To cover the entire viewscreen minus space for close button*/ 
-    max-width: 100vw;           /* To cover the entire viewscreen */ 
-    max-height: 90vh;          /* To cover the entire viewscreen minus space for close button*/ 
+nav > .nav-links-container > a:hover,
+nav > .nav-links-container > a.activated {
+    color: var(--nav-active-font-color);            /* Change text color on hover or click */
 }
 
 
-.overlay-wrapper > article {
-    position: relative; /* Set the container as a positioning context for absolute positioning */
-}
-
-.overlay-wrapper > article:first-of-type {
-    max-width: 20%
-}
-
-dialog.active {display: flex;}              /* Overlay becomes visible when is active*/
-dialog.inactive {display: none;}            /* Overlay becomes invis when is inactive*/
-
-dialog .closeBtn {
-    cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
-    padding: 10px; 
-    font-weight: bold;
-
-    color: var(--closebtn-font-color);
-    position: absolute;                     /* Taken out of normal flow of document */
-    top: 85%;                               /* Positions the close button at the bottom of its containing element*/
-    left: 50%;                              /* Positions the close button in the middle of its containing element*/
-    transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
-    transform: translateX(-50%);            /* Centers the button horizontally.*/
-
-    background-color: var(--tile-basic-font-color);
-    font-size: 30px;
-
-}
 
 /* ----------------------------- */
-/* ---- PORTFOLIO OVERLAY ---- */
+/* ------ FILTER BUTTONS ------- */
 /* ----------------------------- */
-
-#portfoliooverlay-wrapper {
-    column-count: 2;
+.section-container > .section-display > .filter-container > .mobile-filter,
+.section-container > .section-display > .filter-container > .pc-filter {
+    padding-bottom: 2%;
 }
 
-dialog .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+
+.pc-filter > .filter-options > .pc-tile-filter,
+.mobile-filter > .filter-options > .mobile-article-filter {
+    cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
+    display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
+    background: var(--filter-basic-background-color);    /* White background */
+    color: var(--filter-basic-font-color);           /* Gray font colour */
+    transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
+
+    font-size: 2vw;  
+    width: 4vw;
+    height: 4vw;
+
+    margin-right: 10px;                         /* Spacing between tiles*/
+    margin-top: 5px;                            /* High level of zoom in makes filter buttons go to second row */
+
+    align-items: center;                        /* Center content */
+    justify-content: center;                    /* Center content */
+
+    position: relative;                         /* Added for positioning the tooltip */
 }
 
-/* Arrows*/
-dialog .arrow {
-    background-color: rgba(0, 0, 0, 0.8);         /* shows background of slideshow arrow when mouse hovers.*/
+
+.pc-filter > .filter-options > .pc-tile-filter:hover,
+.pc-filter > .filter-options > .pc-tile-filter.activated {
+    background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
+    color: var(--filter-active-font-color)
 }
-dialog .arrow:first-of-type { left: 0; }            /* positions it to the left edge of its containing element. */
-dialog .arrow:last-of-type { right: 0; }            /* positions it to the right edge of its containing element. */
 
 
+/* ----------------------------- */
+/* -- FILTER BUTTON TOOLTIPS --- */
+/* ----------------------------- */
+.pc-tile-filter:hover::before {
+    content: attr(title);               /* The overlay content is the "title" attribute of the li element */
+    position: absolute;
+    background: #333;
+    color: #fff;
+    white-space: nowrap;
+    padding: 5px;
+    font-size: 14px;
+    bottom: 70%;                        /* Position the tooltip above the icon */
+    left: 50%;                          /* Center the tooltip horizontally */
+    transform: translateX(-50%);        /* Center the tooltip horizontally */
+    visibility: hidden;                 /* hidden by default */
+    z-index: 9999;
+}
+
+
+.pc-tile-filter:hover::before {
+    visibility: visible;
+    opacity: 1;                         /* How seethrough the tooltip is */
+    margin-bottom: 0px;                /* Space away the tooltip from the filter button */
+    margin-left: -15px;                 /* Off center the tooltip a bit */
+}
+
+
+
+/* ----------------------------- */
+/* ----------- TILES ----------- */
+/* ----------------------------- */
+.section-display > .tile-container > .tile {
+    display: none;
+    grid-template-columns: 30% 1fr 1fr;
+    grid-template-rows: auto 1fr; 
+
+    cursor: pointer;
+    background-color: var(--tile-basic-background-color);
+    color: var(--tile-basic-font-color);
+    transition: var(--tile-basic-background-color) 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 10px;
+    max-height: 80%
+}
+
+
+/* Scaling font size of Tile */
+.tile > p {font-size: calc(50% + 0.8vmin);}
+
+
+/* When Tile is moused over */
+.section-display > .tile-container > .tile.activated {display: grid;}
+.section-display > .tile-container > .tile:hover {
+    color: var(--tile-active-font-color);
+    background-color: var(--tile-active-background-color);
+    transform: scale(1.05);
+}
+
+/* Logo container */
+.section-display > .tile-container > .tile > div:first-child {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 3;
+    padding-right: 5px;
+}
+
+/* Tile Header */
+.section-display > .tile-container > .tile > p:nth-child(2) {
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 1;
+    font-weight: 900;
+}
+
+/* Tile Desc */
+.section-display > .tile-container > .tile > p:nth-child(3) {
+    grid-column: 2 / span 2;
+    grid-row: 2 / span 2;
+    align-self: end; /* Align the element to the bottom within the grid area */
+    text-align: center; /* Horizontally center the text */
+}
+
+/* Portfolio Programming Languages */
 .program-icon {
     height: var(--icon-size-medium);
     width: var(--icon-size-medium);
-    /* font-size: 30px; */
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
 .portfolio-icon-container > img {
     height: var(--icon-size-medium);
     width: var(--icon-size-medium);
-    /* font-size: 30px; */
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
 
 
-
-
-#wrapper {
-    padding-left: 10%;
-    padding-right: 10%;
-    min-height: 100vh;
-    overflow-y: hidden;
-    background-color: var(--body-background-color);
-    display: flex;
-    flex-direction: column;
+/* ----------------------------- */
+/* ----- OVERLAY - GENERAL ----- */
+/* ----------------------------- */
+dialog {
+    display: inline-grid;               /* Default display is non visible. Display is modified when class becomes "active" */
+    position: fixed;                    /* Positions the overlay relative to the browser window and does not scroll with the page */
+    top: 0;
+    left: 0;      
+    background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
+    color: var(--all-basic-font-color); 
+    justify-content: center;            /* Centers the child elements horizontally */
+    align-items: center;                /* Centers the child elements vertically */
+    z-index: 9999;                      /* Must be most front facing forward since its an overlay */ 
+    min-width: 100vw;                   /* To cover the entire viewscreen */ 
+    min-height: 100vh;                  /* To cover the entire viewscreen */ 
 }
 
-#palette-container {
-    background-color: var(--body-background-color);
+dialog article {
+    padding: 0
 }
 
-/* add another query for 300 to 400 for a 2 column grid */
+dialog article > h3 {
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+/* Scaling font size of Tile */
+dialog li {font-size: calc(40% + 0.9vmin);}
+
+dialog article > p,
+dialog article > ul {
+    margin-top: 1%;
+    margin-left: 5%;
+    /* line-height: 180%; */
+    
+}
+
+dialog p {font-size: calc(40% + 0.9vmin);}
+dialog li {line-height: calc(120% + 0.9vmin);}
+
+
+
+dialog .arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 50%;
+    user-select: none;
+}
+
+#overlay-prev {
+    left: 0;
+}
+
+#overlay-next {
+    right: 0;
+}
+
+
+#overlay-prev:hover, #overlay-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
+}
+
+
+/* Overlay close button */
+dialog .closeBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #ff0000; /* Red background color */
+    color: #fff; /* White text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+
+/* ----------------------------- */
+/* --- OVERLAY - EXPERIENCE ---- */
+/* ----------------------------- */
+.HTMLExperienceOverlay-overlay-wrapper {
+    display: grid;
+    column-gap: 2%;
+    row-gap: 5%;
+    padding: 3%;
+    max-height: 100%;
+    max-width: 100%;
+    height: 100%; /* This forces the overlay to cover the entire height of the screen*/
+    width: 100%; /* This forces the overlay to cover the entire width of the screen*/
+    grid-template-columns: 50% 50%; /* Two columns, each taking up 50% of the width */
+    grid-template-rows: 30% 1fr;
+    position: absolute;
+    top:0;  /* This forces the overlay to be at the top of the screen */
+    left:0; /* This forces the overlay to be at the left of the screen */
+}
+
+/* First Article */
+.HTMLExperienceOverlay-overlay-wrapper > article:nth-child(1) {
+    display: block;
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    border: 5px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+    box-shadow: 2px 5px;
+}
+
+/* Second Article */
+.HTMLExperienceOverlay-overlay-wrapper > article:nth-child(2) {
+    display: block;
+    grid-column: 1 / span 1; /* Start from the first column and span 1 column */
+    grid-row: 2 / span 1; /* Start from the second row and span 1 row */
+    border: 5px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+    box-shadow: 2px 5px;
+}
+
+/* Third Article */
+.HTMLExperienceOverlay-overlay-wrapper > article:nth-child(3) {
+    display: block;
+    grid-column: 2 / span 1; /* Start from the second column and span 1 column */
+    grid-row: 2 / span 1; /* Start from the second row and span 1 row */
+    border: 5px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+    box-shadow: 2px 5px;
+}
+
+
+
+/* ----------------------------- */
+/* ---- OVERLAY - PORTFOLIO ---- */
+/* ----------------------------- */
+
+
+.HTMLPortfolioOverlay-overlay-wrapper {
+    display: grid;
+    column-gap: 2%;
+    row-gap: 5%;
+    padding: 3%;
+    max-height: 100%;
+    max-width: 100%;
+    height: 100%; /* This forces the overlay to cover the entire height of the screen*/
+    width: 100%; /* This forces the overlay to cover the entire width of the screen*/
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto 1fr; 
+    position: absolute;
+    top:0;  /* This forces the overlay to be at the top of the screen */
+    left:0; /* This forces the overlay to be at the left of the screen */
+}
+
+/* First Article */
+.HTMLPortfolioOverlay-overlay-wrapper > article:nth-child(1) {
+    display: block;
+    grid-column: 1 / span 1;
+    border: 5px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+    box-shadow: 2px 5px;
+}
+
+/* Second Article */
+.HTMLPortfolioOverlay-overlay-wrapper > article:nth-child(2) {
+    display: block;
+    grid-column: 2 / span 1;
+    border: 5px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+    box-shadow: 2px 5px;
+}
+
+dialog .portfolio-icon-container {
+    padding: 20px;
+}
+
+dialog .portfolio-icon-container .lang-logo {
+    margin-left: 20px;
+}
+
+
+.image-container {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 5%;
+}
+
+.image-container > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+
+/* ----------------------------- */
+/* ---------- MOBILE ----------- */
+/* ----------------------------- */
+
 @media (max-width: 600px) {
 
-    .projectSumSmall {display: none;}
-    .mobile-filter {display: inline-flex;}
-    /* .mobile-article.inactive {display: none;} */
-    .mobile-article.activated {display: block;}
-    .pc-article {display: none;}
+    html {font-size: calc(60% + 0.6vmin);}
     nav > .mobile-nav-icon {display:initial}
+    .pc-article {display: none;}
     .pc-section-title {display: none;}
+    .mobile-filter {display: inline-flex;}
+    .mobile-article.activated {display: block;}
+    .projectSumSmall {display: none;}
 
-    html {font-size: calc(40% + 0.6vmin);}
-
-    
 
     section {
         padding: 3%;
@@ -472,9 +570,32 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         border-bottom: initial;
     }
 
+    .mobile-filter > .filter-options > .mobile-article-filter {
+        font-size: initial;
+        width: initial;
+        height: initial;
+        margin-top: initial;
+    }
+
+
+    /* ----------------------------- */
+    /* -------- CONTAINERS --------- */
+    /* ----------------------------- */ 
+
+
+    /* ----------------------------- */
+    /* -- ARTICLE/TILE CONTAINERS -- */
+    /* ----------------------------- */
+    .section-display > .tile-container {
+        grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
+        gap: 4%;
+    }
+
+
     /* ----------------------------- */
     /* ------ NAVIGATION BAR ------- */
-    /* ----------------------------- */ 
+    /* ----------------------------- */
 
     /* Style the navigation menu */
     nav {
@@ -543,11 +664,11 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         color: var(--nav-active-font-color)
     }
 
+
     /* ----------------------------- */
     /* ------ FILTER BUTTONS ------- */
     /* ----------------------------- */
-
-    .filter .tile-filter-button {
+    .pc-filter > .filter-options > .pc-tile-filter {
         font-size: 3vh;  
         width: 5vh;
         height: 5vh;
@@ -565,7 +686,7 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         width: 100%;
     }
 
-    .mobile-article-filter {
+    .mobile-filter > .filter-options > .mobile-article-filter {
         min-width: 30%;
         font-size: 2vh;
         font-weight: bold;
@@ -573,115 +694,102 @@ dialog .arrow:last-of-type { right: 0; }            /* positions it to the right
         height: 5vh;
     }
 
-    .mobile-article-filter.activated {
+    .mobile-filter > .filter-options > .mobile-article-filter.activated {
         background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
         color: var(--filter-active-font-color);
     }
 
+
+    /* ----------------------------- */
+    /* -- FILTER BUTTON TOOLTIPS --- */
+    /* ----------------------------- */
+
+
+
     /* ----------------------------- */
     /* ----------- TILES ----------- */
     /* ----------------------------- */
-
-    .section-display > .tile-container {
-        grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
-        gap: 4%;
-    }
+    .section-display > .tile-container > .tile.activated {display: grid;}
 
     .section-display > .tile-container > .tile {
-        /* min-width: 25vw;
-        min-height: 25vw; */
-        min-width: 100%;
-        min-height: 100%;
-    }
-
-    /* Logos */
-    .section-display > .tile-container >.tile > div:first-child {
-        grid-column: 1 / span 3;
-        grid-row: 1 / span 1;
-    }
-
-    /* Tile Header */
-    .section-display > .tile-container >.tile > p:nth-child(2) {
-        grid-column: 1 / span 3;
-        grid-row: 2 / span 3;
-        font-weight: 900;
-    }
-
-    /* Tile Desc */
-    .section-display > .tile-container >.tile > p:nth-child(3) {
-        grid-column: 1 / span 3;
-        grid-row: 3 / span 3;
-    }
-
-    /* Logos */
-    #myExperience-tile-container >.tile > div:first-child {
         display: none;
-        grid-column: 1 / span 3;
-        grid-row: 1 / span 1;
-    }
-
-    /* ----------------------------- */
-    /* ---------- OVERLAY ---------- */
-    /* ----------------------------- */
-    .overlay-wrapper {
-            flex-direction: column;
-    }
-
-    .overlay-wrapper article:first-of-type {
+        min-width: 35vw;
+        min-height: 10vh;
         width: 100%;
-        max-width: fit-content;
-        max-height: 30%;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
-    .overlay-wrapper > article {
-        flex: initial;
+    #myPortfolio-tile-container .tile.activated {
+        display: flex;
+        flex-direction: column;
+        max-width: 50%;
     }
 
-    .program-icon {
-        transform: scale(0.7);
+
+    .icon-container > img{
+        margin-left: 3px;
     }
 
-    #wrapper {
-        padding-left: 7%;
-        padding-right: 7%;
+
+
+    /* ----------------------------- */
+    /* ----- OVERLAY - GENERAL ----- */
+    /* ----------------------------- */
+
+
+
+
+
+    /* ----------------------------- */
+    /* --- OVERLAY - EXPERIENCE ---- */
+    /* ----------------------------- */
+    .HTMLExperienceOverlay-overlay-wrapper {
+        column-gap: 4%;
+        row-gap: 3%;
+        grid-template-columns: 50% 50%; /* Two columns, each taking up 50% of the width */
+        grid-template-rows: 15% 1fr;
     }
-}
 
-@media (max-height: 600px) { 
-    section > .tile-container {
-        grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
-      }
-}
-
-
-
-@media (max-width: 800px), 
-       (max-height: 600px) {
-    section > .tile-container {
-        grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
-        }
-}
-
-
-
-@media (max-width: 1000px) { 
-
-
-
-}
-
-
-@supports (font-size-adjust: 1) {
-    article {
-        font-size-adjust: 0.5;
+    .HTMLExperienceOverlay-overlay-wrapper p {
+        font-size: calc(50% + 0.7vmin);
     }
-}
-
-
-@media (prefers-color-scheme: dark) {
-    article {
-        --red: 30;
-        --green: 30;
-        --blue: 30;
+    
+    .HTMLExperienceOverlay-overlay-wrapper li {
+        font-size: calc(50% + 0.8vmin);
+        line-height: calc(140% + 0.7vmin);
+        margin-left: 5px;
     }
+
+    .HTMLExperienceOverlay-overlay-wrapper > article {
+        box-shadow: initial;
+        box-shadow: 0px 0px;
+    }
+
+    /* First Article */
+    .HTMLExperienceOverlay-overlay-wrapper > article:nth-child(1) {
+        grid-column: 1 / span 2;
+        box-shadow: initial;
+    }
+
+    /* Second Article */
+    .HTMLExperienceOverlay-overlay-wrapper > article:nth-child(2) {
+        box-shadow: initial;
+    }
+
+    /* Third Article */
+    .HTMLExperienceOverlay-overlay-wrapper > article:nth-child(3) {
+        box-shadow: initial;
+    }
+
+
+
+
+
+    /* ----------------------------- */
+    /* ---- OVERLAY - PORTFOLIO ---- */
+    /* ----------------------------- */
+
+
+
 }
