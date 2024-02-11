@@ -198,6 +198,7 @@ class PortfolioFilter extends Filter {
         `.trim();
         return tempEl.firstChild;
     };
+    
 };
 
 export {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter};

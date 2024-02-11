@@ -165,7 +165,7 @@ section {display: none}
 }
 
 /* Global text settings for all articles */
-.article-with-list  ul,
+.article-with-list ul,
 .article-with-text p {
     margin-left: 5%;
 }
@@ -245,6 +245,11 @@ nav > .container > a.activated {
 
 /* The <li> element */
 /* Interactive filter buttons/words that have active status */
+
+.filter-button.for-tile {
+    display: flex;
+}
+
 .filter-button.for-tile {
     cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
@@ -510,7 +515,13 @@ dialog .closeBtn {
 
 
 
+    /* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
+    .for-pc.for-mobile { display: block }
 
+    
+    .menu-filter.for-tile.for-pc.for-mobile { display: inline-flex }
+    .filter-list.for-tile.for-pc.for-mobile { display: inline-block }
+    .filter-button.for-tile.for-pc.for-mobile { display: inline-flex }
 
 
     section {
@@ -528,8 +539,21 @@ dialog .closeBtn {
         border-bottom: initial;
     }
 
+    h1 {
+        margin-left: 5px;
+        margin-top: 5px;
+    }
 
+    h3 {
+        margin-left: 5px;
+        margin-top: 5px;
+    }
 
+    /* Global text settings for all articles */
+    .article-with-list ul,
+    .article-with-text p {
+        margin-left: 10%;
+    }
 
     /* ----------------------------- */
     /* -------- CONTAINERS --------- */
@@ -544,6 +568,8 @@ dialog .closeBtn {
         grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
         gap: 4%;
     }
+
+
 
 
     /* ----------------------------- */
@@ -621,39 +647,53 @@ dialog .closeBtn {
     /* ----------------------------- */
     /* ------ FILTER BUTTONS ------- */
     /* ----------------------------- */
-    /* .menu-filter > .filter-list > .filter-button.for-tile{
-        font-size: 3vh;  
-        width: 5vh;
-        height: 5vh;
-        margin-right: 5px;
-        margin-bottom: 10px;
+
+    /* The <menu> element */
+    .menu-filter { 
+
+        width: 100%;
+        max-width: 100%;
+
     }
 
-    .menu-filter.for-mobile .filter-list{
+    .filter-list {
         display: flex;
         width: 100%;
-    } */
+        max-width: 100%;
+        align-items: center;                        /* Center words vertically */
+        justify-content: space-around;              /* Space menu filter items evenly */ 
+    }
+
+
+    /* The <li> element */
+    /* Interactive filter buttons/words that have active status */
+    .filter-button.for-tile {
+        font-size: 2vh;  
+        width: 4vh;
+        height: 4vh;
+    }
+
+
+    .filter-button.for-article {
+        font-size: large;
+    }
+
+
 
     /* ----------------------------- */
     /* ----------- TILES ----------- */
     /* ----------------------------- */
-    .section-display > .container > .tile.activated {display: grid;}
+    .tile.activated {display: grid;}
 
-    .section-display > .container > .tile {
+    .tile {
         display: none;
         min-width: 35vw;
         min-height: 10vh;
         width: 100%;
         margin-top: 5px;
         margin-bottom: 5px;
+        max-width: 50%;                 /* Stops a single tile from taking up the entire row */
     }
-
-    #myPortfolio.container .tile.activated {
-        display: flex;
-        flex-direction: column;
-        max-width: 50%;
-    }
-
 
     .icon-container > img{
         margin-left: 3px;
@@ -670,46 +710,54 @@ dialog .closeBtn {
 
 
     /* ----------------------------- */
-    /* --- OVERLAY - EXPERIENCE ---- */
+    /* ---- OVERLAY - PORTFOLIO ---- */
     /* ----------------------------- */
-    .HTMLExperienceOverlay-overlay-wrapper {
-        column-gap: 4%;
-        row-gap: 3%;
-        grid-template-columns: 50% 50%; /* Two columns, each taking up 50% of the width */
-        grid-template-rows: 15% 1fr;
+
+    /* Styles specific to overlay */
+    .container.for-overlay.for-portfolio {
+        grid-template-columns: 30% 70%;
+        grid-template-rows: auto 1fr;
     }
 
-    .HTMLExperienceOverlay-overlay-wrapper p {
-        font-size: calc(50% + 0.7vmin);
-    }
-    
-    .HTMLExperienceOverlay-overlay-wrapper li {
-        font-size: calc(50% + 0.8vmin);
-        line-height: calc(140% + 0.7vmin);
-        margin-left: 5px;
+    /* First Article - Description of portfolio */
+    .container.for-overlay.for-portfolio > article:nth-child(1) {
+        grid-column: 1 / span 1;
     }
 
-    .HTMLExperienceOverlay-overlay-wrapper > article {
-        box-shadow: initial;
-        box-shadow: 0px 0px;
+    /* Second Article - Slideshow images for portfolio */
+    .container.for-overlay.for-portfolio > article:nth-child(2) {
+        grid-column: 2 / span 1;
     }
 
-    /* First Article */
-    .HTMLExperienceOverlay-overlay-wrapper > article:nth-child(1) {
-        grid-column: 1 / span 2;
-        box-shadow: initial;
+
+    /* Programming icons in the first article */
+    .container.for-icons.for-overlay {
+        display: inline;
+        height: initial;
+        width: initial;
+        position: initial;
     }
 
-    /* Second Article */
-    .HTMLExperienceOverlay-overlay-wrapper > article:nth-child(2) {
-        box-shadow: initial;
+    /* Programming icons in the first article */
+    .lang-logo {
+        margin-left: 20px;
+        height: 50px;
+        width: 50px;
     }
 
-    /* Third Article */
-    .HTMLExperienceOverlay-overlay-wrapper > article:nth-child(3) {
-        box-shadow: initial;
+
+    .image-container {
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        padding: 5%;
     }
 
+    .image-container > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
 
 
