@@ -35,8 +35,8 @@ class HTMLOverlay {
         this.parentEl.appendChild(this.element);
 
         // Change the display attribute to show the overlay over the screen
-        document.body.querySelector('#section-prev').classList.add('disabled');
-        document.body.querySelector('#section-next').classList.add('disabled');
+        document.body.querySelector('.arrow.prev.for-section').classList.add('disabled');
+        document.body.querySelector('.arrow.next.for-section').classList.add('disabled');
         document.body.querySelector('dialog').classList.add('active');
     };
 
@@ -44,8 +44,8 @@ class HTMLOverlay {
     addEventListeners() {
         // On pressing the close button, deletes the overlay
         this.element.querySelector('.closeBtn').onclick = () => {
-            document.body.querySelector('#section-prev').classList.remove('disabled');
-            document.body.querySelector('#section-next').classList.remove('disabled');
+            document.body.querySelector('.arrow.prev.for-section').classList.remove('disabled');
+            document.body.querySelector('.arrow.next.for-section').classList.remove('disabled');
             this.element.remove();
         };
     };
@@ -68,26 +68,27 @@ class HTMLExperienceOverlay extends HTMLOverlay {
     createOverlayElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="HTMLExperienceOverlay" class="">
-            <div class="HTMLExperienceOverlay-overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
-                <article class="overlay-article" id="experience-information">
+        <dialog id="HTMLExperienceOverlay" class="overlay for-experience">
+            <div class="container for-overlay for-experience" id="${this.name.toLowerCase()}-wrapper">
+                <article class="article-with-text for-pc for-mobile for-overlay for-experience" id="experience-information">
                     <h3 class="position"></h3>
-                    <p class="JobTitle"></p>
+                    <p class="job-title"></p>
                     <p class="period"></p>
                     <p class="company"></p>
                     <p class="address"></p>
                     <p class="extraInfo"></p>
-
                 </article>
-                <article class="overlay-article" id="experience-duties">
+
+                <article class="article-with-list for-pc for-mobile for-overlay for-experience" id="experience-duties">
                     <h3>Duties</h3>
                     <ul class="duties"></ul> 
                 </article>
-                <article class="overlay-article" id="experience-softwares">
+
+                <article class="article-with-list for-pc for-mobile for-overlay for-experience" id="experience-softwares">
                     <h3>Softwares</h3>
                     <ul class="softwares"></ul> 
                 </article>
-                <span class="closeBtn" id="experience-close-btn">x</span>
+                <span class="closeBtn for-overlay for-experience" id="experience-close-btn">x</span>
             </div>
         </dialog>
         `.trim();
@@ -145,21 +146,23 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
     createOverlayElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <dialog id="HTMLPortfolioOverlay" class="">
-            <div class="HTMLPortfolioOverlay-overlay-wrapper" id="${this.name.toLowerCase()}-wrapper">
-                <article class="overlay-article" id="project-information">
-                    <h3 class="portfolio-project-title"></h3>
-                    <div class="portfolio-icon-container"></div>
-                    <p class="portfolio-project-summary"></p>
+        <dialog id="HTMLPortfolioOverlay" class="overlay for-portfolio">
+            <div class="container for-overlay for-portfolio" id="${this.name.toLowerCase()}-wrapper">
+
+                <article class="article-with-text for-pc for-mobile for-overlay for-portfolio" id="project-information">
+                    <h3 class="portfolio-project-title for-overlay"></h3>
+                    <div class="container for-icons for-overlay"></div>
+                    <p class="portfolio-project-summary for-overlay"></p>
                 </article>
 
-                <article class="overlay-article" id="project-slideshow">
-                    <div class="image-container">
-                        <button class="arrow" id="overlay-prev">❮</button>
-                        <button class="arrow" id="overlay-next">❯</button>
+                <article class="article-with-text for-pc for-mobile for-overlay for-portfolio" id="project-slideshow">
+                    <div class="image-container for-overlay for-portfolio">
+                        <button class="arrow prev for-overlay for-portfolio">❮</button>
+                        <button class="arrow next for-overlay for-portfolio">❯</button>
                     </div>
                 </article>
-                <span class="closeBtn" id="portfolio-close-btn">x</span>
+
+                <span class="closeBtn for-overlay for-portfolio" id="portfolio-close-btn">x</span>
             </div>
         </dialog>
         `.trim();
@@ -181,7 +184,7 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
             langLogo.alt = lang; // You can set alt text as the language name
             langLogo.classList.add('lang-logo');
 
-            this.element.querySelector('.portfolio-icon-container').appendChild(langLogo);
+            this.element.querySelector('.container.for-icons').appendChild(langLogo);
         });
 
 
@@ -205,8 +208,8 @@ class HTMLPortfolioOverlay extends HTMLOverlay {
             showImage(this.currentImageIndex);
         };
 
-        this.element.querySelector('#overlay-prev').addEventListener('click', prevImage);
-        this.element.querySelector('#overlay-next').addEventListener('click', nextImage);
+        this.element.querySelector('.arrow.prev.for-overlay').addEventListener('click', prevImage);
+        this.element.querySelector('.arrow.next.for-overlay').addEventListener('click', nextImage);
 
         this.data.projectImages.forEach((image, index) => {
             const img = document.createElement('img');

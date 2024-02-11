@@ -2,16 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
 
-/* ----------------------------- */
-/* ------ REMOVE MOBILE  ------- */
-/* ----------------------------- */  
-nav > .mobile-nav-icon {display:none}
-nav > .mob-section-title {display:none}
-.mobile-filter {display:none}
-.mobile-article-filter {display:none}
-.mobile-article {display: none;}
-.mobile-filter {display: none;}
+/* When on normal PC display: Display all elements with a "for-pc" tag */
+.for-pc {display: block;}
 
+/* When on normal PC display: Hide any elements with a "for-mobile" tag */
+.for-mobile {display: none;}
+
+/* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
+.for-pc.for-mobile { display: block }
 
 
 /* ----------------------------- */
@@ -32,17 +30,12 @@ body, html {
     height:  100%;
     margin:  0px auto;
     padding: 0px auto;
-}
-
-
-html {font-size: calc(60% + 0.8vmin);}
-
-
-body {
     color: var(--all-basic-font-color);
     font-family: var(--sans-serif);
     line-height: 1.45;
+    font-size: calc(60% + 0.8vmin);
 }
+
 
 
 h1 {
@@ -54,40 +47,23 @@ h1 {
 
 h2 {
     font-size: 1.6rem;
-    color: var(--all-basic-head-color)
+    color: var(--all-basic-head-color);
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 
 h3 {
     font-size: 1.3rem;
-    color: var(--all-basic-head-color)
+    color: var(--all-basic-head-color);
+    margin-bottom: 10px;
 }
-
-
-article {
-    padding-top: 20px;
-    padding-left: 4%;
-    background-color: var(--article-background-color);
-    flex: 1;                                /* All child elements take up equal/whole space in a row */
-    border-radius: 12px;
-    box-shadow: 0 10px 80px rgba(0, 0, 0, 0.1);
-    min-height: 100%;
-    max-height: 100%;
-    overflow: hidden;
-}
-
-ul {
-    min-height: 100%;
-    max-height: 100%;
-}
-
-section {display: none}
 
 
 
 /* ----------------------------- */
-/* -------- CONTAINERS --------- */
-/* ----------------------------- */ 
+/* --------- TO REVIEW --------- */
+/* ----------------------------- */
 
 #wrapper {
     display: grid;
@@ -102,17 +78,15 @@ section {display: none}
  }
 
 
- main, .section-container, .section-display {
+ /* all sections set to hidden, only become visible when "activated" class  */
+section {display: none}
+
+
+ main, .section-display {
     height: 100%;
     min-height: 100%;
     min-width: 100%;
     background-color: var(--section-background-color)
- }
-
-
- .section-container {
-    padding-left: 2%;
-    padding-right: 2%;
  }
 
 
@@ -125,70 +99,118 @@ section {display: none}
 
 
 /* ----------------------------- */
-/* -- ARTICLE/TILE CONTAINERS -- */
-/* ----------------------------- */
- .article-container, .tile-container {
-    min-width: 100%;
-    background-color: var(--section-background-color);
-    gap: 2%;
- }
+/* -------- CONTAINERS --------- */
+/* ----------------------------- */ 
 
-
- .section-display > .article-container {
+/* General CSS for all container style elements */
+.container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    height: 100%;
+    min-height: 100%;
+    min-width: 100%;
+
+    padding-left: 2%;
+    padding-right: 2%;
+    gap: 2%;
+
+    background-color: var(--section-background-color);
+    justify-content: space-between; /* Mainly for the navigation bar*/
 }
 
-
-.section-display > .tile-container {
+/* Specific requirements for the container that holds the jobs and portfolio tiles*/
+.container.for-tile {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(33%, 1fr));
+} 
+
+/* Specific requirements for the container that holds the jobs and portfolio overlays*/
+.container.for-overlay {
+    display: grid;
+    height: 100%;                   /* This forces the overlay to cover the entire height of the screen*/
+    width: 100%;                    /* This forces the overlay to cover the entire width of the screen*/
+    max-height: 100%;
+    max-width: 100%;
+
+    padding: 3%;
+    column-gap: 2%;
+    row-gap: 5%;
+
+    position: absolute;
+    top: 0;                         /* This forces the overlay to be at the top of the screen */
+    left: 0;                        /* This forces the overlay to be at the left of the screen */
+    background-color: initial;                     
 }
 
 
 /* ----------------------------- */
-/* -- SECTION NEXT/PREV ARROWS - */
+/* --------- ARTICLES ---------- */
 /* ----------------------------- */
 
-button {width: auto;}
-
-main > button {
-    position: absolute;                     /* Taken out of normal flow of document */
-    top: 50%;                               /* Positions the top of the element at the vertical center of its containing element. */
-    transform: translateY(-50%);            /* vertically center the element.  by half of its own height. */
-    font-size: 24px;                        /* Size of the arrow */
-    cursor: pointer;                        /* mouse becomes a cursor when hovered over the arrow  */
-    color: var(--arrow-basic-font-color);
-    background-color: var(--arrow-background-font-color);
-    padding: 10px;                     
-    outline: none;                          /* Removes the outline, typically added as a default focus style. */
+/* Global article settings */
+.article-with-list,
+.article-with-text {
+    flex: 1;                                                /* All child elements take up equal/whole space in a row */
+    padding-top: 1%;
+    padding-left: 2%;
+    background-color: var(--article-background-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 80px rgba(0, 0, 0, 0.1);
+    min-height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    font-size: calc(40% + 0.9vmin);
+    line-height: calc(150% + 0.9vmin);
+    overflow-y: auto;
 }
 
-main > button.disabled {display: none;}
-main > button:first-of-type { left: 0; }                          /* positions it to the left edge of its containing element. */
-main > button:last-of-type { right: 0; }                         /* positions it to the right edge of its containing element. */
+/* Global text settings for all articles */
+.article-with-list  ul,
+.article-with-text p {
+    margin-left: 5%;
+}
 
+/* Additional border for overlay articles */
+article.for-overlay {
+    border: 5px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+}
+
+
+/* ----------------------------- */
+/* ------ PREV/NEXT ARROWS ----- */
+/* ----------------------------- */  
+.arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.arrow.disabled {display: none;}                  /* When overlay is active, the section arrows become disabled. */
+.arrow.prev { left: 0; }                          /* positions it to the left edge of its containing element. */
+.arrow.next { right: 0; }                         /* positions it to the right edge of its containing element. */
+
+
+.arrow.prev.for-overlay, .arrow.next.for-overlay {
+    background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
+}
 
 
 /* ----------------------------- */
 /* ------ NAVIGATION BAR ------- */
 /* ----------------------------- */  
-nav {
-    background-color: var(--nav-basic-background-color);
-    padding-left: 2%;
-    padding-right: 2%;
+
+/* text styles inside the navbar */
+nav a { 
     padding-top: 2%;
-}
-
-nav > .nav-links-container {
-    display: flex;
-    justify-content: space-between;
-    height: 100%
-}
-
-nav > .nav-links-container a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
@@ -196,24 +218,34 @@ nav > .nav-links-container a {
     color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
 }
 
-nav > .nav-links-container > a:hover,
-nav > .nav-links-container > a.activated {
+nav > .container > a:hover,
+nav > .container > a.activated {
     color: var(--nav-active-font-color);            /* Change text color on hover or click */
 }
-
 
 
 /* ----------------------------- */
 /* ------ FILTER BUTTONS ------- */
 /* ----------------------------- */
-.section-container > .section-display > .filter-container > .mobile-filter,
-.section-container > .section-display > .filter-container > .pc-filter {
-    padding-bottom: 2%;
+
+/* The <menu> element */
+.menu-filter { 
+    display: block;
+    width: 50%;
+    max-width: 50%;
+}
+
+/* The <ul> element */
+.filter-list.for-tile {
+    display: inline-flex;
+    align-items: center;                        /* Center words vertically */
+    justify-content: space-evenly;              /* Space menu filter items evenly */ 
 }
 
 
-.pc-filter > .filter-options > .pc-tile-filter,
-.mobile-filter > .filter-options > .mobile-article-filter {
+/* The <li> element */
+/* Interactive filter buttons/words that have active status */
+.filter-button.for-tile {
     cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
     display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
     background: var(--filter-basic-background-color);    /* White background */
@@ -233,9 +265,8 @@ nav > .nav-links-container > a.activated {
     position: relative;                         /* Added for positioning the tooltip */
 }
 
-
-.pc-filter > .filter-options > .pc-tile-filter:hover,
-.pc-filter > .filter-options > .pc-tile-filter.activated {
+.filter-button.for-tile:hover,
+.filter-button.for-tile.activated {
     background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
     color: var(--filter-active-font-color)
 }
@@ -244,7 +275,8 @@ nav > .nav-links-container > a.activated {
 /* ----------------------------- */
 /* -- FILTER BUTTON TOOLTIPS --- */
 /* ----------------------------- */
-.pc-tile-filter:hover::before {
+
+.filter-button.for-tile:hover::before {
     content: attr(title);               /* The overlay content is the "title" attribute of the li element */
     position: absolute;
     background: #333;
@@ -260,7 +292,7 @@ nav > .nav-links-container > a.activated {
 }
 
 
-.pc-tile-filter:hover::before {
+.filter-button.for-tile:hover::before {
     visibility: visible;
     opacity: 1;                         /* How seethrough the tooltip is */
     margin-bottom: 0px;                /* Space away the tooltip from the filter button */
@@ -268,13 +300,12 @@ nav > .nav-links-container > a.activated {
 }
 
 
-
 /* ----------------------------- */
 /* ----------- TILES ----------- */
 /* ----------------------------- */
-.section-display > .tile-container > .tile {
-    display: none;
-    grid-template-columns: 30% 1fr 1fr;
+.tile {
+    display: none;                          /* Activated tile class is starting class, which has a display of "grid" */
+    grid-template-columns: 30% 1fr 1fr;     /* To set the layout of the contents of the tile */
     grid-template-rows: auto 1fr; 
 
     cursor: pointer;
@@ -286,38 +317,37 @@ nav > .nav-links-container > a.activated {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 5px 10px;
-    max-height: 80%
+    max-height: 80%                          /* Prevents overlapping on the grid */
 }
 
 
 /* Scaling font size of Tile */
 .tile > p {font-size: calc(50% + 0.8vmin);}
 
-
 /* When Tile is moused over */
-.section-display > .tile-container > .tile.activated {display: grid;}
-.section-display > .tile-container > .tile:hover {
+.tile.activated {display: grid;}
+.tile:hover {
     color: var(--tile-active-font-color);
     background-color: var(--tile-active-background-color);
-    transform: scale(1.05);
+    transform: scale(1.05);                 /* Tile slightly grows when hovered */
 }
 
 /* Logo container */
-.section-display > .tile-container > .tile > div:first-child {
+.tile > div:first-child {
     grid-column: 1 / span 1;
     grid-row: 1 / span 3;
     padding-right: 5px;
 }
 
 /* Tile Header */
-.section-display > .tile-container > .tile > p:nth-child(2) {
+.tile > p:nth-child(2) {
     grid-column: 2 / span 2;
     grid-row: 1 / span 1;
     font-weight: 900;
 }
 
 /* Tile Desc */
-.section-display > .tile-container > .tile > p:nth-child(3) {
+.tile > p:nth-child(3) {
     grid-column: 2 / span 2;
     grid-row: 2 / span 2;
     align-self: end; /* Align the element to the bottom within the grid area */
@@ -325,13 +355,13 @@ nav > .nav-links-container > a.activated {
 }
 
 /* Portfolio Programming Languages */
-.program-icon {
+.tile .program-icon {
     height: var(--icon-size-medium);
     width: var(--icon-size-medium);
     flex-shrink: 0; /* Prevent icons from shrinking */
 }
 
-.portfolio-icon-container > img {
+.tile .container.for-icons > img {
     height: var(--icon-size-medium);
     width: var(--icon-size-medium);
     flex-shrink: 0; /* Prevent icons from shrinking */
@@ -356,62 +386,10 @@ dialog {
     min-height: 100vh;                  /* To cover the entire viewscreen */ 
 }
 
-dialog article {
-    padding: 0
-}
-
-dialog article > h3 {
-    margin-top: 1%;
-    margin-left: 1%;
-}
-
-/* Scaling font size of Tile */
-dialog li {font-size: calc(40% + 0.9vmin);}
-
-dialog article > p,
-dialog article > ul {
-    margin-top: 1%;
-    margin-left: 5%;
-    /* line-height: 180%; */
-    
-}
-
-dialog p {font-size: calc(40% + 0.9vmin);}
-dialog li {line-height: calc(120% + 0.9vmin);}
-
-
-
-dialog .arrow {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    color: black;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 50%;
-    user-select: none;
-}
-
-#overlay-prev {
-    left: 0;
-}
-
-#overlay-next {
-    right: 0;
-}
-
-
-#overlay-prev:hover, #overlay-next:hover {
-    background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
-}
-
 
 /* Overlay close button */
 dialog .closeBtn {
-    position: fixed;
+    position: fixed;                /* Forces the close button to be in the top/right of the overlay */
     top: 10px;
     right: 10px;
     cursor: pointer;
@@ -422,102 +400,70 @@ dialog .closeBtn {
   }
 
 
+
 /* ----------------------------- */
 /* --- OVERLAY - EXPERIENCE ---- */
 /* ----------------------------- */
-.HTMLExperienceOverlay-overlay-wrapper {
-    display: grid;
-    column-gap: 2%;
-    row-gap: 5%;
-    padding: 3%;
-    max-height: 100%;
-    max-width: 100%;
-    height: 100%; /* This forces the overlay to cover the entire height of the screen*/
-    width: 100%; /* This forces the overlay to cover the entire width of the screen*/
-    grid-template-columns: 50% 50%; /* Two columns, each taking up 50% of the width */
+
+/* Styles specific to overlay */
+.container.for-overlay.for-experience {
+    grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
     grid-template-rows: 30% 1fr;
-    position: absolute;
-    top:0;  /* This forces the overlay to be at the top of the screen */
-    left:0; /* This forces the overlay to be at the left of the screen */
 }
 
-/* First Article */
-.HTMLExperienceOverlay-overlay-wrapper > article:nth-child(1) {
-    display: block;
-    grid-column: 1 / span 1;
+/* First Article - Experience details */
+.container.for-overlay.for-experience > article:nth-child(1) {
+    grid-column: 1 / span 3;                           /* Cover 75% of the top row */
     grid-row: 1 / span 1;
-    border: 5px solid var(--tile-basic-background-color);
-    border-radius: 10px;
-    box-shadow: 2px 5px;
 }
 
-/* Second Article */
-.HTMLExperienceOverlay-overlay-wrapper > article:nth-child(2) {
-    display: block;
-    grid-column: 1 / span 1; /* Start from the first column and span 1 column */
-    grid-row: 2 / span 1; /* Start from the second row and span 1 row */
-    border: 5px solid var(--tile-basic-background-color);
-    border-radius: 10px;
-    box-shadow: 2px 5px;
+/* Second Article - Duties */
+.container.for-overlay.for-experience > article:nth-child(2) {
+    grid-column: 1 / span 2;                            /* Start from the first column and span 1 column */
+    grid-row: 2 / span 1;                               /* Start from the second row and span 1 row */
 }
 
-/* Third Article */
-.HTMLExperienceOverlay-overlay-wrapper > article:nth-child(3) {
-    display: block;
-    grid-column: 2 / span 1; /* Start from the second column and span 1 column */
-    grid-row: 2 / span 1; /* Start from the second row and span 1 row */
-    border: 5px solid var(--tile-basic-background-color);
-    border-radius: 10px;
-    box-shadow: 2px 5px;
+/* Third Article - Software */
+.container.for-overlay.for-experience > article:nth-child(3) {
+    grid-column: 3 / span 2;                            /* Start from the second column and span 1 column */
+    grid-row: 2 / span 1;                               /* Start from the second row and span 1 row */
 }
-
 
 
 /* ----------------------------- */
 /* ---- OVERLAY - PORTFOLIO ---- */
 /* ----------------------------- */
 
-
-.HTMLPortfolioOverlay-overlay-wrapper {
-    display: grid;
-    column-gap: 2%;
-    row-gap: 5%;
-    padding: 3%;
-    max-height: 100%;
-    max-width: 100%;
-    height: 100%; /* This forces the overlay to cover the entire height of the screen*/
-    width: 100%; /* This forces the overlay to cover the entire width of the screen*/
+/* Styles specific to overlay */
+.container.for-overlay.for-portfolio {
     grid-template-columns: 30% 70%;
-    grid-template-rows: auto 1fr; 
-    position: absolute;
-    top:0;  /* This forces the overlay to be at the top of the screen */
-    left:0; /* This forces the overlay to be at the left of the screen */
+    grid-template-rows: auto 1fr;
 }
 
-/* First Article */
-.HTMLPortfolioOverlay-overlay-wrapper > article:nth-child(1) {
-    display: block;
+/* First Article - Description of portfolio */
+.container.for-overlay.for-portfolio > article:nth-child(1) {
     grid-column: 1 / span 1;
-    border: 5px solid var(--tile-basic-background-color);
-    border-radius: 10px;
-    box-shadow: 2px 5px;
 }
 
-/* Second Article */
-.HTMLPortfolioOverlay-overlay-wrapper > article:nth-child(2) {
-    display: block;
+/* Second Article - Slideshow images for portfolio */
+.container.for-overlay.for-portfolio > article:nth-child(2) {
     grid-column: 2 / span 1;
-    border: 5px solid var(--tile-basic-background-color);
-    border-radius: 10px;
-    box-shadow: 2px 5px;
 }
 
-dialog .portfolio-icon-container {
-    padding: 20px;
+
+/* Programming icons in the first article */
+.container.for-icons.for-overlay {
+    display: inline;
+    height: initial;
+    width: initial;
+    position: initial;
 }
 
-dialog .portfolio-icon-container .lang-logo {
+/* Programming icons in the first article */
+.lang-logo {
     margin-left: 20px;
+    height: 50px;
+    width: 50px;
 }
 
 
@@ -544,22 +490,34 @@ dialog .portfolio-icon-container .lang-logo {
 @media (max-width: 600px) {
 
     html {font-size: calc(60% + 0.6vmin);}
-    nav > .mobile-nav-icon {display:initial}
-    .pc-article {display: none;}
-    .pc-section-title {display: none;}
-    .mobile-filter {display: inline-flex;}
-    .mobile-article.activated {display: block;}
+    nav > .navbar-icon {display:initial}
     .projectSumSmall {display: none;}
+
+
+    /* Hide any elements with a "for-pc" tag */
+    .for-pc {display: none;}
+
+    /* Display all elements with a "for-mobile" tag */
+    .for-mobile {display: initial;}
+
+    /* Default display for mobile articles needs to be none */
+    .article-with-text.for-mobile {display: none;}
+    .article-with-list.for-mobile {display: none;}
+
+    /* The displays for mobile can only be revealed when "activated" */
+    .article-with-text.for-mobile.activated {display: initial;}
+    .article-with-list.for-mobile.activated {display: initial;}
+
+
+
+
 
 
     section {
         padding: 3%;
     }
 
-    .mobile-article p,
-    .mobile-article li {
-        font-size: calc(100% + 0.8vmin)
-    }
+
 
     p, li {
         width: initial;
@@ -570,12 +528,7 @@ dialog .portfolio-icon-container .lang-logo {
         border-bottom: initial;
     }
 
-    .mobile-filter > .filter-options > .mobile-article-filter {
-        font-size: initial;
-        width: initial;
-        height: initial;
-        margin-top: initial;
-    }
+
 
 
     /* ----------------------------- */
@@ -586,7 +539,7 @@ dialog .portfolio-icon-container .lang-logo {
     /* ----------------------------- */
     /* -- ARTICLE/TILE CONTAINERS -- */
     /* ----------------------------- */
-    .section-display > .tile-container {
+    .section-display > .container {
         grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
         grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
         gap: 4%;
@@ -608,11 +561,11 @@ dialog .portfolio-icon-container .lang-logo {
 
 
     /* Hide the links inside the navigation menu (except for logo/home) */
-    nav > .nav-links-container {
+    nav > .container{
         display: none;
     }
 
-    nav > .nav-links-container.activated {
+    nav > .navbar-links-container.activated {
         display: flex;
         flex-direction: column;
     }
@@ -644,7 +597,7 @@ dialog .portfolio-icon-container .lang-logo {
     }
 
     /* Style the hamburger menu */
-    nav > .mobile-nav-icon {
+    nav > .navbar-icon {
         background-color: var(--nav-basic-background-color);
         display: block;
         position: absolute;
@@ -653,13 +606,13 @@ dialog .portfolio-icon-container .lang-logo {
     }
 
     /* Add a grey background color on mouse-over */
-    nav > .nav-links-container > a:hover {
+    nav > .container> a:hover {
         background-color: var(--nav-active-background-color);
         color: var(--nav-active-font-color)
     }
 
     /* Active link */
-    nav > .nav-links-container > a.activated {
+    nav > .container> a.activated {
         background-color: var(--nav-active-background-color);
         color: var(--nav-active-font-color)
     }
@@ -668,7 +621,7 @@ dialog .portfolio-icon-container .lang-logo {
     /* ----------------------------- */
     /* ------ FILTER BUTTONS ------- */
     /* ----------------------------- */
-    .pc-filter > .filter-options > .pc-tile-filter {
+    /* .menu-filter > .filter-list > .filter-button.for-tile{
         font-size: 3vh;  
         width: 5vh;
         height: 5vh;
@@ -676,42 +629,17 @@ dialog .portfolio-icon-container .lang-logo {
         margin-bottom: 10px;
     }
 
-    .mobile-filter {
-        width: 100%;
-    }
-
-
-    .mobile-filter .filter-options{
+    .menu-filter.for-mobile .filter-list{
         display: flex;
         width: 100%;
-    }
-
-    .mobile-filter > .filter-options > .mobile-article-filter {
-        min-width: 30%;
-        font-size: 2vh;
-        font-weight: bold;
-        width: initial;
-        height: 5vh;
-    }
-
-    .mobile-filter > .filter-options > .mobile-article-filter.activated {
-        background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
-        color: var(--filter-active-font-color);
-    }
-
-
-    /* ----------------------------- */
-    /* -- FILTER BUTTON TOOLTIPS --- */
-    /* ----------------------------- */
-
-
+    } */
 
     /* ----------------------------- */
     /* ----------- TILES ----------- */
     /* ----------------------------- */
-    .section-display > .tile-container > .tile.activated {display: grid;}
+    .section-display > .container > .tile.activated {display: grid;}
 
-    .section-display > .tile-container > .tile {
+    .section-display > .container > .tile {
         display: none;
         min-width: 35vw;
         min-height: 10vh;
@@ -720,7 +648,7 @@ dialog .portfolio-icon-container .lang-logo {
         margin-bottom: 5px;
     }
 
-    #myPortfolio-tile-container .tile.activated {
+    #myPortfolio.container .tile.activated {
         display: flex;
         flex-direction: column;
         max-width: 50%;

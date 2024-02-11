@@ -36,31 +36,31 @@ class NavBar {
         this.#activeElName = value;
     };
     get headerEl() {
-        return this.element.querySelector(`.mob-section-title`)
+        return this.element.querySelector(`.navbar-title.for-mobile`)
     }
     get hamburgerIcon() {
-        return this.element.querySelector('.mobile-nav-icon');
+        return this.element.querySelector('.navbar-icon.for-mobile');
     }
     get linkContainerEl() {
-        return this.element.querySelector('.nav-links-container');
+        return this.element.querySelector('.container.for-navbar-links');
     };
     get allLinkEl() {
-        return this.element.querySelectorAll('nav > .nav-links-container > a');
+        return this.element.querySelectorAll('nav > .container.for-navbar-links > a');
     };
 
 
     createElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
-            <h1 class="mob-section-title activated"></h1>
-            <div class="nav-links-container">
+            <h1 class="navbar-title for-mobile activated"></h1>
+            <div class="container for-navbar-links">
                 <a href="#" data-index="0" class="nav-link activated">About Me</a>
                 <a href="#" data-index="1" class="nav-link">Skills</a>
                 <a href="#" data-index="2" class="nav-link">Education</a>
                 <a href="#" data-index="3" class="nav-link">Experience</a>
                 <a href="#" data-index="4" class="nav-link">Portfolio</a>
             </div>
-            <a href="#" class="mobile-nav-icon">
+            <a href="#" class="navbar-icon for-mobile">
                 <i class="fa fa-bars"></i>
             </a>
          `;

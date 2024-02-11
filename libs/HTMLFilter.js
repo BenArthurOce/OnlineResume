@@ -75,10 +75,10 @@ class IntroductionFilter extends Filter {
     createFilterElement(id, heading1, heading2)  {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="mobile-filter activated" id="${this.id}-filter">
-                <ul class="filter-options">
-                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="mobile-article-filter">${heading2}</li>
+            <menu class="menu-filter for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-mobile">
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="filter-button for-article for-mobile">${heading1}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="filter-button for-article for-mobile">${heading2}</li>
                 </ul>
             </menu>
         `.trim();
@@ -101,11 +101,11 @@ class SkillsFilter extends Filter {
     createFilterElement(id, heading1, heading2, heading3) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="mobile-filter activated" id="${this.id}-filter">
-                <ul class="filter-options">
-                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="mobile-article-filter">${heading2}</li>
-                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="${heading3}" class="mobile-article-filter">${heading3}</li>
+            <menu class="menu-filter for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-mobile">
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="filter-button for-article for-mobile">${heading1}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="filter-button for-article for-mobile">${heading2}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="${heading3}" class="filter-button for-article for-mobile">${heading3}</li>
                 </ul>
             </menu>
         `.trim();
@@ -128,10 +128,10 @@ class EducationFilter extends Filter {
     createFilterElement(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="mobile-filter activated" id="${this.id}-filter">
-                <ul class="filter-options">
-                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="mobile-article-filter">${heading1}</li>
-                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="mobile-article-filter">${heading2}</li>
+            <menu class="menu-filter for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-mobile">
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="filter-button for-article for-mobile">${heading1}</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="filter-button for-article for-mobile">${heading2}</li>
                 </ul>
             </menu>
         `.trim();
@@ -154,12 +154,12 @@ class ExperienceFilter extends Filter {
     createFilterElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="pc-filter activated" id="${this.id}-filter">
-                <ul class="filter-options">
-                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="tile" class="pc-tile-filter" title="All">All</li>
-                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="Programming" class="pc-tile-filter" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="Accounting" class="pc-tile-filter" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="3" dataFilter="CustomerService" class="pc-tile-filter" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
+            <menu class="menu-filter for-tile for-pc for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-tile for-pc for-mobile">
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="tile" class="filter-button for-tile for-pc for-mobile" title="All">All</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="Programming" class="filter-button for-tile for-pc for-mobile" title="Information Technology"><i class="sidebar-icon fa fa-desktop icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="Accounting" class="filter-button for-tile for-pc for-mobile" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="3" dataFilter="CustomerService" class="filter-button for-tile for-pc for-mobile" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>
                 </ul>
             </menu>
         `.trim();
@@ -182,17 +182,17 @@ class PortfolioFilter extends Filter {
     createFilterElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="pc-filter activated" id="${this.id}-filter">
-                <ul class="filter-options">
-                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="tile" class="pc-tile-filter" title="All">All</li>
-                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="UserInterface" class="pc-tile-filter" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="Web" class="pc-tile-filter" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="3" dataFilter="Database" class="pc-tile-filter" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="4" dataFilter="Logic" class="pc-tile-filter" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="5" dataFilter="Games" class="pc-tile-filter" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="6" dataFilter="Efficiency" class="pc-tile-filter" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="7" dataFilter="DataSets" class="pc-tile-filter" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>
-                    <li role="button" dataParent="${this.id}" dataIndex="8" dataFilter="Finance" class="pc-tile-filter" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>
+            <menu class="menu-filter for-tile for-pc for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-tile for-pc for-mobile">
+                    <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="tile" class="filter-button for-tile for-pc for-mobile" title="All">All</li>
+                    <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="UserInterface" class="filter-button for-tile for-pc for-mobile" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="Web" class="filter-button for-tile for-pc for-mobile" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="3" dataFilter="Database" class="filter-button for-tile for-pc for-mobile" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="4" dataFilter="Logic" class="filter-button for-tile for-pc for-mobile" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="5" dataFilter="Games" class="filter-button for-tile for-pc for-mobile" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="6" dataFilter="Efficiency" class="filter-button for-tile for-pc for-mobile" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="7" dataFilter="DataSets" class="filter-button for-tile for-pc for-mobile" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>
+                    <li role="button" dataParent="${this.id}" dataIndex="8" dataFilter="Finance" class="filter-button for-tile for-pc for-mobile" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>
                 </ul>
             </menu>
         `.trim();
@@ -201,3 +201,6 @@ class PortfolioFilter extends Filter {
 };
 
 export {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter};
+
+
+// for-pc for-mobile

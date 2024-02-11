@@ -58,22 +58,23 @@ class IntroductionSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
             <section id="${this.id}" class="section-display activated">
-                <h1 class="pc-section-title">${this.name}:</h1>
-                <div class="filter-container" id="${this.id}-filter-container"></div>
-                <div class="article-container" id="${this.id}-article-container">
-                    <article class="pc-article" id="pc-${heading1}">
+                <h1 class="section-title for-pc">${this.name}:</h1>
+                <div class="container for-filter" id="${this.id}-filter-container"></div>
+                <div class="container for-article" id="${this.id}-article-container">
+
+                    <article class="article-with-text for-pc" id="pc-${heading1}">
                         <h2>${heading1}:</h2>
                         <p class="introduction"></p>
                     </article>
-                    <article class="pc-article" id="pc-${heading2}">
+                    <article class="article-with-list for-pc" id="pc-${heading2}">
                         <h2>${heading2}:</h2>
                     </article>
 
-                    <article class="mobile-article" id="mobile-${heading1}">
+                    <article class="article-with-text for-mobile" id="mobile-${heading1}">
                         <h2>${heading1}:</h2>
                         <p class="introduction"></p>
                     </article>
-                    <article class="mobile-article" id="mobile-${heading2}">
+                    <article class="article-with-list for-mobile" id="mobile-${heading2}">
                         <h2>${heading2}:</h2>
                     </article>
                 </div>
@@ -98,24 +99,24 @@ class EducationSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="section-display">
-            <h1 class="pc-section-title">${this.name}:</h1>
-            <div class="filter-container" id="${this.id}-filter-container"></div>
-            <div class="article-container" id="${this.id}-article-container">
-                <article class="pc-article" id="pc-${heading1}">
+            <h1 class="section-title for-pc">${this.name}:</h1>
+            <div class="container for-filter" id="${this.id}-filter-container"></div>
+            <div class="container for-article" id="${this.id}-article-container">
+
+                <article class="article-with-list for-pc" id="pc-${heading1}">
                     <h2>${heading1}:</h2>
                 </article>
-                <article class="pc-article" id="pc-${heading2}">
+                <article class="article-with-list for-pc" id="pc-${heading2}">
                     <h2>${heading2}:</h2>
                 </article>
 
-                <article class="mobile-article" id="mobile-${heading1}">
+                <article class="article-with-list for-mobile" id="mobile-${heading1}">
                     <h2>${heading1}:</h2>
                 </article>
-                <article class="mobile-article" id="mobile-${heading2}">
+                <article class="article-with-list for-mobile" id="mobile-${heading2}">
                     <h2>${heading2}:</h2>
                 </article>
             </div>
-         
         </section>
         `.trim();
         return tempEl.firstChild;
@@ -137,28 +138,30 @@ class SkillsSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="section-display">
-            <h1 class="pc-section-title">${this.name}:</h1>
-            <div class="filter-container" id="${this.id}-filter-container"></div>
-            <div class="article-container" id="${this.id}-article-container">
-                <article class="pc-article" id="pc-${heading1}">
+            <h1 class="section-title for-pc">${this.name}:</h1>
+            <div class="container for-filter" id="${this.id}-filter-container"></div>
+            <div class="container for-article" id="${this.id}-article-container">
+
+                <article class="article-with-list for-pc" id="pc-${heading1}">
                     <h2>${heading1}:</h2>
                 </article>
-                <article class="pc-article" id="pc-${heading2}">
+                <article class="article-with-list for-pc" id="pc-${heading2}">
                     <h2>${heading2}:</h2>
                 </article>
-                <article class="pc-article" id="pc-${heading3}">
+                <article class="article-with-list for-pc" id="pc-${heading3}">
                     <h2>${heading3}:</h2>
                 </article>
 
-                <article class="mobile-article" id="mobile-${heading1}">
+                <article class="article-with-list for-mobile" id="mobile-${heading1}">
                     <h2>${heading1}:</h2>
                 </article>
-                <article class="mobile-article" id="mobile-${heading2}">
+                <article class="article-with-list for-mobile" id="mobile-${heading2}">
                     <h2>${heading2}:</h2>
                 </article>
-                <article class="mobile-article" id="mobile-${heading3}">
+                <article class="article-with-list for-mobile" id="mobile-${heading3}">
                     <h2>${heading3}:</h2>
                 </article>
+
             </div>
         </section>
         `.trim();
@@ -181,9 +184,9 @@ class ExperiencesSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="section-display">
-            <h1 class="pc-section-title">${this.name}:</h1>
-            <div class="filter-container" id="${this.id}-filter-container"></div>
-            <div class="tile-container" id="${this.id}-tile-container"></div>
+            <h1 class="section-title for-pc">${this.name}:</h1>
+            <div class="container for-filter" id="${this.id}-filter-container"></div>
+            <div class="container for-tile" id="${this.id}-tile-container"></div>
         </section>
         `.trim();
         return tempEl.firstChild;
@@ -204,9 +207,9 @@ class PortfolioSection extends Section {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <section id="${this.id}" class="section-display">
-            <h1 class="pc-section-title">${this.name}:</h1>
-            <div class="filter-container" id="${this.id}-filter-container"></div>
-            <div class="tile-container" id="${this.id}-tile-container"></div>
+            <h1 class="section-title for-pc">${this.name}:</h1>
+            <div class="container for-filter" id="${this.id}-filter-container"></div>
+            <div class="container for-tile" id="${this.id}-tile-container"></div>
         </section>
         `.trim();
         return tempEl.firstChild;
