@@ -75,7 +75,7 @@ class HTMLExperienceTile extends HTMLTile {
     createTileElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <div class="tile activated">
+        <div class="tile activated for-experience">
             <div class="icon-container">
 		        <i class="icon"></i>
 		    </div>
@@ -133,7 +133,7 @@ class HTMLPortfolioTile extends HTMLTile {
     createTileElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <div class="tile activated">
+            <div class="tile activated for-portfolio">
                 <div class="container for-icons"></div>
                 <p class="projectName"></p>
                 <p class="projectSumSmall"></p>
