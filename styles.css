@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
 
-/* When on normal PC display: Display all elements with a "for-pc" tag */
-.for-pc {display: block;}
-
 /* When on normal PC display: Hide any elements with a "for-mobile" tag */
 .for-mobile {display: none;}
 
-/* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
-.for-pc.for-mobile { display: block }
+/* When on normal PC display: Display all elements with a "for-pc" tag */
+.for-pc {display: unset;}
 
+
+/* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
+/* .for-pc.for-mobile { display: unset } */
 
 /* ----------------------------- */
 /* -------- GENERAL CSS -------- */
@@ -59,6 +59,14 @@ h3 {
     margin-bottom: 10px;
 }
 
+
+/* ul {
+    list-style-type: none;
+} */
+
+ul li {
+    margin-bottom: 10px;
+}
 
 
 /* ----------------------------- */
@@ -214,8 +222,8 @@ nav a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
-    font-size: large;
     color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
+    font-size: calc(100% + 0.9vmin);            /* Adaptive font size of the naviation words */
 }
 
 nav > .container > a:hover,
@@ -230,29 +238,25 @@ nav > .container > a.activated {
 
 /* The <menu> element */
 .menu-filter { 
-    display: block;
-    width: 50%;
-    max-width: 50%;
+    /* display: block; */
+    width: 100%;
+    max-width: 100%;
 }
 
 /* The <ul> element */
-.filter-list.for-tile {
-    display: inline-flex;
-    align-items: center;                        /* Center words vertically */
-    justify-content: space-evenly;              /* Space menu filter items evenly */ 
+.filter-list {
+    /* display:flex; */
+    /* flex-direction: row; */
+    /* justify-items: center; */
+    width: 100%;
+    max-width: 100%;
 }
 
 
-/* The <li> element */
-/* Interactive filter buttons/words that have active status */
-
-.filter-button.for-tile {
-    display: flex;
-}
-
-.filter-button.for-tile {
-    cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
+.filter-button {
     display: inline-flex;                       /* Keeps the list items next to each other in a horizontal way*/
+    cursor: pointer;                            /* Mouse pointer turns into a pointer when hovering over li*/
+
     background: var(--filter-basic-background-color);    /* White background */
     color: var(--filter-basic-font-color);           /* Gray font colour */
     transition: all 0.3s ease-in-out;           /* Applies a smooth transition effect to all style changes */
@@ -269,6 +273,12 @@ nav > .container > a.activated {
 
     position: relative;                         /* Added for positioning the tooltip */
 }
+
+.filter-button.activated {
+    background: var(--filter-active-background-color);     
+    color: var(--filter-active-font-color);
+}
+
 
 .filter-button.for-tile:hover,
 .filter-button.for-tile.activated {
@@ -311,7 +321,8 @@ nav > .container > a.activated {
 .tile {
     display: none;                          /* Activated tile class is starting class, which has a display of "grid" */
     grid-template-columns: 30% 1fr 1fr;     /* To set the layout of the contents of the tile */
-    grid-template-rows: auto 1fr; 
+    /* grid-template-rows: auto 1fr;  */
+    grid-template-rows: 23% 23% 23% 23%; 
 
     cursor: pointer;
     background-color: var(--tile-basic-background-color);
@@ -322,7 +333,12 @@ nav > .container > a.activated {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 5px 10px;
-    max-height: 80%                          /* Prevents overlapping on the grid */
+    max-height: 70%;                          /* Prevents overlapping on the grid */
+
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
 }
 
 
@@ -339,39 +355,45 @@ nav > .container > a.activated {
 
 /* Logo container */
 .tile > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 0;
     grid-column: 1 / span 1;
-    grid-row: 1 / span 3;
+    grid-row: 2 / 4;
     padding-right: 5px;
+    background-color: inherit;
+    color: inherit;
+    /* max-height: 100%; */
+    align-self: start;
 }
 
 /* Tile Header */
 .tile > p:nth-child(2) {
     grid-column: 2 / span 2;
-    grid-row: 1 / span 1;
+    grid-row: 1 / span 2;
     font-weight: 900;
+    align-self: center;
 }
+
 
 /* Tile Desc */
 .tile > p:nth-child(3) {
     grid-column: 2 / span 2;
-    grid-row: 2 / span 2;
-    align-self: end; /* Align the element to the bottom within the grid area */
+    grid-row: 3 / span 2;
+    /* grid-row: 3 / 4; */
+    align-self: center; /* Align the element to the bottom within the grid area */
     text-align: center; /* Horizontally center the text */
 }
 
-/* Portfolio Programming Languages */
-.tile .program-icon {
-    height: var(--icon-size-medium);
-    width: var(--icon-size-medium);
-    flex-shrink: 0; /* Prevent icons from shrinking */
-}
 
-.tile .container.for-icons > img {
-    height: var(--icon-size-medium);
-    width: var(--icon-size-medium);
-    flex-shrink: 0; /* Prevent icons from shrinking */
+.program-icon {
+    scale: 0.7;
+    width: inherit;
+    height: initial;
+    flex-shrink: 0;
+    /* max-height: 33%; */
 }
-
 
 
 /* ----------------------------- */
@@ -435,6 +457,8 @@ dialog .closeBtn {
 }
 
 
+
+
 /* ----------------------------- */
 /* ---- OVERLAY - PORTFOLIO ---- */
 /* ----------------------------- */
@@ -488,77 +512,44 @@ dialog .closeBtn {
 
 
 
+
+
+
 /* ----------------------------- */
 /* ---------- MOBILE ----------- */
 /* ----------------------------- */
 
 @media (max-width: 600px) {
 
-    html {font-size: calc(60% + 0.6vmin);}
-    nav > .navbar-icon {display:initial}
-    .projectSumSmall {display: none;}
 
 
     /* Hide any elements with a "for-pc" tag */
     .for-pc {display: none;}
 
     /* Display all elements with a "for-mobile" tag */
-    .for-mobile {display: initial;}
+    .for-mobile {display: unset;}
+
+
+
+    /* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
+    /* .for-pc.for-mobile { display: inherit } */
+
 
     /* Default display for mobile articles needs to be none */
     .article-with-text.for-mobile {display: none;}
     .article-with-list.for-mobile {display: none;}
 
-    /* The displays for mobile can only be revealed when "activated" */
-    .article-with-text.for-mobile.activated {display: initial;}
-    .article-with-list.for-mobile.activated {display: initial;}
+    .projectSumSmall {display: none;}
 
+    .for-mobile.activated {display: inline-grid;}
 
-
-    /* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
-    .for-pc.for-mobile { display: block }
-
-    
-    .menu-filter.for-tile.for-pc.for-mobile { display: inline-flex }
-    .filter-list.for-tile.for-pc.for-mobile { display: inline-block }
-    .filter-button.for-tile.for-pc.for-mobile { display: inline-flex }
-
-
-    section {
-        padding: 3%;
+    article.for-mobile {
+        box-shadow: none;
     }
 
-
-
-    p, li {
-        width: initial;
-    } 
-
-    h1 {
-        margin-bottom: initial;
-        border-bottom: initial;
-    }
-
-    h1 {
-        margin-left: 5px;
-        margin-top: 5px;
-    }
-
-    h3 {
-        margin-left: 5px;
-        margin-top: 5px;
-    }
-
-    /* Global text settings for all articles */
-    .article-with-list ul,
-    .article-with-text p {
-        margin-left: 10%;
-    }
-
-    /* ----------------------------- */
-    /* -------- CONTAINERS --------- */
-    /* ----------------------------- */ 
-
+    /* Overrides the previous "display: none" for the articles in regards to overlay */
+    .article-with-text.for-overlay {display: unset;}
+    .article-with-list.for-overlay {display: unset;}
 
     /* ----------------------------- */
     /* -- ARTICLE/TILE CONTAINERS -- */
@@ -568,8 +559,6 @@ dialog .closeBtn {
         grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
         gap: 4%;
     }
-
-
 
 
     /* ----------------------------- */
@@ -583,44 +572,9 @@ dialog .closeBtn {
         background-color: var(--nav-basic-background-color);
         position: relative;
         display: flex;             /* Gives space for the hamburger icon */
+        padding-left: 2%;
     }
 
-
-    /* Hide the links inside the navigation menu (except for logo/home) */
-    nav > .container{
-        display: none;
-    }
-
-    nav > .navbar-links-container.activated {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nav-link.activated {
-        background-color: var(--nav-active-background-color);
-        color: var(--nav-active-font-color)
-    }
-
-    nav > .mob-section-title {
-        align-items: center;
-        justify-content: center;
-        color: var(--nav-basic-font-color)
-    }
-
-    nav > .mob-section-title.activated{ 
-        display: flex;
-        flex-direction: column;  
-        color: var(--nav-active-font-color)  
-    }
-
-    /* Style navigation menu links */
-    nav  a {
-        color: var(--nav-basic-font-color);
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        display: block;
-    }
 
     /* Style the hamburger menu */
     nav > .navbar-icon {
@@ -631,17 +585,44 @@ dialog .closeBtn {
         top: 0;
     }
 
-    /* Add a grey background color on mouse-over */
-    nav > .container> a:hover {
-        background-color: var(--nav-active-background-color);
-        color: var(--nav-active-font-color)
+    /* Style navigation menu links (includes menu text and the hamburger icon) */
+    nav  a {
+        color: var(--nav-basic-font-color);
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        display: block;
     }
 
-    /* Active link */
-    nav > .container> a.activated {
-        background-color: var(--nav-active-background-color);
-        color: var(--nav-active-font-color)
+    /* Mobile header standard display */
+    .navbar-title.for-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: initial;
     }
+   
+    /* The mobile header is only displayed when "activated". When the hamburger menu is selected, its deactivated */
+    .navbar-title.for-mobile.activated {
+        display: none;
+    }
+
+    /* The navigation links on mobile is hidden by default. Activated when hamburger icon is clicked */
+    .container.for-navbar-links {
+        display: none
+    }
+
+    /* When the "hamburger" icon is clicked, the container becomes activated and displays all links */
+    .container.for-navbar-links.activated{
+        display: inline-block;
+    }
+
+    nav > .container > a:hover {
+        color: var(--nav-active-font-color);                                /* Change text color on hover or click */
+        background-color: var(--filter-active-background-color);            /* Change text color on hover or click */
+    }
+
+
 
 
     /* ----------------------------- */
@@ -649,33 +630,73 @@ dialog .closeBtn {
     /* ----------------------------- */
 
     /* The <menu> element */
-    .menu-filter { 
-
-        width: 100%;
-        max-width: 100%;
-
-    }
-
-    .filter-list {
+    /* .menu-filter { 
         display: flex;
         width: 100%;
         max-width: 100%;
-        align-items: center;                        /* Center words vertically */
-        justify-content: space-around;              /* Space menu filter items evenly */ 
-    }
+    } */
 
 
-    /* The <li> element */
-    /* Interactive filter buttons/words that have active status */
-    .filter-button.for-tile {
+    /* The <ul> element */
+    /* .filter-list {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        align-items: center;              
+        justify-content: space-around;              
+    } */
+
+    
+
+
+    /* .filter-button.for-article {
         font-size: 2vh;  
         width: 4vh;
         height: 4vh;
+    } */
+
+    /* .filter-button.for-tile {
+        font-size: 2vh;  
+        min-width: 4vh;
+        min-height: 4vh;
+    } */
+
+    /* .filter-button.for-tile {
+        font-size: large
+    } */
+
+    /* .menu-filter {
+        display: block;
     }
 
+    .filter-list.for-tile {
+        display: inline-block;
+    } */
+
+    .menu-filter.for-article {
+        display: inline-flex;
+        /* align-content: space-between; */
+    }
+
+    .filter-list.for-article {
+        display: inline-flex;
+        /* align-content: space-between; */
+    }
+
+    
 
     .filter-button.for-article {
-        font-size: large;
+        display: inline-flex;
+        font-size: 4vw; 
+        min-width: 32%;
+        min-height: 4vh;
+    }
+
+    .filter-button.for-tile {
+        display: inline-flex;
+        font-size: 2vh;  
+        min-width: 4vh;
+        min-height: 4vh;
     }
 
 
@@ -683,30 +704,44 @@ dialog .closeBtn {
     /* ----------------------------- */
     /* ----------- TILES ----------- */
     /* ----------------------------- */
-    .tile.activated {display: grid;}
+    
+
 
     .tile {
-        display: none;
         min-width: 35vw;
         min-height: 10vh;
-        width: 100%;
-        margin-top: 5px;
-        margin-bottom: 5px;
         max-width: 50%;                 /* Stops a single tile from taking up the entire row */
     }
 
-    .icon-container > img{
-        margin-left: 3px;
+
+    .program-icon {
+        max-height: 95%;                /* Temp measure to stop the programming icons spanning outside of the tile on mobile. */
     }
-
-
+    
 
     /* ----------------------------- */
     /* ----- OVERLAY - GENERAL ----- */
     /* ----------------------------- */
 
+    .article-with-list.for-overlay > h3 {
+        position: sticky;
+        top: 0;
+        right: 0;
+        /* margin-bottom: 10px; */
+        margin: 0;
+        padding: 5%;
+        background-color: var(--article-background-color)
+    }
 
+    /* ----------------------------- */
+    /* --- OVERLAY - EXPERIENCE ---- */
+    /* ----------------------------- */
 
+    /* Styles specific to overlay */
+    .container.for-overlay.for-experience {
+        grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
+        grid-template-rows: 20% 1fr;
+    }
 
 
     /* ----------------------------- */
@@ -715,18 +750,22 @@ dialog .closeBtn {
 
     /* Styles specific to overlay */
     .container.for-overlay.for-portfolio {
-        grid-template-columns: 30% 70%;
-        grid-template-rows: auto 1fr;
+        /* grid-template-columns: 30% 70%; */
+        /* grid-template-rows: auto 1fr; */
+        grid-template-columns: initial;
+        grid-template-rows: 23% 23% 23% 23%;
     }
 
     /* First Article - Description of portfolio */
     .container.for-overlay.for-portfolio > article:nth-child(1) {
         grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
     }
 
     /* Second Article - Slideshow images for portfolio */
     .container.for-overlay.for-portfolio > article:nth-child(2) {
-        grid-column: 2 / span 1;
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 2;
     }
 
 
@@ -753,18 +792,19 @@ dialog .closeBtn {
         padding: 5%;
     }
 
-    .image-container > img {
+    /* .image-container > img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    } */
+
+
+    .image-container.for-overlay.for-portfolio > img {
+        width: 100%;
+        height: 100%;
+        /* object-fit: cover;  */
     }
 
-
-
-
-    /* ----------------------------- */
-    /* ---- OVERLAY - PORTFOLIO ---- */
-    /* ----------------------------- */
 
 
 

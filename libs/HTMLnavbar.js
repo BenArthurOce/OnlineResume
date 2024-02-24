@@ -52,7 +52,7 @@ class NavBar {
     createElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
-            <h1 class="navbar-title for-mobile activated"></h1>
+            <h1 class="navbar-title for-mobile"></h1>
             <div class="container for-navbar-links">
                 <a href="#" data-index="0" class="nav-link activated">About Me</a>
                 <a href="#" data-index="1" class="nav-link">Skills</a>
@@ -85,7 +85,7 @@ class NavBar {
         this.allLinkEl.forEach((link, i) => {
             link.addEventListener('click', () => { 
                 this.linkContainerEl.classList.remove('activated')
-                this.headerEl.classList.add('activated')
+                this.headerEl.classList.remove('activated')
             });  
         });
     };

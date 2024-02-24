@@ -75,8 +75,8 @@ class IntroductionFilter extends Filter {
     createFilterElement(id, heading1, heading2)  {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="menu-filter for-mobile" id="${this.id}-filter">
-                <ul class="filter-list for-mobile">
+            <menu class="menu-filter for-article for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-article for-mobile">
                     <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="filter-button for-article for-mobile">${heading1}</li>
                     <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="filter-button for-article for-mobile">${heading2}</li>
                 </ul>
@@ -101,8 +101,8 @@ class SkillsFilter extends Filter {
     createFilterElement(id, heading1, heading2, heading3) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="menu-filter for-mobile" id="${this.id}-filter">
-                <ul class="filter-list for-mobile">
+            <menu class="menu-filter for-article for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-article for-mobile">
                     <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="filter-button for-article for-mobile">${heading1}</li>
                     <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="filter-button for-article for-mobile">${heading2}</li>
                     <li role="button" dataParent="${this.id}" dataIndex="2" dataFilter="${heading3}" class="filter-button for-article for-mobile">${heading3}</li>
@@ -128,8 +128,8 @@ class EducationFilter extends Filter {
     createFilterElement(id, heading1, heading2) {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <menu class="menu-filter for-mobile" id="${this.id}-filter">
-                <ul class="filter-list for-mobile">
+            <menu class="menu-filter for-article for-mobile" id="${this.id}-filter">
+                <ul class="filter-list for-article for-mobile">
                     <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${heading1}" class="filter-button for-article for-mobile">${heading1}</li>
                     <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${heading2}" class="filter-button for-article for-mobile">${heading2}</li>
                 </ul>

@@ -134,7 +134,7 @@ class HTMLPortfolioTile extends HTMLTile {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
             <div class="tile activated">
-                <div class="icon-container"></div>
+                <div class="container for-icons"></div>
                 <p class="projectName"></p>
                 <p class="projectSumSmall"></p>
             </div>
@@ -150,7 +150,7 @@ class HTMLPortfolioTile extends HTMLTile {
         this.element.querySelector('.projectSumSmall').textContent = this.data.summarySmall;
 
         // Add programming icons
-        const iconContainer = this.element.querySelector('.icon-container');
+        const iconContainer = this.element.querySelector('.container.for-icons');
         this.data.projectLangs.forEach(lang => {
 
             // Get SVG of programming logo
