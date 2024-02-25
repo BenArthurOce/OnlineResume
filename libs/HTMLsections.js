@@ -50,7 +50,7 @@ class IntroductionSection extends Section {
     };
 
     initSection() {
-        this.element = this.createSection(this.id, 'Introduction', 'KeySkills');
+        this.element = this.createSection(this.id, 'Introduction', 'Key Skills');
         this.renderToPage(this.element);
     };
 
