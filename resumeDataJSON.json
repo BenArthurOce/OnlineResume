@@ -1,112 +1,119 @@
 {
     "aboutMe": {
-        "email": "mailto:benjaminmatthewarthur@gmail.com",
-        "phone": "MyPhone",
-        "linkedin": "https://www.linkedin.com/in/benjamin-arthur-125b07ab/",
-        "github": "https://github.com/BenArthurOce",
-        "background": "Background: Programming, Accounting, Finance",
-        "introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
+         "email":       "mailto:benjaminmatthewarthur@gmail.com"
+        ,"phone":       "MyPhone"
+        ,"linkedin":    "https://www.linkedin.com/in/benjamin-arthur-125b07ab/"
+        ,"github":      "https://github.com/BenArthurOce"
+        ,"background":  "Background: Programming, Accounting, Finance"
+        ,"introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
     },
     "myEducations": [
     {
-        "degree": "Javascript Course",
-        "institution": "General Assembley",
-        "tags": ["IT"]
+        "degree":       "Javascript Course",
+        "institution":  "General Assembly",
+        "tags":         ["IT"]
     },
     {
-        "degree": "1 month unpaid internship",
-        "institution": "Interfi Systems",
-        "tags": ["IT"]
+        "degree":       "1-month unpaid internship",
+        "institution":  "Interfi Systems",
+        "tags":         ["IT"]
     },
     {
-        "degree": "Certificate III in Computer Information Technology",
+        "degree":       "Certificate III in Computer Information Technology",
         "institution": "Gordon TAFE - East Geelong campus",
-        "tags": ["IT"]
+        "tags":         ["IT"]
     },
     {
-        "degree": "Bachelor of Commerce - Accounting and Finance",
-        "institution": "Deakin University - Waurn Ponds campus",
-        "tags": ["Finance"]
+        "degree":       "Bachelor of Commerce - Accounting and Finance",
+        "institution":  "Deakin University - Waurn Ponds campus",
+        "tags":         ["Finance"]
     },
     {
-        "degree": "HR Block Tax Consultant Course (3 Taxation Seasons)",
-        "institution": "HR Block Belmont/Werribee",
-        "tags": ["Finance"]
+        "degree":       "HR Block Tax Consultant Course (3 Taxation Seasons)",
+        "institution":  "HR Block Belmont/Werribee",
+        "tags":         ["Finance"]
     },
     {
-        "degree": "MYOB, Payroll, BAS + IAS short courses",
-        "institution": "Gordon TAFE - Geelong campus",
-        "tags": ["Finance"]
+        "degree":       "MYOB, Payroll, BAS + IAS short courses",
+        "institution":  "Gordon TAFE - Geelong campus",
+        "tags":          ["Finance"]
     }
     ],
     "mySkills": {
         "skillsKey":            [
-                                "Database design and management"
-                                ,"Transact-SQL Queries"
-                                ,"Extremely high knowledge of Microsoft Excel"
-                                ,"Process automation"
-                                ,"Technical documentation and maintaining"
-                                ,"User Interface design"
+                                    "Database design and management"
+                                    ,"Transact-SQL Queries"
+                                    ,"Excel Power User with Proficiency in Advanced Functions and Process Automation"
+                                    ,"Process automation through the use of Power Automate and Complex Excel Formulas"
+                                    ,"Ability to produce and maintain detailed knowledgebases with technical documentation"
+                                    ,"User Interface design"
                                 ]
         ,"skillsLangages":      [
-                                "React"
-                                ,"Python"
-                                ,"SQL"
-                                ,"C#"
-                                ,"Javascript"
-                                ,"VBA"
+                                    "React"
+                                    ,"Javascript"
+                                    ,"HTML, CSS"
+                                    ,"Python"
+                                    ,"SQL"
+                                    ,"C#"
+                                    ,"VBA"
                                 ]
         ,"skillsTechincal":     [
-                                "Microsoft SQL Server Manager Studio 2019"
-                                ,"Microsoft Excel"
-                                ,"Microsoft Visual Studio 2019"
-                                ,"Visual Studio Code"
-                                ,"Atlassian JIRA"
-                                ,"Atlassian Confluence"
-                                ,"Citrix Desktops"
-                                ,"Office365, Sharepoint, Teams"
-                                ,"Github"
-                                ,"Slack"
-                                ,"React, NodeJs, HTML, CSS (Web Development)"
-                                ,"Various cloud accounting softwares"
+                                    "Microsoft SQL Server Management Studio 2019"
+                                    ,"Microsoft Excel"
+                                    ,"Microsoft Visual Studio 2019"
+                                    ,"Visual Studio Code"
+                                    ,"Atlassian JIRA"
+                                    ,"Atlassian Confluence"
+                                    ,"Citrix Desktops"
+                                    ,"Office365, Sharepoint, Teams"
+                                    ,"Github"
+                                    ,"Slack"
+                                    ,"Power Automate Flows"
+                                    ,"React, NodeJs, HTML, CSS (Web Development)"
+                                    ,"Various cloud accounting software"
                                 ]
         ,"skillsSoft":          [
-                                "Software Support"
-                                ,"Database Management"
-                                ,"Collaboration and Teamwork"
-                                ,"Documentation and Communication"
-                                ,"Client Services"
-                                ,"Focused Attention to Detail"
-                                ,"Critical and Creative Thinking"
-                                ,"Task and Deadline Management"
-                                ,"Technical Tools"
-                                ,"Workplace Adaptability"
-                                ,"Continuous Learning and Growth"
-                                ,"Task and Deadline Management"
+                                    "Software Support."
+                                    ,"Database Management."
+                                    ,"Collaboration and Teamwork."
+                                    ,"Documentation and Communication."
+                                    ,"Client Services."
+                                    ,"Focused Attention to Detail."
+                                    ,"Critical and Creative Thinking."
+                                    ,"Task and Deadline Management."
+                                    ,"Technical Tools."
+                                    ,"Workplace Adaptability."
+                                    ,"Continuous Learning and Growth."
+                                    ,"Expert in efficiency-boosting user tricks for streamlined operations."
                                 ]
     },
 
-
     "myExperiences": [
     {
-         "company":         "Shire of Queenscliffe"
+         "company":         "Borough of Queenscliffe"
         ,"address":         "Learmonth Street, Queenscliffe"
         ,"position":        "Systems Accountant"
-        ,"period":          "Jun-2023 to Jan-2024"
-        ,"extraInfo":       "Contract Part Time Basis"
+        ,"period":          "Jun-2023 to Current"
+        ,"extraInfo":       "Contracted part-time basis"
         ,"tags":            ["Programming", "HelpDesk", "Accounting"]
         ,"softwares":       [
-                                 "Microsfot Business Dynamics 365"
+                                 "Microsoft Dynamics 365 Business Central"
+                                ,"Microsoft Sharepoint"
+                                ,"Microsoft Teams, 365 Environment"
                                 ,"Microsoft Excel"
+                                ,"myAgency Portal"
+                                ,"Power Automate Flows"
+                                ,"Visual Studio Code"
+                                ,"Various other council related SaaS such as RMS, Councilwise, Greenlight"
                             ]
         ,"duties":          [
                                 "Facilitated the transition to the new accounting system, Business Central, by learning its functionalities and assisting with data migration."
-                                ,"Provided training and support to other staff members on using Business Central, including creating documentation for reference."
                                 ,"Created custom detailed trial balance reports by combining and analyzing multiple data sources in Excel."
-                                ,"Conducted bank reconciliations to ensure accuracy and completeness of financial records."
-                                ,"Managed accounts payable processes, including invoice processing and vendor payments."
                                 ,"Contributed to process improvement initiatives by identifying opportunities for automation and efficiency gains."
                                 ,"Demonstrated strong analytical skills and attention to detail in handling complex financial data and reconciliations."
+                                ,"Provided training and support to other staff members on using Business Central, including creating documentation for reference."
+                                ,"Managed accounts payable processes, including invoice processing and vendor payments."
+                                ,"Conducted bank reconciliations to ensure accuracy and completeness of financial records."
                             ]
     },
     {
@@ -144,7 +151,8 @@
         ,"extraInfo":       ""
         ,"tags":            ["Accounting", "CustomerService"]
         ,"softwares":       [
-                                 "Xero"
+                                 "Xero Cloud Accounting"
+                                ,"Xero Practice Manager"
                                 ,"MYOB"
                                 ,"Intuit Quickbooks"
                                 ,"CCH iFirm"
@@ -156,7 +164,7 @@
         ,"duties":          [
                                 "Proficiently prepared Income Tax Returns and financial statements for companies, partnerships, and trusts using CCH iFirm, ensuring accuracy and compliance with regulatory requirements."
                                 ,"Assumed responsibility for managing ASIC lodgement requirements for all clients, ensuring timely submission and adherence to regulatory deadlines."
-                                ,"Created procedures,instructions and programs for proper record-keeping and task completion."
+                                ,"Created procedures, instructions and programs for proper record-keeping and task completion."
                             ]
     },
     {
@@ -167,9 +175,11 @@
         ,"extraInfo":       "Temp COVID support"
         ,"tags":            ["Accounting"]
         ,"softwares":       [
-                                "Handisoft"
-                                ,"Xero"
+                                "Handisoft Desktop"
+                                ,"Handisoft Practice Management"
+                                ,"Xero Cloud Accounting"
                                 ,"Microsoft Excel"
+                                ,"Microsoft Outlook"
                             ]
         ,"duties":          [
                                 "Preparing of Income Tax Returns and financials of companies, partnerships, and trusts"
@@ -186,10 +196,14 @@
         ,"extraInfo":       ""
         ,"tags":            ["Accounting"]
         ,"softwares":       [
-                                 "Xero"
+                                 "Xero Cloud Accounting"
+                                ,"Xero Practice Manager"
                                 ,"MYOB AccountRight Desktop"
                                 ,"Reckon Elite"
-                                ,"State Revenue Office Services"
+                                ,"State Revenue Portal"
+                                ,"Workcover Portal"
+                                ,"Microsoft Excel"
+                                ,"Microsoft Outlook"
                             ]
         ,"duties":          [
                                  "Preparing of Income Tax Returns, BAS, and IAS obligations of partnerships, companies and trusts"
@@ -207,10 +221,12 @@
         ,"tags":            ["Accounting", "CustomerService"]
         ,"extraInfo":       ""
         ,"softwares":       [
-                                 "Xero"
+                                 "Xero Cloud Accounting"
                                 ,"MYOB"
                                 ,"SageOne"
                                 ,"Handisoft Practice Management"
+                                ,"Microsoft Excel"
+                                ,"Microsoft Outlook"
                             ]
         ,"duties":          [
                                  "Preparing of Income Tax Returns, BAS and IAS obligations of partnerships, companies and trusts"
@@ -227,26 +243,30 @@
         ,"tags":            ["CustomerService"]
         ,"softwares":       [
                                 "ATO in-house software"
+                                ,"Siebel"
                             ]
-        ,"duties":          [
-                                 "Outbound and Inbound telephony to achieve lodgement of overdue tax obligations and compliance activities"
-                                ,"Outbound telephony to arrange payment plans of debt collections from required taxpayers"
-                                ,"Engaging and encouraging clients to use ATO Online Services including: MyGov, MyTax, business online portals, and the ABR"
-                            ]
+        ,"duties": [
+                                "Managed inbound and outbound phone communications to facilitate the lodgement of overdue tax obligations and assist individuals with compliance with taxation laws and regulations."
+                                ,"Initiated outbound calls to organize payment plans for debt collections, effectively negotiating repayment terms with taxpayers to resolve outstanding tax liabilities."
+                                ,"Engaged clients to utilize ATO digital platforms such as MyGov, MyTax, business online portals, and the ABR, to assist individuals with streamline their tax lodgements in the future."
+                                ,"Provided personalized assistance and guidance to taxpayers, addressing inquiries, clarifying tax-related queries, and offering support whem required."
+        ]
     },
     {
          "company":         "H&R Block - Geelong Office"
         ,"address":         "Malop Street, Geelong"
         ,"position":        "Taxation Consultant"
         ,"period":          "Oct 2014 - Sept 2016 (Seasonally)"
-        ,"extraInfo":       "Three taxation seasons between July and October of each year"
+        ,"extraInfo":       "Three taxation seasons from July to October annually"
         ,"tags":            ["CustomerService"]
         ,"softwares":       [
                                "Reckon Elite"
                             ]
-        ,"duties":          [
-                                "Independently prepared tax returns for individuals, partnerships, and small businesses."
-                               ,"Inbound and outbound telephony duties including cold calling prior clients and apportionment booking."
+        ,"duties": [
+                                 "Prepared tax returns for individuals, partnerships, and small businesses independently."
+                                ,"Handled inbound and outbound calls, assisting clients with inquiries and scheduling appointments."
+                                ,"Provided expert guidance on tax-related matters to clients, optimizing their tax positions."
+                                ,"Maintained accurate client records and documentation, ensuring compliance with tax regulations."
                             ]
     }
     ],
@@ -330,6 +350,9 @@
         ,"projectUrl":      "https://github.com/BenArthurOce/InstalmentAmortisationSchedule"
         ,"projectImages":   [
                                 "imgportfolios\\PlaceHolderImage.png"
+                                ,"imgportfolios\\PlaceHolderImage.png"
+                                ,"imgportfolios\\PlaceHolderImage.png"
+                                ,"imgportfolios\\PlaceHolderImage.png"
                             ]
     },
     {

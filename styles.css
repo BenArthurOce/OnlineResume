@@ -522,6 +522,11 @@ dialog .closeBtn {
 @media (max-width: 600px) {
 
 
+    #wrapper {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
 
     /* Hide any elements with a "for-pc" tag */
     .for-pc {display: none;}
@@ -550,6 +555,13 @@ dialog .closeBtn {
     /* Overrides the previous "display: none" for the articles in regards to overlay */
     .article-with-text.for-overlay {display: unset;}
     .article-with-list.for-overlay {display: unset;}
+
+
+    .article-with-list,
+    .article-with-text {
+        font-size: calc(80% + 0.9vmin);
+        line-height: calc(150% + 0.9vmin);
+    }
 
     /* ----------------------------- */
     /* -- ARTICLE/TILE CONTAINERS -- */
@@ -629,50 +641,6 @@ dialog .closeBtn {
     /* ------ FILTER BUTTONS ------- */
     /* ----------------------------- */
 
-    /* The <menu> element */
-    /* .menu-filter { 
-        display: flex;
-        width: 100%;
-        max-width: 100%;
-    } */
-
-
-    /* The <ul> element */
-    /* .filter-list {
-        display: flex;
-        width: 100%;
-        max-width: 100%;
-        align-items: center;              
-        justify-content: space-around;              
-    } */
-
-    
-
-
-    /* .filter-button.for-article {
-        font-size: 2vh;  
-        width: 4vh;
-        height: 4vh;
-    } */
-
-    /* .filter-button.for-tile {
-        font-size: 2vh;  
-        min-width: 4vh;
-        min-height: 4vh;
-    } */
-
-    /* .filter-button.for-tile {
-        font-size: large
-    } */
-
-    /* .menu-filter {
-        display: block;
-    }
-
-    .filter-list.for-tile {
-        display: inline-block;
-    } */
-
     .menu-filter.for-article {
         display: inline-flex;
         /* align-content: space-between; */
@@ -681,9 +649,7 @@ dialog .closeBtn {
     .filter-list.for-article {
         display: inline-flex;
         /* align-content: space-between; */
-    }
-
-    
+    } 
 
     .filter-button.for-article {
         display: inline-flex;
@@ -732,14 +698,24 @@ dialog .closeBtn {
     /* ----- OVERLAY - GENERAL ----- */
     /* ----------------------------- */
 
-    .article-with-list.for-overlay > h3 {
+    .for-overlay > h3 {
         position: sticky;
         top: 0;
         right: 0;
         /* margin-bottom: 10px; */
         margin: 0;
-        padding: 5%;
+        padding: 1%;
         background-color: var(--article-background-color)
+    }
+
+
+    .article-with-list.for-overlay ul {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    ul.for-overlay {
+        margin-left: 5px;
     }
 
     /* ----------------------------- */
@@ -751,6 +727,12 @@ dialog .closeBtn {
         grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
         grid-template-rows: 20% 1fr;
     }
+
+    /* First Article - Experience details */
+    .container.for-overlay.for-experience > article:nth-child(1) {
+    grid-column: 1 / span 4;                           /* Cover 100%% of the top row */
+    grid-row: 1 / span 1;
+}
 
 
     /* ----------------------------- */
