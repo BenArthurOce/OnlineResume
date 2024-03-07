@@ -9,34 +9,34 @@
     },
     "myEducations": [
     {
-        "degree":       "Javascript Course",
-        "institution":  "General Assembly",
-        "tags":         ["IT"]
+         "degree":       "12 week Javascript Course"
+        ,"institution":  "General Assembly"
+        ,"tags":         ["IT"]
     },
     {
-        "degree":       "1-month unpaid internship",
-        "institution":  "Interfi Systems",
-        "tags":         ["IT"]
+         "degree":       "1-month unpaid internship"
+        ,"institution":  "Interfi Systems"
+        ,"tags":         ["IT"]
     },
     {
-        "degree":       "Certificate III in Computer Information Technology",
-        "institution": "Gordon TAFE - East Geelong campus",
-        "tags":         ["IT"]
+         "degree":       "Certificate III in Computer Information Technology"
+        ,"institution": "Gordon TAFE - East Geelong campus"
+        ,"tags":         ["IT"]
     },
     {
-        "degree":       "Bachelor of Commerce - Accounting and Finance",
-        "institution":  "Deakin University - Waurn Ponds campus",
-        "tags":         ["Finance"]
+         "degree":       "Bachelor of Commerce - Accounting and Finance"
+        ,"institution":  "Deakin University - Waurn Ponds campus"
+        ,"tags":         ["Finance"]
     },
     {
-        "degree":       "HR Block Tax Consultant Course (3 Taxation Seasons)",
-        "institution":  "HR Block Belmont/Werribee",
-        "tags":         ["Finance"]
+         "degree":       "HR Block Tax Consultant Course (3 Taxation Seasons)"
+        ,"institution":  "HR Block Belmont/Werribee"
+        ,"tags":         ["Finance"]
     },
     {
-        "degree":       "MYOB, Payroll, BAS + IAS short courses",
-        "institution":  "Gordon TAFE - Geelong campus",
-        "tags":          ["Finance"]
+         "degree":       "MYOB, Payroll, BAS + IAS short courses"
+        ,"institution":  "Gordon TAFE - Geelong campus"
+        ,"tags":          ["Finance"]
     }
     ],
     "mySkills": {

@@ -1,16 +1,34 @@
 import {HTMLExperienceOverlay, HTMLPortfolioOverlay} from './HTMLoverlay.js';
 
 // Base class
-class HTMLTile {
+class Tile {
+    #className;
+    #classType;
+    #parentEl;
     #element;
     #data;
-    #parentEl;
-
     constructor(data, parentEl) {
-        this.#element = '';
-        this.#data = data;
+        this.#className = "Tile";
+        this.#classType = null
         this.#parentEl = parentEl
-        this.initTile();
+        this.#element = null;
+        this.#data = data;
+        this.createTileElement();       // Different functions between classes. Each creates a tile element
+        this.applyInfoToElement();      // Different functions between classes. Add icons, tags to the tile element
+        this.renderToPage();            // Shared function. Adds Tile() to the DOM
+        this.addLocalEventListeners();  // Shared function. Style change when hovered. Overlay() presented when clicked
+    };
+    get className() {
+        return this.#className;
+    };
+    get classType() {
+        return this.#classType;
+    };
+    set classType(value) {
+        this.#classType = value;
+    };
+    get parentEl() {
+        return this.#parentEl;
     };
     get element() {
         return this.#element;
@@ -20,13 +38,6 @@ class HTMLTile {
     };
     get data() {
         return this.#data;
-    };
-    get parentEl() {
-        return this.#parentEl;
-    };
-
-    toggleActive() {
-        this.element.classList.toggle('activated');
     };
 
     renderToPage() {
@@ -45,31 +56,23 @@ class HTMLTile {
         });
 
         // When tile is clicked, an Overlay() will appear
-        if (this.parentEl.id == `myExperience-tile-container`){
-            this.element.addEventListener('click', () => {
-                const overlayClass = new HTMLExperienceOverlay(this.data, document.querySelector(`#wrapper`));
-            });
-        };
-
-        if (this.parentEl.id == `myPortfolio-tile-container`){
-            this.element.addEventListener('click', () => {
-                const overlayClass = new HTMLPortfolioOverlay(this.data, document.querySelector(`#wrapper`));
-            });
-        };
+        this.element.addEventListener('click', () => {
+            let overlayClass
+            if (this.element.classList.contains(`for-experience`)) {
+                overlayClass = new HTMLExperienceOverlay(this.data, document.querySelector(`#wrapper`));
+            }
+            if (this.element.classList.contains(`for-portfolio`)) {
+                overlayClass = new HTMLPortfolioOverlay(this.data, document.querySelector(`#wrapper`))
+            }
+        });
     };
 };
 
 
-class HTMLExperienceTile extends HTMLTile {
+class ExperienceTile extends Tile {
     constructor(data, parentEl) {
         super(data, parentEl);
-    };
-
-    initTile() {
-        this.createTileElement();
-        this.applyInfoToElement();
-        this.renderToPage();
-        this.addLocalEventListeners();
+        this.classType = "Experience"        
     };
 
     createTileElement() {
@@ -79,26 +82,20 @@ class HTMLExperienceTile extends HTMLTile {
             <div class="icon-container">
 		        <i class="icon"></i>
 		    </div>
-            <p class="position"></p>
-            <p class="company"></p>
+            <p class="position">${this.data.position}</p>
+            <p class="company">${this.data.company}</p>
         </div>
         `.trim();
-        this.element = tempEl.firstChild;
+        this.element = tempEl.firstChild
     };
 
     applyInfoToElement() {
         // Add tags for job types
-        this.data.tags.forEach((tag, i) => {
-            this.element.classList.add(tag);
-        });
-
-        this.element.querySelector('.company').textContent = this.data.company;
-        this.element.querySelector('.position').textContent = this.data.position;
+        this.data.tags.forEach(tag => this.element.classList.add(tag));
 
         // Add small icon in top left
         const iconClass = this.getIconClassBasedOnTag(this.data.tags[0]);
         this.element.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
-        this.element.querySelector('i').classList.add('icon');
     };
 
     // Helper method to get icon class based on the tag
@@ -117,17 +114,11 @@ class HTMLExperienceTile extends HTMLTile {
 
 };
 
-// Subclass 2
-class HTMLPortfolioTile extends HTMLTile {
+
+class PortfolioTile extends Tile {
     constructor(data, parentEl) {
         super(data, parentEl);
-    };
-
-    initTile() {
-        this.createTileElement();
-        this.applyInfoToElement();
-        this.renderToPage();
-        this.addLocalEventListeners();
+        this.classType = "Portfolio"
     };
 
     createTileElement() {
@@ -135,8 +126,8 @@ class HTMLPortfolioTile extends HTMLTile {
         tempEl.innerHTML = `
             <div class="tile activated for-portfolio">
                 <div class="container for-icons"></div>
-                <p class="projectName"></p>
-                <p class="projectSumSmall"></p>
+                <p class="projectName">${this.data.projectName}</p>
+                <p class="projectSumSmall">${this.data.summarySmall}</p>
             </div>
         `.trim();
         this.element = tempEl.firstChild;
@@ -146,25 +137,19 @@ class HTMLPortfolioTile extends HTMLTile {
         // Add tags for each portfolio
         this.data.projectTags.forEach(tag => this.element.classList.add(tag));
 
-        this.element.querySelector('.projectName').textContent = this.data.projectName;
-        this.element.querySelector('.projectSumSmall').textContent = this.data.summarySmall;
-
         // Add programming icons
         const iconContainer = this.element.querySelector('.container.for-icons');
         this.data.projectLangs.forEach(lang => {
-
-            // Get SVG of programming logo
-            const logoPath = `imgLogos/${lang}.svg`;
-
-            // Create a new image element for each language
-            const langLogo = document.createElement('img');
+            const logoPath = `imgLogos/${lang}.svg`;                        // Get SVG of programming logo
+            const langLogo = document.createElement('img');                 // Create a new image element for each language
+            
             langLogo.src = logoPath;
             langLogo.alt = lang;
             langLogo.classList.add('program-icon');
-
+    
             iconContainer.appendChild(langLogo);
         });
     };
 }
 
-export { HTMLExperienceTile, HTMLPortfolioTile };
+export { ExperienceTile, PortfolioTile};

@@ -3,7 +3,7 @@ import NavBar from './HTMLnavbar.js';
 import ResumeData from './factoryResumeData.js';
 // import HTMLexperienceTile from './HTMLexperienceTile.js';
 // import HTMLportfolioTile from './HTMLportfolioTile.js';
-import {HTMLExperienceTile, HTMLPortfolioTile } from './HTMLtile.js';
+import {ExperienceTile, PortfolioTile } from './Tile.js';
 import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter} from "./HTMLFilter.js";
 import HTMLPalette from "./HTMLPalette.js";
 
@@ -447,13 +447,13 @@ class FrontPageNEW {
     addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties) {
         const data = {company, address, position, period, extraInfo, tags, softwares, duties}
         const parentEl = document.body.querySelector(`#${this.sectionIDs[3]} .container.for-tile`);
-        const experienceTile = new HTMLExperienceTile(data, parentEl)
+        const experienceTile = new ExperienceTile(data, parentEl)
     };
 
     addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages) {
         const data = {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages}
         const parentEl = document.body.querySelector(`#${this.sectionIDs[4]} .container.for-tile`);
-        const portfolioTile = new HTMLPortfolioTile(data, parentEl);
+        const portfolioTile = new PortfolioTile(data, parentEl);
     };
 };
 
