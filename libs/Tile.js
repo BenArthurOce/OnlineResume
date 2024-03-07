@@ -1,4 +1,4 @@
-import {HTMLExperienceOverlay, HTMLPortfolioOverlay} from './HTMLoverlay.js';
+import {ExperienceOverlay, PortfolioOverlay} from './Overlay.js';
 
 // Base class
 class Tile {
@@ -59,10 +59,10 @@ class Tile {
         this.element.addEventListener('click', () => {
             let overlayClass
             if (this.element.classList.contains(`for-experience`)) {
-                overlayClass = new HTMLExperienceOverlay(this.data, document.querySelector(`#wrapper`));
+                overlayClass = new ExperienceOverlay(this.data, document.querySelector(`#wrapper`));
             }
             if (this.element.classList.contains(`for-portfolio`)) {
-                overlayClass = new HTMLPortfolioOverlay(this.data, document.querySelector(`#wrapper`))
+                overlayClass = new PortfolioOverlay(this.data, document.querySelector(`#wrapper`))
             }
         });
     };
@@ -71,11 +71,11 @@ class Tile {
 
 class ExperienceTile extends Tile {
     constructor(data, parentEl) {
-        super(data, parentEl);
-        this.classType = "Experience"        
+        super(data, parentEl); 
     };
 
     createTileElement() {
+        this.classType = "Experience" 
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
         <div class="tile activated for-experience">
