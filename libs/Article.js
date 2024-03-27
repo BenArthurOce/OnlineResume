@@ -1,21 +1,19 @@
-import {ExperienceOverlay, PortfolioOverlay} from './Overlay.js';
-
 // Base class
-class Tile {
+class Article {
     #className;
     #classType;
     #parentObj;
     #element;
     #data;
     constructor(data, parentObj) {
-        this.#className = "Tile";
+        this.#className = "Article";
         this.#classType = null
         this.#parentObj = parentObj
         this.#element = null;
         this.#data = data;
-        this.createTileElement();       // Different functions between classes. Each creates a tile element
-        this.applyInfoToElement();      // Different functions between classes. Add icons, tags to the tile element
-        this.renderToPage();            // Shared function. Adds Tile() to the DOM
+        this.createArticleElement();       // Different functions between classes. Each creates a article element
+        this.applyInfoToElement();      // Different functions between classes. Add icons, tags to the article element
+        this.renderToPage();            // Shared function. Adds Article() to the DOM
         this.addLocalEventListeners();  // Shared function. Style change when hovered. Overlay() presented when clicked
     };
     get className() {
@@ -61,17 +59,17 @@ class Tile {
     };
 
     addLocalEventListeners(){
-        // Tile lights up when hovered over
+        // Article lights up when hovered over
         this.element.addEventListener('mouseover', () => {
             this.element.classList.add('hover');
         });
 
-        // Tile returns to normal when mouse unhovers
+        // Article returns to normal when mouse unhovers
         this.element.addEventListener('mouseout', () => {
             this.element.classList.remove('hover');
         });
 
-        // When tile is clicked, an Overlay() will appear
+        // When article is clicked, an Overlay() will appear
         this.element.addEventListener('click', () => {
             let overlayClass
             if (this.element.classList.contains(`for-experience`)) {
@@ -85,16 +83,16 @@ class Tile {
 };
 
 
-class ExperienceTile extends Tile {
+class ExperienceArticle extends Article {
     constructor(data, parentObj) {
         super(data, parentObj); 
     };
 
-    createTileElement() {
+    createArticleElement() {
         this.classType = "Experience" 
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-        <div class="tile activated for-experience">
+        <div class="article activated for-experience">
             <div class="icon-container">
 		        <i class="icon"></i>
 		    </div>
@@ -132,16 +130,16 @@ class ExperienceTile extends Tile {
 };
 
 
-class PortfolioTile extends Tile {
+class PortfolioArticle extends Article {
     constructor(data, parentObj) {
         super(data, parentObj);
         this.classType = "Portfolio"
     };
 
-    createTileElement() {
+    createArticleElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
-            <div class="tile activated for-portfolio">
+            <div class="article activated for-portfolio">
                 <div class="container for-icons"></div>
                 <p class="projectName">${this.data.projectName}</p>
                 <p class="projectSumSmall">${this.data.summarySmall}</p>
@@ -169,4 +167,4 @@ class PortfolioTile extends Tile {
     };
 }
 
-export { ExperienceTile, PortfolioTile};
+export { ExperienceArticle, PortfolioArticle};

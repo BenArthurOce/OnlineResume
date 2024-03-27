@@ -1,11 +1,11 @@
 class HTMLPalette {
     #element;
-    #parentEl;
+    // #parentObject;
     #selectedPalette;
-    constructor(parentEl) {
+    constructor() {
         this.name = "HTMLPalette";
         this.element = null;
-        this.#parentEl = parentEl;
+        // this.#parentObject = parentObject;
         this.#selectedPalette = "forest"; // Default palette
         this.initPalette();
     }
@@ -15,9 +15,9 @@ class HTMLPalette {
     set element(value) {
         this.#element = value;
     };
-    get parentEl() {
-        return this.#parentEl;
-    };
+    // get parentObject() {
+    //     return this.#parentObject;
+    // };
     get selectedPalette() {
         return this.#selectedPalette;
     };
@@ -27,7 +27,7 @@ class HTMLPalette {
 
     initPalette() {
         this.createPaletteElement();
-        this.renderToPage();
+        // this.renderToPage();
     };
 
     createPaletteElement() {
@@ -69,9 +69,9 @@ class HTMLPalette {
         this.element = tempEl.firstChild;
     };
 
-    renderToPage() {
-        this.parentEl.appendChild(this.element);
-    };
+    // renderToPage() {
+    //     this.parentObject.appendChild(this.element);
+    // };
 
     setSelectedPalette(palette) {
         if (this.colorPalettes.includes(palette)) {

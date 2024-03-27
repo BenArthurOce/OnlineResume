@@ -98,7 +98,6 @@ ul li {
     padding-right: 10%;
     padding-bottom: 3%;
     background-color: var(--body-background-color);
-    max-height: 100vh;
  }
 
 
@@ -110,86 +109,25 @@ section {display: none}
     height: 100%;
     min-height: 100%;
     min-width: 100%;
-    background-color: var(--section-background-color);
+    background-color: var(--section-background-color)
  }
 
 
-/* .section-display.activated {
+.section-display.activated {
     height: 100%;
     display: grid;
-
-    padding-top: 1%;
-} */
     /* grid-template-rows: auto auto 1fr;  */
     /* First row for buttons, second row for sections */
-
-
+    padding-top: 1%;
+}
 
 
 /* ----------------------------- */
 /* -------- CONTAINERS --------- */
 /* ----------------------------- */ 
 
-
-#main-section-container {
-    display: grid;
-    grid-template-rows: 10% 1fr; 
-    min-height: 95%;
-    max-height: 95%;
-    overflow: hidden;
-}
-
-/* .container {
-    display: none;
- } */
-
-/* container */
-
-h1 {
-    /* padding-left: 2%; */
-    /* padding-right: 2%; */
-    margin-left: 2%;
-    margin-right: 2%;
-}
-
-.container.for-navbar-links {
-    display: flex;
-    height: 100%;
-    min-height: 100%;
-    min-width: 100%;
-
-    padding-left: 2%;
-    padding-right: 2%;
-    gap: 2%;
-
-    background-color: var(--section-background-color);
-    justify-content: space-between; /* Mainly for the navigation bar*/ 
-}
-
-.container.activated {
-    display: block;
- }
-
-section.activated {
-    display: block;
- }
-
-.container.for-article {
-    display: flex;
-    height: 100%;
-    min-height: 100%;
-    min-width: 100%;
-
-    padding-left: 2%;
-    padding-right: 2%;
-    gap: 2%;
-
-    background-color: var(--section-background-color);
-    justify-content: space-between; 
-}
-
 /* General CSS for all container style elements */
-/* .container {
+.container {
     display: flex;
     height: 100%;
     min-height: 100%;
@@ -200,50 +138,32 @@ section.activated {
     gap: 2%;
 
     background-color: var(--section-background-color);
-    justify-content: space-between; 
-} */
+    justify-content: space-between; /* Mainly for the navigation bar*/
+}
 
-/* .container.for-section {
-    display: flex;
+.container.for-section {
     flex-direction: column;
-} */
+}
 
-/* .container.for-section.activated {
-    display: none;
-    flex-direction: column;
-} */
-
-
-/* .container.for-filter {
+.container.for-filter {
     display: none;
     height: 50px;
     min-height: 50px;
-} */
+}
 
-/* .container.for-filter.for-tile {
+.container.for-filter.for-tile {
     display: inline-block;
     height: 50px;
     min-height: 50px;
-} */
+}
 
 
 /* Specific requirements for the container that holds the jobs and portfolio tiles*/
 .container.for-tile {
     display: grid;
-    max-height: 100%;
-    min-height: 100%;
     grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(33%, 1fr));
-    column-gap: 2%;
-    row-gap: 2%;
-    padding-left: 5%;
-    padding-right: 5%;
 } 
-
-.container.for-icons {
-    width: 30px;
-    height: 30px;
-}
 
 /* Specific requirements for the container that holds the jobs and portfolio overlays*/
 .container.for-overlay {
@@ -352,15 +272,9 @@ nav > .container > a.activated {
 /* The <menu> element */
 .menu-filter { 
     /* display: block; */
-    display: none;
     width: 100%;
     max-width: 100%;
 }
-
-.menu-filter.activated {
-    display: block;
-}
-
 
 /* The <ul> element */
 .filter-list {
@@ -441,7 +355,7 @@ nav > .container > a.activated {
     display: none;                          /* Activated tile class is starting class, which has a display of "grid" */
     grid-template-columns: 30% 1fr 1fr;     /* To set the layout of the contents of the tile */
     /* grid-template-rows: auto 1fr;  */
-    /* grid-template-rows: 23% 23% 23% 23%;  */
+    grid-template-rows: 23% 23% 23% 23%; 
 
     cursor: pointer;
     background-color: var(--tile-basic-background-color);
@@ -452,16 +366,12 @@ nav > .container > a.activated {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 5px 10px;
-    /* max-height: 70%; */
-    /* Prevents overlapping on the grid */
+    max-height: 70%;                          /* Prevents overlapping on the grid */
 
+    width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
 
-    /* height: 200px; */
-    /* min-width: 35vw; */
-    min-height: 13vw;
-    max-height: 13vw;
 }
 
 

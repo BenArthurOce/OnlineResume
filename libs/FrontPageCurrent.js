@@ -1,4 +1,4 @@
-import { IntroductionSection, EducationSection, SkillsSection, ExperiencesSection, PortfolioSection } from './HTMLsections.js';
+import { IntroductionSection, EducationSection, SkillsSection, ExperiencesSection, PortfolioSection } from './Section.js';
 import NavBar from './HTMLnavbar.js';
 import ResumeData from './factoryResumeData.js';
 // import HTMLexperienceTile from './HTMLexperienceTile.js';
@@ -6,8 +6,9 @@ import ResumeData from './factoryResumeData.js';
 import {ExperienceTile, PortfolioTile } from './Tile.js';
 import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter} from "./HTMLFilter.js";
 import HTMLPalette from "./HTMLPalette.js";
+import SectionHandler from "./SectionHandler.js";
 
-class FrontPageNEW {
+class FrontPageCurrent {
     #sectionIDs;
     #sectionNames;
     #sectionsEl;
@@ -21,12 +22,13 @@ class FrontPageNEW {
     #filterBarObjs;
     #sectionsObj;
     #frontPageElements
+    #sectionHandler;
 
 
     constructor() {
 
-        this.#sectionIDs = ["aboutMe", "mySkills", "myEducation", "myExperience", "myPortfolio"]
-        this.#sectionNames = ["About Me", "My Skills", "Education", "Experience", "Portfolio"]
+        // this.#sectionIDs = ["about", "skills", "myEducation", "myExperience", "portfolio"]
+        // this.#sectionNames = ["About Me", "My Skills", "Education", "Experience", "Portfolio"]
         
         this.#currentIndex = 0;
         this.#previousIndex = 0;
@@ -39,15 +41,18 @@ class FrontPageNEW {
     
         // Render the sections
         this.#paletteObj = this.createPalette()
-        this.#sectionsObj = this.createSections()
-        this.#filterBarObjs = this.createFilters()
+        this.#sectionsObj = []
+        // this.#sectionsObj = this.createSections()
+        // this.#filterBarObjs = this.createFilters()
 
         this.#paletteEl = document.body.querySelector(`#paletteSelector`)
         this.#sectionsEl = document.body.querySelectorAll(`section`)
 
-        this.#frontPageElements = this.initSlideshowElements();
+        // this.#frontPageElements = this.initSlideshowElements();
 
-        this.showSlide();
+        // this.showSlide();
+
+        this.#sectionHandler = new SectionHandler;
     };
     //
     // All Names
@@ -113,16 +118,16 @@ class FrontPageNEW {
         return this.mainEl.querySelectorAll('menu')
     };
     get experienceTiles() {
-        return document.body.querySelectorAll('#myExperiences .tile')
+        return document.body.querySelectorAll('#experience .tile')
     };
     get portfolioTiles() {
-        return this.mainEl.querySelectorAll('#myPortfolio .tile')
+        return this.mainEl.querySelectorAll('#portfolio .tile')
     };
     get experienceFilter() {
-        return this.mainEl.querySelector(`#myExperiences menu`)
+        return this.mainEl.querySelector(`#experience menu`)
     };
     get portfolioFilter() {
-        return this.mainEl.querySelector(`#myPortfolio menu`)
+        return this.mainEl.querySelector(`#portfolio menu`)
     };
     get allButtons() {
         return this.mainEl.querySelectorAll('button')
@@ -142,6 +147,14 @@ class FrontPageNEW {
     get portfolioFilter() {
         return this.frontPageElements.single.filter.portfolio
     };
+
+
+    get sectionHandler() {
+        return this.#sectionHandler
+    };
+    set sectionHandler(value) {
+        this.#sectionHandler = value
+    }
 
     
     initSlideshowElements() {
@@ -212,13 +225,16 @@ class FrontPageNEW {
         return navBar;
     };
 
+    // das good code
     createSections() {
         const sections = [
-             new IntroductionSection(0, this.sectionIDs[0], document.body.querySelector('.container.for-section'), this.sectionNames[0])
-            ,new SkillsSection(1, this.sectionIDs[1], document.body.querySelector('.container.for-section'), this.sectionNames[1])
-            ,new EducationSection(2, this.sectionIDs[2], document.body.querySelector('.container.for-section'), this.sectionNames[2])
-            ,new ExperiencesSection(3, this.sectionIDs[3], document.body.querySelector('.container.for-section'), this.sectionNames[3])
-            ,new PortfolioSection(4, this.sectionIDs[4], document.body.querySelector('.container.for-section'), this.sectionNames[4])
+            //  new IntroductionSection(0, this.sectionIDs[0], document.body.querySelector('.container.for-section'), this.sectionNames[0])
+             new IntroductionSection(data, document.body.querySelector('.container.for-section'))
+            ,new SkillsSection(data, document.body.querySelector('.container.for-section'))
+            ,new EducationSection(data, document.body.querySelector('.container.for-section'))
+            // ,new EducationSection(2, this.sectionIDs[2], document.body.querySelector('.container.for-section'), this.sectionNames[2])
+            // ,new ExperiencesSection(3, this.sectionIDs[3], document.body.querySelector('.container.for-section'), this.sectionNames[3])
+            // ,new PortfolioSection(4, this.sectionIDs[4], document.body.querySelector('.container.for-section'), this.sectionNames[4])
         ];
         return sections;
     };
@@ -374,78 +390,100 @@ class FrontPageNEW {
         };
     };
 
-    addIntro(email, phone, linkedin, github, background, introduction) {
-        const articleEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[0]; // Pc
-        const articleEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[2]; // Mobile
-        articleEl1.querySelector('.introduction').textContent = introduction;
-        articleEl2.querySelector('.introduction').textContent = introduction;
+    addIntro(data) {
+
+        const subHeadings = ['Introduction', 'KeySkills']
+        const parentEl = document.body.querySelector('.container.for-section')
+        const newIntro = new IntroductionSection(data, parentEl, subHeadings)
+        this.sectionsObj.push(newIntro)
+
     };
+
+
 
     addEducations(degree, institution, tags) {
-        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[0]; // IT Article // PC
-        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[1]; // Accounting Article // PC
+        // const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[0]; // IT Article // PC
+        // const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[1]; // Accounting Article // PC
 
-        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[2]; // IT Article // Mobile
-        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[3]; // Accounting Article // Mobile
+        // const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[2]; // IT Article // Mobile
+        // const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[2]} article`)[3]; // Accounting Article // Mobile
 
-        // Function to create a list item and append it to the specified parent element
-        const createListItemAndAppend = (parentElement, textContent) => {
-            const ul = document.createElement('ul');
-            const li = document.createElement('li');
-            li.textContent = textContent;
-            ul.appendChild(li);
-            parentElement.appendChild(ul);
-        };
+        // // Function to create a list item and append it to the specified parent element
+        // const createListItemAndAppend = (parentElement, textContent) => {
+        //     const ul = document.createElement('ul');
+        //     const li = document.createElement('li');
+        //     li.textContent = textContent;
+        //     ul.appendChild(li);
+        //     parentElement.appendChild(ul);
+        // };
 
-        if (tags.includes("IT")) {
-            createListItemAndAppend(parentEl1, `${degree} - ${institution}`);
-            createListItemAndAppend(parentEl3, `${degree} - ${institution}`);
-        }
+        // if (tags.includes("IT")) {
+        //     createListItemAndAppend(parentEl1, `${degree} - ${institution}`);
+        //     createListItemAndAppend(parentEl3, `${degree} - ${institution}`);
+        // }
 
-        if (tags.includes("Finance")) {
-            createListItemAndAppend(parentEl2, `${degree} - ${institution}`);
-            createListItemAndAppend(parentEl4, `${degree} - ${institution}`);
-        }
+        // if (tags.includes("Finance")) {
+        //     createListItemAndAppend(parentEl2, `${degree} - ${institution}`);
+        //     createListItemAndAppend(parentEl4, `${degree} - ${institution}`);
+        // }
 
     };
 
-    addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft) {
-        const parentIntro = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[1]
+    addSkills(data) {
 
-        const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[0] // Hard Skills
-        const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[1] // Soft Skills
-        const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[2] // Programming Languages
-        const parentIntro2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[3]
+        const subHeadings = ['Technical', 'Soft', 'Languages']
+        const parentEl = document.body.querySelector('.container.for-section')
+        const newSkills = new SkillsSection(data, parentEl, subHeadings)
+        this.sectionsObj.push(newSkills)
+
+
+        // new SkillsSection(data, document.body.querySelector('.container.for-section'))
+
+        // const parentIntro = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[1]
+
+        // const parentEl1 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[0] // Hard Skills
+        // const parentEl2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[1] // Soft Skills
+        // const parentEl3 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[2] // Programming Languages
+        // const parentIntro2 = this.mainEl.querySelectorAll(`#${this.sectionIDs[0]} article`)[3]
         
-        const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[3] // Hard Skills
-        const parentEl5 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[4] // Soft Skills
-        const parentEl6 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[5] // Programming Languages
+        // const parentEl4 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[3] // Hard Skills
+        // const parentEl5 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[4] // Soft Skills
+        // const parentEl6 = this.mainEl.querySelectorAll(`#${this.sectionIDs[1]} article`)[5] // Programming Languages
 
-        // Function to create a list and append it to the specified parent element
-        const createListAndAppend = (parentElement, skillsArray) => {
-            const ul = document.createElement('ul');
-            skillsArray.forEach(skill => {
-                const li = document.createElement('li');
-                li.textContent = skill;
-                ul.appendChild(li);
-            });
-            parentElement.appendChild(ul);
-        };
+        // // Function to create a list and append it to the specified parent element
+        // const createListAndAppend = (parentElement, skillsArray) => {
+        //     const ul = document.createElement('ul');
+        //     skillsArray.forEach(skill => {
+        //         const li = document.createElement('li');
+        //         li.textContent = skill;
+        //         ul.appendChild(li);
+        //     });
+        //     parentElement.appendChild(ul);
+        // };
 
-        // Populate the sections with skills
-        createListAndAppend(parentIntro, skillsKey);
-        createListAndAppend(parentEl1, skillsTechincal);
-        createListAndAppend(parentEl2, skillsSoft);
-        createListAndAppend(parentEl3, skillsLangages);
+        // // Populate the sections with skills
+        // createListAndAppend(parentIntro, skillsKey);
+        // createListAndAppend(parentEl1, skillsTechincal);
+        // createListAndAppend(parentEl2, skillsSoft);
+        // createListAndAppend(parentEl3, skillsLangages);
 
-        createListAndAppend(parentIntro2, skillsKey);
-        createListAndAppend(parentEl4, skillsTechincal);
-        createListAndAppend(parentEl5, skillsSoft);
-        createListAndAppend(parentEl6, skillsLangages);
+        // createListAndAppend(parentIntro2, skillsKey);
+        // createListAndAppend(parentEl4, skillsTechincal);
+        // createListAndAppend(parentEl5, skillsSoft);
+        // createListAndAppend(parentEl6, skillsLangages);
     };
+
+    addExperienceTileOLD(company, address, position, period, extraInfo, tags, softwares, duties) {
+        const data = {company, address, position, period, extraInfo, tags, softwares, duties}
+        console.log(this.sectionIDs[3])
+        const parentEl = document.body.querySelector(`#${this.sectionIDs[3]} .container.for-tile`);
+        const experienceTile = new ExperienceTile(data, parentEl)
+    };
+
 
     addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties) {
         const data = {company, address, position, period, extraInfo, tags, softwares, duties}
+        console.log(this.sectionIDs[3])
         const parentEl = document.body.querySelector(`#${this.sectionIDs[3]} .container.for-tile`);
         const experienceTile = new ExperienceTile(data, parentEl)
     };
@@ -458,7 +496,7 @@ class FrontPageNEW {
 };
 
 
-class FrontPageWithResumeData extends FrontPageNEW {
+class FrontPageWithResumeData extends FrontPageCurrent {
     #resumeData;
     #data;
     #url;
@@ -479,4 +517,4 @@ class FrontPageWithResumeData extends FrontPageNEW {
     };
 };
 
-export {FrontPageNEW, FrontPageWithResumeData};
+export {FrontPageCurrent as FrontPageNEW, FrontPageWithResumeData};

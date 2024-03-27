@@ -1,7 +1,8 @@
 "use strict"
 
+// import ResumeData from "./libs/factoryResumeData.js";
 import ResumeData from "./libs/factoryResumeData.js";
-import {FrontPageNEW, FrontPageWithResumeData} from "./libs/FrontPage.js";
+import {FrontPageNEW, FrontPageWithResumeData} from "./libs/FrontPageCurrent.js";
 
 
 const classResumeData = new ResumeData;
@@ -20,27 +21,32 @@ classResumeData.getJSONdata()
     // const {degree, institution} = myEducations
     // frontpage.addEducations(degree, institution);
 
-    const {email, phone, linkedin, github, background, introduction} = aboutMe
-    frontpage.addIntro(email, phone, linkedin, github, background, introduction)
+    // const {email, phone, linkedin, github, background, introduction} = aboutMe
+    // frontpage.addIntro(email, phone, linkedin, github, background, introduction)
 
-    for (const {degree, institution, tags} of myEducations) {
-        frontpage.addEducations(degree, institution, tags);
-    };
+    const {email, phone, linkedin, github, background, introduction, skillsKey} = aboutMe;
+    const data = {email, phone, linkedin, github, background, introduction, skillsKey}
+    frontpage.addIntro(data)
 
-    const {skillsKey, skillsLangages, skillsTechincal, skillsSoft} = mySkills
-    frontpage.addSkills(skillsKey, skillsLangages, skillsTechincal, skillsSoft);
+    // for (const {degree, institution, tags} of myEducations) {
+    //     frontpage.addEducations(degree, institution, tags);
+    // };
 
-    for (const {company, address, position, period, extraInfo, tags, softwares, duties} of myExperiences) {
-        frontpage.addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties)
-    };
+    const {skillsLangages, skillsTechincal, skillsSoft} = mySkills
+    const data2 = {skillsLangages, skillsTechincal, skillsSoft}
+    frontpage.addSkills(data2);
+
+    // for (const {company, address, position, period, extraInfo, tags, softwares, duties} of myExperiences) {
+    //     frontpage.addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties)
+    // };
 
 
-    for (const {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
-        frontpage.addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages)
-    };
+    // for (const {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
+    //     frontpage.addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages)
+    // };
     
-    frontpage.initSlideshowElements()
-    frontpage.addEventListeners()
+    // frontpage.initSlideshowElements()
+    // frontpage.addEventListeners()
 
 });
 

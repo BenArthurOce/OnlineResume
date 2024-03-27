@@ -1,117 +1,27 @@
-class FilterButton {
-   #className;
-   #classType;
-//    #parentObject;
-   #element;
-   #buttonName;
-   constructor(parentObject, buttonName) {
-        this.#className = "FilterButton";
-        this.#classType = null;
-        // this.#parentObject = parentObject;
-        this.#element = null;
-        this.#buttonName = buttonName;
-   };
-   get className() {
-        return this.#className;
-   };
-   set className(value) {
-       this.#className = value;
-   };
-   get classType() {
-       return this.#classType;
-   };
-   set classType(value) {
-       this.#classType = value;
-   };
-//    get parentObject() {
-//        return this.#parentObject;
-//    };
-//    set parentObject(value) {
-//        this.#parentObject = value;
-//    };
-   get element() {
-       return this.#element;
-   };
-   set element(value) {
-       this.#element = value;
-   };
-   get buttonName() {
-       return this.#buttonName;
-   };
-   set buttonName(value) {
-       this.#buttonName = value;
-   };
-
-//****** Inits the Objects element to the DOM
-    // appendToParent() {
-    //     this.parentObject.element.appendChild(this.element);
-    // };
-};
-
-
-class FilterButtonArticle extends FilterButton {
-    constructor(parentObject, buttonName) {
-        super(parentObject, buttonName); 
-        this.classType = "FilterButtonArticle";
-        this.createElement();
-        this.addLocalEventListeners();
-    };
-
-    createElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
-            <li role="button" dataFilter="${this.buttonName.toLowerCase()}" class="filter-button for-article for-mobile">${this.buttonName.toLowerCase()}</li>
-        `.trim();
-        this.element = tempEl.firstChild; 
-    };
-
-    addLocalEventListeners() {
-
-    };
-};
-
-
-
-class FilterButtonTile extends FilterButton {
-    constructor(parentObject, buttonName) {
-        super(parentObject, buttonName); 
-        this.classType = "FilterButtonTile";
-        this.createElement();
-        this.addLocalEventListeners();
-    };
-
-    createElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
-            <li role="button" dataFilter="${this.buttonName.toLowerCase()}" class="filter-button for-tile for-pc for-mobile">${this.buttonName.toLowerCase()}</li>
-        `.trim();
-        this.element = tempEl.firstChild; 
-    };
-
-    addLocalEventListeners() {
-
-    };
-};
-
-
-class FilterBar {
+class Filter {
     #className;             // The name of the class
     #classType;             // The name of the subclass
-    // #parentObject;          // The Object that contains this object. In this case, its SectionHandler()
+    #parentEl;              // The Object that contains this object. In this case, its SectionHandler()
     #element;               // The DOM element of this class
     #data;                  // The part of the resume data from Dictionary() that populates the element of this class
     #subHeadings;           // Article, Filter names
     #activeIndex;           // Current Filter that is active
-    #filterButtons;         // The FilterButton() objects inside this class
-    constructor(data, subHeadings) {
+    constructor(data, parentEl, subHeadings) {
         this.#className = "Filter";
         this.#classType = null;
-        // this.#parentObject = parentObject;
+        this.#parentEl = parentEl;
         this.#element = null;
         this.#data = data;
         this.#subHeadings = subHeadings;
         this.#activeIndex = 0
-        this.#filterButtons = []
+
+        // this.initFilter();
+
+        // this.init()
+
+        // this.createSectionElement();
+        // this.applyInfoToElement();      // Different functions between classes. Add icons, tags to the tile element
+        // this.renderToPage();            // Shared function. Adds Tile() to the DOM
 
     };
     get className() {
@@ -123,9 +33,9 @@ class FilterBar {
     set classType(value) {
         this.#classType = value;
     };
-    // get parentObject() {
-    //     return this.#parentObject;
-    // };
+    get parentEl() {
+        return this.#parentEl;
+    };
     get element() {
         return this.#element;
     };
@@ -144,12 +54,6 @@ class FilterBar {
     set activeIndex(value) {
         this.#activeIndex = value;
     };
-    get filterButtons() {
-        return this.#filterButtons;
-    };
-    set filterButtons(value) {
-        this.#filterButtons = value;
-    };
 
 //****** Command to make this Objects element visible from the DOM
     toggleOn() {
@@ -164,9 +68,9 @@ class FilterBar {
     };
 
 //****** Inits the Objects element to the DOM
-    // appendToParent() {
-    //     this.parentObject.element.appendChild(this.element);
-    // };
+    appendToParent() {
+        this.parentEl.appendChild(this.element);
+    };
 
 
     // addLocalEventListeners() {
@@ -189,20 +93,14 @@ class FilterBar {
 };
 
 
-class IntroductionFilter extends FilterBar {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
+class IntroductionFilter extends Filter {
+    constructor(data, parentEl, subHeadings) {
+        super(data, parentEl, subHeadings);
         this.classType = "Introduction";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-
-        console.log(this.subHeadings)
-        this.createElement();
     };
 
 
-
-
-//****** Creates a HTML element
     createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
@@ -215,23 +113,17 @@ class IntroductionFilter extends FilterBar {
         `.trim();
         this.element = tempEl.firstChild;
     };
-
-//****** Adds a button to the Filter Object
-    addButton() {
-
-    };
 };
 
 
-class SkillsFilter extends FilterBar {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
+class SkillsFilter extends Filter {
+    constructor(data, parentEl, subHeadings) {
+        super(data, parentEl, subHeadings);
         this.classType = "Skills";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-        this.createElement();
     };
 
-//****** Creates a HTML element
+
     createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
@@ -245,90 +137,95 @@ class SkillsFilter extends FilterBar {
         `.trim();
         this.element = tempEl.firstChild
     };
+};
 
-//****** Adds a button to the Filter Object
-    addButton() {
 
+class EducationFilter extends Filter {
+    constructor(data, parentEl, subHeadings) {
+        super(data, parentEl, subHeadings);
+        this.classType = "Education";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+    };
+
+    createElement() {
+        const tempEl = document.createElement('div');
+        tempEl.innerHTML = `
+                <menu id="${this.id}" class="menu-filter for-article for-mobile">
+                    <ul class="filter-list for-article for-mobile">
+                        <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${this.subHeadings[0].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[0].toLowerCase()}</li>
+                        <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${this.subHeadings[1].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[1].toLowerCase()}</li>
+                    </ul>
+                </menu>
+        `.trim();
+        this.element = tempEl.firstChild;
+    };
+};
+
+
+class ExperienceFilter extends Filter {
+    constructor(data, parentEl, subHeadings) {
+        super(data, parentEl, subHeadings);
+        this.classType = "Experience";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+    };
+
+    createElement() {
+        
+        // <menu id="${this.id}-filter" class="menu-filter for-article for-mobile">     NEW
+        //<menu class="menu-filter for-tile for-pc for-mobile" id="${this.id}-filter">  OLD
+
+        const tempEl = document.createElement('div');
+        tempEl.innerHTML = `
+                <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
+                    <ul class="filter-list for-tile for-pc for-mobile">
+                        ${this.generateFilterOptions()}
+                    </ul>
+                </menu>
+        `.trim();
+        this.element = tempEl.firstChild;
+    };
+
+
+    // const tempEl = document.createElement('div');
+    // tempEl.innerHTML = `
+    //     <div id="${this.id}-filter-container" class="container for-filter for-tile">
+    //         <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
+    //             <ul class="filter-list for-tile for-pc for-mobile">
+    //                 ${this.generateFilterOptions()}
+    //             </ul>
+    //         </menu>
+    //     </div>
+    // `.trim();
+    // this.element = tempEl.firstChild;
+    
+    generateFilterOptions() {
+        const filterOptions = [
+             { dataIndex: 0, dataFilter: "All", title: "All" }
+            ,{ dataIndex: 1, dataFilter: "Programming", title: "Information Technology", icon: "desktop" }
+            ,{ dataIndex: 2, dataFilter: "Accounting", title: "Accounting", icon: "dollar" }
+            ,{ dataIndex: 3, dataFilter: "CustomerService", title: "Customer Services", icon: "bell" }
+        ];
+    
+        return filterOptions.map(option => `
+            <li role="button" dataParent="${this.id}" dataIndex="${option.dataIndex}" dataFilter="${option.dataFilter}" class="filter-button for-tile for-pc for-mobile" title="${option.title}">
+                ${option.icon ? `<i class="sidebar-icon fa fa-${option.icon} icon"></i>` : ""}
+            </li>
+        `).join('');
     };    
 };
 
 
-class EducationFilter extends FilterBar {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
-        this.classType = "Education";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-        this.createElement();
-        this.addButton()
-    };
-
-//****** Creates a HTML element
-    createElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
-                <ul class="filter-list for-tile for-pc for-mobile">
-                </ul>
-            </menu>
-        `.trim();
-        this.element = tempEl.firstChild;
-    };
-
-//****** Adds a button to the Filter Object
-    addButton() {
-
-
-    };
-};
-
-
-class ExperienceFilter extends FilterBar {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
-        this.classType = "Experience";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-        this.createElement();
-    };
-
-//****** Creates a HTML element
-    createElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
-                <ul class="filter-list for-tile for-pc for-mobile">
-                </ul>
-            </menu>
-        `.trim();
-        this.element = tempEl.firstChild;
-    };
-    
-//****** Adds a button to the Filter Object
-    addButton() {
-        // parentObjectement, buttonName
-
-        this.filterButtons.push(new FilterButtonTile(this, "All"))
-        this.filterButtons.push(new FilterButtonTile(this, "IT"))
-        this.filterButtons.push(new FilterButtonTile(this, "Accounting"))
-        this.filterButtons.push(new FilterButtonTile(this, "Customer Service"))
-
-        console.log(this.filterButtons)
-    };
-};
-
-
-class PortfolioFilter extends FilterBar {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
+class PortfolioFilter extends Filter {
+    constructor(data, parentEl, subHeadings) {
+        super(data, parentEl, subHeadings);
         this.classType = "Portfolio";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-        this.createElement();
     };
 
 
             // <menu id="${this.id}-filter" class="menu-filter for-article for-mobile"> NEW
             // <menu class="menu-filter for-tile for-pc for-mobile" id="${this.id}-filter"> OLD
 
-//****** Creates a HTML element
     createElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
@@ -368,12 +265,6 @@ class PortfolioFilter extends FilterBar {
     //     return Array.from(uniqueValues);
     // };
     
-//****** Adds a button to the Filter Object
-    addButton() {
-
-    };
-
-
 };
 
 export {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter};

@@ -1,111 +1,134 @@
-class NavBar {
-    #element;
-    #parentEl;
-    #activeIndex
-    #activeElName
-    constructor(parentEl) {
-        this.name = "NavBar";
-        this.#parentEl = parentEl;
-        this.#element = '';
-        this.#activeIndex = 0
-        this.#activeElName = ''
-
-        this.createElement();
-        this.renderToPage();
-        this.addLocalEventListeners();
+class NavLink {
+    constructor(index, text, isActive = false) {
+        this.index = index;
+        this.text = text;
+        this.isActive = isActive;
+        this.element = this.createLinkElement();
     }
+
+    createLinkElement() {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.dataset.index = this.index;
+        link.textContent = this.text;
+        link.classList.add('nav-link');
+        if (this.isActive) {
+            link.classList.add('activated');
+        }
+        return link;
+    };
+
+    setText(text) {
+        this.text = text;
+        this.element.textContent = text;
+    };
+
+    toggleOn() {
+        this.isActive = true;
+        this.element.classList.add('activated');
+    };
+
+    toggleOff() {
+        this.isActive = false;
+        this.element.classList.remove('activated');
+    };
+
+
+}
+
+
+
+
+
+class NavBar {
+    #className;             // The name of the class
+    #headings;              // List of the Navbar names
+    #links;                 // Contains each of the NavLink() objects
+    // #parentObject;              // The object that contains this class
+    #element;               // The DOM element of this class
+    #indexCurrent;          // Which NavLink() object should be displayed on screen
+    constructor(headings) {
+        this.#className = "NavBar";
+        this.#headings = headings
+        this.#links = [];
+        // this.#parentObject = parentObject;
+        this.#element = this.createElement();
+        this.#indexCurrent = 0;
+        this.addInfoToElement();
+
+        this.addLink(0, this.#headings[0], true);
+        this.addLink(1, this.#headings[1]);
+        this.addLink(2, this.#headings[2]);
+        this.addLink(3, this.#headings[3]);
+        this.addLink(4, this.#headings[4]);
+    };
+    get className() {
+        return this.#className;
+    };
+    get headings() {
+        return this.#headings;
+    };
+    get links() {
+        return this.#links;
+    };
+    // get parentObject() {
+    //     return this.#parentObject;
+    // };
     get element() {
         return this.#element;
     };
     set element(value) {
         this.#element = value;
     };
-    get parentEl() {
-        return this.#parentEl;
+    get indexCurrent() {
+        return this.#indexCurrent;
     };
-    get activeIndex() {
-        return this.#activeIndex;
+    set indexCurrent(value) {
+        this.#indexCurrent = value;
+        this.toggleNavLink(); // Call toggleActiveSection whenever index changes
     };
-    set activeIndex(value) {
-        this.#activeIndex = value;
-    };
-    get activeElName() {
-        return this.#activeElName;
-    };
-    set activeElName(value) {
-        this.#activeElName = value;
-    };
-    get headerEl() {
-        return this.element.querySelector(`.navbar-title.for-mobile`)
-    }
-    get hamburgerIcon() {
-        return this.element.querySelector('.navbar-icon.for-mobile');
-    }
-    get linkContainerEl() {
-        return this.element.querySelector('.container.for-navbar-links');
-    };
-    get allLinkEl() {
-        return this.element.querySelectorAll('nav > .container.for-navbar-links > a');
+
+
+    toggleNavLink() {
+        this.links.forEach((link, index) => {
+            if (index === this.#indexCurrent) {
+                link.toggleOn();
+            } else {
+                link.toggleOff();
+            }
+        });
     };
 
 
     createElement() {
-        const newElement = document.createElement('nav');
-        newElement.innerHTML = `
-            <h1 class="navbar-title for-mobile"></h1>
-            <div class="container for-navbar-links">
-                <a href="#" data-index="0" class="nav-link activated">About Me</a>
-                <a href="#" data-index="1" class="nav-link">Skills</a>
-                <a href="#" data-index="2" class="nav-link">Education</a>
-                <a href="#" data-index="3" class="nav-link">Experience</a>
-                <a href="#" data-index="4" class="nav-link">Portfolio</a>
-            </div>
+        const navElement = document.createElement('nav');
+        navElement.innerHTML = `
+            <h1 class="${this.className.toLowerCase()}-title for-mobile"></h1>
+            <div class="container for-navbar-links"></div>
             <a href="#" class="navbar-icon for-mobile">
                 <i class="fa fa-bars"></i>
             </a>
-         `;
-        this.element = newElement.cloneNode(true);
+        `;
+        return navElement;
     };
 
-    renderToPage() {
-        // Append the created elements to the wrapper
-        this.parentEl.appendChild(this.element);
-    };
-
-    addLocalEventListeners() {
-        this.hamburgerIcon.addEventListener('click', () => { 
-            // The mobile navbar grows to show all links
-            this.linkContainerEl.classList.toggle('activated')
-
-            // The mobile h1 header is temp removed while hamburger is open
-            this.headerEl.classList.toggle('activated')
-        });
-
-        // When a navlink is clicked, close the hamburger menu
-        this.allLinkEl.forEach((link, i) => {
-            link.addEventListener('click', () => { 
-                this.linkContainerEl.classList.remove('activated')
-                this.headerEl.classList.remove('activated')
-            });  
+    addInfoToElement() {
+        const linkContainer = this.element.querySelector('.for-navbar-links');
+        this.links.forEach(link => {
+            linkContainer.appendChild(link.element);
         });
     };
 
-    updateActiveLink() {
-        // Reset all
-        this.allLinkEl.forEach((link, i) => {link.classList.remove('activated')});
-
-        // Activate the current link
-        this.allLinkEl[this.activeIndex].classList.add('activated')
+    addLink(index, text, isActive = false) {
+        const link = new NavLink(index, text, isActive);
+        this.links.push(link);
+        const linkContainer = this.element.querySelector('.for-navbar-links');
+        linkContainer.appendChild(link.element);
     };
 
-    updateActiveName(sectionNames) {
-        this.activeElName = sectionNames[this.activeIndex];
-        this.headerEl.innerHTML = this.activeElName;
+    returnLink(index) {
+        return this.links[index];
     };
-
-
 };
-
-
 
 export default NavBar;

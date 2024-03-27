@@ -1,13 +1,21 @@
 {
-    "aboutMe": {
+    "about": {
          "email":       "mailto:benjaminmatthewarthur@gmail.com"
         ,"phone":       "MyPhone"
         ,"linkedin":    "https://www.linkedin.com/in/benjamin-arthur-125b07ab/"
         ,"github":      "https://github.com/BenArthurOce"
         ,"background":  "Background: Programming, Accounting, Finance"
         ,"introduction": "Experienced in public practice accounting with a strong passion for programming languages and SQL. Seeking an opportunity in software development and help desk within the IT industry to enhance my skills in a professional setting. I take pride in my determination and continuous self-education, always striving for personal and professional growth."
+        ,"skillsKey": [
+            "Database design and management"
+            ,"Transact-SQL Queries"
+            ,"Excel Power User with Proficiency in Advanced Functions and Process Automation"
+            ,"Process automation through the use of Power Automate and Complex Excel Formulas"
+            ,"Ability to produce and maintain detailed knowledgebases with technical documentation"
+            ,"User Interface design"
+        ]
     },
-    "myEducations": [
+    "education": [
     {
          "degree":       "12 week Javascript Course"
         ,"institution":  "General Assembly"
@@ -39,16 +47,9 @@
         ,"tags":          ["Finance"]
     }
     ],
-    "mySkills": {
-        "skillsKey":            [
-                                    "Database design and management"
-                                    ,"Transact-SQL Queries"
-                                    ,"Excel Power User with Proficiency in Advanced Functions and Process Automation"
-                                    ,"Process automation through the use of Power Automate and Complex Excel Formulas"
-                                    ,"Ability to produce and maintain detailed knowledgebases with technical documentation"
-                                    ,"User Interface design"
-                                ]
-        ,"skillsLangages":      [
+    "skills": {
+
+         "skillsLangages":      [
                                     "React"
                                     ,"Javascript"
                                     ,"HTML, CSS"
@@ -88,7 +89,7 @@
                                 ]
     },
 
-    "myExperiences": [
+    "experience": [
     {
          "company":         "Borough of Queenscliffe"
         ,"address":         "Learmonth Street, Queenscliffe"
@@ -245,12 +246,12 @@
                                 "ATO in-house software"
                                 ,"Siebel"
                             ]
-        ,"duties": [
+        ,"duties":          [
                                 "Managed inbound and outbound phone communications to facilitate the lodgement of overdue tax obligations and assist individuals with compliance with taxation laws and regulations."
                                 ,"Initiated outbound calls to organize payment plans for debt collections, effectively negotiating repayment terms with taxpayers to resolve outstanding tax liabilities."
                                 ,"Engaged clients to utilize ATO digital platforms such as MyGov, MyTax, business online portals, and the ABR, to assist individuals with streamline their tax lodgements in the future."
                                 ,"Provided personalized assistance and guidance to taxpayers, addressing inquiries, clarifying tax-related queries, and offering support whem required."
-        ]
+                            ]
     },
     {
          "company":         "H&R Block - Geelong Office"
@@ -262,7 +263,7 @@
         ,"softwares":       [
                                "Reckon Elite"
                             ]
-        ,"duties": [
+        ,"duties":          [
                                  "Prepared tax returns for individuals, partnerships, and small businesses independently."
                                 ,"Handled inbound and outbound calls, assisting clients with inquiries and scheduling appointments."
                                 ,"Provided expert guidance on tax-related matters to clients, optimizing their tax positions."
@@ -270,7 +271,7 @@
                             ]
     }
     ],
-    "myPortfolio": [
+    "portfolio": [
     {
          "projectName":      "Taxation Calculator"
         ,"projectLangs":     ["React", "nodeJs"]
