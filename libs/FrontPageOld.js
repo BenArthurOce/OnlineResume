@@ -1,17 +1,10 @@
-// import { IntroductionSection, EducationSection, SkillsSection, ExperiencesSection, PortfolioSection } from './Section.js';
-import NavBar from './HTMLnavbar.js';
-// import ResumeData from './factoryResumeData.js';
-// // import HTMLexperienceTile from './HTMLexperienceTile.js';
-// // import HTMLportfolioTile from './HTMLportfolioTile.js';
-// import {ExperienceTile, PortfolioTile } from './Tile.js';
-
-import HTMLPalette from "./HTMLPalette.js";
+import JSONReader from '../data/JSONReader.js';
+import Dictionary from '../data/Dictionary.js';
+import NavBar from './NavbarObject.js';
+import Palette from "./Palette.js";
 import SectionHandler from "./SectionHandler.js";
 
-import JSONReader from "./JSONReader.js";
-import Dictionary from './Dictionary.js';
-
-class FrontPageNEW {
+class FrontPage {
     //There is no parent element for this. This is the top level
     #paletteObj;        // A colour palette picker that stays in the FrontPage() - I should make a class for it
     #element;           // The element of the FrontPage() object, its just the wrapper
@@ -92,7 +85,7 @@ class FrontPageNEW {
 
 
         // Navbar links
-        this.initNavBarLinks();
+        // this.initNavBarLinks();
 
         // Sections
         // this.initSectionHandler();
@@ -105,15 +98,12 @@ class FrontPageNEW {
 
         clearTimeout(this.#searchTimeout);      // Stop all the setup async functions
 
-        // console.log("-----")
-        // console.log(this)
-        // await this.printObjectTree(this);
+        // this.renderToPage() 
 
-        // this.walk(this)
-
-        this.renderToPage() 
+        console.log(this)
 
 
+        console.log(this.sectionHandler.sectionObjectList[3].subObjects)
     };
 
 
@@ -121,23 +111,12 @@ class FrontPageNEW {
 //****** Render Everything to Dom ******
     renderToPage() {
 
+        // Main issue 27/Mar/24
+        // Gotta figure out how to MVC
+
         document.body.appendChild(this.previousArrow);
         document.body.appendChild(this.nextArrow);
-        // this.element.appendChild(this.navigationBar.element)  
 
-
-        // this.sectionHandler.element.appendChild()
-        // this.sectionHandler.element.appendChild()
-        // this.sectionHandler.element.appendChild()
-        // this.sectionHandler.element.appendChild()
-        // this.sectionHandler.element.appendChild()
-
-        
-        // console.log(allSections)
-
-        // this.sectionHandler.element.appendChild()
-
-        // console.log(this.element)
 
         const allSections = this.sectionHandler.sectionObjectList
         console.log(allSections)
@@ -151,8 +130,6 @@ class FrontPageNEW {
             this.sectionHandler.element.appendChild(section.element)
         });
         
-
-
         // FrontPage() object
         this.element.appendChild(this.sectionHandler.element)
     };
@@ -243,7 +220,7 @@ class FrontPageNEW {
 
 //****** Colour Palette ******
     createPalette(){
-        const paletteInstance = new HTMLPalette(this);
+        const paletteInstance = new Palette(this);
         this.updateColorScheme("forest"); //default colour scheme
         return paletteInstance;
     };
@@ -256,7 +233,4 @@ class FrontPageNEW {
 }
 
 
-
-
-
-export default FrontPageNEW;
+export default FrontPage;

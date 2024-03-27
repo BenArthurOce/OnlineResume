@@ -1,9 +1,9 @@
-class HTMLPalette {
+class Palette {
     #element;
     // #parentObject;
     #selectedPalette;
     constructor() {
-        this.name = "HTMLPalette";
+        this.name = "Palette";
         this.element = null;
         // this.#parentObject = parentObject;
         this.#selectedPalette = "forest"; // Default palette
@@ -85,4 +85,4 @@ class HTMLPalette {
     
 };
 
-export default HTMLPalette;
+export default Palette;

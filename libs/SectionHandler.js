@@ -1,16 +1,25 @@
-import { IntroductionSection, EducationSection, SkillsSection, ExperiencesSection, PortfolioSection } from './Section.js';
-import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter} from "./HTMLFilter.js";
-import {ExperienceTile, PortfolioTile } from './Tile.js';
+// import { IntroductionSection, EducationSection, SkillsSection, ExperiencesSection, PortfolioSection } from './SectionObject.js';
+// import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter} from "./FilterObject.js";
+// import {ExperienceTile, PortfolioTile } from './TileObject.js';
+
+import {IntroductionSectionObject, EducationSectionObject, SkillSectionObject, ExperienceSectionObject, PortfolioSectionObject} from "./SectionObject.js";
+import {IntroductionFilterObject, EducationFilterObject, SkillFilterObject, ExperienceFilterObject, PortfolioFilterObject} from './FilterObject.js';
+
+
+// import SectionObject from './SectionObject.js';
+
+// import FilterObject from './FilterObject.js';
+// import TileObject from './TileObject.js';
 
 
 class SectionHandler {
-    #className; // The name of the class
-    #sectionObjectList; // Contains each of the Section() objects
-    #sectionFilterList; // Contains each of the Filter() objects which pair with each Section() object
+    #className;             // The name of the class
+    #sectionObjectList;     // Contains each of the Section() objects
+    #sectionFilterList;     // Contains each of the Filter() objects which pair with each Section() object
     // #parentObject; // The object that contains this class
-    #element; // The DOM element of this class
-    #indexCurrent; // Which Section() should currently be displayed on screen
-    #indexChangeCallback; // What happens automatically when an Index number is changed
+    #element;               // The DOM element of this class
+    #indexCurrent;          // Which Section() should currently be displayed on screen
+    #indexChangeCallback;   // What happens automatically when an Index number is changed
     constructor() {
         this.#className = "SectionHandler";
         this.#sectionObjectList = [];
@@ -75,15 +84,15 @@ class SectionHandler {
         return this.sectionObjectList[index].subObjects
     };
 
-
+    
 //****** Creates the Section() objects and added to class ******
     createSectionObjects(data) {
         this.sectionObjectList = [
-              new IntroductionSection(data.get("about"), ['Introduction', 'KeySkills'])
-            , new SkillsSection(data.get("skills"), ['Technical', 'Soft', 'Languages'])
-            , new EducationSection(data.get("education"), ['IT', 'Accounting'])
-            , new ExperiencesSection(data.get("experience"), null)
-            , new PortfolioSection(data.get("portfolio"), null)
+              new IntroductionSectionObject(data.get("about"), ['Introduction', 'KeySkills'])
+            , new SkillSectionObject(data.get("skills"), ['Technical', 'Soft', 'Languages'])
+            , new EducationSectionObject(data.get("education"), ['IT', 'Accounting'])
+            , new ExperienceSectionObject(data.get("experience"), null)
+            , new PortfolioSectionObject(data.get("portfolio"), null)
         ]; 
     };
 
@@ -91,11 +100,12 @@ class SectionHandler {
 //****** Creates the FilterBar() Objects ******
     createFilterMenuObjects(data) {
         this.sectionFilterList = [
-            new IntroductionFilter(data.get("about"), ['Introduction', 'KeySkills'])
-            , new SkillsFilter(data.get("skills"), ['Technical', 'Soft', 'Languages'])
-            , new EducationFilter(data.get("education"), ['IT', 'Accounting'])
-            , new ExperienceFilter(data.get("experience"), null)
-            , new PortfolioFilter(data.get("portfolio"), null)
+              new IntroductionFilterObject(data.get("about"), ['Introduction', 'KeySkills'])
+            , new SkillFilterObject(data.get("skills"), ['Technical', 'Soft', 'Languages'])
+            , new EducationFilterObject(data.get("education"), ['IT', 'Accounting'])
+            , new ExperienceFilterObject(data.get("experience"), null)
+            , new PortfolioFilterObject(data.get("portfolio"), null)
+            // , new IntroductionFilterObject
         ];
     };
 
@@ -132,11 +142,11 @@ class SectionHandler {
         const portfolioTiles = this.returnSectionSubItems(4)
 
         const filterButtons = this.returnFilterObject(3)
-        console.log(filterButtons)
+        // console.log(filterButtons)
 
         experienceTiles.forEach((tile, i) => {
 
-            // tile.addEventListener('click', () => {
+            // tile.addEventListener('click', () => {   
 
             // });
 
@@ -278,16 +288,6 @@ class SectionHandler {
     };
 
 
-    // for (const {company, address, position, period, extraInfo, tags, softwares, duties} of myExperiences) {
-    //     frontpage.addExperienceTile(company, address, position, period, extraInfo, tags, softwares, duties)
-    // };
-
-
-    // for (const {projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages} of myPortfolio) {
-    //     frontpage.addPortfolioTile(projectName, projectLangs, projectTags, summarySmall, summaryLarge, projectUrl, projectImages)
-    // };
-
-
 //****** 
     createASingleTile() {
         //maybe? Kinda need to loop through the tiles
@@ -295,6 +295,7 @@ class SectionHandler {
 
 //****** 
     addExperienceTiles(data) {
+        console.log("addExperienceTiles")
 
         const sectionObject = this.returnSectionObject(3)
         // console.log(sectionObject)
@@ -344,13 +345,6 @@ class SectionHandler {
     };
 
 
-    // addExperienceTileOLD(company, address, position, period, extraInfo, tags, softwares, duties) {
-    //     const data = {company, address, position, period, extraInfo, tags, softwares, duties}
-    //     console.log(this.sectionIDs[3])
-    //     const parentEl = document.body.querySelector(`#${this.sectionIDs[3]} .container.for-tile`);
-    //     const experienceTile = new ExperienceTile(data, parentEl)
-    // };.
-
 
     addFilterEventsToExperienceSection() {
         const tiles = this.returnSectionSubItems(3)
@@ -370,38 +364,9 @@ class SectionHandler {
 
     }
 
-    // // All buttons inside the menu bars
-    // this.filterBarObjs.forEach((filterBarObject, i) => {
-    //     if (filterBarObject.refNum === 0 || filterBarObject.refNum === 1 || filterBarObject.refNum === 2) {
-    //         const filterButtons = filterBarObject.element.querySelectorAll(`li`)
-    //         filterButtons.forEach((button, i) => {
-    //             const callbackFunction = this.showArticle.bind(this)
-    //             button.addEventListener("click", callbackFunction);
-    //         });
-    //     };
-    //     if (filterBarObject.refNum === 3 || filterBarObject.refNum === 4) {
-    //         const filterButtons = filterBarObject.element.querySelectorAll(`li`)
-    //         filterButtons.forEach((button, i) => {
-    //             const callbackFunction = this.filterTiles.bind(this)
-    //             button.addEventListener("click", callbackFunction);
-    //         });
-    //     };
-    // });
 
 
 };
 
-export default SectionHandler
+export default SectionHandler;
 
-
-// console.log(filters)
-// filters[4].createFilterElement()
-
-// // this.#filterBars = filters
-// this.sectionFilterList = filters;
-
-// console.log(filters[4])
-// console.log(filters[4].element)
-// this.parentEl.appendChild(filters[4].element)
-
-// // document.body.querySelectorAll(`#wrapper`).appendChild(this.sectionFilterList[1].element)
