@@ -18,7 +18,6 @@ class FrontPage {
 
     constructor() {
         // this.#paletteObj = this.createPalette()
-        // this.#element = document.querySelector(`#wrapper`)
         this.#dictionary = new Dictionary();
         this.#navBar = new NavBar(this, ['About Me', 'Skills', 'Education', 'Experience', 'Portfolio']);
         this.#sectionHandler = new SectionHandler();
@@ -27,12 +26,11 @@ class FrontPage {
         // this.#elArrowNext = this.initRightArrow();
         // this.#intPrevInx = null;
         this.#intCurrInx = 0;
-
         this.init();
     };
-    get element() {
-        return this.#element;
-    };
+    // get element() {
+    //     return this.#element;
+    // };
     get resumeData() {
         return this.#dictionary;
     };
@@ -67,10 +65,6 @@ class FrontPage {
         return this.sectionHandler.sectionObjectList[index]
     }
 
-//****** Append to Front Page ******
-    appendToFrontPage(object) {
-        this.element.appendChild(object.element)
-    };
 
 
 //****** Initialize the Front Page ******
