@@ -1,5 +1,4 @@
-// In each section, there are sub items that contain resume information, either ArticleObject() or TileObject()
-
+// 
 class NavlinkObject {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
@@ -27,12 +26,14 @@ class NavlinkObject {
         return this.#word;
     };
 
-    //****** Command to make this Object "visible" 
+
+
+//****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
     };
 
-    //****** Command to make this Object "invisible" 
+//****** Command to make this Object "invisible" 
     toggleOff() {
         this.isActive = false;
     };

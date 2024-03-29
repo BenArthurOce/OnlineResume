@@ -14,16 +14,20 @@ import {IntroductionFilterObject, EducationFilterObject, SkillFilterObject, Expe
 
 class SectionHandler {
     #className;             // The name of the class
+    #data;
     #sectionObjectList;     // Contains each of the Section() objects
     #sectionFilterList;     // Contains each of the Filter() objects which pair with each Section() object
     // #parentObject; // The object that contains this class
     #element;               // The DOM element of this class
     #indexCurrent;          // Which Section() should currently be displayed on screen
     #indexChangeCallback;   // What happens automatically when an Index number is changed
-    constructor() {
+
+    constructor(data) {
         this.#className = "SectionHandler";
-        this.#sectionObjectList = [];
-        this.#sectionFilterList = []
+        console.log(data)
+        this.#data = data
+        this.#sectionObjectList = this.createSectionObjects(data)
+        this.#sectionFilterList = this.createFilterMenuObjects(data)
         // this.#parentObject = document.querySelector("#wrapper");
         this.#element = null
         this.#indexCurrent = 0;
@@ -87,19 +91,20 @@ class SectionHandler {
     
 //****** Creates the Section() objects and added to class ******
     createSectionObjects(data) {
-        this.sectionObjectList = [
+        const tempList = [
               new IntroductionSectionObject(data.get("about"), ['Introduction', 'KeySkills'])
             , new SkillSectionObject(data.get("skills"), ['Technical', 'Soft', 'Languages'])
             , new EducationSectionObject(data.get("education"), ['IT', 'Accounting'])
             , new ExperienceSectionObject(data.get("experience"), null)
             , new PortfolioSectionObject(data.get("portfolio"), null)
         ]; 
+        return tempList;
     };
 
 
 //****** Creates the FilterBar() Objects ******
     createFilterMenuObjects(data) {
-        this.sectionFilterList = [
+        const tempList = [
               new IntroductionFilterObject(data.get("about"), ['Introduction', 'KeySkills'])
             , new SkillFilterObject(data.get("skills"), ['Technical', 'Soft', 'Languages'])
             , new EducationFilterObject(data.get("education"), ['IT', 'Accounting'])
@@ -107,6 +112,7 @@ class SectionHandler {
             , new PortfolioFilterObject(data.get("portfolio"), null)
             // , new IntroductionFilterObject
         ];
+        return tempList;
     };
 
 

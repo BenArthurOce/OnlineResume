@@ -6,7 +6,19 @@ class JSONReader {
       this.data = null;
     }
   
+    fileExists() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('HEAD', this.filePath, false); // false makes the request synchronous
+      xhr.send(null);
+      return xhr.status === 200;
+    }
+  
     readJSONSync() {
+      if (!this.fileExists()) {
+        console.error('JSON file does not exist:', this.filePath);
+        return;
+      }
+      
       const xhr = new XMLHttpRequest();
       xhr.overrideMimeType('application/json');
       xhr.open('GET', this.filePath, false); // false makes the request synchronous
@@ -22,15 +34,12 @@ class JSONReader {
     getData() {
       return this.data;
     }
-  }
+}
   
-//   // Example usage:
-//   const jsonReader = new JSONReader('data.json');
-//   jsonReader.readJSONSync();
-  
-//   // Accessing data
-//   const jsonData = jsonReader.getData();
-//   console.log(jsonData);
+// Example usage:
+// const jsonReader = new JSONReader('data.json');
+// jsonReader.readJSONSync();
+// const jsonData = jsonReader.getData();
+// console.log(jsonData);
 
-
-export default JSONReader
+export default JSONReader;

@@ -1,134 +1,75 @@
-class NavLink {
-    constructor(index, text, isActive = false) {
-        this.index = index;
-        this.text = text;
-        this.isActive = isActive;
-        this.element = this.createLinkElement();
-    }
+//
 
-    createLinkElement() {
-        const link = document.createElement('a');
-        link.href = '#';
-        link.dataset.index = this.index;
-        link.textContent = this.text;
-        link.classList.add('nav-link');
-        if (this.isActive) {
-            link.classList.add('activated');
-        }
-        return link;
-    };
-
-    setText(text) {
-        this.text = text;
-        this.element.textContent = text;
-    };
-
-    toggleOn() {
-        this.isActive = true;
-        this.element.classList.add('activated');
-    };
-
-    toggleOff() {
-        this.isActive = false;
-        this.element.classList.remove('activated');
-    };
-
-
-}
-
-
-
-
-
-class NavBar {
-    #className;             // The name of the class
-    #headings;              // List of the Navbar names
-    #links;                 // Contains each of the NavLink() objects
-    // #parentObject;              // The object that contains this class
-    #element;               // The DOM element of this class
-    #indexCurrent;          // Which NavLink() object should be displayed on screen
-    constructor(headings) {
+class NavLinkView {
+    #className;                     //  The name of the class
+    #classType;                     //  The name of the subclass
+    #mvcComponent;                  //  What part of the MVC is this class
+    #index;                         //  Index order of NavLink
+    #text;                          //  String displayed on screen
+    #isActive;                      //  DOM element displays a different attribute if active
+    #element;                       //  HTML Element
+    constructor(index, text) {
         this.#className = "NavBar";
-        this.#headings = headings
-        this.#links = [];
-        // this.#parentObject = parentObject;
-        this.#element = this.createElement();
-        this.#indexCurrent = 0;
-        this.addInfoToElement();
-
-        this.addLink(0, this.#headings[0], true);
-        this.addLink(1, this.#headings[1]);
-        this.addLink(2, this.#headings[2]);
-        this.addLink(3, this.#headings[3]);
-        this.addLink(4, this.#headings[4]);
+        this.#classType = "NavLinkView";
+        this.#mvcComponent = "View";
+        this.#index = index;
+        this.#text = text;
+        this.#element = this.generateElement();
+        console.log(this.#element)
     };
     get className() {
         return this.#className;
     };
-    get headings() {
-        return this.#headings;
+    get classType() {
+        return this.#classType;
     };
-    get links() {
-        return this.#links;
+    get mvcComponent() {
+        return this.#mvcComponent;
     };
-    // get parentObject() {
-    //     return this.#parentObject;
-    // };
+    get text() {
+        return this.#text;
+    };
+    get index() {
+        return this.#index;
+    };
+    get isActive() {
+        return this.#isActive;
+    };
+    set isActive(value) {
+        this.#isActive = value;
+    };
     get element() {
         return this.#element;
     };
-    set element(value) {
-        this.#element = value;
-    };
-    get indexCurrent() {
-        return this.#indexCurrent;
-    };
-    set indexCurrent(value) {
-        this.#indexCurrent = value;
-        this.toggleNavLink(); // Call toggleActiveSection whenever index changes
-    };
 
-
-    toggleNavLink() {
-        this.links.forEach((link, index) => {
-            if (index === this.#indexCurrent) {
-                link.toggleOn();
-            } else {
-                link.toggleOff();
-            }
-        });
+//****** Prepares the HTML element ******
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+        <a href="#" data-index="${this.index}" class="nav-link">${this.text}</a>
+         `;
+         return newElement.cloneNode(true);
     };
 
-
-    createElement() {
-        const navElement = document.createElement('nav');
-        navElement.innerHTML = `
-            <h1 class="${this.className.toLowerCase()}-title for-mobile"></h1>
-            <div class="container for-navbar-links"></div>
-            <a href="#" class="navbar-icon for-mobile">
-                <i class="fa fa-bars"></i>
-            </a>
-        `;
-        return navElement;
+//****** Command to make this Object "visible" ******
+    toggleOn() {
+        this.isActive = true;
+        this.element.classList.add("activated")
     };
 
-    addInfoToElement() {
-        const linkContainer = this.element.querySelector('.for-navbar-links');
-        this.links.forEach(link => {
-            linkContainer.appendChild(link.element);
-        });
+//****** Command to make this Object "invisible" ******
+    toggleOff() {
+        this.isActive = false;
+        this.element.classList.remove("activated")
     };
 
-    addLink(index, text, isActive = false) {
-        const link = new NavLink(index, text, isActive);
-        this.links.push(link);
-        const linkContainer = this.element.querySelector('.for-navbar-links');
-        linkContainer.appendChild(link.element);
-    };
-
-    returnLink(index) {
-        return this.links[index];
+//******  ******
+    toggle() {
+        this.isActive = !this.isActive
+        this.element.classList.toggle("activated")
     };
 };
 
-export default NavBar;
+
+export default NavLinkView;
+

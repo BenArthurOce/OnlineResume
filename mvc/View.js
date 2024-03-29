@@ -1,67 +1,161 @@
-import NavBar from '../views/NavbarView.js'
+import NavBarView from '../views/NavbarView.js'
+import NavLinkView from '../views/NavlinkView.js';
 import {IntroductionSectionView, EducationSectionView, SkillSectionView, ExperienceSectionView, PortfolioSectionView} from '../views/SectionView.js'
 
 class View {
     constructor() {
-        const navbar = new NavBar();
-        const section1 = new IntroductionSectionView();
-        const section2 = new SkillSectionView();
-        const section3 = new EducationSectionView();
-        const section4 = new ExperienceSectionView();
-        const section5 = new PortfolioSectionView();
+        this.searchTimeout = null;
+        this.init()
+
+    }
+
+
+
+    async init() {
+
 
         this.app = this.getElement('#wrapper');
+
+
 
         this.title = this.createElement('h1');
         this.title.textContent = 'Ben Resume';
 
-        this.navbar = navbar.element;
-        this.sections = [section1.element, section2.element, section3.element, section4.element, section5.element];
+
+        // Prepare Navigation Bar
+        this.navBar = new NavBarView();
+        this.navBar.appendLink(new NavLinkView(0, "Introduction"))
+        this.navBar.appendLink(new NavLinkView(1, "Skills"))
+        this.navBar.appendLink(new NavLinkView(2, "Education"))
+        this.navBar.appendLink(new NavLinkView(3, "Experience"))
+        this.navBar.appendLink(new NavLinkView(4, "Portfolio"))
+
+        
+        this.sections = [
+             new IntroductionSectionView()
+            ,new SkillSectionView()
+            ,new EducationSectionView()
+            ,new ExperienceSectionView()
+            ,new PortfolioSectionView()
+        ]
+
+        // this.elNavs = []
+        this.sectionsEL = this.sections.map(section => section.element)
+
+
+        // this.navbar = navbar.element;
+        // this.sections = [section1.element, section2.element, section3.element, section4.element, section5.element];
         this.currentSectionIndex = 0;
 
+        this.indexView = 0;
+
+        console.log(this.navBar)
+
+
+
+        this.app.append(this.title, this.navBar.element, ...this.sectionsEL);
+        // this.renderNavLinks();
+    };
+
+
+    renderNavBar() {
+        // Append navigation bar element to the body or any other appropriate container
+        document.body.appendChild(this.navBar.element);
+    }
+
+    renderNavLinks() {
+        // Get the container element where navigation links will be appended
+        const navLinksContainer = this.navBar.element.querySelector('.container.for-navbar-links');
+
+        // Append each navigation link element to the container
+        this.navLinks.forEach(navLink => {
+            navLinksContainer.appendChild(navLink.element);
+        });
+    }
+
+
+    // I'm not sure if the hanlder is needed as I think its to do with adjusting data in the model, and data in the model doesnt need adjusting
+    bindAdjIndexNumber(handler) {
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
                 // Navigate to previous section
-                this.navigateSections(-1);
+                this.decrementActiveNumber()
+                handler(-1); // Decrement index by 1
+
+                this.render(this.indexView)
             } else if (event.key === 'ArrowRight') {
                 // Navigate to next section
-                this.navigateSections(1);
+                this.incrementActiveNumber()
+                handler(1); // Increment index by 1
+                this.render(this.indexView)
             }
         });
+    };
 
-        this.app.append(this.title, this.navbar, ...this.sections);
-    }
+
+    decrementActiveNumber() {
+        const numSections = this.sections.length;
+        let a 
+        a = this.indexView 
+        let b 
+        b = (a - 1 + numSections) % numSections;
+        this.indexView = b
+    };
+
+
+    incrementActiveNumber() {
+        // console.log("incrementActiveNumber")
+        const numSections = this.sections.length;
+        let a 
+        a = this.indexView 
+        let b 
+        b = (a + 1 + numSections) % numSections;
+        this.indexView = b
+    };
+
+
   
     createElement(tag, className) {
         const element = document.createElement(tag);
         if (className) element.classList.add(className);
         return element;
-    }
+    };
+
   
     getElement(selector) {
         return document.querySelector(selector);
-    }
+    };
 
-    navigateSections(direction) {
-        // Calculate the index of the next section
-        let nextIndex = this.currentSectionIndex + direction;
 
-        // Ensure the index stays within bounds
-        if (nextIndex < 0) {
-            nextIndex = 0; // Wrap around to the last section
-        } else if (nextIndex >= this.sections.length) {
-            nextIndex = this.sections.length - 1; // Wrap around to the first section
-        }
+    renderNewSection(sections) {
+        console.log(sections)
+    };
+
+
+
+
+    render(nextIndex) {
+        console.log(nextIndex)
+
+        // Unactivate current nav link
+        this.navBar.returnSingleNavigationLink(this.currentSectionIndex).toggle();
+
+
+        // Activate next navlink
+
+
+
 
         // Hide the current section
-        this.sections[this.currentSectionIndex].style.display = 'none';
+        this.sectionsEL[this.currentSectionIndex].style.display = 'none';
 
         // Show the next section
-        this.sections[nextIndex].style.display = 'block';
+        this.sectionsEL[nextIndex].style.display = 'block';
 
         // Update current section index
         this.currentSectionIndex = nextIndex;
-    }
+    };
+
 };
 
 export default View;

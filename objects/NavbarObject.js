@@ -1,4 +1,6 @@
-// In each section, there are sub items that contain resume information, either ArticleObject() or TileObject()
+// 
+
+// import NavlinkObject from "./NavlinkObject.js";
 
 class NavbarObject {
     #className;                     //  The name of the class
@@ -12,6 +14,7 @@ class NavbarObject {
         this.#mvcComponent = "Object";
         this.#data = data;
         this.#links = [];
+        this.addLinks();
     };
     get className() {
         return this.#className;
@@ -32,14 +35,19 @@ class NavbarObject {
         return this.#links;
     };
 
-    //****** Command to make this Object "visible" 
+//****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
     };
 
-    //****** Command to make this Object "invisible" 
+//****** Command to make this Object "invisible" 
     toggleOff() {
         this.isActive = false;
+    };
+
+//****** 
+    addLinks() {
+
     };
 };
 
