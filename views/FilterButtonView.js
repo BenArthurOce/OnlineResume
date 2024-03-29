@@ -1,6 +1,6 @@
 //
 
-class NavLinkView {
+class FilterButtonView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
@@ -9,11 +9,11 @@ class NavLinkView {
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor(index, text) {
-        this.#className = "NavBar";
-        this.#classType = "NavLinkView";
+        this.#className = "FilterButton";
+        this.#classType = "FilterButtonView";
         this.#mvcComponent = "View";
+        this.#text = text
         this.#index = index;
-        this.#text = text;
         this.#element = this.generateElement();
     };
     get className() {
@@ -50,25 +50,25 @@ class NavLinkView {
          return newElement.cloneNode(true);
     };
 
-//****** Command to make this Object "visible" ******
-    toggleOn() {
-        this.isActive = true;
-        this.element.classList.add("activated")
-    };
+// //****** Command to make this Object "visible" ******
+//     toggleOn() {
+//         this.isActive = true;
+//         this.element.classList.add("activated")
+//     };
 
-//****** Command to make this Object "invisible" ******
-    toggleOff() {
-        this.isActive = false;
-        this.element.classList.remove("activated")
-    };
+// //****** Command to make this Object "invisible" ******
+//     toggleOff() {
+//         this.isActive = false;
+//         this.element.classList.remove("activated")
+//     };
 
-//******  ******
-    toggle() {
-        this.isActive = !this.isActive
-        this.element.classList.toggle("activated")
-    };
+// //******  ******
+//     toggle() {
+//         this.isActive = !this.isActive
+//         this.element.classList.toggle("activated")
+//     };
 };
 
 
-export default NavLinkView;
+export default FilterButtonView;
 

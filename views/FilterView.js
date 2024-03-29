@@ -202,19 +202,19 @@ class FilterButton {
  
  
  
- //****** Creates a HTML element
-     createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
-                 <menu id="${this.id}" class="menu-filter for-article for-mobile">
-                     <ul class="filter-list for-article for-mobile">
-                         <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${this.subHeadings[0].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[0].toLowerCase()}</li>
-                         <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${this.subHeadings[1].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[1].toLowerCase()}</li>
-                     </ul>
-                 </menu>
-         `.trim();
-         this.element = tempEl.firstChild;
-     };
+//  //****** Creates a HTML element
+//      createElement() {
+//          const tempEl = document.createElement('div');
+//          tempEl.innerHTML = `
+//                  <menu id="${this.id}" class="menu-filter for-article for-mobile">
+//                      <ul class="filter-list for-article for-mobile">
+//                          <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${this.subHeadings[0].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[0].toLowerCase()}</li>
+//                          <li role="button" dataParent="${this.id}" dataIndex="1" dataFilter="${this.subHeadings[1].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[1].toLowerCase()}</li>
+//                      </ul>
+//                  </menu>
+//          `.trim();
+//          this.element = tempEl.firstChild;
+//      };
  
  //****** Adds a button to the Filter Object
      addButton() {

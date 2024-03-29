@@ -7,7 +7,7 @@ class SectionView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
-    #element;                          //  The part of the resume data from Dictionary()
+    #element;                       //  The part of the resume data from Dictionary()
     #subObjects;                    //  Article() or Tile() objects contained in this section
     #isActive;
     constructor() {
@@ -45,12 +45,12 @@ class SectionView {
         this.#isActive = value;
     };
 
-    //****** Command to make this Object "visible" 
+//****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
     };
 
-    //****** Command to make this Object "invisible" 
+//****** Command to make this Object "invisible" 
     toggleOff() {
         this.isActive = false;
     };

@@ -2,13 +2,16 @@ import NavBarView from '../views/NavbarView.js'
 import NavLinkView from '../views/NavlinkView.js';
 import {IntroductionSectionView, EducationSectionView, SkillSectionView, ExperienceSectionView, PortfolioSectionView} from '../views/SectionView.js'
 
+
+import {IntroductionFilterBarView, EducationFilterBarView, SkillsFilterBarView, ExperienceFilterBarView, PortfolioFilterBarView} from '../views/FilterBarView.js'
+import FilterButtonView from '../views/FilterButtonView.js';
+
 class View {
     constructor() {
         this.searchTimeout = null;
         this.init()
 
     }
-
 
 
     async init() {
@@ -32,15 +35,39 @@ class View {
 
         
         this.sections = [
-             new IntroductionSectionView()
-            ,new SkillSectionView()
-            ,new EducationSectionView()
-            ,new ExperienceSectionView()
-            ,new PortfolioSectionView()
+              new IntroductionSectionView()
+            , new SkillSectionView()
+            , new EducationSectionView()
+            , new ExperienceSectionView()
+            , new PortfolioSectionView()
         ]
+
+
+
+        this.filterBars = [
+              new IntroductionFilterBarView(0)
+            , new EducationFilterBarView(1)
+            , new SkillsFilterBarView(2)
+            , new ExperienceFilterBarView(3)
+            , new PortfolioFilterBarView(4)
+        ]
+
+
+        this.filterBars[0].appendButton(new FilterButtonView(1, "test0"))
+        this.filterBars[0].appendButton(new FilterButtonView(1, "test0"))
+        this.filterBars[1].appendButton(new FilterButtonView(1, "test1"))
+        this.filterBars[1].appendButton(new FilterButtonView(1, "test1"))
+        this.filterBars[2].appendButton(new FilterButtonView(1, "test2"))
+        this.filterBars[2].appendButton(new FilterButtonView(1, "test2"))
+        this.filterBars[3].appendButton(new FilterButtonView(1, "test3"))
+        this.filterBars[3].appendButton(new FilterButtonView(1, "test3"))
+        this.filterBars[4].appendButton(new FilterButtonView(1, "test4"))
+        this.filterBars[4].appendButton(new FilterButtonView(1, "test4"))
 
         // this.elNavs = []
         this.sectionsEL = this.sections.map(section => section.element)
+
+        this.filterBarsEl = this.filterBars.map(filterBar => filterBar.element)
 
 
         // this.navbar = navbar.element;
@@ -53,7 +80,19 @@ class View {
 
 
 
-        this.app.append(this.title, this.navBar.element, ...this.sectionsEL);
+
+//29/03/2024
+// Need two seperate classes for FilterButtonView
+////////-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+        this.app.append(this.title, this.navBar.element, ...this.filterBarsEl, ...this.sectionsEL);
         // this.renderNavLinks();
     };
 
@@ -136,6 +175,33 @@ class View {
 
     render(nextIndex) {
         console.log(nextIndex)
+
+
+        // turn it all off
+        this.filterBars.map(filterBar => filterBar.toggleOff())
+
+        this.filterBars.forEach((filterBar, i) => {
+            console.log(nextIndex)
+            console.log(filterBar.index)
+            if (filterBar.index === nextIndex) {filterBar.toggleOn()}
+            // console.log(`element: ${element}  index: ${ i}`);
+        });
+
+        // this.filterBars.map(filterBar => )
+        // this.filterBars.forEach(filterBar => {
+        //     filterBar.isActive = filterBar.index === nextIndex;
+        // });
+
+        const test = this.filterBars.map(filterBar => filterBar.isActive)
+        console.log(test)
+
+        const test2 = this.filterBars.map(filterBar => filterBar.index)
+        console.log(test2)
+
+        const test3 = this.filterBars.map(filterBar => filterBar.id)
+        console.log(test3)
+
+        // this.filterBars[this.currentSectionIndex].toggle();
 
         // Unactivate current nav link
         this.navBar.returnSingleNavigationLink(this.currentSectionIndex).toggle();
