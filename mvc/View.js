@@ -6,23 +6,21 @@ import {IntroductionSectionView, EducationSectionView, SkillSectionView, Experie
 import {IntroductionFilterBarView, EducationFilterBarView, SkillsFilterBarView, ExperienceFilterBarView, PortfolioFilterBarView} from '../views/FilterBarView.js'
 import FilterButtonView from '../views/FilterButtonView.js';
 
+import ArticleView from '../views/ArticleView.js';
+import {ExperienceTileView, PortfolioTileView} from '../views/TileView.js';
+
+
 class View {
     constructor() {
         this.searchTimeout = null;
         this.init()
-
-    }
+    };
 
 
     async init() {
-
+        console.log("VIEW: init" + "\n" + "----------")
 
         this.app = this.getElement('#wrapper');
-
-
-
-        this.title = this.createElement('h1');
-        this.title.textContent = 'Ben Resume';
 
 
         // Prepare Navigation Bar
@@ -33,13 +31,13 @@ class View {
         this.navBar.appendLink(new NavLinkView(3, "Experience"))
         this.navBar.appendLink(new NavLinkView(4, "Portfolio"))
 
-        
+
         this.sections = [
-              new IntroductionSectionView()
-            , new SkillSectionView()
-            , new EducationSectionView()
-            , new ExperienceSectionView()
-            , new PortfolioSectionView()
+              new IntroductionSectionView(0)
+            , new SkillSectionView(1)
+            , new EducationSectionView(2)
+            , new ExperienceSectionView(3)
+            , new PortfolioSectionView(4)
         ]
 
 
@@ -64,126 +62,129 @@ class View {
         this.filterBars[4].appendButton(new FilterButtonView(1, "test4"))
         this.filterBars[4].appendButton(new FilterButtonView(1, "test4"))
 
-        // this.elNavs = []
         this.sectionsEL = this.sections.map(section => section.element)
-
         this.filterBarsEl = this.filterBars.map(filterBar => filterBar.element)
 
 
-        // this.navbar = navbar.element;
-        // this.sections = [section1.element, section2.element, section3.element, section4.element, section5.element];
-        this.currentSectionIndex = 0;
 
-        this.indexView = 0;
-
-        console.log(this.navBar)
+        //29/03/2024
+        // Need two seperate classes for FilterButtonView
+        ////////-----------------------------------------------------------------------
 
 
+        // ArticleView
+        this.sections[0].appendSubObject(new ArticleView(0, "Intro-0articleText", "Intro-0articleHeading"))
+        this.sections[0].appendSubObject(new ArticleView(1, "Intro-1articleText", "Intro-1articleHeading"))
 
 
-//29/03/2024
-// Need two seperate classes for FilterButtonView
-////////-----------------------------------------------------------------------
+        this.sections[1].appendSubObject(new ArticleView(0, "Skills-0articleText", "Skills-0articleHeading"))
+        this.sections[1].appendSubObject(new ArticleView(1, "Skills-1articleText", "Skills-1articleHeading"))
+
+        this.sections[2].appendSubObject(new ArticleView(0, "Education-0articleText", "Education-0articleHeading"))
+        this.sections[2].appendSubObject(new ArticleView(1, "Education-1articleText", "Education-1articleHeading"))
+
+
+        this.sections[3].appendSubObject(new ExperienceTileView(0, "Exp-0articleText", "Exp-0articleHeading"))
+        this.sections[3].appendSubObject(new ExperienceTileView(1, "Exp-1articleText", "Exp-1articleHeading"))
+
+        this.sections[4].appendSubObject(new PortfolioTileView(0, "Port-0articleText", "Port-0articleHeading"))
+        this.sections[4].appendSubObject(new PortfolioTileView(1, "Port-1articleText", "Port-1articleHeading"))
 
 
 
 
+        this.app.append(this.navBar.element, ...this.filterBarsEl, ...this.sectionsEL);
 
+        // this.app.append(this.title, this.navBar.element, ...this.filterBarsEl, ...this.sectionsEL);
+        this.updateColorScheme("forest");
+        this._initLocalListeners();
 
-
-
-        this.app.append(this.title, this.navBar.element, ...this.filterBarsEl, ...this.sectionsEL);
-        // this.renderNavLinks();
     };
 
-
-    renderNavBar() {
-        // Append navigation bar element to the body or any other appropriate container
-        document.body.appendChild(this.navBar.element);
-    }
-
-    renderNavLinks() {
-        // Get the container element where navigation links will be appended
-        const navLinksContainer = this.navBar.element.querySelector('.container.for-navbar-links');
-
-        // Append each navigation link element to the container
-        this.navLinks.forEach(navLink => {
-            navLinksContainer.appendChild(navLink.element);
-        });
+    commenceRender(data) {
+        console.log("VIEW: commenceRender")
+        console.log(data)
     }
 
 
-    // I'm not sure if the hanlder is needed as I think its to do with adjusting data in the model, and data in the model doesnt need adjusting
-    bindAdjIndexNumber(handler) {
+    bindIndexChange(handler) {
+        console.log("VIEW: bindAddCard")
+        this.handleIndexChange = handler;
+    }
+
+
+    _initLocalListeners() {
+        console.log("VIEW: _initLocalListeners")
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
-                // Navigate to previous section
-                this.decrementActiveNumber()
-                handler(-1); // Decrement index by 1
-
-                this.render(this.indexView)
+                this.handleIndexChange(-1)
             } else if (event.key === 'ArrowRight') {
-                // Navigate to next section
-                this.incrementActiveNumber()
-                handler(1); // Increment index by 1
-                this.render(this.indexView)
+                this.handleIndexChange(1)
             }
         });
-    };
+    }
 
 
-    decrementActiveNumber() {
-        const numSections = this.sections.length;
-        let a 
-        a = this.indexView 
-        let b 
-        b = (a - 1 + numSections) % numSections;
-        this.indexView = b
-    };
-
-
-    incrementActiveNumber() {
-        // console.log("incrementActiveNumber")
-        const numSections = this.sections.length;
-        let a 
-        a = this.indexView 
-        let b 
-        b = (a + 1 + numSections) % numSections;
-        this.indexView = b
-    };
-
-
-  
-    createElement(tag, className) {
-        const element = document.createElement(tag);
-        if (className) element.classList.add(className);
-        return element;
-    };
-
-  
     getElement(selector) {
         return document.querySelector(selector);
     };
 
 
-    renderNewSection(sections) {
-        console.log(sections)
+    updateColorScheme(newColour) {
+        const root = document.documentElement;
+        root.setAttribute('data-style', newColour);
     };
 
 
-
-
     render(nextIndex) {
-        console.log(nextIndex)
+        console.log("VIEW: render")
+        // console.log(nextIndex)
+
+
+
+        // turn it all off
+        this.navBar.links.map(link => link.toggleOff())
+
+        this.navBar.links.forEach((link, i) => {
+            // console.log("------")
+            // console.log(nextIndex)
+            // console.log(link.index)
+            if (link.index === nextIndex) {
+                link.toggleOn()
+            }
+        });
+
+        const testNav = this.navBar.links.map(link => link.isActive)
+        // console.log(testNav)
+
+
+
+        // turn it all off
+        this.sections.map(section => section.toggleOff())
+
+        this.sections.forEach((section, i) => {
+            // console.log("------")
+            // console.log(nextIndex)
+            // console.log(section.index)
+            if (section.index === nextIndex) {
+                section.toggleOn()
+            }
+        });
+
+        const testSections = this.sections.map(section => section.isActive)
+        // console.log(testSections)
 
 
         // turn it all off
         this.filterBars.map(filterBar => filterBar.toggleOff())
 
         this.filterBars.forEach((filterBar, i) => {
-            console.log(nextIndex)
-            console.log(filterBar.index)
-            if (filterBar.index === nextIndex) {filterBar.toggleOn()}
+            // console.log("------")
+            // console.log(nextIndex)
+            // console.log(filterBar.index)
+            if (filterBar.index === nextIndex) {
+                filterBar.toggleOn()
+            }
             // console.log(`element: ${element}  index: ${ i}`);
         });
 
@@ -193,33 +194,15 @@ class View {
         // });
 
         const test = this.filterBars.map(filterBar => filterBar.isActive)
-        console.log(test)
+        // console.log(test)
 
         const test2 = this.filterBars.map(filterBar => filterBar.index)
-        console.log(test2)
+        // console.log(test2)
 
         const test3 = this.filterBars.map(filterBar => filterBar.id)
-        console.log(test3)
-
-        // this.filterBars[this.currentSectionIndex].toggle();
-
-        // Unactivate current nav link
-        this.navBar.returnSingleNavigationLink(this.currentSectionIndex).toggle();
+        // console.log(test3)
 
 
-        // Activate next navlink
-
-
-
-
-        // Hide the current section
-        this.sectionsEL[this.currentSectionIndex].style.display = 'none';
-
-        // Show the next section
-        this.sectionsEL[nextIndex].style.display = 'block';
-
-        // Update current section index
-        this.currentSectionIndex = nextIndex;
     };
 
 };

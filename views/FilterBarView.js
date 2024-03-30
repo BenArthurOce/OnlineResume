@@ -4,21 +4,20 @@ class FilterBarView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
-    #buttons;                         //  Array containing the NavBarLinks (Added to the class in main View code)
     #id;                            //  Combination of class names to create an element id string
-    #element;                       //  HTML Element
-    #isActive;
     #index;
+    #buttons;                         //  Array containing the NavBarLinks (Added to the class in main View code)
+    #isActive;
+    #element;                       //  HTML Element
     constructor(index) {
         this.#className = "FilterBar";
         this.#classType = null;
         this.#mvcComponent = "View";
-        this.#buttons = [];
         this.#id = null;
-        this.#element = null;
-        this.#isActive = false;
         this.#index = index;
-        // console.log(index)
+        this.#buttons = [];
+        this.#isActive = false;
+        this.#element = null;
     };
     get className() {
         return this.#className;
@@ -32,9 +31,6 @@ class FilterBarView {
     get mvcComponent() {
         return this.#mvcComponent;
     };
-    get buttons() {
-        return this.#buttons;
-    };
     get id() {
         return this.#id;
     };
@@ -44,6 +40,10 @@ class FilterBarView {
     get index() {
         return this.#index;
     };
+    get buttons() {
+        return this.#buttons;
+    };
+
     get isActive() {
         return this.#isActive;
     };

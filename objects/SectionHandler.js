@@ -24,7 +24,7 @@ class SectionHandler {
 
     constructor(data) {
         this.#className = "SectionHandler";
-        console.log(data)
+        // console.log(data)
         this.#data = data
         this.#sectionObjectList = this.createSectionObjects(data)
         this.#sectionFilterList = this.createFilterMenuObjects(data)
@@ -201,7 +201,7 @@ class SectionHandler {
 
 //****** Creates the element for SectionHandler() ******
     createElement() {
-        console.log("createElement - SectionHandler")
+        // console.log("createElement - SectionHandler")
         this.element = document.createElement("main");
         this.element.innerHTML = `
             <h1 id="section-heading">PlaceHolder Heading</h1>

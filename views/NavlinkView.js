@@ -47,7 +47,8 @@ class NavLinkView {
         newElement.innerHTML = `
         <a href="#" data-index="${this.index}" class="nav-link">${this.text}</a>
          `;
-         return newElement.cloneNode(true);
+        //  return newElement.cloneNode(true);
+         return newElement.firstElementChild
     };
 
 //****** Command to make this Object "visible" ******
@@ -62,11 +63,6 @@ class NavLinkView {
         this.element.classList.remove("activated")
     };
 
-//******  ******
-    toggle() {
-        this.isActive = !this.isActive
-        this.element.classList.toggle("activated")
-    };
 };
 
 

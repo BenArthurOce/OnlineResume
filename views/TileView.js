@@ -1,22 +1,27 @@
-import {ExperienceOverlay, PortfolioOverlay} from './Overlay.js';
 
-// Base class
-class Tile {
-    #className;
-    #classType;
-    #parentObj;
-    #element;
-    #data;
-    constructor(data, parentObj) {
-        this.#className = "Tile";
+
+//
+
+class TileView {
+    #className;                     //  The name of the class
+    #classType;                     //  The name of the subclass
+    #mvcComponent;                  //  What part of the MVC is this class
+    #id;                            //  Combination of class names to create an element id string
+    #index;                         //  Index order of Article
+    #text;                          //  String displayed on screen
+    #heading;                       //  Heading
+    #isActive;                      //  DOM element displays a different attribute if active
+    #element;                       //  HTML Element
+    constructor(index, text, heading) {
+        this.#className = "TileView";
         this.#classType = null
-        this.#parentObj = parentObj
-        this.#element = null;
-        this.#data = data;
-        this.createTileElement();       // Different functions between classes. Each creates a tile element
-        this.applyInfoToElement();      // Different functions between classes. Add icons, tags to the tile element
-        this.renderToPage();            // Shared function. Adds Tile() to the DOM
-        this.addLocalEventListeners();  // Shared function. Style change when hovered. Overlay() presented when clicked
+        this.#mvcComponent = "View";
+        this.#id = null;
+        this.#index = index;
+        this.#text = text;
+        this.#heading = heading;
+        this.#isActive = false;
+        this.#element = null;  
     };
     get className() {
         return this.#className;
@@ -27,8 +32,29 @@ class Tile {
     set classType(value) {
         this.#classType = value;
     };
-    get parentObj() {
-        return this.#parentObj;
+    get mvcComponent() {
+        return this.#mvcComponent;
+    };
+    get id() {
+        return this.#id;
+    };
+    set id(value) {
+        this.#id = value;
+    };
+    get index() {
+        return this.#index;
+    };
+    get text() {
+        return this.#text;
+    };
+    get heading() {
+        return this.#heading;
+    };
+    get isActive() {
+        return this.#isActive;
+    };
+    set isActive(value) {
+        this.#isActive = value;
     };
     get element() {
         return this.#element;
@@ -36,137 +62,86 @@ class Tile {
     set element(value) {
         this.#element = value;
     };
-    get data() {
-        return this.#data;
-    };
 
-    //****** Command to make this Objects element visible from the DOM
-    toggleOn() {
-        this.isActive = true;
-        this.element.classList.add('activated');
-    };
-
-    //****** Command to remove visibility from the DOM
-    toggleOff() {
-        this.isActive = false;
-        this.element.classList.remove('activated');
-    };
-
-    renderToPage() {
-        // this.parentEl.appendChild(this.element);
-    };
-
-    getParentObject(element) {
-
-    };
-
-    addLocalEventListeners(){
-        // Tile lights up when hovered over
-        this.element.addEventListener('mouseover', () => {
-            this.element.classList.add('hover');
-        });
-
-        // Tile returns to normal when mouse unhovers
-        this.element.addEventListener('mouseout', () => {
-            this.element.classList.remove('hover');
-        });
-
-        // When tile is clicked, an Overlay() will appear
-        this.element.addEventListener('click', () => {
-            let overlayClass
-            if (this.element.classList.contains(`for-experience`)) {
-                overlayClass = new ExperienceOverlay(this.data, document.querySelector(`#wrapper`));
-            }
-            if (this.element.classList.contains(`for-portfolio`)) {
-                overlayClass = new PortfolioOverlay(this.data, document.querySelector(`#wrapper`))
-            }
-        });
-    };
-};
-
-
-class ExperienceTile extends Tile {
-    constructor(data, parentObj) {
-        super(data, parentObj); 
-    };
-
-    createTileElement() {
-        this.classType = "Experience" 
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+//****** Prepares the HTML element ******
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
         <div class="tile activated for-experience">
             <div class="icon-container">
 		        <i class="icon"></i>
 		    </div>
-            <p class="position">${this.data.position}</p>
-            <p class="company">${this.data.company}</p>
+            <p class="position">${"placeholder"}</p>
+            <p class="company">${"placeholder"}</p>
         </div>
-        `.trim();
-        this.element = tempEl.firstChild
+         `;
+        return newElement.firstElementChild
     };
 
-    applyInfoToElement() {
-        // Add tags for job types
-        // console.log(this.data)
-        this.data.tags.forEach(tag => this.element.classList.add(tag));
-
-        // Add small icon in top left
-        const iconClass = this.getIconClassBasedOnTag(this.data.tags[0]);
-        this.element.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
+//****** Command to make this Object "visible" ******
+    toggleOn() {
+        this.isActive = true;
+        this.element.classList.add("activated")
     };
 
-    // Helper method to get icon class based on the tag
-    getIconClassBasedOnTag(tag) {
-        switch (tag) {
-            case "Programming":
-                return 'fa-desktop';
-            case "Accounting":
-                return 'fa-dollar';
-            case "CustomerService":
-                return 'fa-bell';
-            default:
-                return '';
-        }
+//****** Command to make this Object "invisible" ******
+    toggleOff() {
+        this.isActive = false;
+        this.element.classList.remove("activated")
     };
-
 };
 
 
-class PortfolioTile extends Tile {
-    constructor(data, parentObj) {
-        super(data, parentObj);
-        this.classType = "Portfolio"
+class ExperienceTileView extends TileView {
+    constructor(index, text, heading) {
+        super(index, text, heading);
+        this.classType = "Experience";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.element = this.generateElement();
+
+        // console.log(this.text)
+        // console.log(this.heading)
     };
 
-    createTileElement() {
+    generateElement() {
+        const tempEl = document.createElement('div');
+        tempEl.innerHTML = `
+            <div class="tile activated for-experience">
+                <div class="icon-container">
+                    <i class="icon"></i>
+                </div>
+                <p class="position">${"placeholder position"}</p>
+                <p class="company">${"placeholder company"}</p>
+            </div>
+        `.trim();
+        return tempEl.firstChild;
+    };
+};
+
+
+class PortfolioTileView extends TileView {
+    constructor(index) {
+        super(index);
+        this.classType = "Portfolio";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.element = this.generateElement();
+    };
+
+    generateElement() {
         const tempEl = document.createElement('div');
         tempEl.innerHTML = `
             <div class="tile activated for-portfolio">
                 <div class="container for-icons"></div>
-                <p class="projectName">${this.data.projectName}</p>
-                <p class="projectSumSmall">${this.data.summarySmall}</p>
+                <p class="projectName">${"placeholder Project"}</p>
+                <p class="projectSumSmall">${"placeholder Project Sum"}</p>
             </div>
         `.trim();
-        this.element = tempEl.firstChild;
+        return tempEl.firstChild;
     };
+};
 
-    applyInfoToElement() {
-        // Add tags for each portfolio
-        this.data.projectTags.forEach(tag => this.element.classList.add(tag));
 
-        // Add programming icons
-        const iconContainer = this.element.querySelector('.container.for-icons');
-        this.data.projectLangs.forEach(lang => {
-            const logoPath = `imgLogos/${lang}.svg`;                        // Get SVG of programming logo
-            const langLogo = document.createElement('img');                 // Create a new image element for each language
-            
-            langLogo.src = logoPath;
-            langLogo.alt = lang;
-            langLogo.classList.add('program-icon');
-    
-            iconContainer.appendChild(langLogo);
-        });
-    };
-}
 
-export { ExperienceTile, PortfolioTile};
+
+
+export {ExperienceTileView, PortfolioTileView};

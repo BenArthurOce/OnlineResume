@@ -189,7 +189,7 @@ section.activated {
 }
 
 /* General CSS for all container style elements */
-/* .container {
+.container {
     display: flex;
     height: 100%;
     min-height: 100%;
@@ -201,7 +201,7 @@ section.activated {
 
     background-color: var(--section-background-color);
     justify-content: space-between; 
-} */
+}
 
 /* .container.for-section {
     display: flex;
@@ -214,11 +214,11 @@ section.activated {
 } */
 
 
-/* .container.for-filter {
+.container.for-filter {
     display: none;
     height: 50px;
     min-height: 50px;
-} */
+}
 
 /* .container.for-filter.for-tile {
     display: inline-block;

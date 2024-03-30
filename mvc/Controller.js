@@ -1,46 +1,48 @@
 class Controller {
     constructor(model, view) {
-      this.model = model
-      this.view = view
-      this.timeout = null
-      this.init();
+        this.model = model
+        this.view = view
+        this.timeout = null
+        this.init();
     }
 
-    async init () {
+    async init() {
+        console.log("CONTROLLER: init" + "\n" + "----------")
         await this.model.init()
-        // await this.view = view;
-        clearTimeout(this.searchTimeout); 
 
-        this.model.bindIndexChanged(this.onSectionDisplayChange)
-        this.view.bindAdjIndexNumber(this.handleAdjIndex)
+        clearTimeout(this.searchTimeout);
 
+        this.model.bindIndexChanged(this.onIndexChanged.bind(this));
+        this.view.bindIndexChange(this.handleIndexChange.bind(this));
 
-        // Display initial
-        // this.onSectionDisplayChange(this.model.sections)
+        this.onIndexChanged(this.model.data);
     };
 
-    onSectionDisplayChange = (sections) => {
-        this.view.renderNewSection(sections)
+
+    onIndexChanged(data) {
+        console.log("CONTROLLER: onIndexChanged")
+        this.view.commenceRender(data);
     };
 
-    handleIncIndex = () => {
-        this.model.incIndex()
+
+    handleIndexChange(index) {
+        console.log("CONTROLLER: handleIndexChange");
+        const currentInx = this.model.data.index;
+        const numSections = this.model.data.sections.length;
+
+        if (index === -1) {
+            let a = currentInx;
+            let b = (a - 1 + numSections) % numSections;
+            this.indexView = b;
+            console.log("VIEW: decrementActiveNumber");
+        } else if (index === 1) {
+            let a = currentInx;
+            let b = (a + 1 + numSections) % numSections;
+            this.indexView = b;
+            console.log("VIEW: incrementActiveNumber");
+        }
+
+        this.model.changeIndex(this.indexView);
     };
-
-    handleDecIndex = () => {
-        this.model.decIndex()
-    };
-
-    handleAdjIndex = (index) => {
-        // In normal circumstances, you would do something like
-        // this.model.MODELFUNCTION(param) to actually adjust things in the model, like adding new jobs or things like that
-        // This is a static page with no new information being added or removed, so there is no need for that
-
-        // So nothing actually needs to be done here?
-        // this.model.adjIndex(index)
-        // console.log(index)
-        // console.log(this.model.index)
-    };
-
-  }
+};
 export default Controller
