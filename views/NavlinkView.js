@@ -10,7 +10,7 @@ class NavLinkView {
     #element;                       //  HTML Element
     constructor(index, text) {
         this.#className = "NavBar";
-        this.#classType = "NavLinkView";
+        this.#classType = null;
         this.#mvcComponent = "View";
         this.#index = index;
         this.#text = text;

@@ -8,7 +8,7 @@ class NavBarView {
     #element;                       //  HTML Element
     constructor() {
         this.#className = "NavBar";
-        this.#classType = "NavBarView";
+        this.#classType = null;
         this.#mvcComponent = "View";
         this.#links = [];
         this.#element = this.generateElement();

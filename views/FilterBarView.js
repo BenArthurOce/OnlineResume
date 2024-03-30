@@ -84,6 +84,9 @@ class FilterBarView {
 };
 
 
+//
+//  Introduction
+//
 class IntroductionFilterBarView extends FilterBarView {
     constructor(index) {
         super(index);
@@ -93,17 +96,20 @@ class IntroductionFilterBarView extends FilterBarView {
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <menu id="${this.id}" class="menu-filter for-article for-mobile">
                 <ul class="filter-list for-article for-mobile"></ul>
             </menu>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstChild;
     };
 };
 
 
+//
+//  Education
+//
 class EducationFilterBarView extends FilterBarView {
     constructor(index) {
         super(index);
@@ -113,17 +119,19 @@ class EducationFilterBarView extends FilterBarView {
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <menu id="${this.id}" class="menu-filter for-article for-mobile">
                 <ul class="filter-list for-article for-mobile"></ul>
             </menu>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstChild;
     };
 };
 
-
+//
+//  Skills
+//
 class SkillsFilterBarView extends FilterBarView {
     constructor(index) {
         super(index);
@@ -133,17 +141,19 @@ class SkillsFilterBarView extends FilterBarView {
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <menu id="${this.id}" class="menu-filter for-article for-mobile">
                 <ul class="filter-list for-article for-mobile"></ul>
             </menu>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstChild;
     };
 };
 
-
+//
+//  Experience
+//
 class ExperienceFilterBarView extends FilterBarView {
     constructor(index) {
         super(index);
@@ -153,17 +163,19 @@ class ExperienceFilterBarView extends FilterBarView {
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
                 <ul class="filter-list for-tile for-pc for-mobile"></ul>
             </menu>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstChild;
     };
 };
 
-
+//
+//  Portfolio
+//
 class PortfolioFilterBarView extends FilterBarView {
     constructor(index) {
         super(index);
@@ -173,13 +185,13 @@ class PortfolioFilterBarView extends FilterBarView {
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
                 <ul class="filter-list for-tile for-pc for-mobile"></ul>
             </menu>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstChild;
     };
 };
 

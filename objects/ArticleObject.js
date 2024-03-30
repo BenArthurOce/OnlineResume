@@ -56,7 +56,6 @@ class SkillArticleObject extends ArticleObject {
         super(data);
         this.classType = "Skill";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-
         this.title = heading
         this.info = data
     };
@@ -68,7 +67,6 @@ class EducationArticleObject extends ArticleObject {
         super(data);
         this.classType = "Education";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-
         this.title = heading
         this.info = data
     };

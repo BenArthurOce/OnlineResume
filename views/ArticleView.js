@@ -8,20 +8,20 @@ class ArticleView {
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Index order of Article
-    #text;                          //  String displayed on screen
+    #data;                          //  String displayed on screen
     #heading;                       //  Heading
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, text, heading) {
-        this.#className = "ArticleView";
-        this.#classType = "ArticleView";
+    constructor(index, heading, data) {
+        this.#className = "Article";
+        this.#classType = null
         this.#mvcComponent = "View";
-        this.#id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.#id = null;
         this.#index = index;
-        this.#text = text;
+        this.#data = data;
         this.#heading = heading;
         this.#isActive = false;
-        this.#element = this.generateElement();  
+        this.#element = null;  
     };
     get className() {
         return this.#className;
@@ -29,17 +29,23 @@ class ArticleView {
     get classType() {
         return this.#classType;
     };
+    set classType(value) {
+        this.#classType = value;
+    };
     get mvcComponent() {
         return this.#mvcComponent;
     };
     get id() {
         return this.#id;
     };
+    set id(value) {
+        this.#id = value;
+    };
     get index() {
         return this.#index;
     };
-    get text() {
-        return this.#text;
+    get data() {
+        return this.#data;
     };
     get heading() {
         return this.#heading;
@@ -53,17 +59,8 @@ class ArticleView {
     get element() {
         return this.#element;
     };
-
-//****** Prepares the HTML element ******
-    generateElement() {
-        const newElement = document.createElement('div');
-        newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-text for-pc">
-                <h2>${this.heading}:</h2>
-                <p>${this.text}</p>
-            </article>
-         `;
-        return newElement.firstElementChild
+    set element(value) {
+        this.#element = value;
     };
 
 //****** Command to make this Object "visible" ******
@@ -77,113 +74,87 @@ class ArticleView {
         this.isActive = false;
         this.element.classList.remove("activated")
     };
-
 };
 
 
-export default ArticleView;
+//
+//  Introduction
+//
+class IntroductionArticleView extends ArticleView {
+    constructor(index, heading, data) {
+        super(index, heading, data);
+        this.classType = "Introduction";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.element = this.generateElement();
+        console.log(data)
+    };
+
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <article id="${this.id}" class="article-with-text for-pc">
+                <h2>${this.heading}:</h2>
+                <p>${this.data}</p>
+            </article>
+        `;
+        return newElement.firstElementChild
+    };
+
+    applyInfoToElement() {
+    };
+};
+
+//
+//  Skills
+//
+class SkillsArticleView extends ArticleView {
+    constructor(index, heading, data) {
+        super(index, heading, data);
+        this.classType = "Skills";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.element = this.generateElement();
+    };
+
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <article id="${this.id}" class="article-with-list for-pc">
+                <h2>${this.heading}:</h2>
+                <p>${this.data}</p>
+            </article>
+        `;
+        return newElement.firstElementChild
+    };
+
+    applyInfoToElement() {
+    };
+};
+
+//
+//  Education
+//
+class EducationArticleView extends ArticleView {
+    constructor(index, heading, data) {
+        super(index, heading, data);
+        this.classType = "Education";
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.element = this.generateElement();
+    };
+
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <article id="${this.id}" class="article-with-text for-pc">
+                <h2>${this.heading}:</h2>
+                <p>${this.classType}</p>
+            </article>
+        `;
+        return newElement.firstElementChild
+    };
+
+    applyInfoToElement() {
+    };
+};
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// class ExperienceArticle extends ArticleObject {
-//     constructor(data, parentObj) {
-//         super(data, parentObj); 
-//         this.classType = "Experience"
-//         this.testInit();
-//     };
-
-//     testInit() {
-//         console.log(this)
-//     }
-
-//     createArticleElement() {
-         
-//         const tempEl = document.createElement('div');
-//         tempEl.innerHTML = `
-//         <div class="article activated for-experience">
-//             <div class="icon-container">
-// 		        <i class="icon"></i>
-// 		    </div>
-//             <p class="position">${this.data.position}</p>
-//             <p class="company">${this.data.company}</p>
-//         </div>
-//         `.trim();
-//         this.element = tempEl.firstChild
-//     };
-
-//     applyInfoToElement() {
-//         // Add tags for job types
-//         // console.log(this.data)
-//         this.data.tags.forEach(tag => this.element.classList.add(tag));
-
-//         // Add small icon in top left
-//         const iconClass = this.getIconClassBasedOnTag(this.data.tags[0]);
-//         this.element.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
-//     };
-
-//     // Helper method to get icon class based on the tag
-//     getIconClassBasedOnTag(tag) {
-//         switch (tag) {
-//             case "Programming":
-//                 return 'fa-desktop';
-//             case "Accounting":
-//                 return 'fa-dollar';
-//             case "CustomerService":
-//                 return 'fa-bell';
-//             default:
-//                 return '';
-//         }
-//     };
-
-// };
-
-
-// class PortfolioArticle extends ArticleObject {
-//     constructor(data, parentObj) {
-//         super(data, parentObj);
-//         this.classType = "Portfolio"
-//     };
-
-//     createArticleElement() {
-//         const tempEl = document.createElement('div');
-//         tempEl.innerHTML = `
-//             <div class="article activated for-portfolio">
-//                 <div class="container for-icons"></div>
-//                 <p class="projectName">${this.data.projectName}</p>
-//                 <p class="projectSumSmall">${this.data.summarySmall}</p>
-//             </div>
-//         `.trim();
-//         this.element = tempEl.firstChild;
-//     };
-
-//     applyInfoToElement() {
-//         // Add tags for each portfolio
-//         this.data.projectTags.forEach(tag => this.element.classList.add(tag));
-
-//         // Add programming icons
-//         const iconContainer = this.element.querySelector('.container.for-icons');
-//         this.data.projectLangs.forEach(lang => {
-//             const logoPath = `imgLogos/${lang}.svg`;                        // Get SVG of programming logo
-//             const langLogo = document.createElement('img');                 // Create a new image element for each language
-            
-//             langLogo.src = logoPath;
-//             langLogo.alt = lang;
-//             langLogo.classList.add('program-icon');
-    
-//             iconContainer.appendChild(langLogo);
-//         });
-//     };
-// }
-
-// export { ExperienceArticle, PortfolioArticle};
+export {IntroductionArticleView, SkillsArticleView as SkillArticleView, EducationArticleView};

@@ -80,6 +80,9 @@ class SectionView {
 };
 
 
+//
+//  Introduction
+//
 class IntroductionSectionView extends SectionView {
     constructor(index) {
         super(index);
@@ -101,7 +104,10 @@ class IntroductionSectionView extends SectionView {
 };
 
 
-class SkillSectionView extends SectionView {
+//
+//  Skills
+//
+class SkillsSectionView extends SectionView {
     constructor(index) {
         super(index);
         this.classType = "Skills";
@@ -122,6 +128,9 @@ class SkillSectionView extends SectionView {
 };
 
 
+//
+//  Education
+//
 class EducationSectionView extends SectionView {
     constructor(index) {
         super(index);
@@ -143,6 +152,9 @@ class EducationSectionView extends SectionView {
 };
 
 
+//
+//  Experience
+//
 class ExperienceSectionView extends SectionView {
     constructor(index) {
         super(index);
@@ -164,6 +176,9 @@ class ExperienceSectionView extends SectionView {
 };
 
 
+//
+//  Portfolio
+//
 class PortfolioSectionView extends SectionView {
     constructor(index) {
         super(index);
@@ -184,4 +199,4 @@ class PortfolioSectionView extends SectionView {
     };
 };
 
-export {IntroductionSectionView, EducationSectionView, SkillSectionView, ExperienceSectionView, PortfolioSectionView}
+export {IntroductionSectionView, EducationSectionView, SkillsSectionView as SkillSectionView, ExperienceSectionView, PortfolioSectionView}

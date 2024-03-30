@@ -63,20 +63,6 @@ class TileView {
         this.#element = value;
     };
 
-//****** Prepares the HTML element ******
-    generateElement() {
-        const newElement = document.createElement('div');
-        newElement.innerHTML = `
-        <div class="tile activated for-experience">
-            <div class="icon-container">
-		        <i class="icon"></i>
-		    </div>
-            <p class="position">${"placeholder"}</p>
-            <p class="company">${"placeholder"}</p>
-        </div>
-         `;
-        return newElement.firstElementChild
-    };
 
 //****** Command to make this Object "visible" ******
     toggleOn() {
@@ -92,20 +78,20 @@ class TileView {
 };
 
 
+//
+//  Experience
+//
 class ExperienceTileView extends TileView {
     constructor(index, text, heading) {
         super(index, text, heading);
         this.classType = "Experience";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
-
-        // console.log(this.text)
-        // console.log(this.heading)
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <div class="tile activated for-experience">
                 <div class="icon-container">
                     <i class="icon"></i>
@@ -114,11 +100,17 @@ class ExperienceTileView extends TileView {
                 <p class="company">${"placeholder company"}</p>
             </div>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstElementChild
+    };
+
+    applyInfoToElement() {
     };
 };
 
 
+//
+//  Portfolio
+//
 class PortfolioTileView extends TileView {
     constructor(index) {
         super(index);
@@ -128,15 +120,18 @@ class PortfolioTileView extends TileView {
     };
 
     generateElement() {
-        const tempEl = document.createElement('div');
-        tempEl.innerHTML = `
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
             <div class="tile activated for-portfolio">
                 <div class="container for-icons"></div>
                 <p class="projectName">${"placeholder Project"}</p>
                 <p class="projectSumSmall">${"placeholder Project Sum"}</p>
             </div>
         `.trim();
-        return tempEl.firstChild;
+        return newElement.firstElementChild
+    };
+
+    applyInfoToElement() {
     };
 };
 

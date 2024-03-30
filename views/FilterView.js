@@ -58,11 +58,11 @@ class FilterButton {
      };
  
      createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
+         const newElement = document.createElement('div');
+         newElement.innerHTML = `
              <li role="button" dataFilter="${this.buttonName.toLowerCase()}" class="filter-button for-article for-mobile">${this.buttonName.toLowerCase()}</li>
          `.trim();
-         this.element = tempEl.firstChild; 
+         this.element = newElement.firstChild; 
      };
  
      addLocalEventListeners() {
@@ -81,11 +81,11 @@ class FilterButton {
      };
  
      createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
+         const newElement = document.createElement('div');
+         newElement.innerHTML = `
              <li role="button" dataFilter="${this.buttonName.toLowerCase()}" class="filter-button for-tile for-pc for-mobile">${this.buttonName.toLowerCase()}</li>
          `.trim();
-         this.element = tempEl.firstChild; 
+         this.element = newElement.firstChild; 
      };
  
      addLocalEventListeners() {
@@ -204,8 +204,8 @@ class FilterButton {
  
 //  //****** Creates a HTML element
 //      createElement() {
-//          const tempEl = document.createElement('div');
-//          tempEl.innerHTML = `
+//          const newElement = document.createElement('div');
+//          newElement.innerHTML = `
 //                  <menu id="${this.id}" class="menu-filter for-article for-mobile">
 //                      <ul class="filter-list for-article for-mobile">
 //                          <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${this.subHeadings[0].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[0].toLowerCase()}</li>
@@ -213,7 +213,7 @@ class FilterButton {
 //                      </ul>
 //                  </menu>
 //          `.trim();
-//          this.element = tempEl.firstChild;
+//          this.element = newElement.firstChild;
 //      };
  
  //****** Adds a button to the Filter Object
@@ -233,8 +233,8 @@ class FilterButton {
  
  //****** Creates a HTML element
      createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
+         const newElement = document.createElement('div');
+         newElement.innerHTML = `
                  <menu id="${this.id}" class="menu-filter for-article for-mobile">
                      <ul class="filter-list for-article for-mobile">
                          <li role="button" dataParent="${this.id}" dataIndex="0" dataFilter="${this.subHeadings[0].toLowerCase()}" class="filter-button for-article for-mobile">${this.subHeadings[0].toLowerCase()}</li>
@@ -243,7 +243,7 @@ class FilterButton {
                      </ul>
                  </menu>
          `.trim();
-         this.element = tempEl.firstChild
+         this.element = newElement.firstChild
      };
  
  //****** Adds a button to the Filter Object
@@ -264,14 +264,14 @@ class FilterButton {
  
  //****** Creates a HTML element
      createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
+         const newElement = document.createElement('div');
+         newElement.innerHTML = `
              <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
                  <ul class="filter-list for-tile for-pc for-mobile">
                  </ul>
              </menu>
          `.trim();
-         this.element = tempEl.firstChild;
+         this.element = newElement.firstChild;
      };
  
  //****** Adds a button to the Filter Object
@@ -292,14 +292,14 @@ class FilterButton {
  
  //****** Creates a HTML element
      createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
+         const newElement = document.createElement('div');
+         newElement.innerHTML = `
              <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
                  <ul class="filter-list for-tile for-pc for-mobile">
                  </ul>
              </menu>
          `.trim();
-         this.element = tempEl.firstChild;
+         this.element = newElement.firstChild;
      };
      
  //****** Adds a button to the Filter Object
@@ -330,15 +330,15 @@ class FilterButton {
  
  //****** Creates a HTML element
      createElement() {
-         const tempEl = document.createElement('div');
-         tempEl.innerHTML = `
+         const newElement = document.createElement('div');
+         newElement.innerHTML = `
                  <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
                      <ul class="filter-list for-tile for-pc for-mobile">
                          ${this.generateFilterOptions()}
                      </ul>
                  </menu>
          `.trim();
-         this.element = tempEl.firstChild;
+         this.element = newElement.firstChild;
      };
  
      
