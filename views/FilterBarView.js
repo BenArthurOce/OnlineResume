@@ -58,7 +58,7 @@ class FilterBarView {
     };
 
 //****** Adds a filter button ******
-    appendButton(filterButton) {
+    appendSubObject(filterButton) {
         this.buttons.push(filterButton)
         const elToAppend = this.element.querySelector(`.filter-list`)
         elToAppend.appendChild(filterButton.element)
@@ -76,11 +76,6 @@ class FilterBarView {
         this.element.classList.remove("activated")
     };
 
-//******  ******
-    toggle() {
-        this.isActive = !this.isActive
-        this.element.classList.toggle("activated")
-    };
 };
 
 
@@ -102,7 +97,7 @@ class IntroductionFilterBarView extends FilterBarView {
                 <ul class="filter-list for-article for-mobile"></ul>
             </menu>
         `.trim();
-        return newElement.firstChild;
+        return newElement.firstElementChild
     };
 };
 
@@ -125,7 +120,7 @@ class EducationFilterBarView extends FilterBarView {
                 <ul class="filter-list for-article for-mobile"></ul>
             </menu>
         `.trim();
-        return newElement.firstChild;
+        return newElement.firstElementChild
     };
 };
 
@@ -147,7 +142,7 @@ class SkillsFilterBarView extends FilterBarView {
                 <ul class="filter-list for-article for-mobile"></ul>
             </menu>
         `.trim();
-        return newElement.firstChild;
+        return newElement.firstElementChild
     };
 };
 
@@ -169,7 +164,7 @@ class ExperienceFilterBarView extends FilterBarView {
                 <ul class="filter-list for-tile for-pc for-mobile"></ul>
             </menu>
         `.trim();
-        return newElement.firstChild;
+        return newElement.firstElementChild
     };
 };
 
@@ -191,7 +186,7 @@ class PortfolioFilterBarView extends FilterBarView {
                 <ul class="filter-list for-tile for-pc for-mobile"></ul>
             </menu>
         `.trim();
-        return newElement.firstChild;
+        return newElement.firstElementChild
     };
 };
 

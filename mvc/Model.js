@@ -17,12 +17,55 @@ class Model {
 
 
         this.data = {
-              "index": 0
-            , "sections": this.frontpage.sections
-            , "filters": this.frontpage.filters
-        }
+              "index" :         0
+            , "count" :         this.frontpage.sections.length
 
-        // console.log(this.data["filters"])
+            , "filterBars" :    {
+                                    "introduction" :    this.frontpage.filters[0]
+                                    ,"skills" :         this.frontpage.filters[1]
+                                    ,"education" :      this.frontpage.filters[2]
+                                    ,"experience" :     this.frontpage.filters[3]
+                                    ,"portfolio" :      this.frontpage.filters[4]
+                                }
+
+            , "sections" :      {
+                                    "introduction" :    this.frontpage.sections[0].data
+                                    ,"skills" :         this.frontpage.sections[1].data
+                                    ,"education" :      this.frontpage.sections[2].data
+                                    ,"experience" :     this.frontpage.sections[3].data
+                                    ,"portfolio" :      this.frontpage.sections[4].data
+                                }
+
+            , "filterTags" :    {
+                                     "introduction" :   Array.from(this.returnIntroductionTypes())
+                                    ,"skills" :         Array.from(this.returnSkillsTypes())
+                                    ,"education" :      Array.from(this.returnEducationTypes())
+                                    ,"experience" :     Array.from(this.returnExperienceTypes())
+                                    ,"portfolio" :      Array.from(this.returnPortfolioTypes())
+                                }
+
+
+        }
+    };
+
+    returnIntroductionTypes() {
+        return new Set(["Introduction", "SkillsKey"]);
+    };
+
+    returnSkillsTypes() {
+        return new Set(Object.keys(this.frontpage.sections[1].data).map(key => key.charAt(0).toUpperCase() + key.slice(1)));
+    };
+
+    returnEducationTypes() {
+        return new Set(this.frontpage.sections[2].data.flatMap(education => education.tags));
+    };
+
+    returnExperienceTypes() {
+        return new Set(this.frontpage.sections[3].data.flatMap(experience => experience.tags));
+    };
+
+    returnPortfolioTypes() {
+        return new Set(this.frontpage.sections[4].data.flatMap(portfolio => portfolio.projectTags))
     };
 
 

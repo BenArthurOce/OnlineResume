@@ -9,11 +9,12 @@ class NavLinkView {
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor(index, text) {
-        this.#className = "NavBar";
-        this.#classType = null;
+        this.#className = "NavLink";
+        this.#classType = text;
         this.#mvcComponent = "View";
         this.#index = index;
         this.#text = text;
+        this.#isActive = false;
         this.#element = this.generateElement();
     };
     get className() {

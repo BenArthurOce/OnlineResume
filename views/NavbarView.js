@@ -5,12 +5,14 @@ class NavBarView {
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
     #links;                         //  Array containing the NavBarLinks (Added to the class in main View code)
+    #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor() {
         this.#className = "NavBar";
         this.#classType = null;
         this.#mvcComponent = "View";
         this.#links = [];
+        this.#isActive = false;
         this.#element = this.generateElement();
     };
     get className() {
@@ -25,8 +27,26 @@ class NavBarView {
     get links() {
         return this.#links;
     };
+    get isActive() {
+        return this.#isActive;
+    };
+    set isActive(value) {
+        this.#isActive = value;
+    };
     get element() {
         return this.#element;
+    };
+
+//****** Command to make this Object "visible" ******
+    toggleOn() {
+        this.isActive = true;
+        this.element.classList.add("activated")
+    };
+
+//****** Command to make this Object "invisible" ******
+    toggleOff() {
+        this.isActive = false;
+        this.element.classList.remove("activated")
     };
 
 //****** return a Navigation Link ******

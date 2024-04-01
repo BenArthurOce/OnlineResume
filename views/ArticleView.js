@@ -83,10 +83,12 @@ class ArticleView {
 class IntroductionArticleView extends ArticleView {
     constructor(index, heading, data) {
         super(index, heading, data);
+        //console.log(index);
+        //console.log(heading);
+        //console.log(data);
         this.classType = "Introduction";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
-        console.log(data)
     };
 
     generateElement() {
@@ -110,6 +112,9 @@ class IntroductionArticleView extends ArticleView {
 class SkillsArticleView extends ArticleView {
     constructor(index, heading, data) {
         super(index, heading, data);
+        //console.log(index);
+        //console.log(heading);
+        //console.log(data);
         this.classType = "Skills";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
@@ -136,6 +141,9 @@ class SkillsArticleView extends ArticleView {
 class EducationArticleView extends ArticleView {
     constructor(index, heading, data) {
         super(index, heading, data);
+        //console.log(index);
+        //console.log(heading);
+        //console.log(data);
         this.classType = "Education";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();

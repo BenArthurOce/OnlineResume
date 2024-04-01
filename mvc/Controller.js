@@ -28,7 +28,7 @@ class Controller {
     handleIndexChange(index) {
         console.log("CONTROLLER: handleIndexChange");
         const currentInx = this.model.data.index;
-        const numSections = this.model.data.sections.length;
+        const numSections = this.model.data.count;
 
         if (index === -1) {
             let a = currentInx;

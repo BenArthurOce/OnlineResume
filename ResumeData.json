@@ -48,8 +48,7 @@
     }
     ],
     "skills": {
-
-         "skillsLangages":      [
+         "languages":           [
                                     "React"
                                     ,"Javascript"
                                     ,"HTML, CSS"
@@ -58,7 +57,7 @@
                                     ,"C#"
                                     ,"VBA"
                                 ]
-        ,"skillsTechincal":     [
+        ,"technical":           [
                                     "Microsoft SQL Server Management Studio 2019"
                                     ,"Microsoft Excel"
                                     ,"Microsoft Visual Studio 2019"
@@ -73,7 +72,7 @@
                                     ,"React, NodeJs, HTML, CSS (Web Development)"
                                     ,"Various cloud accounting software"
                                 ]
-        ,"skillsSoft":          [
+        ,"soft":                [
                                     "Software Support."
                                     ,"Database Management."
                                     ,"Collaboration and Teamwork."
