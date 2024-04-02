@@ -1,6 +1,6 @@
-
-
-//
+// Sections are the main content displayers of this app/website. Inside each section, are either Articles or Tiles depending on what section it is
+// These "SubObjects" are created in the View() class, and are appended in the SectionView() class
+// In the View() and FilterButtonView() classes, logic is determined if this class should be visible or not. This is done using the "ToggleOn" and "ToggleOff"
 
 class ArticleView {
     #className;                     //  The name of the class
@@ -9,17 +9,17 @@ class ArticleView {
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Index order of Article
     #data;                          //  String displayed on screen
-    #heading;                       //  Heading
+    #title;                         //  Heading
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, heading, data) {
+    constructor(index, title, data) {
         this.#className = "Article";
         this.#classType = null
         this.#mvcComponent = "View";
         this.#id = null;
         this.#index = index;
         this.#data = data;
-        this.#heading = heading;
+        this.#title = title;
         this.#isActive = false;
         this.#element = null;  
     };
@@ -47,8 +47,8 @@ class ArticleView {
     get data() {
         return this.#data;
     };
-    get heading() {
-        return this.#heading;
+    get title() {
+        return this.#title;
     };
     get isActive() {
         return this.#isActive;
@@ -81,24 +81,22 @@ class ArticleView {
 //  Introduction
 //
 class IntroductionArticleView extends ArticleView {
-    constructor(index, heading, data) {
-        super(index, heading, data);
-        //console.log(index);
-        //console.log(heading);
-        //console.log(data);
+    constructor(index, title, data) {
+        super(index, title, data);
         this.classType = "Introduction";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
+//****** Creates the element for the "IntroductionArticleView" ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-text for-pc">
-                <h2>${this.heading}:</h2>
+            <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
+                <h2>${this.title}:</h2>
                 <p>${this.data}</p>
             </article>
-        `;
+        `.trim();
         return newElement.firstElementChild
     };
 
@@ -110,24 +108,25 @@ class IntroductionArticleView extends ArticleView {
 //  Skills
 //
 class SkillsArticleView extends ArticleView {
-    constructor(index, heading, data) {
-        super(index, heading, data);
+    constructor(index, title, data) {
+        super(index, title, data);
         //console.log(index);
         //console.log(heading);
-        //console.log(data);
+        console.log(data);
         this.classType = "Skills";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
+//****** Creates the element for the "SkillsArticleView" ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-list for-pc">
-                <h2>${this.heading}:</h2>
+            <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
+                <h2>${this.title}:</h2>
                 <p>${this.data}</p>
             </article>
-        `;
+        `.trim();
         return newElement.firstElementChild
     };
 
@@ -139,8 +138,8 @@ class SkillsArticleView extends ArticleView {
 //  Education
 //
 class EducationArticleView extends ArticleView {
-    constructor(index, heading, data) {
-        super(index, heading, data);
+    constructor(index, title, data) {
+        super(index, title, data);
         //console.log(index);
         //console.log(heading);
         //console.log(data);
@@ -149,14 +148,15 @@ class EducationArticleView extends ArticleView {
         this.element = this.generateElement();
     };
 
+//****** Creates the element for the "EducationArticleView" ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-text for-pc">
-                <h2>${this.heading}:</h2>
+            <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
+                <h2>${this.title}:</h2>
                 <p>${this.classType}</p>
             </article>
-        `;
+        `.trim();
         return newElement.firstElementChild
     };
 

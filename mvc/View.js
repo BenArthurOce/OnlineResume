@@ -66,8 +66,7 @@ class View {
 
         navigationBar.links.forEach((link, i) => {
             link.element.addEventListener("click", (event) => {
-                const dataIndex = event.target.getAttribute('data-index');
-                this.handleIndexChange(dataIndex)
+                this.handleIndexChange(link.index)
             });
         });
 
@@ -80,6 +79,18 @@ class View {
         //  Filter
         //
         this.filter = this.createFilter(toProperCase(key), data);
+        // this.attachFilterEvents();
+
+        console.log(this.filter.buttons)
+
+        this.filter.buttons.forEach((button, i) => {      
+            button.element.addEventListener("click", (event) => {
+
+                this.handleFilterClick(button)
+                // const dataIndex = event.target.getAttribute('data-index');
+                // this.handleIndexChange(dataIndex)
+            });
+        });
 
         //  (5 of 5)
         //  Sections
@@ -94,20 +105,36 @@ class View {
     };
 
 
-    createHeading(heading) {
-        return new HeadingView(heading)
-    };
-
-
+//****** Creates a dropdown box which allows the user to change the colour style of the page ******
     createPalette() {
         return new PaletteView()
     };
 
 
     attachPaletteChangeEvent() {
+
+        // OLD VERSION CODE
+        // // ColourPalette
+        // this.paletteEl.addEventListener('change', () => {
+        //     const newColour = document.body.querySelector(`#paletteSelector`).value;
+        //     this.updateColorScheme(newColour);
+        // });
     };
 
 
+    updateColorScheme(newColour) {
+        const root = document.documentElement;
+        root.setAttribute('data-style', newColour);
+    };
+
+
+//****** Creates an object to display the name of the current Section that the user is on ******
+    createHeading(heading) {
+        return new HeadingView(heading)
+    };
+
+
+//****** Creates the Navigation bar and the navigation links inside it ******
     createNavigation(keys) {
         const navbar = new NavBarView();
         keys.forEach((key, i) => {
@@ -117,6 +144,7 @@ class View {
     };
 
 
+//****** Creates the Filter Bar, and the Filter buttons ******
     createFilter(key, data) {
         let filter = null; // Set the element to null for the switch function
 
@@ -126,9 +154,8 @@ class View {
         switch (key) {
             case "Introduction":
                 filter = new IntroductionFilterBarView(data.filterTags['introduction']);
-                Array.from(data.filterTags['introduction']).forEach((element, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonView(i, element))
-                });
+                filter.appendSubObject(new ArticleFilterButtonView(0, "About Me"))
+                filter.appendSubObject(new ArticleFilterButtonView(1, "Key Skills"))
                 break;
             case "Skills":
                 filter = new SkillsFilterBarView(data.filterTags['skills']);
@@ -165,25 +192,57 @@ class View {
     };
 
 
+//****** Compares the "title" attribute of the clicked filter button, and makes section subObjects active/inactive depending on if their content matches the "title" attribute ******
+    handleFilterClick(button) {
+
+        // Set all section subObjects to be off when a filter button is pressed
+        this.section.subObjects.map(subObject => subObject.toggleOff())
+
+        if (button.classType === "Article") {
+
+            // If the button title attribute matches the subObject title attribute, turn the subObject on
+            this.section.subObjects.forEach(subObject => subObject.title === button.title ? subObject.toggleOn() : null);
+            return;
+        };
+
+        if (button.classType === "Tile") {
+
+            // If A tile has a tag that matches the title attribute of the button pressed, turn that subObject on
+            this.section.subObjects.forEach(subObject => subObject.tags.includes(button.title) ? subObject.toggleOn() : null);
+            return;
+        };
+
+        // Error if neither of the if statements ran
+        throw new Error ("handleFilterClick failed to detect a filter input button")
+        
+    };
+
+
+//****** Creates the Section, which displays the main content of the page. Sections contain subObjects which are either Articles or Tiles ******
     createSection(key, data) {
         const keyyy = key.toLowerCase()
         let section = null; // Set the element to null for the switch function
 
 
+        const sectionData = data
+        console.log(sectionData)
+
+
         let headings = data.filterBars[keyyy].headings
         let info = data.sections[keyyy]
+
+        console.log(info)
 
         switch (key) {
             case "Introduction":
                 section = new IntroductionSectionView(data);
-                Array.from(headings).forEach((heading, i) => {
-                    section.appendSubObject(new IntroductionArticleView(i, heading, data))
-                });
+                section.appendSubObject(new IntroductionArticleView(0, "About Me", info["introduction"]));
+                section.appendSubObject(new IntroductionArticleView(1, "Key Skills", info["skillsKey"]));
                 break;
             case "Skills":
                 section = new SkillSectionView(data);
                 Array.from(headings).forEach((heading, i) => {
-                    section.appendSubObject(new SkillArticleView(i, heading, data))
+                    section.appendSubObject(new SkillArticleView(i, heading, Object.values(info)[i]))
                 });
                 break;
             case "Education":
@@ -191,17 +250,18 @@ class View {
                 Array.from(headings).forEach((heading, i) => {
                     section.appendSubObject(new EducationArticleView(i, heading, data))
                 });
+                // Need additional code to add the educations
                 break;
             case "Experience":
                 section = new ExperienceSectionView(data);
                 info.forEach((experience, i) => {
-                    section.appendSubObject(new ExperienceTileView(i, experience))
+                    section.appendSubObject(new ExperienceTileView(i, Object.values(info)[i]))
                 });
                 break;
             case "Portfolio":
                 section = new PortfolioSectionView(data);
                 info.forEach((portfolio, i) => {
-                    section.appendSubObject(new PortfolioTileView(i, portfolio))
+                    section.appendSubObject(new PortfolioTileView(i, Object.values(info)[i]))
                 });
                 break;
             default:
@@ -212,12 +272,14 @@ class View {
     };
 
 
+//****** Refer to the local events that change the index number. Refer to the Controller and the Model ******
     bindIndexChange(handler) {
         //console.log("VIEW: bindIndexChange")
         this.handleIndexChange = handler;
     };
 
 
+//****** Changes the index number of the page based on if the left or right arrow is pressed. ******
     _initLocalListeners() {
         //console.log("VIEW: _initLocalListeners")
         document.addEventListener('keydown', (event) => {
@@ -230,10 +292,6 @@ class View {
     };
 
 
-    updateColorScheme(newColour) {
-        const root = document.documentElement;
-        root.setAttribute('data-style', newColour);
-    };
 
 };
 

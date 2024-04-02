@@ -353,6 +353,7 @@ nav > .container > a.activated {
 /* The <menu> element */
 .menu-filter { 
     /* display: block; */
+    background-color: var(--filter-basic-background-color); 
     display: none;
     width: 100%;
     max-width: 100%;

@@ -151,7 +151,7 @@ class PortfolioTileView extends TileView {
 
         this.projectName        = this.data[`projectName`];
         this.projectLangs       = this.data[`projectLangs`];
-        this.projectTags        = this.data[`projectTags`];
+        this.tags        = this.data[`projectTags`];
         this.summarySmall       = this.data[`summarySmall`];
         this.summaryLarge       = this.data[`summaryLarge`]
         this.projectUrl         = this.data[`projectUrl`]

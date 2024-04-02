@@ -43,7 +43,6 @@ class FilterBarView {
     get buttons() {
         return this.#buttons;
     };
-
     get isActive() {
         return this.#isActive;
     };
