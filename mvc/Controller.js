@@ -30,16 +30,19 @@ class Controller {
         const currentInx = this.model.data.index;
         const numSections = this.model.data.count;
 
-        if (index === -1) {
+        if (index === "-1") {
             let a = currentInx;
             let b = (a - 1 + numSections) % numSections;
             this.indexView = b;
             console.log("VIEW: decrementActiveNumber");
-        } else if (index === 1) {
+        } else if (index === "+1") {
             let a = currentInx;
             let b = (a + 1 + numSections) % numSections;
             this.indexView = b;
             console.log("VIEW: incrementActiveNumber");
+        }
+        else {
+            this.indexView = index;
         }
 
         this.model.changeIndex(this.indexView);

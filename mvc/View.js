@@ -64,6 +64,13 @@ class View {
         const navigationBar = this.createNavigation(keysUp)
         navigationBar.links[index].toggleOn()
 
+        navigationBar.links.forEach((link, i) => {
+            link.element.addEventListener("click", (event) => {
+                const dataIndex = event.target.getAttribute('data-index');
+                this.handleIndexChange(dataIndex)
+            });
+        });
+
         //  (3 of 5)
         //  Title
         //
@@ -113,6 +120,9 @@ class View {
     createFilter(key, data) {
         let filter = null; // Set the element to null for the switch function
 
+        const tileKey = ["All", "Programming", "Accounting", "CustomerService"]
+        const portKey = ["All", "UserInterface", "Web", "Database", "Logic", "Games", "Efficiency", "DataSets", "Finance"]
+
         switch (key) {
             case "Introduction":
                 filter = new IntroductionFilterBarView(data.filterTags['introduction']);
@@ -135,12 +145,14 @@ class View {
             case "Experience":
                 filter = new ExperienceFilterBarView(data.filterTags['experience']);
                 Array.from(data.filterTags['experience']).forEach((element, i) => {
+                    // filter.appendSubObject(new TileFilterButtonView(i, element, tileKey[i]))
                     filter.appendSubObject(new TileFilterButtonView(i, element))
                 });
                 break;
             case "Portfolio":
                 filter = new PortfolioFilterBarView(data.filterTags['portfolio']);
                 Array.from(data.filterTags['portfolio']).forEach((element, i) => {
+                    // filter.appendSubObject(new TileFilterButtonView(i, element, portKey[i]))
                     filter.appendSubObject(new TileFilterButtonView(i, element))
                 });
                 break;
@@ -210,29 +222,11 @@ class View {
         //console.log("VIEW: _initLocalListeners")
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
-                this.handleIndexChange(-1)
+                this.handleIndexChange("-1")
             } else if (event.key === 'ArrowRight') {
-                this.handleIndexChange(1)
+                this.handleIndexChange("+1")
             }
         });
-
-        // const navigationBar = this.TESTgetNavigationBar(keysUpper)
-        // navigationBar.links.forEach((link, i) => {
-        //     //console.log(link)
-        //     // console.log(i)
-        //     // //console.log(`element: ${element}  index: ${ i}`);
-
-        //     const element = link.element
-        //     console.log(element)
-
-        //     // addEventListener("click", (event) => {
-        //     //     // this.handleIndexChange(1)
-        //     //     console.log(event.target)
-        //     // });
-
-        //     // //console.log(link.element)
-        // });
-
     };
 
 

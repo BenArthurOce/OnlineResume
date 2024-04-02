@@ -60,7 +60,7 @@ class FilterBarView {
 //****** Adds a filter button ******
     appendSubObject(filterButton) {
         this.buttons.push(filterButton)
-        const elToAppend = this.element.querySelector(`.filter-list`)
+        const elToAppend = this.element.querySelector(`ul`)
         elToAppend.appendChild(filterButton.element)
     };
 
@@ -78,7 +78,6 @@ class FilterBarView {
 
 };
 
-
 //
 //  Introduction
 //
@@ -90,6 +89,7 @@ class IntroductionFilterBarView extends FilterBarView {
         this.element = this.generateElement();
     };
 
+//****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
@@ -113,6 +113,7 @@ class EducationFilterBarView extends FilterBarView {
         this.element = this.generateElement();
     };
 
+//****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
@@ -135,6 +136,7 @@ class SkillsFilterBarView extends FilterBarView {
         this.element = this.generateElement();
     };
 
+//****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
@@ -157,6 +159,7 @@ class ExperienceFilterBarView extends FilterBarView {
         this.element = this.generateElement();
     };
 
+//****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
@@ -179,6 +182,7 @@ class PortfolioFilterBarView extends FilterBarView {
         this.element = this.generateElement();
     };
 
+//****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `

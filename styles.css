@@ -368,6 +368,7 @@ nav > .container > a.activated {
     /* display:flex; */
     /* flex-direction: row; */
     /* justify-items: center; */
+    background-color: var(--filter-basic-background-color); 
     width: 100%;
     max-width: 100%;
 }
@@ -776,7 +777,7 @@ dialog .closeBtn {
     .filter-button.for-article {
         display: inline-flex;
         font-size: 4vw; 
-        min-width: 32%;
+        min-width: 30%;
         min-height: 4vh;
     }
 
