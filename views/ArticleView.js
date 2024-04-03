@@ -100,6 +100,12 @@ class IntroductionArticleView extends ArticleView {
         return newElement.firstElementChild
     };
 
+    addInfo() {
+        return this.data.map(item => `<li>${item}</li>`).join('');
+    };
+
+
+
     applyInfoToElement() {
     };
 };
@@ -112,10 +118,11 @@ class SkillsArticleView extends ArticleView {
         super(index, title, data);
         //console.log(index);
         //console.log(heading);
-        console.log(data);
+        // console.log(data);
         this.classType = "Skills";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
+
     };
 
 //****** Creates the element for the "SkillsArticleView" ******
@@ -124,13 +131,14 @@ class SkillsArticleView extends ArticleView {
         newElement.innerHTML = `
             <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
                 <h2>${this.title}:</h2>
-                <p>${this.data}</p>
+                <p>${this.addInfo()}</p>
             </article>
         `.trim();
         return newElement.firstElementChild
     };
 
-    applyInfoToElement() {
+    addInfo() {
+        return this.data.map(item => `<li>${item}</li>`).join('');
     };
 };
 
@@ -162,6 +170,10 @@ class EducationArticleView extends ArticleView {
 
     applyInfoToElement() {
     };
+
+    // addInfo() {
+    //     return this.duties.map(duty => `<li>${duty}</li>`).join('');
+    // };
 };
 
 

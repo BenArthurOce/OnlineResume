@@ -8,18 +8,16 @@ class TileView {
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Index order of Article
-    #data;                          //  
-    // #heading;                       //  Heading
+    #data;                          //  Detailed information about the Job/Project
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor(index, data) {
-        this.#className = "TileView";
+        this.#className = "Tile";
         this.#classType = null
         this.#mvcComponent = "View";
         this.#id = null;
         this.#index = index;
         this.#data = data;
-        // this.#heading = heading;
         this.#isActive = false;
         this.#element = null;  
     };
@@ -47,9 +45,6 @@ class TileView {
     get data() {
         return this.#data;
     };
-    // get heading() {
-    //     return this.#heading;
-    // };
     get isActive() {
         return this.#isActive;
     };
@@ -97,15 +92,15 @@ class ExperienceTileView extends TileView {
         this.duties     = this.data[`duties`]
 
         this.element = this.generateElement();
-        this.applyInfoToElement()
     };
 
+//****** Prepares the HTML element - An Experience Tile ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
             <div class="tile activated for-experience">
-                <div class="icon-container">
-                    <i class="icon"></i>
+                <div class="container for-icons">
+                    ${this.addIcon(this.data.tags[0])}
                 </div>
                 <p class="position">${this.position}</p>
                 <p class="company">${this.company}</p>
@@ -114,27 +109,20 @@ class ExperienceTileView extends TileView {
         return newElement.firstElementChild
     };
 
-    applyInfoToElement() {
-        // Add tags for job types
-        // console.log(this.data)
-        this.data.tags.forEach(tag => this.element.classList.add(tag));
 
-        // Add small icon in top left
-        const iconClass = this.getIconClassBasedOnTag(this.data.tags[0]);
-        this.element.querySelector('i').className = `sidebar-icon fa ${iconClass}`;
-    };
-
-    // Helper method to get icon class based on the tag
-    getIconClassBasedOnTag(tag) {
-        switch (tag) {
-            case "Programming":
-                return 'fa-desktop';
-            case "Accounting":
-                return 'fa-dollar';
-            case "CustomerService":
-                return 'fa-bell';
-            default:
-                return '';
+//****** Adds a single FontAwesome Icon based on the first tag in the JSON data ******
+    addIcon(key) {
+        const iconTypes = {
+             "Government":      `<i class="sidebar-icon fa fa-building icon"></i>`
+            ,"Programming":     `<i class="sidebar-icon fa fa-code icon"></i>`
+            ,"HelpDesk":        `<i class="sidebar-icon fa fa-desktop icon"></i>`
+            ,"Accounting":      `<i class="sidebar-icon fa fa-dollar icon"></i>`
+            ,"CustomerService": `<i class="sidebar-icon fa fa-bell icon"></i>`
+        }
+        if (key in iconTypes) {
+            return iconTypes[key];
+        } else {
+            throw new Error(`Title '${key}' not found in addIcon`);
         }
     };
 };
@@ -158,14 +146,17 @@ class PortfolioTileView extends TileView {
         this.projectImages      = this.data[`projectImages`]
 
         this.element = this.generateElement();
-        this.applyInfoToElement()
+        // this.applyInfoToElement()
     };
 
+//****** Prepares the HTML element - A Portfolio Tile ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
             <div class="tile activated for-portfolio">
-                <div class="container for-icons"></div>
+                <div class="container for-icons">
+                    ${this.addProgrammingLogos()}
+                </div>
                 <p class="projectName">${this.projectName}</p>
                 <p class="projectSumSmall">${this.summarySmall}</p>
             </div>
@@ -173,27 +164,10 @@ class PortfolioTileView extends TileView {
         return newElement.firstElementChild
     };
 
-    applyInfoToElement() {
-        // Add tags for each portfolio
-        this.data.projectTags.forEach(tag => this.element.classList.add(tag));
-
-        // Add programming icons
-        const iconContainer = this.element.querySelector('.container.for-icons');
-        this.data.projectLangs.forEach(lang => {
-            const logoPath = `imgLogos/${lang}.svg`;                        // Get SVG of programming logo
-            const langLogo = document.createElement('img');                 // Create a new image element for each language
-            
-            langLogo.src = logoPath;
-            langLogo.alt = lang;
-            langLogo.classList.add('program-icon');
-    
-            iconContainer.appendChild(langLogo);
-        });
+//****** Adds programming logos to the portfolio tile ******
+    addProgrammingLogos() {
+        return this.projectLangs.map(language => `<img src="${`imgLogos/${language}.svg`}" alt="${language}" class="program-icon">`).join('');
     };
 };
-
-
-
-
 
 export {ExperienceTileView, PortfolioTileView};

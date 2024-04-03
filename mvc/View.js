@@ -12,6 +12,8 @@ import {ExperienceTileView, PortfolioTileView} from '../views/TileView.js';
 import PaletteView from '../views/PaletteView.js';
 import HeadingView from '../views/HeadingView.js';
 
+import { ExperienceOverlayView,  PortfolioOverlayView } from '../views/OverlayView.js';
+
 
 class View {
     constructor() {
@@ -81,14 +83,12 @@ class View {
         this.filter = this.createFilter(toProperCase(key), data);
         // this.attachFilterEvents();
 
-        console.log(this.filter.buttons)
+        // console.log(this.filter.buttons)
 
         this.filter.buttons.forEach((button, i) => {      
             button.element.addEventListener("click", (event) => {
 
                 this.handleFilterClick(button)
-                // const dataIndex = event.target.getAttribute('data-index');
-                // this.handleIndexChange(dataIndex)
             });
         });
 
@@ -96,6 +96,25 @@ class View {
         //  Sections
         //
         this.section = this.createSection(toProperCase(key), data);
+
+        // Tile Event listeners for overlay
+        if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
+            this.section.subObjects.forEach((subObject, i) => {
+
+                subObject.element.addEventListener("click", (event) => {
+
+                    if (this.section.classType === "Experience") {
+                        const newOverlay = new ExperienceOverlayView(0, subObject)
+                        this.app.append(newOverlay.element)
+                    };
+
+                    if (this.section.classType === "Portfolio") {
+                        const newOverlay = new PortfolioOverlayView(0, subObject)
+                        this.app.append(newOverlay.element)
+                    };
+                });
+            });
+        }
 
         //
         //  Render
@@ -171,6 +190,7 @@ class View {
                 break;
             case "Experience":
                 filter = new ExperienceFilterBarView(data.filterTags['experience']);
+                filter.appendSubObject(new TileFilterButtonView(0, "All"))
                 Array.from(data.filterTags['experience']).forEach((element, i) => {
                     // filter.appendSubObject(new TileFilterButtonView(i, element, tileKey[i]))
                     filter.appendSubObject(new TileFilterButtonView(i, element))
@@ -178,6 +198,7 @@ class View {
                 break;
             case "Portfolio":
                 filter = new PortfolioFilterBarView(data.filterTags['portfolio']);
+                filter.appendSubObject(new TileFilterButtonView(0, "All"))
                 Array.from(data.filterTags['portfolio']).forEach((element, i) => {
                     // filter.appendSubObject(new TileFilterButtonView(i, element, portKey[i]))
                     filter.appendSubObject(new TileFilterButtonView(i, element))
@@ -207,8 +228,14 @@ class View {
 
         if (button.classType === "Tile") {
 
+            // Special Case if the "All" button was pressed
+            if (button.title === "All") {
+                this.section.subObjects.map(subObject => subObject.toggleOn())
+            }
             // If A tile has a tag that matches the title attribute of the button pressed, turn that subObject on
-            this.section.subObjects.forEach(subObject => subObject.tags.includes(button.title) ? subObject.toggleOn() : null);
+            else {
+                this.section.subObjects.forEach(subObject => subObject.tags.includes(button.title) ? subObject.toggleOn() : null);
+            }
             return;
         };
 
@@ -225,13 +252,13 @@ class View {
 
 
         const sectionData = data
-        console.log(sectionData)
+        // console.log(sectionData)
 
 
         let headings = data.filterBars[keyyy].headings
         let info = data.sections[keyyy]
 
-        console.log(info)
+        // console.log(info)
 
         switch (key) {
             case "Introduction":
