@@ -1,3 +1,5 @@
+import IconLinkView from "./IconLinkView.js";
+
 // Sections are the main content displayers of this app/website. Inside each section, are either Articles or Tiles depending on what section it is
 // These "SubObjects" are created in the View() class, and are appended in the SectionView() class
 // In the View() and FilterButtonView() classes, logic is determined if this class should be visible or not. This is done using the "ToggleOn" and "ToggleOff"
@@ -86,28 +88,38 @@ class IntroductionArticleView extends ArticleView {
         this.classType = "Introduction";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
+
     };
 
 //****** Creates the element for the "IntroductionArticleView" ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
-                <h2>${this.title}:</h2>
-                <p>${this.data}</p>
+            <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}"> 
+                <h2 class="for-pc">${this.title}:</h2>
+                ${this.title === "About Me" ? `<div> ${this.addIcons()} </div>` : ''}
+                ${this.title === "About Me" ? `<p> ${this.data.introduction} </p>` : ''}
+                ${this.title === "Key Skills" ? `<ul> ${this.addInfoList()} </ul>` : ''}
             </article>
         `.trim();
         return newElement.firstElementChild
     };
 
-    addInfo() {
+//****** Adds Email, Linkedin, and Github icons to the "About Me" section ******
+    addIcons() {
+        console.log(this.data)
+            const tempEl = document.createElement('div');
+            const icon1 = new IconLinkView("Email" , "Email Me", this.data.email);
+            const icon2 = new IconLinkView("LinkedIn" , "Linkedin", this.data.linkedin);
+            const icon3 = new IconLinkView("Github" , "Github", this.data.github);
+            const linebreak = ''
+            tempEl.append(icon1.element, icon2.element, icon3.element)
+            return tempEl.innerHTML;
+    };
+
+    addInfoList() {
         return this.data.map(item => `<li>${item}</li>`).join('');
-    };
-
-
-
-    applyInfoToElement() {
-    };
+    }
 };
 
 //
@@ -129,9 +141,9 @@ class SkillsArticleView extends ArticleView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
-                <h2>${this.title}:</h2>
-                <p>${this.addInfo()}</p>
+            <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}">
+                <h2 class="for-pc">${this.title}:</h2>
+                <ul>${this.addInfo()}</ul>
             </article>
         `.trim();
         return newElement.firstElementChild
@@ -160,9 +172,9 @@ class EducationArticleView extends ArticleView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="article-with-text for-pc for-mobile" dataFilter="${this.title}">
-                <h2>${this.title}:</h2>
-                <p>${this.classType}</p>
+            <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}">
+                <h2 class="for-pc">${this.title}:</h2>
+                <ul>${this.classType}</ul>
             </article>
         `.trim();
         return newElement.firstElementChild

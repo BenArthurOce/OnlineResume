@@ -219,10 +219,17 @@ class View {
         // Set all section subObjects to be off when a filter button is pressed
         this.section.subObjects.map(subObject => subObject.toggleOff())
 
+        // Turn all the filter buttons off
+        this.filter.buttons.map(button => button.toggleOff())
+
+
         if (button.classType === "Article") {
 
             // If the button title attribute matches the subObject title attribute, turn the subObject on
             this.section.subObjects.forEach(subObject => subObject.title === button.title ? subObject.toggleOn() : null);
+
+            // And turn the filter button on
+            button.toggleOn()
             return;
         };
 
@@ -236,6 +243,9 @@ class View {
             else {
                 this.section.subObjects.forEach(subObject => subObject.tags.includes(button.title) ? subObject.toggleOn() : null);
             }
+
+            // And turn the filter button on
+            button.toggleOn()
             return;
         };
 
@@ -247,23 +257,15 @@ class View {
 
 //****** Creates the Section, which displays the main content of the page. Sections contain subObjects which are either Articles or Tiles ******
     createSection(key, data) {
-        const keyyy = key.toLowerCase()
+
         let section = null; // Set the element to null for the switch function
-
-
-        const sectionData = data
-        // console.log(sectionData)
-
-
-        let headings = data.filterBars[keyyy].headings
-        let info = data.sections[keyyy]
-
-        // console.log(info)
+        let headings = data.filterBars[key.toLowerCase()].headings
+        let info = data.sections[key.toLowerCase()]     // Data that is relevant to the current section (based on index)
 
         switch (key) {
             case "Introduction":
                 section = new IntroductionSectionView(data);
-                section.appendSubObject(new IntroductionArticleView(0, "About Me", info["introduction"]));
+                section.appendSubObject(new IntroductionArticleView(0, "About Me", info));
                 section.appendSubObject(new IntroductionArticleView(1, "Key Skills", info["skillsKey"]));
                 break;
             case "Skills":

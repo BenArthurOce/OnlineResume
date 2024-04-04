@@ -167,9 +167,6 @@ class PortfolioOverlayView extends OverlayView {
         this.url                = this.data[`projectUrl`]
         this.images             = this.data[`projectImages`]
 
-
-        this.slideshowIndex = 0; 
-
         this.element = this.generateElement();
         this.addLocalEventListeners()
     };
@@ -185,7 +182,7 @@ class PortfolioOverlayView extends OverlayView {
         newElement.innerHTML = `
             <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} ${domForType}">
                 <div class="container ${domForName} ${domForType}" id="${this.classType.toLowerCase()}-wrapper">
-            
+
                     <article class="article-with-text for-pc for-mobile ${domForName} ${domForType}" id="project-information">
                         <h3 class="portfolio-project-title ${domForName} ${domForType}">${this.name}</h3>
                         <div class="container for-icons ${domForName} ${domForType}">
@@ -193,9 +190,7 @@ class PortfolioOverlayView extends OverlayView {
                         </div>
                         <p class="portfolio-project-summary ${domForName} ${domForType}">${this.summaryLarge}</p>
                     </article>
-            
 
-            
                     <span class="closeBtn ${domForName} ${domForType}" id="portfolio-close-btn">x</span>
                 </div>
             </dialog>
@@ -203,25 +198,15 @@ class PortfolioOverlayView extends OverlayView {
         return newElement.firstElementChild
     };
 
-
-                    // <article class="article-with-text for-pc for-mobile ${domForName} ${domForType}" id="project-slideshow">
-                    //     <div class="image-container ${domForName} ${domForType}">
-                    //         <button class="arrow prev ${domForName} ${domForType}">❮</button>
-                    //         ${this.addImages()}
-                    //         <button class="arrow next ${domForName} ${domForType}">❯</button>
-                    //     </div>
-                    // </article>
-
 //****** Adds programming logos to the portfolio Overlay ******
     addProgrammingLogos() {
-        return this.languages.map(language => `<img src="${`imgLogos/${language}.svg`}" alt="${language}" class="program-icon">`).join('');
+        return this.languages.map(language => `<img src="${`imgLogos/${language}.svg`}" alt="${language}" class="lang-logo">`).join('');
     };
 
 //****** Prepares each portfolio.image item as an image element and adds to the Overlay ****** 
     addImages() {
         return this.images.map(image => `<img src="${image}" alt="${image}" class="portfolio-image">`).join('');
     };
-
 
 //****** Local event listener(s) that are contained only within the OverlayView() class ****** 
     addLocalEventListeners() {
@@ -230,17 +215,9 @@ class PortfolioOverlayView extends OverlayView {
             this.closeOverlay()
         };
 
-        // First image needs to be active
-        // this.element.classList.add("activated")
-        // console.log(this.element.querySelectorAll(".portfolio-image"))
-        // this.element.querySelectorAll(".portfolio-image")[0].classList.add("activated")
-
+        // Create image slideshow
         const slideshow = new Slideshow(this.images);
         this.element.querySelector("#portfolio-wrapper").append(slideshow.element)
-        // this.element
-        // slideshow.initialize();
-
-
     };
 };
 
@@ -254,6 +231,7 @@ class Slideshow {
         this.imageElements = null;
         this.element = this.generateElement();
         this.addLocalEventListeners();
+        this.showImage(this.currentIndex)
     };
 
 //****** Generates a slideshow element that will be added to the Portfolio Overlay class ****** 

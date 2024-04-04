@@ -86,8 +86,9 @@ ul li {
     /* 
     Row 1: Palette
     Row 2: NavBar (nav)
-    Row 3: Section (main)
-    Row 4: Incorrectly Applied Sections
+    Row 3: Heading (h1)
+    Row 4: Filter (menu)
+    Row 5: Section (main)
      */
 
     grid-template-rows: 10% 20% 20% 20% 1fr;
@@ -266,36 +267,37 @@ section.activated {
 
 
 /* ----------------------------- */
+/* --------- EXT LINKS --------- */
+/* ----------------------------- */
+
+.icon-link {
+    margin-right: 10px;                                 /* Gives spacing between the icons */
+    font-size: 30px;                                    /* Increases visibility of the icons */
+}
+
+
+/* ----------------------------- */
 /* --------- ARTICLES ---------- */
 /* ----------------------------- */
 
-/* Global article settings */
-.article-with-list,
-.article-with-text {
-    flex: 1;                                                /* All child elements take up equal/whole space in a row */
-    padding-top: 1%;
-    padding-left: 2%;
-    background-color: var(--article-background-color);
-    border-radius: 12px;
-    box-shadow: 0 10px 80px rgba(0, 0, 0, 0.1);
-    min-height: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    font-size: calc(40% + 0.9vmin);
-    line-height: calc(150% + 0.9vmin);
-    overflow-y: auto;
+article {
+    padding: 1px;
+    flex: 1;                                            /* Allows articles to share equal space on the screen */
+    overflow-y: auto;                                   /* Allows articles to scroll downwards if there is too much text */
+    line-height: calc(150% + 0.9vmin);                  /* Dynamically adjust line spacing based on the screen size */
+    padding-left: 2%;                                   /* Move all items of the article away from the left hand edge */
+    padding-right: 2%;                                  /* Reduces the chance of text being overlapped by the right hand side scrollbar */
 }
 
-/* Global text settings for all articles */
-.article-with-list ul,
-.article-with-text p {
-    margin-left: 5%;
+article ul {
+    overflow-y: visible;                                /* Ensure overflow-y is visible for ul elements */
+    padding-left: 20px;                                 /* Adjust padding to create space for dot points */
 }
 
-/* Additional border for overlay articles */
 article.for-overlay {
-    border: 5px solid var(--tile-basic-background-color);
-    border-radius: 10px;
+    border: 5px solid var(--tile-basic-background-color);   /* Adds a border around the articles with a lighter colour */
+    border-radius: 10px;                                    /* Gives the borders curved edges */
+    background-color: var(--article-background-color);      /* Gives background colour to the overlay articles. */
 }
 
 
@@ -303,17 +305,19 @@ article.for-overlay {
 /* ------ PREV/NEXT ARROWS ----- */
 /* ----------------------------- */  
 .arrow {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    color: black;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 50%;
-    user-select: none;
+    cursor: pointer;                            /* Mouse cursor changes when hovered over */
+    position: absolute;                         /* Positions the arrow element relative to its nearest positioned ancestor */
+    top: 50%;                                   /* Vertically centering */
+    transform: translateY(-50%);                /* Vertically center the arrow by translating it up by 50% of its own height */
+    padding: 16px;                              /* Increases space that the arrow button takes */
+    color: white;                             /* Text colour to white */
+    font-weight: bold;                          /* Text font to bold */
+    font-size: 24px;                            /* Text font size */
+    transition: background-color 0.3s ease;     /* Transition effect */
+    border-radius: 50%;                         /* Rounds the corners of the arrow to make it circular. */
+    user-select: none;                          /* Prevents the user from selecting the arrow text */
+    background-color: rgba(0, 0, 0, 0.5);     /* default background color of the arrow to a semi-transparent black */
+    z-index: 999;                               /* Ensure the arrows are on top of other content */
 }
 
 .arrow.disabled {display: none;}                  /* When overlay is active, the section arrows become disabled. */
@@ -322,7 +326,8 @@ article.for-overlay {
 
 
 .arrow.prev.for-overlay, .arrow.next.for-overlay {
-    background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black;
 }
 
 
@@ -336,7 +341,7 @@ nav a {
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
-    color: var(--nav-basic-font-color);               /* Standard inactive colour of nav text */
+    color: var(--nav-basic-font-color);         /* Standard inactive colour of nav text */
     font-size: calc(100% + 0.9vmin);            /* Adaptive font size of the naviation words */
 }
 
@@ -626,7 +631,7 @@ dialog .closeBtn {
     position: relative;
     max-width: 100%;
     max-height: 100%;
-    padding: 5%;
+    padding: 2%;
 }
 
 .image-container > img {
@@ -634,6 +639,9 @@ dialog .closeBtn {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border: 20px solid black;
+    box-sizing: border-box; 
+    overflow: hidden;
 }
 
 .image-container > img.activated {
@@ -668,24 +676,29 @@ dialog .closeBtn {
 
 
     /* Default display for mobile articles needs to be none */
-    .article-with-text.for-mobile {display: none;}
-    .article-with-list.for-mobile {display: none;}
+    /* .article-with-text.for-mobile {display: none;} */            /* Old Code before i removed the "with list" and "with text" */
+    /* .article-with-list.for-mobile {display: none;} */            /* Old Code before i removed the "with list" and "with text" */
+
+    article.for-mobile {display: none;}
+    article.for-mobile {display: none;}
 
     .projectSumSmall {display: none;}
 
-    .for-mobile.activated {display: inline-grid;}
+    .for-mobile.activated {display: initial;}
 
     article.for-mobile {
         box-shadow: none;
     }
 
     /* Overrides the previous "display: none" for the articles in regards to overlay */
-    .article-with-text.for-overlay {display: unset;}
-    .article-with-list.for-overlay {display: unset;}
+    /* .article-with-text.for-overlay {display: unset;} */      /* Old Code before i removed the "with list" and "with text" */
+    /* .article-with-list.for-overlay {display: unset;} */      /* Old Code before i removed the "with list" and "with text" */
+
+    article.for-overlay {display: unset;}  
+    article.for-overlay {display: unset;}
 
 
-    .article-with-list,
-    .article-with-text {
+    article {
         font-size: calc(80% + 0.9vmin);
         line-height: calc(150% + 0.9vmin);
     }
@@ -835,8 +848,13 @@ dialog .closeBtn {
         background-color: var(--article-background-color)
     }
 
+    /* Old code before i remove "with list, with text" */
+    /* .article-with-list.for-overlay ul {
+        margin-left: 10%;
+        margin-right: 10%;
+    } */
 
-    .article-with-list.for-overlay ul {
+    article.for-overlay ul {
         margin-left: 10%;
         margin-right: 10%;
     }
