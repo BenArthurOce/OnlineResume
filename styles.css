@@ -41,12 +41,13 @@ body, html {
 }
 
 
-
 h1 {
     font-size: 2.5rem;
+    display: inline-block;
+    min-width:100%;
     color: var(--all-basic-head-color);
-    /* border-bottom: 2px solid var(--all-basic-head-color); */
-}
+    border-bottom: 2px solid var(--all-basic-head-color)
+ }
 
 
 h2 {
@@ -132,36 +133,6 @@ section {display: none}
 /* ----------------------------- */ 
 
 
-#main-section-container {
-    display: grid;
-    grid-template-rows: 10% 1fr; 
-    min-height: 95%;
-    max-height: 95%;
-    overflow: hidden;
-}
-
-/* .container {
-    display: none;
- } */
-
-/* container */
-
-
-
-.container.for-navbar-links {
-    display: flex;
-    height: 100%;
-    min-height: 100%;
-    min-width: 100%;
-
-    padding-left: 2%;
-    padding-right: 2%;
-    gap: 2%;
-
-    background-color: var(--section-background-color);
-    justify-content: space-between; /* Mainly for the navigation bar*/ 
-}
-
 .container.activated {
     display: block;
  }
@@ -170,23 +141,6 @@ section.activated {
     display: block;
  }
 
- .container.for-heading {
-    border-bottom: 2px solid var(--all-basic-head-color)
- }
-
-.container.for-article {
-    display: flex;
-    height: 100%;
-    min-height: 100%;
-    min-width: 100%;
-
-    padding-left: 2%;
-    padding-right: 2%;
-    gap: 2%;
-
-    background-color: var(--section-background-color);
-    justify-content: space-between; 
-}
 
 /* General CSS for all container style elements */
 .container {
@@ -203,41 +157,20 @@ section.activated {
     justify-content: space-between; 
 }
 
-/* .container.for-section {
-    display: flex;
-    flex-direction: column;
-} */
 
-/* .container.for-section.activated {
-    display: none;
-    flex-direction: column;
-} */
-
-
-.container.for-filter {
-    display: none;
-    height: 50px;
-    min-height: 50px;
-}
-
-/* .container.for-filter.for-tile {
-    display: inline-block;
-    height: 50px;
-    min-height: 50px;
-} */
 
 
 /* Specific requirements for the container that holds the jobs and portfolio tiles*/
 .container.for-tile {
-    display: grid;
+    display: grid;              /* Overwrites container flex display */
     max-height: 100%;
     min-height: 100%;
     grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(33%, 1fr));
     column-gap: 2%;
     row-gap: 2%;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 5%;           /* Overwrites standard container padding */
+    padding-right: 5%;          /* Overwrites standard container padding */
     padding-top: 2%;
     padding-bottom: 2%;
 } 
@@ -249,7 +182,7 @@ section.activated {
 
 /* Specific requirements for the container that holds the jobs and portfolio overlays*/
 .container.for-overlay {
-    display: grid;
+    display: grid;                  /* Overwrites container flex display */
     height: 100%;                   /* This forces the overlay to cover the entire height of the screen*/
     width: 100%;                    /* This forces the overlay to cover the entire width of the screen*/
     max-height: 100%;
@@ -281,16 +214,15 @@ section.activated {
 /* ----------------------------- */
 
 article {
-    padding: 1px;
     flex: 1;                                            /* Allows articles to share equal space on the screen */
     overflow-y: auto;                                   /* Allows articles to scroll downwards if there is too much text */
+    overflow-x: hidden;                                 /* Prevents horizontal scrollbar at bottom of the article */
     line-height: calc(150% + 0.9vmin);                  /* Dynamically adjust line spacing based on the screen size */
     padding-left: 2%;                                   /* Move all items of the article away from the left hand edge */
     padding-right: 2%;                                  /* Reduces the chance of text being overlapped by the right hand side scrollbar */
 }
 
 article ul {
-    overflow-y: visible;                                /* Ensure overflow-y is visible for ul elements */
     padding-left: 20px;                                 /* Adjust padding to create space for dot points */
 }
 
@@ -298,6 +230,17 @@ article.for-overlay {
     border: 5px solid var(--tile-basic-background-color);   /* Adds a border around the articles with a lighter colour */
     border-radius: 10px;                                    /* Gives the borders curved edges */
     background-color: var(--article-background-color);      /* Gives background colour to the overlay articles. */
+}
+
+/* Ensures that the article heading remains at the top and visible, regardless of scrolling. */
+article > h2.for-pc {
+    display: inline-block;                                  /* Make heading width the size of the content */
+    min-width: 100%;                                        /* As above */
+    position: sticky;                                       /* Always keep at the top of the article */
+    top: 0;                                                 /* Required to keep the heading "sticky" to the top */
+    margin: 0;                                              /* Stops the h2 element from moving when scrolling is performed */
+    background-color: var(--article-background-color);      /* Required so the scrolling text looks to appear behind the h2 element */
+    padding-top:5%;                                        /* Gives space between the heading and the h1 */
 }
 
 
@@ -842,7 +785,6 @@ dialog .closeBtn {
         position: sticky;
         top: 0;
         right: 0;
-        /* margin-bottom: 10px; */
         margin: 0;
         padding: 1%;
         background-color: var(--article-background-color)

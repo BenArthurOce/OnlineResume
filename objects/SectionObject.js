@@ -132,15 +132,3 @@ class PortfolioSectionObject extends SectionObject {
 };
 
 export {IntroductionSectionObject, EducationSectionObject, SkillSectionObject, ExperienceSectionObject, PortfolioSectionObject}
-
-
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]

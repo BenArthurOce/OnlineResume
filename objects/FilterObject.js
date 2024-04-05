@@ -89,14 +89,3 @@ class PortfolioFilterObject extends FilterObject {
 
 
 export {IntroductionFilterObject, EducationFilterObject, SkillFilterObject, ExperienceFilterObject, PortfolioFilterObject}
-
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]

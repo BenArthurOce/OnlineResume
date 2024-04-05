@@ -92,9 +92,11 @@ class IntroductionFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-article for-mobile">
-                <ul class="filter-list for-article for-mobile"></ul>
-            </menu>
+            <div class="container for-filter for-pc for-mobile">
+                <menu id="${this.id}" class="menu-filter for-article for-mobile">
+                    <ul class="filter-list for-article for-mobile"></ul>
+                </menu>
+            </div>
         `.trim();
         return newElement.firstElementChild
     };
@@ -162,9 +164,11 @@ class ExperienceFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
-                <ul class="filter-list for-tile for-pc for-mobile"></ul>
-            </menu>
+            <div class="container for-filter for-tile for-pc for-mobile">
+                <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
+                    <ul class="filter-list for-tile for-pc for-mobile"></ul>
+                </menu>
+            </div>
         `.trim();
         return newElement.firstElementChild
     };
@@ -185,9 +189,11 @@ class PortfolioFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
-                <ul class="filter-list for-tile for-pc for-mobile"></ul>
-            </menu>
+            <div class="container for-filter for-tile for-pc for-mobile">
+                <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
+                    <ul class="filter-list for-tile for-pc for-mobile"></ul>
+                </menu>
+            </div>
         `.trim();
         return newElement.firstElementChild
     };
@@ -196,3 +202,8 @@ class PortfolioFilterBarView extends FilterBarView {
 
 export {IntroductionFilterBarView, EducationFilterBarView, SkillsFilterBarView, ExperienceFilterBarView, PortfolioFilterBarView};
 
+{/* <div class="container for-filter for-tile for-pc for-mobile">
+<menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
+    <ul class="filter-list for-tile for-pc for-mobile"></ul>
+</menu>
+</div> */}

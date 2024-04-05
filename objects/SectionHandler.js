@@ -1,40 +1,41 @@
-// import { IntroductionSection, EducationSection, SkillsSection, ExperiencesSection, PortfolioSection } from './SectionObject.js';
-// import {IntroductionFilter, EducationFilter, SkillsFilter, ExperienceFilter, PortfolioFilter} from "./FilterObject.js";
-// import {ExperienceTile, PortfolioTile } from './TileObject.js';
-
 import {IntroductionSectionObject, EducationSectionObject, SkillSectionObject, ExperienceSectionObject, PortfolioSectionObject} from "./SectionObject.js";
 import {IntroductionFilterObject, EducationFilterObject, SkillFilterObject, ExperienceFilterObject, PortfolioFilterObject} from './FilterObject.js';
 
 
-// import SectionObject from './SectionObject.js';
-
-// import FilterObject from './FilterObject.js';
-// import TileObject from './TileObject.js';
-
 
 class SectionHandler {
-    #className;             // The name of the class
-    #data;
-    #sectionObjectList;     // Contains each of the Section() objects
-    #sectionFilterList;     // Contains each of the Filter() objects which pair with each Section() object
-    // #parentObject; // The object that contains this class
-    #element;               // The DOM element of this class
-    #indexCurrent;          // Which Section() should currently be displayed on screen
-    #indexChangeCallback;   // What happens automatically when an Index number is changed
+    #className;                     //  The name of the class
+    #classType;                     //  The name of the subclass
+    #mvcComponent;                  //  What part of the MVC is this class
+    #data;                          //  Data from Dictionary() class
+    #sectionObjectList;             //  Contains each of the Section() objects
+    #sectionFilterList;             //  Contains each of the Filter() objects which pair with each Section() object
+    #indexCurrent;                  //  Which Section() should currently be displayed on screen
 
     constructor(data) {
         this.#className = "SectionHandler";
-        // console.log(data)
+        this.#classType = null;
+        this.#mvcComponent = "Object";
         this.#data = data
         this.#sectionObjectList = this.createSectionObjects(data)
         this.#sectionFilterList = this.createFilterMenuObjects(data)
-        // this.#parentObject = document.querySelector("#wrapper");
-        this.#element = null
         this.#indexCurrent = 0;
         this.createElement();
     };
     get className() {
         return this.#className;
+    };
+    get classType() {
+        return this.#classType;
+    };
+    set classType(value) {
+        this.#classType = value;
+    };
+    get mvcComponent() {
+        return this.#mvcComponent;
+    };
+    get data() {
+        return this.#data;
     };
     get sectionObjectList() {
         return this.#sectionObjectList;
@@ -48,23 +49,11 @@ class SectionHandler {
     set sectionFilterList(value) {
         this.#sectionFilterList = value;
     };
-    // get parentObject() {
-    //     return this.#parentObject;
-    // };
-    // set parentObject(value) {
-    //     this.#parentObject = value;
-    // };
-    get element() {
-        return this.#element;
-    };
-    set element(value) {
-        this.#element = value;
-    };
+
     get indexCurrent() {
         return this.#indexCurrent;
     };
     set indexCurrent(value) {
-        // console.log("indexCurrent")
         this.#indexCurrent = value;
         this.toggleActiveSection(); // Call toggleActiveSection whenever index changes
     };
@@ -146,49 +135,17 @@ class SectionHandler {
         console.log("function:  createEventListeners")
         const experienceTiles = this.returnSectionSubItems(3)
         const portfolioTiles = this.returnSectionSubItems(4)
-
         const filterButtons = this.returnFilterObject(3)
-        // console.log(filterButtons)
 
         experienceTiles.forEach((tile, i) => {
 
-            // tile.addEventListener('click', () => {   
-
-            // });
-
             const callbackFunction = this.filterTiles.bind(this)
-            console.log(callbackFunction)
             tile.element.addEventListener("click", callbackFunction);
 
-            // console.log(`element: ${tile}  index: ${ i}`);
-
         });
-
-        // console.log(experienceTiles)
     };
 
-    // prevArrow.addEventListener('click', () => {
-    //     this.adjustDisplayedSection("-1");
-    // });
 
-    // filterTiles(event) {
-    //     // Code to handle if the button icon was pressed, or the background of the icon
-    //     let { class: btnClass, role, dataParent, dataIndex, dataFilter, title } = event.target.parentElement.attributes;
-    //     if (dataIndex === undefined) {
-    //         ({ class: btnClass, role, dataParent, dataIndex, dataFilter, title } = event.target.attributes);
-    //     };
-
-    //     // Get a list of all the tiles in the same section and remove all of them
-    //     const tiles = document.body.querySelectorAll(`#${dataParent.value} .tile`);
-    //     tiles.forEach(tile => tile.classList.remove('activated'));
-    
-    //     // If a tile class attribute matches the filterKeyword, it becomes activated
-    //     tiles.forEach(tile => {
-    //         const tags = Array.from(tile.classList);
-    //         const shouldShow = tags.includes(dataFilter.value);
-    //         tile.classList.toggle('activated', shouldShow);
-    //     });
-    // };
 
 
 //****** Updates the h1 tag dependant on the current active section object ******
@@ -212,7 +169,6 @@ class SectionHandler {
 
 //****** Picks which Section() in SectionHandler() that needs to be displayed to the user ******
     toggleActiveSection() {
-        // console.log("toggleActiveSection")
         this.sectionObjectList.forEach((section, index) => {
             if (index === this.#indexCurrent) {
                 section.toggleOn();
@@ -234,25 +190,11 @@ class SectionHandler {
 
 
 
-
-
-//****** Selects an object from the sectionObjectList and creates the HTML element. Does NOT add it to the DOM******
-    createSectionElement(index) {
-        // this.returnSectionObject(index).createElement();
-        // this.returnSectionObject(index).applyInfoToElement();
-    };
-
-
-
-
-
 //****** Adds buttons to the FilterBar() object ******
     createFilterButtonObjects() {
-
         const menuBar = this.returnFilterObject(3)
-        // console.log(menuBar)
         menuBar.addButton()
-    }
+    };
 
 
 //****** Selects an object from the sectionFilterList and creates the HTML element. Does NOT add it to the DOM******
@@ -260,44 +202,6 @@ class SectionHandler {
         this.returnFilterObject(index).createElement();
     };
 
-    // appendFilterElement
-
-
-
-
-//****** 
-    appendSectionsAndFilters() {
-        // console.log("appendSectionsAndFilters")
-        for (let i = 0; i < this.sectionObjectList.length; i++) {
-            // console.log(i)
-            // Create section element
-            // this.createSectionElement(i);
-            // Append section element to SectionHandler element
-            // this.element.querySelector('.for-section').appendChild(this.returnSectionElement(i));
-
-            // this.element.appendChild(this.returnSectionElement(i))
-
-            // this.returnFilterElement(i).appendToParent()
-
-            // Create filter element
-            // this.createFilterElement(i);
-            // Append filter element to SectionHandler element
-            // this.element.querySelector('.for-filter').appendChild(this.returnFilterElement(i));
-
-            // this.element.appendChild(this.returnFilterElement(i))
-
-            // this.returnFilterObject(i).appendToParent()
-            // this.returnSectionObject(i).appendToParent()
-
-
-        }
-    };
-
-
-//****** 
-    createASingleTile() {
-        //maybe? Kinda need to loop through the tiles
-    }
 
 //****** 
     addExperienceTiles(data) {
@@ -325,8 +229,6 @@ class SectionHandler {
 
 
         });
-
-        // SECTIONOBJECT.subObjects.push
 
     };
 

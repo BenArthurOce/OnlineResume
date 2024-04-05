@@ -27,7 +27,6 @@ class NavlinkObject {
     };
 
 
-
 //****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;

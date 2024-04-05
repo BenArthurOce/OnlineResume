@@ -270,9 +270,9 @@ class View {
                 break;
             case "Skills":
                 section = new SkillSectionView(data);
-                Array.from(headings).forEach((heading, i) => {
-                    section.appendSubObject(new SkillArticleView(i, heading, Object.values(info)[i]))
-                });
+                section.appendSubObject(new SkillArticleView(0, "Technical", data.sections["skills"]["technical"]))
+                section.appendSubObject(new SkillArticleView(1, "Soft", data.sections["skills"]["soft"]))
+                section.appendSubObject(new SkillArticleView(2, "Languages", data.sections["skills"]["languages"]))
                 break;
             case "Education":
                 section = new EducationSectionView(data);

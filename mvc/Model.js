@@ -1,4 +1,4 @@
-import FrontPage from "../objects/FrontPage.js"
+import FrontPageObject from "../objects/FrontPageObject.js"
 
 
 class Model {
@@ -10,7 +10,7 @@ class Model {
 
     async init() {
         console.log("MODEL: init" + "\n" + "----------")
-        this.frontpage = new FrontPage()
+        this.frontpage = new FrontPageObject()
 
         await this.frontpage.init();
         clearTimeout(this.searchTimeout);
