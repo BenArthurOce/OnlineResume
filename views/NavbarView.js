@@ -74,7 +74,7 @@ class NavBarView {
         this.links.push(navLink)
         const elToAppend = this.element.querySelector(`.container.for-navbar-links`)
         elToAppend.appendChild(navLink.element)
-    }
+    };
 };
 export default NavBarView;
 

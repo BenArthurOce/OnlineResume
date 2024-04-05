@@ -259,14 +259,39 @@ class View {
     createSection(key, data) {
 
         let section = null; // Set the element to null for the switch function
-        let headings = data.filterBars[key.toLowerCase()].headings
+        // let headings = data.filterBars[key.toLowerCase()].headings
         let info = data.sections[key.toLowerCase()]     // Data that is relevant to the current section (based on index)
+
+
+
 
         switch (key) {
             case "Introduction":
+                console.log(key)
+                console.log(data)
+
+                // console.log(data.sections.introduction)
+                // console.log(data.sectionSubObjs.introduction)
+                // console.log(data.sectionSubObjs.introduction[0].data)
+                // data.sections.forEach((element, i) => {
+                //     console.log(`element: ${element}  index: ${ i}`);
+                // });
+
+                // throw new Error ("stop the code here")
+
+                //
+                //  Current issue:
+                //  each section is undefined. Model -> sections
+                //
                 section = new IntroductionSectionView(data);
-                section.appendSubObject(new IntroductionArticleView(0, "About Me", info));
-                section.appendSubObject(new IntroductionArticleView(1, "Key Skills", info["skillsKey"]));
+
+                const obj1 = data["sectionSubObjs"]["introduction"][0]      // From the model - the first article (About me )
+                const obj2 = data["sectionSubObjs"]["introduction"][1]      // From the model - the second article (key skills)
+
+                section.appendSubObject(new IntroductionArticleView(0, obj1.title, obj1.data));
+                section.appendSubObject(new IntroductionArticleView(1, obj2.title, obj2.data));
+
+                throw new Error ("stop the code here")
                 break;
             case "Skills":
                 section = new SkillSectionView(data);

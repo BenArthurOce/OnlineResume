@@ -1,10 +1,22 @@
 import JSONReader from '../data/JSONReader.js';
 import Dictionary from '../data/Dictionary.js';
-import SectionHandler from "./SectionHandler.js";
+// import SectionHandler from "./SectionHandler.js";
 
-import NavbarObject from './NavbarObject.js';
+import NavBarObject from './NavBarObject.js';
 
 class FrontPageObject {
+
+
+    // Requirements:
+        // Dictionary - But this doesnt go into the model
+        // Navigation Bar. (it will include the navigation links as objects)
+        // Heading? Maybe? Since we have a specific part on the view for it
+        // Sections (will include the sub objects)
+        // Overlays for the experience?
+        // Overlays for the portfolios?
+
+
+
     #dictionary;
     #navBar;
     #sectionHandler;
@@ -13,7 +25,7 @@ class FrontPageObject {
 
     constructor() {
         this.#dictionary = new Dictionary();
-        this.#navBar = new NavbarObject(this, ['About Me', 'Skills', 'Education', 'Experience', 'Portfolio']);
+        this.#navBar = new NavBarObject(this, ['About Me', 'Skills', 'Education', 'Experience', 'Portfolio']);
         this.#sectionHandler = null;
         this.#searchTimeout = null;
         this.#intCurrInx = 0;

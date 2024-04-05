@@ -1,22 +1,20 @@
-// In each section, there are sub items that contain resume information, either ArticleObject() or TileObject()
+// 
 
-class ArticleObject {
+class FilterButtonObject {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
-    #index;                         //  Index order of Article
-    #title;                         //  Heading
-    #data;                          //  String displayed on screen
-    #isActive;                      //  DOM element displays a different attribute if active
-    constructor(index, title, data) {
-        this.#className = "Article";
-        this.#classType = null
-        this.#mvcComponent = "View";
+    #index;                         //  Position reference number
+    #title;                         //  Display name of the filter button, or reference key if its for tiles
+    #isActive;                      //  true = is supposed to be shown to user, false = meant to be invis
+    constructor(index, title) {
+        this.#className = "FilterButton";
+        this.#classType = null;
+        this.#mvcComponent = "Model";
         this.#id = null;
         this.#index = index;
         this.#title = title;
-        this.#data = data;
         this.#isActive = false;
     };
     get className() {
@@ -43,9 +41,6 @@ class ArticleObject {
     get title() {
         return this.#title;
     };
-    get data() {
-        return this.#data;
-    };
     get isActive() {
         return this.#isActive;
     };
@@ -65,31 +60,21 @@ class ArticleObject {
 };
 
 
-class IntroductionArticleObject extends ArticleObject {
-    constructor(index, title, data) {
-        super(index, title, data);
-        this.classType = "Introduction";
+class ArticleFilterButtonObject extends FilterButtonObject {
+    constructor(index, title) {
+        super(index, title);
+        this.classType = "Article";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+    };
+};
+
+class TileFilterButtonObject extends FilterButtonObject {
+    constructor(index, title) {
+        super(index, title);
+        this.classType = "Tile";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
     };
 };
 
 
-class SkillArticleObject extends ArticleObject {
-    constructor(index, title, data) {
-        super(index, title, data);
-        this.classType = "Skill";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
-    };
-};
-
-
-class EducationArticleObject extends ArticleObject {
-    constructor(index, title, data) {
-        super(index, title, data);
-        this.classType = "Education";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
-    };
-};
-
-
-export {IntroductionArticleObject, SkillArticleObject, EducationArticleObject}
+export {ArticleFilterButtonObject, TileFilterButtonObject};

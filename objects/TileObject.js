@@ -4,12 +4,20 @@ class TileObject {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
-    #data;                          //  The part of the resume data from Dictionary()
-    constructor(data) {
+    #id;                            //  Combination of class names to create an element id string
+    #index;                         //  Index order of Article
+    #title;                         //  Heading
+    #data;                          //  Detailed information about the Job/Project
+    #isActive;                      //  DOM element displays a different attribute if active
+    constructor(index, title, data) {
         this.#className = "Tile";
-        this.#classType = null;
-        this.#mvcComponent = "Object";
+        this.#classType = null
+        this.#mvcComponent = "Model";
+        this.#id = null;
+        this.#index = index;
+        this.#title = title;
         this.#data = data;
+        this.#isActive = false;
     };
     get className() {
         return this.#className;
@@ -23,16 +31,34 @@ class TileObject {
     get mvcComponent() {
         return this.#mvcComponent;
     };
+    get id() {
+        return this.#id;
+    };
+    set id(value) {
+        this.#id = value;
+    };
+    get index() {
+        return this.#index;
+    };
+    get title() {
+        return this.#title;
+    };
     get data() {
         return this.#data;
     };
+    get isActive() {
+        return this.#isActive;
+    };
+    set isActive(value) {
+        this.#isActive = value;
+    };
 
-    //****** Command to make this Object "visible" 
+//****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
     };
 
-    //****** Command to make this Object "invisible" 
+//****** Command to make this Object "invisible" 
     toggleOff() {
         this.isActive = false;
     };
@@ -40,10 +66,10 @@ class TileObject {
 
 
 class ExperienceTileObject extends TileObject {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
+    constructor(index, title, data) {
+        super(index, title, data);
         this.classType = "Experience";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
 
         this.company    = this.data[`company`];
         this.address    = this.data[`address`];
@@ -58,23 +84,11 @@ class ExperienceTileObject extends TileObject {
 
 
 class PortfolioTileObject extends TileObject {
-    constructor(data, subHeadings) {
-        super(data, subHeadings);
+    constructor(index, title, data) {
+        super(index, title, data);
         this.classType = "Portfolio";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
     };
 };
 
 export {ExperienceTileObject, PortfolioTileObject};
-
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]
-        // this.data[``]

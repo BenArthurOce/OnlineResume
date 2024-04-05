@@ -1,20 +1,20 @@
 // 
 
-class SectionObject {
+class FilterBarObject {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Position reference number
-    #subObjects;                    //  Article() or Tile() objects contained in this section
+    #buttons;                       //  Filter buttons that go into this class object
     #isActive;                      //  true = is supposed to be shown to user, false = meant to be invis
     constructor(index) {
-        this.#className = "Section";
+        this.#className = "FilterBar";
         this.#classType = null;
         this.#mvcComponent = "Model";
         this.#id = null;
         this.#index = index;
-        this.#subObjects = [];
+        this.#buttons = [];
         this.#isActive = false;
     };
     get className() {
@@ -38,8 +38,8 @@ class SectionObject {
     get index() {
         return this.#index;
     };
-    get subObjects() {
-        return this.#subObjects;
+    get buttons() {
+        return this.#buttons;
     };
     get isActive() {
         return this.#isActive;
@@ -58,32 +58,22 @@ class SectionObject {
         this.isActive = false;
     };
 
-//****** Adds an article / tile ******
+//****** Adds a filter button to this object ******
     appendSubObject(object) {
-        this.subObjects.push(object)
+        this.buttons.push(object)
     };
 };
 
-
-class IntroductionSectionObject extends SectionObject {
+class IntroductionFilterBarObject extends FilterBarObject {
     constructor(index) {
         super(index);
-        this.classType = "Introduction";
+        this.classType = "About";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
     };
 };
 
 
-class SkillSectionObject extends SectionObject {
-    constructor(index) {
-        super(index);
-        this.classType = "Skills";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
-    };
-};
-
-
-class EducationSectionObject extends SectionObject {
+class EducationFilterBarObject extends FilterBarObject {
     constructor(index) {
         super(index);
         this.classType = "Education";
@@ -92,7 +82,16 @@ class EducationSectionObject extends SectionObject {
 };
 
 
-class ExperienceSectionObject extends SectionObject {
+class SkillFilterBarObject extends FilterBarObject {
+    constructor(index) {
+        super(index);
+        this.classType = "Skills";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
+    };
+};
+
+
+class ExperienceFilterBarObject extends FilterBarObject {
     constructor(index) {
         super(index);
         this.classType = "Experience";
@@ -101,7 +100,7 @@ class ExperienceSectionObject extends SectionObject {
 };
 
 
-class PortfolioSectionObject extends SectionObject {
+class PortfolioFilterBarObject extends FilterBarObject {
     constructor(index) {
         super(index);
         this.classType = "Portfolio";
@@ -109,4 +108,5 @@ class PortfolioSectionObject extends SectionObject {
     };
 };
 
-export {IntroductionSectionObject, EducationSectionObject, SkillSectionObject, ExperienceSectionObject, PortfolioSectionObject}
+
+export {IntroductionFilterBarObject, EducationFilterBarObject, SkillFilterBarObject, ExperienceFilterBarObject, PortfolioFilterBarObject}

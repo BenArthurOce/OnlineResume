@@ -10,20 +10,26 @@ class ArticleView {
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Index order of Article
-    #data;                          //  String displayed on screen
     #title;                         //  Heading
+    #data;                          //  String displayed on screen
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor(index, title, data) {
+
         this.#className = "Article";
         this.#classType = null
         this.#mvcComponent = "View";
         this.#id = null;
         this.#index = index;
-        this.#data = data;
         this.#title = title;
+        this.#data = data;
         this.#isActive = false;
         this.#element = null;  
+
+        if (index === undefined|| title=== undefined || data=== undefined) {
+            this.printToTerminal()
+            throw new Error("ArticleView: parameter declared is null/undefined")
+        }
     };
     get className() {
         return this.#className;
@@ -46,11 +52,11 @@ class ArticleView {
     get index() {
         return this.#index;
     };
-    get data() {
-        return this.#data;
-    };
     get title() {
         return this.#title;
+    };
+    get data() {
+        return this.#data;
     };
     get isActive() {
         return this.#isActive;
@@ -63,6 +69,20 @@ class ArticleView {
     };
     set element(value) {
         this.#element = value;
+    };
+
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        isActive    = ${this.isActive}
+        index       = ${this.index}
+        title       = ${this.title}
+        data        = ${this.data}`);
+        console.log(this.data)
     };
 
 //****** Command to make this Object "visible" ******

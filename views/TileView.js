@@ -1,6 +1,4 @@
-
-
-//
+// In each section, there are sub items that contain resume information, either ArticleObject() or TileObject()
 
 class TileView {
     #className;                     //  The name of the class
