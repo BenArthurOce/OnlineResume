@@ -18,8 +18,34 @@ import { ExperienceOverlayView,  PortfolioOverlayView } from '../views/OverlayVi
 class View {
     constructor() {
         this.searchTimeout = null;
-        this.init()
+        this.init();
     };
+
+    returnActiveHeading(data) {
+        return data["active"]["heading"];
+    };
+
+    returnActiveFilterBar(data) {
+        return data["active"]["filterBar"];
+    };
+
+    returnActiveFilterButton(data) {
+        return data["active"]["filterButtons"];
+    };
+
+    returnActiveSection(data) {
+        return data["active"]["section"];
+    };
+
+    returnActiveSubObjects(data) {
+        return data["active"]["subObjects"];
+    };
+
+    returnActiveFilterTags(data) {
+        return Array.from(data["active"]["filterTags"]);
+    };
+
+
 
 
     async init() {
@@ -27,6 +53,7 @@ class View {
         this.app = document.querySelector('#wrapper');
         this.updateColorScheme("forest");
         this._initLocalListeners();
+
     };
 
 
@@ -75,12 +102,12 @@ class View {
         //  (3 of 5)
         //  Title
         //
-        const heading = this.createHeading(toProperCase(key));
+        const heading = this.createHeading(data);
 
         //  (4 of 5)
         //  Filter
         //
-        this.filter = this.createFilter(toProperCase(key), data);
+        this.filter = this.createFilter( data);
         // this.attachFilterEvents();
 
         // console.log(this.filter.buttons)
@@ -95,7 +122,7 @@ class View {
         //  (5 of 5)
         //  Sections
         //
-        this.section = this.createSection(toProperCase(key), data);
+        this.section = this.createSection(data);
 
         // Tile Event listeners for overlay
         if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
@@ -120,7 +147,6 @@ class View {
         //  Render
         //
         this.app.append(palette.element, navigationBar.element, heading.element, this.filter.element, this.section.element);
-
     };
 
 
@@ -148,7 +174,8 @@ class View {
 
 
 //****** Creates an object to display the name of the current Section that the user is on ******
-    createHeading(heading) {
+    createHeading(data) {
+        const heading = this.returnActiveHeading(data)
         return new HeadingView(heading)
     };
 
@@ -164,46 +191,53 @@ class View {
 
 
 //****** Creates the Filter Bar, and the Filter buttons ******
-    createFilter(key, data) {
+    createFilter(data) {
+        // console.log(`VIEW: createFilter`);
         let filter = null; // Set the element to null for the switch function
-
-        const tileKey = ["All", "Programming", "Accounting", "CustomerService"]
-        const portKey = ["All", "UserInterface", "Web", "Database", "Logic", "Games", "Efficiency", "DataSets", "Finance"]
+        const key = this.returnActiveHeading(data)
+        const activeBar = this.returnActiveFilterBar(data)
 
         switch (key) {
             case "Introduction":
-                filter = new IntroductionFilterBarView(data.filterTags['introduction']);
-                filter.appendSubObject(new ArticleFilterButtonView(0, "About Me"))
-                filter.appendSubObject(new ArticleFilterButtonView(1, "Key Skills"))
+                console.log("-----------------INTRODUCTION-----------------")
+                filter = new IntroductionFilterBarView(0);
+                activeBar.buttons.forEach((button, i) => {
+                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title))
+                });
                 break;
+
             case "Skills":
-                filter = new SkillsFilterBarView(data.filterTags['skills']);
-                Array.from(data.filterTags['skills']).forEach((element, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonView(i, element))
+                console.log("-----------------SKILLS-----------------")
+                filter = new SkillsFilterBarView(1);
+                activeBar.buttons.forEach((button, i) => {
+                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title))
                 });
                 break;
+
             case "Education":
-                filter = new EducationFilterBarView(data.filterTags['education']);
-                Array.from(data.filterTags['education']).forEach((element, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonView(i, element))
+                console.log("-----------------EDUCATION-----------------")
+                filter = new EducationFilterBarView(2);
+                activeBar.buttons.forEach((button, i) => {
+                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title))
                 });
                 break;
+
             case "Experience":
-                filter = new ExperienceFilterBarView(data.filterTags['experience']);
-                filter.appendSubObject(new TileFilterButtonView(0, "All"))
-                Array.from(data.filterTags['experience']).forEach((element, i) => {
-                    // filter.appendSubObject(new TileFilterButtonView(i, element, tileKey[i]))
-                    filter.appendSubObject(new TileFilterButtonView(i, element))
+                console.log("-----------------EXPERIENCE-----------------")
+                filter = new ExperienceFilterBarView(3);
+                activeBar.buttons.forEach((button, i) => {
+                    filter.appendSubObject(new TileFilterButtonView(button.index, button.title))
                 });
                 break;
+                
             case "Portfolio":
-                filter = new PortfolioFilterBarView(data.filterTags['portfolio']);
-                filter.appendSubObject(new TileFilterButtonView(0, "All"))
-                Array.from(data.filterTags['portfolio']).forEach((element, i) => {
-                    // filter.appendSubObject(new TileFilterButtonView(i, element, portKey[i]))
-                    filter.appendSubObject(new TileFilterButtonView(i, element))
+                console.log("-----------------PORTFOLIO-----------------")
+                filter = new PortfolioFilterBarView(4);
+                activeBar.buttons.forEach((button, i) => {
+                    filter.appendSubObject(new TileFilterButtonView(button.index, button.title))
                 });
                 break;
+
             default:
                 console.error("Unknown filter key: " + key);
         };
@@ -256,66 +290,58 @@ class View {
 
 
 //****** Creates the Section, which displays the main content of the page. Sections contain subObjects which are either Articles or Tiles ******
-    createSection(key, data) {
-
+    createSection(data) {
+        console.log(`VIEW: createSection`);
         let section = null; // Set the element to null for the switch function
-        // let headings = data.filterBars[key.toLowerCase()].headings
-        let info = data.sections[key.toLowerCase()]     // Data that is relevant to the current section (based on index)
 
 
+        const key = this.returnActiveHeading(data);
 
+        const activeSection = this.returnActiveSection(data);
+        const activeSubObjects = this.returnActiveSubObjects(data);
+        // throw new Error ("stop the code here")
 
         switch (key) {
             case "Introduction":
-                console.log(key)
-                console.log(data)
-
-                // console.log(data.sections.introduction)
-                // console.log(data.sectionSubObjs.introduction)
-                // console.log(data.sectionSubObjs.introduction[0].data)
-                // data.sections.forEach((element, i) => {
-                //     console.log(`element: ${element}  index: ${ i}`);
-                // });
-
-                // throw new Error ("stop the code here")
-
-                //
-                //  Current issue:
-                //  each section is undefined. Model -> sections
-                //
+                console.log("-----------------INTRODUCTION-----------------")
                 section = new IntroductionSectionView(data);
-
-                const obj1 = data["sectionSubObjs"]["introduction"][0]      // From the model - the first article (About me )
-                const obj2 = data["sectionSubObjs"]["introduction"][1]      // From the model - the second article (key skills)
-
-                section.appendSubObject(new IntroductionArticleView(0, obj1.title, obj1.data));
-                section.appendSubObject(new IntroductionArticleView(1, obj2.title, obj2.data));
-
-                throw new Error ("stop the code here")
+                activeSubObjects.forEach((article, i) => {
+                    section.appendSubObject(new IntroductionArticleView(article.index, article.title, article.data))
+                });
                 break;
+
             case "Skills":
+                console.log("-----------------SKILLS-----------------")
                 section = new SkillSectionView(data);
-                section.appendSubObject(new SkillArticleView(0, "Technical", data.sections["skills"]["technical"]))
-                section.appendSubObject(new SkillArticleView(1, "Soft", data.sections["skills"]["soft"]))
-                section.appendSubObject(new SkillArticleView(2, "Languages", data.sections["skills"]["languages"]))
+                activeSubObjects.forEach((article, i) => {
+                    section.appendSubObject(new SkillArticleView(article.index, article.title, article.data))
+                });
                 break;
+
             case "Education":
+                console.log("-----------------EDUCATION-----------------")
                 section = new EducationSectionView(data);
-                Array.from(headings).forEach((heading, i) => {
-                    section.appendSubObject(new EducationArticleView(i, heading, data))
-                });
-                // Need additional code to add the educations
+
+                const obj3_0 = data["sectionSubObjs"]["education"][0]
+                const obj3_1 = data["sectionSubObjs"]["education"][1]
+
+                section.appendSubObject(new EducationArticleView(0, obj3_0.title, obj3_0.data));
+                section.appendSubObject(new EducationArticleView(1, obj3_1.title, obj3_1.data));
                 break;
+                
             case "Experience":
+                console.log("-----------------EXPERIENCE-----------------")
                 section = new ExperienceSectionView(data);
-                info.forEach((experience, i) => {
-                    section.appendSubObject(new ExperienceTileView(i, Object.values(info)[i]))
+                activeSubObjects.forEach((tile, i) => {
+                    section.appendSubObject(new ExperienceTileView(tile.index, null, tile.data))
                 });
                 break;
+
             case "Portfolio":
+                console.log("-----------------PORTFOLIO-----------------")
                 section = new PortfolioSectionView(data);
-                info.forEach((portfolio, i) => {
-                    section.appendSubObject(new PortfolioTileView(i, Object.values(info)[i]))
+                activeSubObjects.forEach((tile, i) => {
+                    section.appendSubObject(new PortfolioTileView(tile.index, null, tile.data))
                 });
                 break;
             default:

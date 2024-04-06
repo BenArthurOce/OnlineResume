@@ -15,6 +15,9 @@ class Controller {
         this.model.bindIndexChanged(this.onIndexChanged.bind(this));
         this.view.bindIndexChange(this.handleIndexChange.bind(this));
 
+
+        this.handleIndexChange(0);
+
         this.onIndexChanged(this.model.data);
     };
 

@@ -1,5 +1,4 @@
-import FrontPageObject from "../objects/FrontPageObject.js"
-import FrontPageObjectNEW from "../objects/NewFrontPageObject.js";
+import FrontPageObject from "../objects/FrontPageObject.js";
 
 
 
@@ -13,15 +12,16 @@ class Model {
 
     async init() {
         console.log("MODEL: init" + "\n" + "----------")
-        this.frontpage = new FrontPageObjectNEW()
+        this.frontpage = new FrontPageObject()
 
         await this.frontpage.init();
         clearTimeout(this.searchTimeout);
 
 
         this.data = {
-              "index" :         0
-            , "count" :         this.frontpage.sections.length
+              "index" :             -1
+            , "count" :             -1
+            , "headings" :          []
 
             , "filterBars" :        {
                                         "introduction" :    this.frontpage.returnSingleFilterBar(0)
@@ -54,52 +54,18 @@ class Model {
                                         ,"experience" :     this.frontpage.returnExperienceTypes()
                                         ,"portfolio" :      this.frontpage.returnPortfolioTypes()
                                     }
+
+            , "active" :            {
+                                         "heading" :            null
+                                        ,"filterBar" :          null
+                                        ,"filterButtons" :      null
+                                        ,"section" :            null
+                                        ,"subObjects" :         null
+                                        ,"filterTags" :         null
+
+           }
         };
-
-        console.log(this.data)
     };
-
-    // returnxx() {
-
-    // }
-
-    // returnxx() {
-        
-    // }
-
-    // returnxx() {
-        
-    // }
-
-    // returnxx() {
-        
-    // }
-
-    // returnIntroductionTypes() {
-    //     return new Set(["Introduction", "KeySkills"]);
-    // };
-
-    // returnSkillsTypes() {
-    //     // return new Set(Object.keys(this.frontpage.sections[1].data).map(key => key.charAt(0).toUpperCase() + key.slice(1)));
-    //     return new Set(["aa", "bb", "cc"]);
-    // };
-
-    // returnEducationTypes() {
-    //     // return new Set(this.frontpage.sections[2].data.flatMap(education => education.tags));
-    //     return new Set(["IT", "Accounting"]);
-    // };
-
-    // returnExperienceTypes() {
-    //     // return new Set(this.frontpage.sections[3].data.flatMap(experience => experience.tags));
-    //     return new Set(["aa", "bb", "cc"]);
-    // };
-
-    // returnPortfolioTypes() {
-    //     // return new Set(this.frontpage.sections[4].data.flatMap(portfolio => portfolio.projectTags))
-    //     return new Set(["aa", "bb", "cc"]);
-    // };
-
-
 
     bindIndexChanged(callback) {
         console.log("MODEL: bindIndexChanged")
@@ -115,112 +81,30 @@ class Model {
     // Controller: handleChangeIndex is called by the View: bindChangeIndex
     changeIndex(index) {
         console.log("MODEL: changeIndex")
+        
+        const capitalizeFirstLetter = (input) => input.charAt(0).toUpperCase() + input.slice(1);
+
+        // Make array of headers
+        console.log("---setting header array and count----")
+        const headerArray = Object.keys(this.data.sections)
         this.data['index'] = index;
+        this.data['headings'] = headerArray.map(header => capitalizeFirstLetter(header))
+        this.data['count'] = headerArray.length;
+
+
+        // Set active data depending on index (this is what the model will read)
+        console.log("---setting active data----")
+        const sectionName = Object.keys(this.data.sections)[index];
+
+        this.data['active']['heading']          = capitalizeFirstLetter(sectionName);
+        this.data['active']['filterBar']        = this.data.filterBars[sectionName];
+        this.data['active']['filterButtons']    = this.data.filterTags[sectionName];
+        this.data['active']['section']          = this.data.sections[sectionName];
+        this.data['active']['subObjects']       = this.data.sectionSubObjs[sectionName];
+        this.data['active']['filterTags']       = this.data.filterTags[sectionName];
+    
         this._commit(this.data);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class Model {
-//     constructor() {
-//         this.frontpage = null
-//         this.searchTimeout = null;
-//         this.init();
-//     };
-
-//     async init() {
-//         console.log("MODEL: init" + "\n" + "----------")
-//         this.frontpage = new FrontPageObject()
-
-//         await this.frontpage.init();
-//         clearTimeout(this.searchTimeout);
-
-
-//         this.data = {
-//               "index" :         0
-//             , "count" :         this.frontpage.sections.length
-
-//             , "filterBars" :    {
-//                                     "introduction" :    this.frontpage.filters[0]
-//                                     ,"skills" :         this.frontpage.filters[1]
-//                                     ,"education" :      this.frontpage.filters[2]
-//                                     ,"experience" :     this.frontpage.filters[3]
-//                                     ,"portfolio" :      this.frontpage.filters[4]
-//                                 }
-
-//             , "sections" :      {
-//                                     "introduction" :    this.frontpage.sections[0].data
-//                                     ,"skills" :         this.frontpage.sections[1].data
-//                                     ,"education" :      this.frontpage.sections[2].data
-//                                     ,"experience" :     this.frontpage.sections[3].data
-//                                     ,"portfolio" :      this.frontpage.sections[4].data
-//                                 }
-
-//             , "filterTags" :    {
-//                                      "introduction" :   Array.from(this.returnIntroductionTypes())
-//                                     ,"skills" :         Array.from(this.returnSkillsTypes())
-//                                     ,"education" :      Array.from(this.returnEducationTypes())
-//                                     ,"experience" :     Array.from(this.returnExperienceTypes())
-//                                     ,"portfolio" :      Array.from(this.returnPortfolioTypes())
-//                                 }
-
-
-//         }
-//     };
-
-//     returnIntroductionTypes() {
-//         return new Set(["Introduction", "KeySkills"]);
-//     };
-
-//     returnSkillsTypes() {
-//         return new Set(Object.keys(this.frontpage.sections[1].data).map(key => key.charAt(0).toUpperCase() + key.slice(1)));
-//     };
-
-//     returnEducationTypes() {
-//         return new Set(this.frontpage.sections[2].data.flatMap(education => education.tags));
-//     };
-
-//     returnExperienceTypes() {
-//         return new Set(this.frontpage.sections[3].data.flatMap(experience => experience.tags));
-//     };
-
-//     returnPortfolioTypes() {
-//         return new Set(this.frontpage.sections[4].data.flatMap(portfolio => portfolio.projectTags))
-//     };
-
-
-
-//     bindIndexChanged(callback) {
-//         console.log("MODEL: bindIndexChanged")
-//         this.onIndexChanged = callback;
-//     };
-
-//     _commit(data) {
-//         console.log("MODEL: _commit")
-//         this.onIndexChanged(data);
-//     };
-
-//     // This function is called by the Controller() handler: handleChangeIndex
-//     // Controller: handleChangeIndex is called by the View: bindChangeIndex
-//     changeIndex(index) {
-//         console.log("MODEL: changeIndex")
-//         this.data['index'] = index;
-//         this._commit(this.data);
-//     }
-// };
+    };
+};
 
 export default Model;

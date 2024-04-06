@@ -6,10 +6,11 @@ class TileView {
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Index order of Article
+    #title;                         //  Heading
     #data;                          //  Detailed information about the Job/Project
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, data) {
+    constructor(index, title, data) {
         this.#className = "Tile";
         this.#classType = null
         this.#mvcComponent = "View";
@@ -39,6 +40,9 @@ class TileView {
     };
     get index() {
         return this.#index;
+    };
+    get title() {
+        return this.#title;
     };
     get data() {
         return this.#data;
@@ -75,8 +79,8 @@ class TileView {
 //  Experience
 //
 class ExperienceTileView extends TileView {
-    constructor(index, data) {
-        super(index, data);
+    constructor(index, title, dat) {
+        super(index, title, dat);
         this.classType = "Experience";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
 
@@ -130,8 +134,8 @@ class ExperienceTileView extends TileView {
 //  Portfolio
 //
 class PortfolioTileView extends TileView {
-    constructor(index, data) {
-        super(index, data);
+    constructor(index, title, dat) {
+        super(index, title, dat);
         this.classType = "Portfolio";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
 

@@ -106,7 +106,7 @@ class IntroductionArticleView extends ArticleView {
     constructor(index, title, data) {
         super(index, title, data);
         this.classType = "Introduction";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}-${this.title.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
 
     };
@@ -127,7 +127,7 @@ class IntroductionArticleView extends ArticleView {
 
 //****** Adds Email, Linkedin, and Github icons to the "About Me" section ******
     addIcons() {
-        console.log(this.data)
+        // console.log(this.data)
             const tempEl = document.createElement('div');
             const icon1 = new IconLinkView("Email" , "Email Me", this.data.email);
             const icon2 = new IconLinkView("LinkedIn" , "Linkedin", this.data.linkedin);
@@ -148,11 +148,11 @@ class IntroductionArticleView extends ArticleView {
 class SkillsArticleView extends ArticleView {
     constructor(index, title, data) {
         super(index, title, data);
-        //console.log(index);
-        //console.log(heading);
+        // console.log(index);
+        // console.log(title);
         // console.log(data);
         this.classType = "Skills";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
 
     };
@@ -184,7 +184,7 @@ class EducationArticleView extends ArticleView {
         //console.log(heading);
         //console.log(data);
         this.classType = "Education";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
