@@ -48,16 +48,8 @@
     }
     ],
     "skills": {
-         "languages":           [
-                                    "React"
-                                    ,"Javascript"
-                                    ,"HTML, CSS"
-                                    ,"Python"
-                                    ,"SQL"
-                                    ,"C#"
-                                    ,"VBA"
-                                ]
-        ,"technical":           [
+
+        "technical":           [
                                     "Microsoft SQL Server Management Studio 2019"
                                     ,"Microsoft Excel"
                                     ,"Microsoft Visual Studio 2019"
@@ -71,6 +63,15 @@
                                     ,"Power Automate Flows"
                                     ,"React, NodeJs, HTML, CSS (Web Development)"
                                     ,"Various cloud accounting software"
+                                ]
+        ,"languages":           [
+                                    "React"
+                                    ,"Javascript"
+                                    ,"HTML, CSS"
+                                    ,"Python"
+                                    ,"SQL"
+                                    ,"C#"
+                                    ,"VBA"
                                 ]
         ,"soft":                [
                                     "Software Support."

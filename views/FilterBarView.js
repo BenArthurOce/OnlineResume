@@ -5,9 +5,9 @@ class FilterBarView {
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
-    #index;
+    #index;                         //  Index number. Will always match the SectionView
     #buttons;                         //  Array containing the NavBarLinks (Added to the class in main View code)
-    #isActive;
+    #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor(index) {
         this.#className = "FilterBar";
@@ -66,13 +66,13 @@ class FilterBarView {
 //****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
-        this.element.classList.add("activated")
+        // //this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" 
     toggleOff() {
         this.isActive = false;
-        this.element.classList.remove("activated")
+        // //this.element.classList.remove("activated")
     };
 
 };
@@ -92,8 +92,8 @@ class IntroductionFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter for-pc for-mobile">
-                <menu id="${this.id}" class="menu-filter for-article for-mobile">
+            <div class="container for-filter for-mobile">
+                <menu id="${this.id}">
                     <ul class="filter-list for-article for-mobile"></ul>
                 </menu>
             </div>
@@ -118,9 +118,11 @@ class EducationFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-article for-mobile">
-                <ul class="filter-list for-article for-mobile"></ul>
-            </menu>
+            <div class="container for-filter for-mobile">
+                <menu id="${this.id}">
+                    <ul class="filter-list for-article for-mobile"></ul>
+                </menu>
+            </div>
         `.trim();
         return newElement.firstElementChild
     };
@@ -141,9 +143,11 @@ class SkillsFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <menu id="${this.id}" class="menu-filter for-article for-mobile">
-                <ul class="filter-list for-article for-mobile"></ul>
-            </menu>
+            <div class="container for-filter for-mobile">
+                <menu id="${this.id}">
+                    <ul class="filter-list for-article for-mobile"></ul>
+                </menu>
+            </div>
         `.trim();
         return newElement.firstElementChild
     };

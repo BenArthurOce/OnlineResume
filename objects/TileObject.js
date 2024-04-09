@@ -9,7 +9,7 @@ class TileObject {
     #title;                         //  Heading
     #data;                          //  Detailed information about the Job/Project
     #isActive;                      //  DOM element displays a different attribute if active
-    constructor(index, title, data) {
+    constructor(index, title, data, isActive) {
         this.#className = "Tile";
         this.#classType = null
         this.#mvcComponent = "Model";
@@ -17,7 +17,12 @@ class TileObject {
         this.#index = index;
         this.#title = title;
         this.#data = data;
-        this.#isActive = false;
+        this.#isActive = isActive;
+
+        if (index === undefined|| title === undefined || data === undefined || isActive === undefined) {
+            this.printToTerminal()
+            throw new Error("TileObject: parameter declared is null/undefined")
+        }
     };
     get className() {
         return this.#className;
@@ -53,6 +58,20 @@ class TileObject {
         this.#isActive = value;
     };
 
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        isActive    = ${this.isActive}
+        index       = ${this.index}
+        title       = ${this.title}
+        data        = ${this.data}`);
+        console.log(this.data)
+    };
+
 //****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
@@ -66,8 +85,8 @@ class TileObject {
 
 
 class ExperienceTileObject extends TileObject {
-    constructor(index, title, data) {
-        super(index, title, data);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
         this.classType = "Experience";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
 
@@ -84,10 +103,15 @@ class ExperienceTileObject extends TileObject {
 
 
 class PortfolioTileObject extends TileObject {
-    constructor(index, title, data) {
-        super(index, title, data);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
         this.classType = "Portfolio";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+
+        // this.tags       = this.data[`tags`]  
+        this.tags       = this.data[`projectTags`]  
+
+        // projectTags
     };
 };
 

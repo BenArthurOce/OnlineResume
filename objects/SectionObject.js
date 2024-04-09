@@ -68,7 +68,7 @@ class SectionObject {
 class IntroductionSectionObject extends SectionObject {
     constructor(index) {
         super(index);
-        this.classType = "Introduction";
+        this.classType = "About";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
     };
 };

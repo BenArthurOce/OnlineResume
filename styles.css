@@ -104,10 +104,6 @@ ul li {
  }
 
 
- /* all sections set to hidden, only become visible when "activated" class  */
-section {display: none}
-
-
  main, .section-display {
     height: 100%;
     min-height: 100%;
@@ -133,9 +129,9 @@ section {display: none}
 /* ----------------------------- */ 
 
 
-.container.activated {
+/* .container.activated {
     display: block;
- }
+ } */
 
 section.activated {
     display: block;
@@ -155,6 +151,19 @@ section.activated {
 
     background-color: var(--section-background-color);
     justify-content: space-between; 
+}
+
+/* .container.for-mobile {
+    display: none;
+} */
+
+/* .container.for-filter {
+    display: block
+} */
+
+
+.container.for-section {
+    display: flex
 }
 
 

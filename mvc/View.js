@@ -18,38 +18,37 @@ import { ExperienceOverlayView,  PortfolioOverlayView } from '../views/OverlayVi
 class View {
     constructor() {
         this.searchTimeout = null;
-        this.init();
     };
 
     returnActiveHeading(data) {
-        return data["active"]["heading"];
+        return data["state"]["heading"];
     };
 
     returnActiveFilterBar(data) {
-        return data["active"]["filterBar"];
+        return data["state"]["filterBar"];
     };
 
     returnActiveFilterButton(data) {
-        return data["active"]["filterButtons"];
+        return data["state"]["filterButtons"];
     };
 
     returnActiveSection(data) {
-        return data["active"]["section"];
+        return data["state"]["section"];
     };
 
     returnActiveSubObjects(data) {
-        return data["active"]["subObjects"];
+        return data["state"]["subObjects"];
     };
 
     returnActiveFilterTags(data) {
-        return Array.from(data["active"]["filterTags"]);
+        return Array.from(data["state"]["filterTags"]);
     };
 
 
 
 
     async init() {
-        //console.log("VIEW: init" + "\n" + "----------")
+        console.log("VIEW: init" + "\n" + "----------")
         this.app = document.querySelector('#wrapper');
         this.updateColorScheme("forest");
         this._initLocalListeners();
@@ -61,8 +60,8 @@ class View {
     //****** Function that is called to start Rendering the View ******
     //******
     commenceRender(data) {
-        //console.log("VIEW: commenceRender")
-        //console.log("---------\n------------")
+        ////console.log("VIEW: commenceRender")
+        ////console.log("---------\n------------")
 
 
         //
@@ -90,14 +89,8 @@ class View {
         //  (2 of 5)
         //  Navigation
         //
-        const navigationBar = this.createNavigation(keysUp)
-        navigationBar.links[index].toggleOn()
+        this.navigationBar = this.createNavigation(data["state"].navigationBar)
 
-        navigationBar.links.forEach((link, i) => {
-            link.element.addEventListener("click", (event) => {
-                this.handleIndexChange(link.index)
-            });
-        });
 
         //  (3 of 5)
         //  Title
@@ -108,15 +101,18 @@ class View {
         //  Filter
         //
         this.filter = this.createFilter( data);
+        // this.filter.buttons.forEach(button => {
+        //     button.bindFilterButton(this.handleButtonPress2.bind(this));
+        // });
         // this.attachFilterEvents();
 
-        // console.log(this.filter.buttons)
+        // //console.log(this.filter.buttons)
 
         this.filter.buttons.forEach((button, i) => {      
-            button.element.addEventListener("click", (event) => {
+            // button.element.addEventListener("click", (event) => {
 
-                this.handleFilterClick(button)
-            });
+            //     this.handleFilterClick(button)
+            // });
         });
 
         //  (5 of 5)
@@ -146,8 +142,87 @@ class View {
         //
         //  Render
         //
-        this.app.append(palette.element, navigationBar.element, heading.element, this.filter.element, this.section.element);
+        this.app.append(palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element);
+
+
+
+
+        // Bind
+        this.filter.buttons.forEach((button, i) => {
+
+            button.element.addEventListener("click", () => {
+                // this.handleIndexChange(button.index)
+                button.callback()
+            });
+            // element.bind()
+            // console.log(element)
+
+            // this.view.bindButtonPress(this.handleButtonPress.bind(this));
+
+            // element.testBindButtonPress(this.handleButtonPress2.bind(this))
+
+        });
+
+        // To do
+        // Have each of the filter button elements have a trigger
+        // The trigger needs to go to the controller, and just the model
+        // We're looking for certain subObjects to be "state" or "inactive"
+        // and then the view will render the model, but also keeping these items in mind
+
+        // console.log(data)
+        // console.log(data.returnSingleNavLink(1))
+        // throw new Error ("stop code here")
     };
+
+
+    onFilterButtonClick(buttonClicked) {
+        console.log("VIEW: onFilterButtonClick");
+        if (buttonClicked.classType === "Article") {
+            this.handleArticleFilter(buttonClicked)
+        } else if (buttonClicked.classType === "Tile") {
+            this.handleTileFilter(buttonClicked)
+        }
+        else {
+            throw new Error ("click handler failed for filter button")
+        }
+    };
+
+
+    bindTileFilter(handler) {
+        console.log("VIEW: bindTileFilter");
+        this.handleTileFilter = handler;       
+    };
+
+    bindArticleFilter(handler) {
+        console.log("VIEW: bindArticleFilter");
+        this.handleArticleFilter = handler;       
+    };
+
+
+
+//****** Refer to the local events that change the index number. Refer to the Controller and the Model ******
+    bindIndexChange(handler) {
+        console.log("VIEW: bindIndexChange");
+        this.handleIndexChange = handler;
+        // console.log(handler)
+        // console.log(this.handleIndexChange)
+    };
+
+
+
+
+    // _initLocalListeners() {
+    //     ////console.log("VIEW: _initLocalListeners")
+    //     document.addEventListener('keydown', (event) => {
+    //         if (event.key === 'ArrowLeft') {
+    //             this.handleIndexChange("-1")
+    //         } else if (event.key === 'ArrowRight') {
+    //             this.handleIndexChange("+1")
+    //         }
+    //     });
+    // };
+
+
 
 
 //****** Creates a dropdown box which allows the user to change the colour style of the page ******
@@ -181,60 +256,75 @@ class View {
 
 
 //****** Creates the Navigation bar and the navigation links inside it ******
-    createNavigation(keys) {
+    createNavigation(object) {
         const navbar = new NavBarView();
-        keys.forEach((key, i) => {
-            navbar.appendLink(new NavLinkView(i, key));
+        object.links .forEach((link, i) => {
+            navbar.appendLink(new NavLinkView(i, link.word));
         });
+
+        navbar.links.forEach((link, i) => {
+            link.element.addEventListener("click", (event) => {
+                this.handleIndexChange(link.index)
+            });
+        });
+
         return navbar;
     };
 
 
+
 //****** Creates the Filter Bar, and the Filter buttons ******
     createFilter(data) {
-        // console.log(`VIEW: createFilter`);
         let filter = null; // Set the element to null for the switch function
         const key = this.returnActiveHeading(data)
         const activeBar = this.returnActiveFilterBar(data)
 
+        //console.log(`func = ${"VIEW:   createFilter"} ||  key = ${key}`);
+
+
         switch (key) {
             case "Introduction":
-                console.log("-----------------INTRODUCTION-----------------")
+                //console.log("-----------------CREATE FILTER-----------------")
+                //console.log("-----------------INTRODUCTION-----------------")
                 filter = new IntroductionFilterBarView(0);
                 activeBar.buttons.forEach((button, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title))
+                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title, this.onFilterButtonClick.bind(this, button)))
                 });
                 break;
 
             case "Skills":
-                console.log("-----------------SKILLS-----------------")
+                //console.log("-----------------CREATE FILTER-----------------")
+                //console.log("-----------------SKILLS-----------------")
                 filter = new SkillsFilterBarView(1);
                 activeBar.buttons.forEach((button, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title))
+                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title, this.onFilterButtonClick.bind(this, button)))
                 });
                 break;
 
             case "Education":
-                console.log("-----------------EDUCATION-----------------")
+                //console.log("-----------------CREATE FILTER-----------------")
+                //console.log("-----------------EDUCATION-----------------")
                 filter = new EducationFilterBarView(2);
                 activeBar.buttons.forEach((button, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title))
+                    filter.appendSubObject(new ArticleFilterButtonView(button.index, button.title, this.onFilterButtonClick.bind(this, button)))
                 });
                 break;
 
             case "Experience":
-                console.log("-----------------EXPERIENCE-----------------")
+                //console.log("-----------------CREATE FILTER-----------------")
+                //console.log("-----------------EXPERIENCE-----------------")
                 filter = new ExperienceFilterBarView(3);
                 activeBar.buttons.forEach((button, i) => {
-                    filter.appendSubObject(new TileFilterButtonView(button.index, button.title))
+                    filter.appendSubObject(new TileFilterButtonView(button.index, button.title, this.onFilterButtonClick.bind(this, button)))
                 });
                 break;
                 
             case "Portfolio":
-                console.log("-----------------PORTFOLIO-----------------")
+                //console.log("-----------------CREATE FILTER-----------------")
+                //console.log("-----------------PORTFOLIO-----------------")
                 filter = new PortfolioFilterBarView(4);
                 activeBar.buttons.forEach((button, i) => {
-                    filter.appendSubObject(new TileFilterButtonView(button.index, button.title))
+                    filter.appendSubObject(new TileFilterButtonView(button.index, button.title, this.onFilterButtonClick.bind(this, button)))
                 });
                 break;
 
@@ -290,58 +380,77 @@ class View {
 
 
 //****** Creates the Section, which displays the main content of the page. Sections contain subObjects which are either Articles or Tiles ******
-    createSection(data) {
-        console.log(`VIEW: createSection`);
+    createSection(information) {
+
+        let filter = null; // Set the element to null for the switch function
+        const key = this.returnActiveHeading(information)
+        const activeSection = this.returnActiveSection(information);
+        const activeSubObjects = this.returnActiveSubObjects(information);
+        //console.log(`func = ${"VIEW:   createSection"} ||  key = ${key}`);
+
         let section = null; // Set the element to null for the switch function
 
+        let index; let title; let data; let isActive;
 
-        const key = this.returnActiveHeading(data);
-
-        const activeSection = this.returnActiveSection(data);
-        const activeSubObjects = this.returnActiveSubObjects(data);
         // throw new Error ("stop the code here")
 
         switch (key) {
             case "Introduction":
-                console.log("-----------------INTRODUCTION-----------------")
-                section = new IntroductionSectionView(data);
+                //console.log("-----------------CREATE SECTION-----------------")
+                //console.log("-----------------INTRODUCTION-----------------")
+                section = new IntroductionSectionView(information);
                 activeSubObjects.forEach((article, i) => {
-                    section.appendSubObject(new IntroductionArticleView(article.index, article.title, article.data))
+                    // console.log(article)
+                    section.appendSubObject(new IntroductionArticleView(index=article.index, title=article.title, data=article.data, isActive=article.isActive));
                 });
                 break;
 
             case "Skills":
-                console.log("-----------------SKILLS-----------------")
-                section = new SkillSectionView(data);
+                //console.log("-----------------CREATE SECTION-----------------")
+                //console.log("-----------------SKILLS-----------------")
+                section = new SkillSectionView(information);
                 activeSubObjects.forEach((article, i) => {
-                    section.appendSubObject(new SkillArticleView(article.index, article.title, article.data))
+                    section.appendSubObject(new SkillArticleView(index=article.index, title=article.title, data=article.data, isActive=article.isActive));
                 });
                 break;
 
             case "Education":
-                console.log("-----------------EDUCATION-----------------")
-                section = new EducationSectionView(data);
+                // console.log("-----------------CREATE SECTION-----------------")
+                // console.log("-----------------EDUCATION-----------------")
+                section = new EducationSectionView(information);
 
-                const obj3_0 = data["sectionSubObjs"]["education"][0]
-                const obj3_1 = data["sectionSubObjs"]["education"][1]
+                const articleNames = this.returnActiveFilterTags(information)
+                // console.log(articleNames)
+                // console.log(activeSubObjects)
 
-                section.appendSubObject(new EducationArticleView(0, obj3_0.title, obj3_0.data));
-                section.appendSubObject(new EducationArticleView(1, obj3_1.title, obj3_1.data));
+                // console.log(data)
+
+
+                // section.appendSubObject(new EducationArticleView(0, articleNames[0], obj3_0.data));
+                // section.appendSubObject(new EducationArticleView(1, articleNames[1], obj3_1.data));
+
+                activeSubObjects.forEach((article, i) => {
+                    section.appendSubObject(new EducationArticleView(article.index, articleNames[i], article.data, article.isActive))
+                });
                 break;
                 
             case "Experience":
-                console.log("-----------------EXPERIENCE-----------------")
-                section = new ExperienceSectionView(data);
+                //console.log("-----------------CREATE SECTION-----------------")
+                //console.log("-----------------EXPERIENCE-----------------")
+                section = new ExperienceSectionView(information);
                 activeSubObjects.forEach((tile, i) => {
-                    section.appendSubObject(new ExperienceTileView(tile.index, null, tile.data))
+                    // console.log(tile)
+                    // console.log(tile.isActive)
+                    section.appendSubObject(new ExperienceTileView(index=tile.index, title="tile.title", data=tile.data, isActive=tile.isActive));
                 });
                 break;
 
             case "Portfolio":
-                console.log("-----------------PORTFOLIO-----------------")
-                section = new PortfolioSectionView(data);
+                //console.log("-----------------CREATE SECTION-----------------")
+                //console.log("-----------------PORTFOLIO-----------------")
+                section = new PortfolioSectionView(information);
                 activeSubObjects.forEach((tile, i) => {
-                    section.appendSubObject(new PortfolioTileView(tile.index, null, tile.data))
+                    section.appendSubObject(new PortfolioTileView(index=tile.index, title="tile.title", data=tile.data, isActive=tile.isActive));
                 });
                 break;
             default:
@@ -352,16 +461,12 @@ class View {
     };
 
 
-//****** Refer to the local events that change the index number. Refer to the Controller and the Model ******
-    bindIndexChange(handler) {
-        //console.log("VIEW: bindIndexChange")
-        this.handleIndexChange = handler;
-    };
+
 
 
 //****** Changes the index number of the page based on if the left or right arrow is pressed. ******
     _initLocalListeners() {
-        //console.log("VIEW: _initLocalListeners")
+        ////console.log("VIEW: _initLocalListeners")
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
                 this.handleIndexChange("-1")

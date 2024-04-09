@@ -7,7 +7,6 @@ class Model {
         this.frontpage = null
         this.searchTimeout = null;
         this.data = {}
-        this.init();
     };
 
     async init() {
@@ -55,27 +54,25 @@ class Model {
                                         ,"portfolio" :      this.frontpage.returnPortfolioTypes()
                                     }
 
-            , "active" :            {
-                                         "heading" :            null
+            , "state" :            {
+                                         "navigationBar" :      this.frontpage.navigation
+                                        ,"heading" :            null
                                         ,"filterBar" :          null
                                         ,"filterButtons" :      null
                                         ,"section" :            null
                                         ,"subObjects" :         null
                                         ,"filterTags" :         null
 
-           }
+                                    }
         };
+
     };
 
-    bindIndexChanged(callback) {
-        console.log("MODEL: bindIndexChanged")
-        this.onIndexChanged = callback;
-    };
+    returnSingleNavLink(index) {
+        return this.data["state"]["navigationBar"][index]
+    }
 
-    _commit(data) {
-        console.log("MODEL: _commit")
-        this.onIndexChanged(data);
-    };
+
 
     // This function is called by the Controller() handler: handleChangeIndex
     // Controller: handleChangeIndex is called by the View: bindChangeIndex
@@ -92,19 +89,129 @@ class Model {
         this.data['count'] = headerArray.length;
 
 
-        // Set active data depending on index (this is what the model will read)
-        console.log("---setting active data----")
+        // Set state data depending on index (this is what the model will read)
+        console.log("---setting state data----")
         const sectionName = Object.keys(this.data.sections)[index];
 
-        this.data['active']['heading']          = capitalizeFirstLetter(sectionName);
-        this.data['active']['filterBar']        = this.data.filterBars[sectionName];
-        this.data['active']['filterButtons']    = this.data.filterTags[sectionName];
-        this.data['active']['section']          = this.data.sections[sectionName];
-        this.data['active']['subObjects']       = this.data.sectionSubObjs[sectionName];
-        this.data['active']['filterTags']       = this.data.filterTags[sectionName];
+        this.data['state']['heading']          = capitalizeFirstLetter(sectionName);
+        this.data['state']['filterBar']        = this.data.filterBars[sectionName];
+        this.data['state']['filterButtons']    = this.data.filterTags[sectionName];
+        this.data['state']['section']          = this.data.sections[sectionName];
+        this.data['state']['subObjects']       = this.data.sectionSubObjs[sectionName];
+        this.data['state']['filterTags']       = this.data.filterTags[sectionName];
     
-        this._commit(this.data);
+        this._commitIndex(this.data);
     };
+
+
+    // bindButtonPressed(callback) {
+    //     console.log("MODEL: bindButtonPressed")
+    //     this.onButtonPressed = callback;
+    // };
+
+    // changeActiveSubObject(object) {
+    //     console.log("MODEL: changeActiveSubObject")
+    //     // Function to make all subobjects false in "isactive"
+
+    //     this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
+    //     this.data['state']['subObjects'].map(button => button.toggleOff())
+
+    //     // set clicked object to active
+
+    //     //get index of the subobject clicked
+    //     const index = object.index
+    //     // console.log(index)
+
+    //     this.data['state']['filterBar'].buttons[index].isActive = true
+    //     this.data['state']['subObjects'][index].isActive = true
+
+    //     // console.log(object)
+    //     // object.isActive = true
+    //     // console.log(object)
+    //     console.log(this.data.state.subObjects)
+    //     console.log(this.data.state.filterBar.buttons)
+    //     this._commitSubObjectActive(this.data);
+
+
+    // };
+
+    filterStateArticles(object) {
+        console.log("MODEL: filterStateArticles")
+
+        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
+        this.data['state']['subObjects'].map(button => button.toggleOff())
+
+        const index = object.index
+
+        this.data['state']['filterBar'].buttons[index].isActive = true
+        this.data['state']['subObjects'][index].isActive = true
+
+        this._commitSubObjectActive(this.data);
+
+    };
+
+    filterStateTiles(object) {
+        console.log("MODEL: filterStateTiles")
+
+        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
+        this.data['state']['subObjects'].map(button => button.toggleOff())
+
+        const title = object.title  // This is what the tiles will be filtered on
+
+        const listOfTiles = this.data['state']['subObjects']
+        // console.log(title)
+        // console.log(listOfTiles)
+
+        // If "All" is picked, then reveal all tiles
+        if (object.title === "All") {
+            this.data['state']['subObjects'].map(button => button.toggleOn())
+        }
+        else {
+            this.data['state']['subObjects'].forEach((tile, i) => {
+                // console.log(i)
+                if (tile.tags.includes(title)) {
+                    // console.log("yes");
+                    tile.toggleOn();
+                } else {
+                    // console.log("no");
+                }
+            });
+        }
+
+
+        this._commitSubObjectActive(this.data);
+    };
+
+
+
+
+
+    bindArticleFiltered(callback) {
+        console.log("MODEL: bindArticleFiltered")
+        this.onActiveSubObjectChanged = callback
+    };
+
+    bindTileFiltered(callback) {
+        console.log("MODEL: bindTileFiltered")
+        this.onActiveSubObjectChanged = callback
+    };
+
+    _commitSubObjectActive(data) {
+        console.log("MODEL: _commitSubObjectActive")
+        this.onActiveSubObjectChanged(data);        
+    }
+
+    _commitIndex(data) {
+        console.log("MODEL: _commitIndex")
+        this.onIndexChanged(data);
+    };
+
+
+    bindIndexChanged(callback) {
+        console.log("MODEL: bindIndexChanged")
+        this.onIndexChanged = callback;
+    };
+
 };
 
 export default Model;

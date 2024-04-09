@@ -14,8 +14,7 @@ class ArticleView {
     #data;                          //  String displayed on screen
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, title, data) {
-
+    constructor(index, title, data, isActive) {
         this.#className = "Article";
         this.#classType = null
         this.#mvcComponent = "View";
@@ -23,10 +22,10 @@ class ArticleView {
         this.#index = index;
         this.#title = title;
         this.#data = data;
-        this.#isActive = false;
+        this.#isActive = isActive;
         this.#element = null;  
 
-        if (index === undefined|| title=== undefined || data=== undefined) {
+        if (index === undefined|| title === undefined || data === undefined || isActive === undefined) {
             this.printToTerminal()
             throw new Error("ArticleView: parameter declared is null/undefined")
         }
@@ -103,12 +102,13 @@ class ArticleView {
 //  Introduction
 //
 class IntroductionArticleView extends ArticleView {
-    constructor(index, title, data) {
-        super(index, title, data);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
         this.classType = "Introduction";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
 
+        if (isActive) {this.toggleOn()} else {this.toggleOff()}
     };
 
 //****** Creates the element for the "IntroductionArticleView" ******
@@ -146,14 +146,15 @@ class IntroductionArticleView extends ArticleView {
 //  Skills
 //
 class SkillsArticleView extends ArticleView {
-    constructor(index, title, data) {
-        super(index, title, data);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
         // console.log(index);
         // console.log(title);
         // console.log(data);
         this.classType = "Skills";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
+        if (isActive) {this.toggleOn()} else {this.toggleOff()}
 
     };
 
@@ -178,14 +179,15 @@ class SkillsArticleView extends ArticleView {
 //  Education
 //
 class EducationArticleView extends ArticleView {
-    constructor(index, title, data) {
-        super(index, title, data);
-        //console.log(index);
-        //console.log(heading);
-        //console.log(data);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
+        // console.log(index);
+        // console.log(title);
+        // console.log(data);
         this.classType = "Education";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
+        if (isActive) {this.toggleOn()} else {this.toggleOff()}
     };
 
 //****** Creates the element for the "EducationArticleView" ******
@@ -194,18 +196,15 @@ class EducationArticleView extends ArticleView {
         newElement.innerHTML = `
             <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}">
                 <h2 class="for-pc">${this.title}:</h2>
-                <ul>${this.classType}</ul>
+                <ul>${this.addInfo()}</ul>
             </article>
         `.trim();
         return newElement.firstElementChild
     };
 
-    applyInfoToElement() {
+    addInfo() {
+        return this.data.map(item => `<li>${item}</li>`).join('');
     };
-
-    // addInfo() {
-    //     return this.duties.map(duty => `<li>${duty}</li>`).join('');
-    // };
 };
 
 

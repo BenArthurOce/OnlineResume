@@ -10,15 +10,22 @@ class TileView {
     #data;                          //  Detailed information about the Job/Project
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, title, data) {
+    constructor(index, title, data, isActive) {
         this.#className = "Tile";
         this.#classType = null
         this.#mvcComponent = "View";
         this.#id = null;
         this.#index = index;
+        this.#title = title;
         this.#data = data;
-        this.#isActive = false;
-        this.#element = null;  
+        this.#isActive = isActive;
+        this.#element = null;
+        
+        if (index === undefined|| title === undefined || data === undefined || isActive === undefined) {
+            this.printToTerminal()
+            throw new Error("TileView: parameter declared is null/undefined")
+        }
+
     };
     get className() {
         return this.#className;
@@ -60,6 +67,20 @@ class TileView {
         this.#element = value;
     };
 
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        isActive    = ${this.isActive}
+        index       = ${this.index}
+        title       = ${this.title}
+        data        = ${this.data}`);
+        console.log(this.data)
+    };
+
 
 //****** Command to make this Object "visible" ******
     toggleOn() {
@@ -79,8 +100,8 @@ class TileView {
 //  Experience
 //
 class ExperienceTileView extends TileView {
-    constructor(index, title, dat) {
-        super(index, title, dat);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
         this.classType = "Experience";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
 
@@ -94,6 +115,7 @@ class ExperienceTileView extends TileView {
         this.duties     = this.data[`duties`]
 
         this.element = this.generateElement();
+        if (isActive) {this.toggleOn()} else {this.toggleOff()}
     };
 
 //****** Prepares the HTML element - An Experience Tile ******
@@ -134,8 +156,8 @@ class ExperienceTileView extends TileView {
 //  Portfolio
 //
 class PortfolioTileView extends TileView {
-    constructor(index, title, dat) {
-        super(index, title, dat);
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
         this.classType = "Portfolio";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
 
@@ -148,7 +170,7 @@ class PortfolioTileView extends TileView {
         this.projectImages      = this.data[`projectImages`]
 
         this.element = this.generateElement();
-        // this.applyInfoToElement()
+        if (isActive) {this.toggleOn()} else {this.toggleOff()}
     };
 
 //****** Prepares the HTML element - A Portfolio Tile ******

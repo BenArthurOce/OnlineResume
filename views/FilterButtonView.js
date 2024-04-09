@@ -9,7 +9,8 @@ class FilterButtonView {
     #title;                         //  Display name of the filter button, or reference key if its for tiles
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, title) {
+    #callback;                      //  Function in the View() class that is ran when the element of this class is clicked
+    constructor(index, title, callback) {
         this.#className = "FilterButton";
         this.#classType = null
         this.#mvcComponent = "View";
@@ -17,7 +18,8 @@ class FilterButtonView {
         this.#index = index;
         this.#title = title;
         this.#isActive = false;
-        this.#element = null;  
+        this.#element = null;
+        this.#callback = callback;
     };
     get className() {
         return this.#className;
@@ -55,6 +57,9 @@ class FilterButtonView {
     set element(value) {
         this.#element = value;
     };
+    get callback() {
+        return this.#callback;
+    };
 
 // //****** Command to make this Object "visible" ******
     toggleOn() {
@@ -71,12 +76,26 @@ class FilterButtonView {
 
 
 class ArticleFilterButtonView extends FilterButtonView {
-    constructor(index, title) {
-        super(index, title);
+    constructor(index, title, callback) {
+        super(index, title, callback);
         this.classType = "Article";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
+
+        // console.log(this.id)
+        // console.log(this.isActive)
+        if (this.isActive) {this.toggleOn()}
+        // if (this.isActive) {this.toggleOn()} else {this.toggleOff()}
     };
+    // bindFilterButton(handler) {
+    //     console.log("FILTERBUTTON: bindFilterButton")
+    //     console.log(handler)
+    //     this.callback()
+    // };
+
+    // bind() {
+    //     this.element.addEventListener('click', () => this.callback());
+    // }
 
 //****** Prepares the HTML element ******
     generateElement() {
@@ -86,16 +105,29 @@ class ArticleFilterButtonView extends FilterButtonView {
         `.trim();
         return newElement.firstElementChild
     };
+
 };
 
 
 class TileFilterButtonView extends FilterButtonView {
-    constructor(index, title) {
-        super(index, title);
+    constructor(index, title, callback) {
+        super(index, title, callback);
         this.classType = "Tile";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
     };
+
+    // bindFilterButton(handler) {
+    //     console.log("FILTERBUTTON: bindFilterButton")
+    //     console.log(handler)
+    // };
+
+    // bind() {
+    //     this.element.addEventListener('click', () => this.callback());
+    //     // this.view.bindButtonPress(this.handleButtonPress.bind(this));
+
+    //     // this.element.
+    // }
 
 //****** Prepares the HTML element ******
     generateElement() {

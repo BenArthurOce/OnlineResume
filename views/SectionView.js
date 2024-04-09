@@ -11,7 +11,7 @@ class SectionView {
     #index;                         //  Index order of Article
     #subObjects;                    //  Article() or Tile() objects contained in this section
     #isActive;                      //  DOM element displays a different attribute if active
-    #element;                       //  The part of the resume data from Dictionary()
+    #element;                       //  HTML Element
     constructor(index) {
         this.#className = "Section";
         this.#classType = null;
@@ -62,13 +62,13 @@ class SectionView {
 //****** Command to make this Object "visible" ******
     toggleOn() {
         this.isActive = true;
-        this.element.classList.add("activated")
+        //this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" ******
     toggleOff() {
         this.isActive = false;
-        this.element.classList.remove("activated")
+        //this.element.classList.remove("activated")
     };
 
 //****** Adds an article / tile ******
@@ -94,7 +94,7 @@ class IntroductionSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display activated">
+            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
                 <div id="${this.id}-article-container" class="container for-article">
                 </div>
             </section>
@@ -118,7 +118,7 @@ class SkillsSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display">
+            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
                 <div id="${this.id}-article-container" class="container for-article">
                 </div>
             </section>
@@ -142,7 +142,7 @@ class EducationSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display">
+            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
                 <div id="${this.id}-article-container" class="container for-article">
                 </div>
             </section>
@@ -166,7 +166,7 @@ class ExperienceSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display">
+            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
                 <div id="${this.id}-tile-container" class="container for-tile">
                 </div>
             </section>
@@ -190,7 +190,7 @@ class PortfolioSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display">
+            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
                 <div id="${this.id}-tile-container" class="container for-tile">
                 </div>
             </section>

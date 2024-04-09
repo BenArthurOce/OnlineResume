@@ -55,13 +55,13 @@ class NavLinkView {
 //****** Command to make this Object "visible" ******
     toggleOn() {
         this.isActive = true;
-        this.element.classList.add("activated")
+        //this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" ******
     toggleOff() {
         this.isActive = false;
-        this.element.classList.remove("activated")
+        //this.element.classList.remove("activated")
     };
 
 };
