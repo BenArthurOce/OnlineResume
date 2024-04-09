@@ -70,8 +70,7 @@ class Model {
 
     returnSingleNavLink(index) {
         return this.data["state"]["navigationBar"][index]
-    }
-
+    };
 
 
     // This function is called by the Controller() handler: handleChangeIndex
@@ -82,7 +81,7 @@ class Model {
         const capitalizeFirstLetter = (input) => input.charAt(0).toUpperCase() + input.slice(1);
 
         // Make array of headers
-        console.log("---setting header array and count----")
+        // console.log("---setting header array and count----")
         const headerArray = Object.keys(this.data.sections)
         this.data['index'] = index;
         this.data['headings'] = headerArray.map(header => capitalizeFirstLetter(header))
@@ -90,7 +89,7 @@ class Model {
 
 
         // Set state data depending on index (this is what the model will read)
-        console.log("---setting state data----")
+        // console.log("---setting state data----")
         const sectionName = Object.keys(this.data.sections)[index];
 
         this.data['state']['heading']          = capitalizeFirstLetter(sectionName);
@@ -99,41 +98,16 @@ class Model {
         this.data['state']['section']          = this.data.sections[sectionName];
         this.data['state']['subObjects']       = this.data.sectionSubObjs[sectionName];
         this.data['state']['filterTags']       = this.data.filterTags[sectionName];
+
+
+
+        this.data['state']['navigationBar'].links.map(link => link.toggleOff())
+        this.data['state']['navigationBar'].links[index].toggleOn()
+
     
         this._commitIndex(this.data);
     };
 
-
-    // bindButtonPressed(callback) {
-    //     console.log("MODEL: bindButtonPressed")
-    //     this.onButtonPressed = callback;
-    // };
-
-    // changeActiveSubObject(object) {
-    //     console.log("MODEL: changeActiveSubObject")
-    //     // Function to make all subobjects false in "isactive"
-
-    //     this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
-    //     this.data['state']['subObjects'].map(button => button.toggleOff())
-
-    //     // set clicked object to active
-
-    //     //get index of the subobject clicked
-    //     const index = object.index
-    //     // console.log(index)
-
-    //     this.data['state']['filterBar'].buttons[index].isActive = true
-    //     this.data['state']['subObjects'][index].isActive = true
-
-    //     // console.log(object)
-    //     // object.isActive = true
-    //     // console.log(object)
-    //     console.log(this.data.state.subObjects)
-    //     console.log(this.data.state.filterBar.buttons)
-    //     this._commitSubObjectActive(this.data);
-
-
-    // };
 
     filterStateArticles(object) {
         console.log("MODEL: filterStateArticles")
@@ -158,10 +132,6 @@ class Model {
 
         const title = object.title  // This is what the tiles will be filtered on
 
-        const listOfTiles = this.data['state']['subObjects']
-        // console.log(title)
-        // console.log(listOfTiles)
-
         // If "All" is picked, then reveal all tiles
         if (object.title === "All") {
             this.data['state']['subObjects'].map(button => button.toggleOn())
@@ -178,12 +148,8 @@ class Model {
             });
         }
 
-
         this._commitSubObjectActive(this.data);
     };
-
-
-
 
 
     bindArticleFiltered(callback) {

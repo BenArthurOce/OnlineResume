@@ -15,69 +15,15 @@ class Controller {
         this.model.bindIndexChanged(this.onIndexChanged.bind(this));
         this.view.bindIndexChange(this.handleIndexChange.bind(this));
 
-
         this.model.bindArticleFiltered(this.onArticleFiltered.bind(this));
         this.view.bindArticleFilter(this.handleArticleFilter.bind(this));
-        // this.view.bindButtonPress(this.handleButtonPress.bind(this));
 
         this.model.bindTileFiltered(this.onTileFiltered.bind(this));
         this.view.bindTileFilter(this.handleTileFilter.bind(this));
-        // Pass controller's handler to view's method
-        // this.view.bindTestButtonPress(this.handleButtonPress2.bind(this));
 
-
-        // this.view.testBindButtonPress(this.handleButtonPress2.bind(this)); // Use testBindButtonPress here
-
-
-
+        // Manually activate so the app displays the first section
         this.handleIndexChange(0);
-        this.onIndexChanged(this.model.data);
 
-        // you now have the ability to set subobjects to true/false
-
-        // You need to remove the Set() objects
-        // throw new Error ("stop code here")
-
-    };
-
-    onTileFiltered(modelData) {
-        console.log("CONTROLLER: onTileFiltered")
-        // console.log(modelData)
-        this.view.commenceRender(modelData);
-    };
-
-    handleTileFilter(subObject) {
-        console.log("CONTROLLER: handleTileFilter")
-        // console.log(subObject)
-
-        // subObject.isActive = true
-
-        // console.log(this)
-
-        // console.log(this.model.data.active)
-
-        this.model.filterStateTiles(subObject)
-    };
-
-    // bindActiveSubObjectChanged
-
-    onArticleFiltered(modelData) {
-        console.log("CONTROLLER: onArticleFiltered")
-        // console.log(modelData)
-        this.view.commenceRender(modelData);
-    };
-
-    handleArticleFilter(subObject) {
-        console.log("CONTROLLER: handleArticleFilter")
-        // console.log(subObject)
-
-        // subObject.isActive = true
-
-        // console.log(this)
-
-        // console.log(this.model.data.active)
-
-        this.model.filterStateArticles(subObject)
     };
 
     onIndexChanged(modelData) {
@@ -85,8 +31,15 @@ class Controller {
         this.view.commenceRender(modelData);
     };
 
+    onArticleFiltered(modelData) {
+        console.log("CONTROLLER: onArticleFiltered")
+        this.view.commenceRender(modelData);
+    };
 
-
+    onTileFiltered(modelData) {
+        console.log("CONTROLLER: onTileFiltered")
+        this.view.commenceRender(modelData);
+    };
 
     handleIndexChange(index) {
         console.log("CONTROLLER: handleIndexChange");
@@ -110,5 +63,18 @@ class Controller {
 
         this.model.changeIndex(this.indexView);
     };
+
+    handleArticleFilter(subObject) {
+        console.log("CONTROLLER: handleArticleFilter")
+        this.model.filterStateArticles(subObject)
+    };
+
+    
+    handleTileFilter(subObject) {
+        console.log("CONTROLLER: handleTileFilter")
+        this.model.filterStateTiles(subObject)
+    };
+
+
 };
 export default Controller

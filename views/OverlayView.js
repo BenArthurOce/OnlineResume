@@ -9,7 +9,6 @@ class OverlayView {
     #id;                            //  Combination of class names to create an element id string
     #index;                         //  Index order of Article
     #data;                          //  
-    // #heading;                       //  Heading
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor(index, data) {
@@ -19,7 +18,6 @@ class OverlayView {
         this.#id = null;
         this.#index = index;
         this.#data = data;
-        // this.#heading = heading;
         this.#isActive = false;
         this.#element = null;  
 
@@ -48,9 +46,6 @@ class OverlayView {
     get data() {
         return this.#data;
     };
-    // get heading() {
-    //     return this.#heading;
-    // };
     get isActive() {
         return this.#isActive;
     };

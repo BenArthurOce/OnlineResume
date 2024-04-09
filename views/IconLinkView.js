@@ -62,8 +62,6 @@ class IconLinkView {
         return newElement.firstElementChild
     };
 
-
-
 //****** takes the "this.key" attribute to create an icon HTML object ******
     selectIconGraphic(key) {
         const iconOptions = {

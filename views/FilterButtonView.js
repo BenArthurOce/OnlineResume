@@ -10,14 +10,14 @@ class FilterButtonView {
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     #callback;                      //  Function in the View() class that is ran when the element of this class is clicked
-    constructor(index, title, callback) {
+    constructor(index, title, isActive, callback) {
         this.#className = "FilterButton";
         this.#classType = null
         this.#mvcComponent = "View";
         this.#id = null;
         this.#index = index;
         this.#title = title;
-        this.#isActive = false;
+        this.#isActive = isActive;
         this.#element = null;
         this.#callback = callback;
     };
@@ -61,6 +61,20 @@ class FilterButtonView {
         return this.#callback;
     };
 
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        id          = ${this.id}
+        index       = ${this.index}
+        title       = ${this.title}
+        isActive    = ${this.isActive}
+        callback    = ${this.callback}`);
+    };
+
 // //****** Command to make this Object "visible" ******
     toggleOn() {
         this.isActive = true;
@@ -76,26 +90,20 @@ class FilterButtonView {
 
 
 class ArticleFilterButtonView extends FilterButtonView {
-    constructor(index, title, callback) {
-        super(index, title, callback);
+    constructor(index, title, isActive, callback) {
+        super(index, title, isActive, callback);
         this.classType = "Article";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
 
-        // console.log(this.id)
-        // console.log(this.isActive)
-        if (this.isActive) {this.toggleOn()}
-        // if (this.isActive) {this.toggleOn()} else {this.toggleOff()}
-    };
-    // bindFilterButton(handler) {
-    //     console.log("FILTERBUTTON: bindFilterButton")
-    //     console.log(handler)
-    //     this.callback()
-    // };
+    
+        if (this.isActive) {this.toggleOn()} else {this.toggleOff()}
 
-    // bind() {
-    //     this.element.addEventListener('click', () => this.callback());
-    // }
+        if (index === undefined|| title === undefined || isActive === undefined || callback === undefined) {
+            this.printToTerminal()
+            throw new Error("ArticleFilterButtonView: parameter declared is null/undefined")
+        }
+    };
 
 //****** Prepares the HTML element ******
     generateElement() {
@@ -110,24 +118,19 @@ class ArticleFilterButtonView extends FilterButtonView {
 
 
 class TileFilterButtonView extends FilterButtonView {
-    constructor(index, title, callback) {
-        super(index, title, callback);
+    constructor(index, title, isActive, callback) {
+        super(index, title, isActive, callback);
         this.classType = "Tile";
         this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
         this.element = this.generateElement();
+
+        if (this.isActive) {this.toggleOn()} else {this.toggleOff()}
+
+        if (index === undefined|| title === undefined || isActive === undefined || callback === undefined) {
+            this.printToTerminal()
+            throw new Error("TileFilterButtonView: parameter declared is null/undefined")
+        }
     };
-
-    // bindFilterButton(handler) {
-    //     console.log("FILTERBUTTON: bindFilterButton")
-    //     console.log(handler)
-    // };
-
-    // bind() {
-    //     this.element.addEventListener('click', () => this.callback());
-    //     // this.view.bindButtonPress(this.handleButtonPress.bind(this));
-
-    //     // this.element.
-    // }
 
 //****** Prepares the HTML element ******
     generateElement() {

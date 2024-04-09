@@ -165,12 +165,22 @@ class ExperienceFilterBarView extends FilterBarView {
     };
 
 //****** Prepares the HTML element ******
+    // generateElement() {
+    //     const newElement = document.createElement('div');
+    //     newElement.innerHTML = `
+    //             <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile activated">
+    //                 <ul class="filter-list for-tile for-pc for-mobile"></ul>
+    //             </menu>
+    //     `.trim();
+    //     return newElement.firstElementChild
+    // };
+
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter for-tile for-pc for-mobile">
-                <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
-                    <ul class="filter-list for-tile for-pc for-mobile"></ul>
+            <div class="container for-filter for-pc for-mobile activated">
+                <menu id="${this.id}" class="for-pc for-mobile activated">
+                    <ul class="for-pc for-mobile"></ul>
                 </menu>
             </div>
         `.trim();
@@ -190,12 +200,22 @@ class PortfolioFilterBarView extends FilterBarView {
     };
 
 //****** Prepares the HTML element ******
+    // generateElement() {
+    //     const newElement = document.createElement('div');
+    //     newElement.innerHTML = `
+    //             <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile activated">
+    //                 <ul class="filter-list for-tile for-pc for-mobile"></ul>
+    //             </menu>
+    //     `.trim();
+    //     return newElement.firstElementChild
+    // };
+
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter for-tile for-pc for-mobile">
-                <menu id="${this.id}" class="menu-filter for-tile for-pc for-mobile for-tile">
-                    <ul class="filter-list for-tile for-pc for-mobile"></ul>
+            <div class="container for-filter for-pc for-mobile activated">
+                <menu id="${this.id}" class="for-pc for-mobile activated">
+                    <ul class="for-pc for-mobile"></ul>
                 </menu>
             </div>
         `.trim();

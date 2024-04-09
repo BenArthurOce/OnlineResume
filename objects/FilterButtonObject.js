@@ -8,14 +8,14 @@ class FilterButtonObject {
     #index;                         //  Position reference number
     #title;                         //  Display name of the filter button, or reference key if its for tiles
     #isActive;                      //  true = is supposed to be shown to user, false = meant to be invis
-    constructor(index, title) {
+    constructor(index, title, isActive) {
         this.#className = "FilterButton";
         this.#classType = null;
         this.#mvcComponent = "Model";
         this.#id = null;
         this.#index = index;
         this.#title = title;
-        this.#isActive = false;
+        this.#isActive = isActive;
     };
     get className() {
         return this.#className;
@@ -48,6 +48,19 @@ class FilterButtonObject {
         this.#isActive = value;
     };
 
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        id          = ${this.id}
+        index       = ${this.index}
+        title       = ${this.title}
+        isActive    = ${this.isActive}`);
+    };
+
 //****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
@@ -61,18 +74,28 @@ class FilterButtonObject {
 
 
 class ArticleFilterButtonObject extends FilterButtonObject {
-    constructor(index, title) {
-        super(index, title);
+    constructor(index, title, isActive) {
+        super(index, title, isActive);
         this.classType = "Article";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+
+        if (index === undefined|| title === undefined || isActive === undefined) {
+            this.printToTerminal()
+            throw new Error("ArticleFilterButtonObject: parameter declared is null/undefined")
+        }
     };
 };
 
 class TileFilterButtonObject extends FilterButtonObject {
-    constructor(index, title) {
-        super(index, title);
+    constructor(index, title, isActive) {
+        super(index, title, isActive);
         this.classType = "Tile";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+
+        if (index === undefined|| title === undefined || isActive === undefined) {
+            this.printToTerminal()
+            throw new Error("TileFilterButtonObject: parameter declared is null/undefined")
+        }
     };
 };
 

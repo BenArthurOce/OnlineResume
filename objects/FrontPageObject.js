@@ -108,10 +108,11 @@ class FrontPageObject {
 
 //****** Creates and populates the Dictionary attribute in this class ******
     async initDictionary() {
-        const filepath = './ResumeData.json';
+        const filepath = './data/ResumeData.json';
         const jsonData = await this.readJSONFile(filepath);
         Object.entries(jsonData).forEach(([key, value]) => this.#dictionary.set(key, value));
-    };
+
+    };    
 
     async readJSONFile(filePath) {
         const jsonReader = new JSONReader(filePath);
@@ -122,9 +123,10 @@ class FrontPageObject {
 
 //****** Creates the Navigation Bar and the links inside it ******
     createNavigationBar() {
+        let index; let title; let isActive;
         const navbar = new NavBarObject();
-        this.#navigationTitles.forEach((title, i) => {
-            navbar.appendLink(new NavLinkObject(title))
+        this.#navigationTitles.forEach((heading, i) => {
+            navbar.appendLink(new NavLinkObject(index=i, title=heading, isActive=false))
         });
         return navbar;
     };
@@ -159,77 +161,86 @@ class FrontPageObject {
         //console.log(`func = ${"prepareFilterButtonObjects"} ||  key = ${key}`);
         let filter = null; // Set the element to null for the switch function
         let keywords = null
+        let index; let title; let isActive;
 
         switch (key) {
             case "About":
                 //console.log("----------FRONTPAGE - FILTER BUTTONS--------------")
-                //console.log("-----------------INTRODUCTION-----------------")
+                //console.log("-----------------INTRODUCTION---------------------")
                 filter = this.returnSingleFilterBar(0);
                 keywords = this.returnIntroductionTypes()
-                filter.appendSubObject(new ArticleFilterButtonObject(0, "About Me"));
-                filter.appendSubObject(new ArticleFilterButtonObject(1, "Key Skills"));
-
-                // filter.appendSubObject(new ArticleFilterButtonObject(0, keywords[0]));
-                // filter.appendSubObject(new ArticleFilterButtonObject(1, keywords[1]));
-
-                // keywords.forEach((word, i) => {
-                //     filter.appendSubObject(new ArticleFilterButtonObject(i, word));
-                // });
-                // break;
+                filter.appendSubObject(new ArticleFilterButtonObject(index=0, title="About Me",     isActive=false));
+                filter.appendSubObject(new ArticleFilterButtonObject(index=1, title="Key Skills",   isActive=false));
                 break;
 
             case "Skills":
                 //console.log("----------FRONTPAGE - FILTER BUTTONS--------------")
-                //console.log("-----------------SKILLS-----------------")
+                //console.log("------------------SKILLS--------------------------")
                 filter = this.returnSingleFilterBar(1);
                 keywords = this.returnSkillsTypes()
-                // filter.appendSubObject(new ArticleFilterButtonObject(0, "Technical"));
-                // filter.appendSubObject(new ArticleFilterButtonObject(1, "Soft"));
-                // filter.appendSubObject(new ArticleFilterButtonObject(2, "Languages"));
-
-                // filter.appendSubObject(new ArticleFilterButtonObject(0, keywords[0]));
-                // filter.appendSubObject(new ArticleFilterButtonObject(1, keywords[1]));
-                // filter.appendSubObject(new ArticleFilterButtonObject(2, keywords[2]));
                 keywords.forEach((word, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonObject(i, word));
+                    filter.appendSubObject(new ArticleFilterButtonObject(
+                                              index = i
+                                            , title = word
+                                            , isActive = false
+                                        ));
                 });
                 break;
 
             case "Education":
                 //console.log("----------FRONTPAGE - FILTER BUTTONS--------------")
-                //console.log("-----------------EDUCATION-----------------")
+                //console.log("------------------EDUCATION-----------------------")
                 filter = this.returnSingleFilterBar(2);
                 keywords = this.returnEducationTypes()
-                // filter.appendSubObject(new ArticleFilterButtonObject(0, "IT"));
-                // filter.appendSubObject(new ArticleFilterButtonObject(1, "Accounting"));
-                // filter.appendSubObject(new ArticleFilterButtonObject(0, keywords[0]));
-                // filter.appendSubObject(new ArticleFilterButtonObject(1, keywords[1]));
                 keywords.forEach((word, i) => {
-                    filter.appendSubObject(new ArticleFilterButtonObject(i, word));
+                    filter.appendSubObject(new ArticleFilterButtonObject(
+                                              index = i
+                                            , title = word
+                                            , isActive = false
+                                        ));
                 });
                 break;
 
             case "Experience":
                 //console.log("----------FRONTPAGE - FILTER BUTTONS--------------")
-                //console.log("-----------------EXPERIENCE-----------------")
+                //console.log("-----------------EXPERIENCE-----------------------")
                 filter = this.returnSingleFilterBar(3);
                 keywords = this.returnExperienceTypes();
 
-                filter.appendSubObject(new TileFilterButtonObject(99, "All"));
+                filter.appendSubObject(new TileFilterButtonObject(
+                                              index = 99
+                                            , title = "All"
+                                            , isActive = false
+                                        ));
+
                 keywords.forEach((word, i) => {
-                    filter.appendSubObject(new TileFilterButtonObject(i, word));
+                    filter.appendSubObject(new TileFilterButtonObject(
+                                              index = i
+                                            , title = word
+                                            , isActive = false
+                                        ));
                 });
                 break;
 
             case "Portfolio":
                 //console.log("----------FRONTPAGE - FILTER BUTTONS--------------")
-                //console.log("-----------------PORTFOLIO-----------------")
+                //console.log("-----------------PORTFOLIO------------------------")
                 filter = this.returnSingleFilterBar(4);
                 keywords = this.returnPortfolioTypes();
 
-                filter.appendSubObject(new TileFilterButtonObject(99, "All"));
+                filter.appendSubObject(new TileFilterButtonObject(
+                                      index = 99
+                                    , title = "All"
+                                    , isActive = false
+                                ));
+
                 keywords.forEach((word, i) => {
-                    filter.appendSubObject(new TileFilterButtonObject(i, word));
+                    filter.appendSubObject(new TileFilterButtonObject(
+                                          index = i
+                                        , title = word
+                                        , isActive = false
+                                    ));
+
                 });
                 break;
 
@@ -298,7 +309,7 @@ class FrontPageObject {
                 //console.log("-----------------EXPERIENCE-----------------")
                 section = this.returnSingleSection(3);
                 this.dict("experience").forEach((job, i) => {
-                    section.appendSubObject(new ExperienceTileObject(i, title="placehold", data=job, isActive=false));
+                    section.appendSubObject(new ExperienceTileObject(index=i, title="placehold", data=job, isActive=true));
                 });
                 break;
 
@@ -307,7 +318,7 @@ class FrontPageObject {
                 //console.log("-----------------PORTFOLIO-----------------")
                 section = this.returnSingleSection(4);
                 this.dict("portfolio").forEach((project, i) => {
-                    section.appendSubObject(new PortfolioTileObject(index=i, title="placehold", data=project, isActive=false));
+                    section.appendSubObject(new PortfolioTileObject(index=i, title="placehold", data=project, isActive=true));
                 });
                 break;
                 

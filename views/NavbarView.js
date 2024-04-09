@@ -8,8 +8,8 @@ class NavBarView {
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
     constructor() {
-        this.#className = "NavBar";
-        this.#classType = null;
+        this.#className = "Navigation";
+        this.#classType = "Bar";
         this.#mvcComponent = "View";
         this.#links = [];
         this.#isActive = false;
@@ -58,7 +58,7 @@ class NavBarView {
     generateElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
-            <h1 class="navbar-title for-mobile"></h1>
+            <h1 class="navbar-title for-mobile">aaaaaaa</h1>
             <div class="container for-navbar-links">
 
             </div>

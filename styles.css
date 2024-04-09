@@ -157,9 +157,10 @@ section.activated {
     display: none;
 } */
 
-/* .container.for-filter {
-    display: block
-} */
+.container.for-filter {
+    display: block;
+    min-width: 100%;
+}
 
 
 .container.for-section {
@@ -308,17 +309,17 @@ nav > .container > a.activated {
 /* ----------------------------- */
 
 /* The <menu> element */
-.menu-filter { 
-    /* display: block; */
+/* .menu-filter { 
+    display: block;
     background-color: var(--filter-basic-background-color); 
     display: none;
     width: 100%;
     max-width: 100%;
-}
+} */
 
-.menu-filter.activated {
+/* .menu-filter.activated {
     display: block;
-}
+} */
 
 
 /* The <ul> element */
