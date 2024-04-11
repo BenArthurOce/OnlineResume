@@ -48,55 +48,46 @@ class View {
     async init() {
         console.log("VIEW: init" + "\n" + "----------")
         this.app = document.querySelector('#wrapper');
-        this.updateColorScheme("forest");
         this._initLocalListeners();
     };
 
 
-    //******
-    //****** Function that is called to start Rendering the View ******
-    //******
-    commenceRender(data) {
-        ////console.log("VIEW: commenceRender")
-        ////console.log("---------\n------------")
+//****************************
+//*** Main Render Function ***
+//****************************
 
-        //
-        //  Function to set string to Proper Case
-        //
-        function toProperCase(str) {
-            return str.toLowerCase().replace(/\b\w/g, function(char) {
-                return char.toUpperCase();
-            });
-        };
+    async commenceRender(data) {
+        console.log("VIEW: commenceRender" + "\n" + "--------------------")
 
+        //  (0 of 5)
+        //  Clear entire HTML
+        //        
         this.app.innerHTML = null;
-        const keys = Object.keys(data.filterBars);
 
         //  (1 of 5)
         //  Palette
         //
-        const palette = this.createPalette();
-        this.attachPaletteChangeEvent()
+        this.palette = await this.createPalette(data["state"].palette);
 
         //  (2 of 5)
         //  Navigation
         //
-        this.navigationBar = this.createNavigation(data["state"].navigationBar)
+        this.navigationBar = await this.createNavigation(data["state"].navigationBar)
 
         //  (3 of 5)
         //  Title
         //
-        const heading = this.createHeading(data);
+        const heading = await this.createHeading(data);
 
         //  (4 of 5)
         //  Filter
         //
-        this.filter = this.createFilter(data);
+        this.filter = await this.createFilter(data);
 
         //  (5 of 5)
         //  Sections
         //
-        this.section = this.createSection(data);
+        this.section = await this.createSection(data);
 
         // Tile Event listeners for overlay
         if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
@@ -120,8 +111,15 @@ class View {
         //
         //  Render
         //
-        this.app.append(palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element);
+        this.app.append(this.palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element);
+        this.updateColorScheme(this.palette.currentCSSName);
 
+        //
+        //  Bind Palette
+        //
+        this.palette.element.addEventListener("change", () => {
+            this.palette.callback()
+        });
 
         //
         //  Bind Navigation bar
@@ -131,7 +129,6 @@ class View {
                 link.callback()
             });
         });
-
 
         //
         //  Bind Filter bar
@@ -149,6 +146,17 @@ class View {
     };
 
 
+//****************************
+//******** Callbacks *********
+//****************************
+
+//****** View() event that is the PaletteView() callback function. Triggers when the dropdown box changes value ******
+    onPaletteChangeClick(buttonClicked) {
+        console.log("VIEW: onPaletteChangeClick");
+        const optionClicked = event.target.value
+        this.handlePaletteChange(optionClicked);
+    }
+
 //****** View() event that is the FilterButtonView() callback function. Triggers when the object element is clicked ******
     onFilterButtonClick(buttonClicked) {
         // console.log("VIEW: onFilterButtonClick");
@@ -164,11 +172,19 @@ class View {
 
 //****** View() event that is the NavLinkView() callback function. Triggers when the object element is clicked ******
     onNavigationButtonClick(buttonClicked) {
-        // console.log("VIEW: onFilterButtonClick");
+        // console.log("VIEW: onNavigationButtonClick");
         this.handleIndexChange(buttonClicked.index)
     };
 
+
+//****************************
 //****** Binding Events ******
+//****************************
+    bindPaletteChange(handler) {
+        // console.log("VIEW: bindPaletteChange");
+        this.handlePaletteChange = handler;
+    };
+
     bindTileFilter(handler) {
         // console.log("VIEW: bindTileFilter");
         this.handleTileFilter = handler;       
@@ -184,40 +200,44 @@ class View {
         this.handleIndexChange = handler;
     };
 
-
-//****** Creates a dropdown box which allows the user to change the colour style of the page ******
-    createPalette() {
-        // console.log("VIEW: createPalette");
-        return new PaletteView()
-    };
-
-
-    attachPaletteChangeEvent() {
-
-        // OLD VERSION CODE
-        // // ColourPalette
-        // this.paletteEl.addEventListener('change', () => {
-        //     const newColour = document.body.querySelector(`#paletteSelector`).value;
-        //     this.updateColorScheme(newColour);
-        // });
-    };
-
-
     updateColorScheme(newColour) {
+        // console.log("VIEW: updateColorScheme");
         const root = document.documentElement;
         root.setAttribute('data-style', newColour);
     };
 
 
+//****************************
+//****** Create Elements *****
+//****************************
+
+//****** Creates a dropdown box which allows the user to change the colour style of the page ******
+    async createPalette(paletteObj) {
+        console.log("VIEW: createPalette");
+        let palette
+        let index; let styles; let callback;
+
+        palette = new PaletteView (
+            index = paletteObj.index
+          , styles = paletteObj.styles
+          , callback = this.onPaletteChangeClick.bind(this, paletteObj)
+        );
+
+        return palette
+    };
+
+
 //****** Creates an object to display the name of the current Section that the user is on ******
-    createHeading(data) {
+    async createHeading(data) {
+        console.log("VIEW: createHeading");
         const heading = this.returnActiveHeading(data)
         return new HeadingView(heading)
     };
 
 
 //****** Creates the Navigation bar and the navigation links inside it ******
-    createNavigation(object) {
+    async createNavigation(object) {
+        console.log("VIEW: createNavigation");
         let index; let title; let isActive; let callback;
         const navbar = new NavBarView();
         object.links .forEach((link, i) => {
@@ -233,7 +253,7 @@ class View {
 
 
 //****** Creates the Filter Bar, and the Filter buttons ******
-    createFilter(data) {
+    async createFilter(data) {
         console.log("VIEW: createFilter");
 
         let filter = null; // Set the element to null for the switch function
@@ -325,7 +345,7 @@ class View {
 
 
 //****** Creates the Section, which displays the main content of the page. Sections contain subObjects which are either Articles or Tiles ******
-    createSection(information) {
+    async createSection(information) {
         console.log("VIEW: createSection");
 
         const key = this.returnActiveHeading(information)

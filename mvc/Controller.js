@@ -12,8 +12,8 @@ class Controller {
 
         clearTimeout(this.searchTimeout);
 
-        this.model.bindIndexChanged(this.onIndexChanged.bind(this));
-        this.view.bindIndexChange(this.handleIndexChange.bind(this));
+        this.model.bindPaletteChanged(this.onPaletteChanged.bind(this));
+        this.view.bindPaletteChange(this.handlePaletteChange.bind(this));
 
         this.model.bindArticleFiltered(this.onArticleFiltered.bind(this));
         this.view.bindArticleFilter(this.handleArticleFilter.bind(this));
@@ -21,13 +21,18 @@ class Controller {
         this.model.bindTileFiltered(this.onTileFiltered.bind(this));
         this.view.bindTileFilter(this.handleTileFilter.bind(this));
 
+        this.model.bindIndexChanged(this.onIndexChanged.bind(this));
+        this.view.bindIndexChange(this.handleIndexChange.bind(this));
+
         // Manually activate so the app displays the first section
         this.handleIndexChange(0);
 
     };
 
-    onIndexChanged(modelData) {
-        console.log("CONTROLLER: onIndexChanged")
+
+//****** On Change ******
+    onPaletteChanged(modelData) {
+        console.log("CONTROLLER: onPaletteChanged")
         this.view.commenceRender(modelData);
     };
 
@@ -39,6 +44,28 @@ class Controller {
     onTileFiltered(modelData) {
         console.log("CONTROLLER: onTileFiltered")
         this.view.commenceRender(modelData);
+    };
+
+    onIndexChanged(modelData) {
+        console.log("CONTROLLER: onIndexChanged")
+        this.view.commenceRender(modelData);
+    };
+
+
+//****** Handle Change ******
+    handlePaletteChange(style) {
+        console.log("CONTROLLER: handlePaletteChange")
+        this.model.changeColour(style)
+    };
+
+    handleArticleFilter(subObject) {
+        console.log("CONTROLLER: handleArticleFilter")
+        this.model.filterStateArticles(subObject)
+    };
+
+    handleTileFilter(subObject) {
+        console.log("CONTROLLER: handleTileFilter")
+        this.model.filterStateTiles(subObject)
     };
 
     handleIndexChange(index) {
@@ -64,17 +91,6 @@ class Controller {
         this.model.changeIndex(this.indexView);
     };
 
-    handleArticleFilter(subObject) {
-        console.log("CONTROLLER: handleArticleFilter")
-        this.model.filterStateArticles(subObject)
-    };
-
-    
-    handleTileFilter(subObject) {
-        console.log("CONTROLLER: handleTileFilter")
-        this.model.filterStateTiles(subObject)
-    };
-
-
 };
+
 export default Controller

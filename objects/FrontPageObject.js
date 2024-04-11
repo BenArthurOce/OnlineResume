@@ -11,10 +11,13 @@ import {IntroductionSectionObject, EducationSectionObject, SkillSectionObject, E
 import {IntroductionArticleObject, SkillArticleObject, EducationArticleObject} from "./ArticleObject.js"
 import {ExperienceTileObject, PortfolioTileObject} from "./TileObject.js"
 
+import PaletteObject from './PaletteObject.js';
+
 
 class FrontPageObject {
 
     #dictionary;            // Entire class that holds the dictionary of resume data. Can be called by using the method "dict()"
+    #paletteObject;         // Reads colours.css and returns a list of selectable styles
     #sectionKeys;           // [Description Required]
     #navigationTitles;      // [Description Required]
     #navigationBar;         // The NavBarObject()
@@ -23,8 +26,10 @@ class FrontPageObject {
     #searchTimeout;         // [Description Required]
     #index;                 // [Description Required]
 
+
     constructor() {
         this.#dictionary        = new Dictionary();
+        this.#paletteObject     = null
         this.#sectionKeys       = ['About', 'Skills', 'Education', 'Experience', 'Portfolio'];
         this.#navigationTitles  = ['About Me', 'Skills', 'Education', 'Experience', 'Portfolio'];
         this.#navigationBar     = null
@@ -32,9 +37,13 @@ class FrontPageObject {
         this.#allSections       = null;
         this.#searchTimeout     = null;
         this.#index             = 0;
+        clearTimeout(null)
     };
     get navigation() {
         return this.#navigationBar;
+    };
+    get palette() {
+        return this.#paletteObject;
     };
     get filters() {
         return this.#allFilterBars;
@@ -57,6 +66,14 @@ class FrontPageObject {
         return this.#dictionary.get(key);
     };
 
+    async getPalette() {
+        return this.#paletteObject;
+    };
+
+    async getNavigation() {
+        return this.#navigationBar;
+    };
+
     returnSingleFilterBar(i) {
         return this.#allFilterBars[i];
     };
@@ -76,7 +93,6 @@ class FrontPageObject {
     };
 
     returnEducationTypes() {
-        // return new Set(this.frontpage.sections[2].data.flatMap(education => education.tags));
         return Array.from(new Set(this.dict("education").flatMap(education => education.tags)));
     };
 
@@ -89,15 +105,16 @@ class FrontPageObject {
     };
 
 
-
 //****** Starts the class ******
 //****** Transforms the JSON file into a dictionary class, creates all the resume website objects that are used in Model() ******
     async init() {
+        console.log("FRONTPAGE:   init");
         await this.initDictionary();
         clearTimeout(this.#searchTimeout);
-        this.#navigationBar = this.createNavigationBar();       // Creates the Navigation Bar
-        this.#allSections = this.createSectionObjects();        // Creates the main content objects - a Section()
-        this.#allFilterBars = this.createFilterBarObjects();    // Creates the filter bar that is paired with each Section()
+        this.#paletteObject = await this.createPaletteObject();       // Creates the Colour Palette
+        this.#navigationBar = await this.createNavigationBar();       // Creates the Navigation Bar
+        this.#allSections   = await this.createSectionObjects();      // Creates the main content objects - a Section()
+        this.#allFilterBars = await this.createFilterBarObjects();    // Creates the filter bar that is paired with each Section()
 
         //Using information in the SectionObject() class, run switch functions that allow the filterbars and subobjects of that SectionObject() to be populated
         this.#allSections.forEach((section) => {
@@ -108,6 +125,7 @@ class FrontPageObject {
 
 //****** Creates and populates the Dictionary attribute in this class ******
     async initDictionary() {
+        console.log("FRONTPAGE:   initDictionary");
         const filepath = './data/ResumeData.json';
         const jsonData = await this.readJSONFile(filepath);
         Object.entries(jsonData).forEach(([key, value]) => this.#dictionary.set(key, value));
@@ -115,6 +133,7 @@ class FrontPageObject {
     };    
 
     async readJSONFile(filePath) {
+        console.log("FRONTPAGE:   readJSONFile");
         const jsonReader = new JSONReader(filePath);
         await jsonReader.readJSONSync();
         return jsonReader.getData();
@@ -122,18 +141,33 @@ class FrontPageObject {
 
 
 //****** Creates the Navigation Bar and the links inside it ******
-    createNavigationBar() {
+    async createPaletteObject() {
+        console.log("FRONTPAGE:   createPaletteObject");
+        const palette = new PaletteObject();
+        await palette.init()
+        return palette;
+    };
+
+
+//****** Creates the Navigation Bar and the links inside it ******
+    async createNavigationBar() {
+        console.log("FRONTPAGE:   createNavigationBar");
         let index; let title; let isActive;
         const navbar = new NavBarObject();
         this.#navigationTitles.forEach((heading, i) => {
-            navbar.appendLink(new NavLinkObject(index=i, title=heading, isActive=false))
+            navbar.appendLink(new NavLinkObject(
+                              index=i
+                            , title=heading
+                            , isActive=false
+                        ))
         });
         return navbar;
     };
 
 
 //****** Creates the Section() objects and added to class ******
-    createSectionObjects() {
+    async createSectionObjects() {
+        console.log("FRONTPAGE:   createSectionObjects");
         let index = null
         return [
               new IntroductionSectionObject(index = 0)
@@ -145,7 +179,8 @@ class FrontPageObject {
     };
 
 //****** Creates the FilterBar() Objects ******
-    createFilterBarObjects() {
+    async createFilterBarObjects() {
+        console.log("FRONTPAGE:   createFilterBarObjects");
         let index = null
         return [
               new IntroductionFilterBarObject(index = 0)
@@ -157,7 +192,8 @@ class FrontPageObject {
     };
 
 //****** Create Articles and Tiles for the subobjects ******
-    prepareFilterButtonObjects(key) {
+    async prepareFilterButtonObjects(key) {
+        console.log("FRONTPAGE:   prepareFilterButtonObjects");
         //console.log(`func = ${"prepareFilterButtonObjects"} ||  key = ${key}`);
         let filter = null; // Set the element to null for the switch function
         let keywords = null
@@ -252,7 +288,8 @@ class FrontPageObject {
 
 
 //****** Create Articles and Tiles (SubObjects) for the Sections ******
-    prepareSectionSubObjects(key) {
+    async prepareSectionSubObjects(key) {
+        console.log("FRONTPAGE:   prepareSectionSubObjects");
         //console.log(`func = ${"prepareSectionSubObjects"} ||  key = ${key}`);
 
         let section = null; // Set the element to null for the switch function
@@ -309,7 +346,12 @@ class FrontPageObject {
                 //console.log("-----------------EXPERIENCE-----------------")
                 section = this.returnSingleSection(3);
                 this.dict("experience").forEach((job, i) => {
-                    section.appendSubObject(new ExperienceTileObject(index=i, title="placehold", data=job, isActive=true));
+                    section.appendSubObject(new ExperienceTileObject(
+                                              index = i
+                                            , title = "placehold"
+                                            , data = job
+                                            , isActive = true
+                                        ));
                 });
                 break;
 
@@ -318,7 +360,12 @@ class FrontPageObject {
                 //console.log("-----------------PORTFOLIO-----------------")
                 section = this.returnSingleSection(4);
                 this.dict("portfolio").forEach((project, i) => {
-                    section.appendSubObject(new PortfolioTileObject(index=i, title="placehold", data=project, isActive=true));
+                    section.appendSubObject(new PortfolioTileObject(
+                                              index = i
+                                            , title = "placehold"
+                                            , data = project
+                                            , isActive = true
+                                        ));
                 });
                 break;
                 

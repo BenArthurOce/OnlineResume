@@ -55,7 +55,9 @@ class Model {
                                     }
 
             , "state" :            {
-                                         "navigationBar" :      this.frontpage.navigation
+                                         "palette" :            await this.frontpage.getPalette()
+                                        ,"colourStyle" :        null
+                                        ,"navigationBar" :      await this.frontpage.getNavigation()
                                         ,"heading" :            null
                                         ,"filterBar" :          null
                                         ,"filterButtons" :      null
@@ -65,12 +67,71 @@ class Model {
 
                                     }
         };
-
     };
+
+
 
     returnSingleNavLink(index) {
         return this.data["state"]["navigationBar"][index]
     };
+
+    // returnColourStyle() {
+    //     const myPalette = this.data['state']['palette']
+    //     throw new Error ("stop code")
+    // };
+
+
+//****** Model Adjustments ******
+    changeColour(colour) {
+        console.log("MODEL: changeColour")
+
+        const paletteObj = this.data['state']['palette']
+        paletteObj.updateIndex(colour)
+
+        this._commitPaletteChange(this.data)
+    };
+
+    filterStateArticles(object) {
+        console.log("MODEL: filterStateArticles")
+
+        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
+        this.data['state']['subObjects'].map(button => button.toggleOff())
+
+        const index = object.index
+
+        this.data['state']['filterBar'].buttons[index].isActive = true
+        this.data['state']['subObjects'][index].isActive = true
+
+        this._commitSubObjectActive(this.data);
+    };
+    
+
+    filterStateTiles(object) {
+        console.log("MODEL: filterStateTiles")
+
+        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
+        this.data['state']['subObjects'].map(button => button.toggleOff())
+
+        const title = object.title  // This is what the tiles will be filtered on
+
+        // If "All" is picked, then reveal all tiles
+        if (object.title === "All") {
+            this.data['state']['subObjects'].map(button => button.toggleOn())
+        }
+        else {
+            this.data['state']['subObjects'].forEach((tile, i) => {
+                // console.log(i)
+                if (tile.tags.includes(title)) {
+                    // console.log("yes");
+                    tile.toggleOn();
+                } else {
+                    // console.log("no");
+                }
+            });
+        }
+        this._commitSubObjectActive(this.data);
+    };
+
 
 
     // This function is called by the Controller() handler: handleChangeIndex
@@ -99,8 +160,6 @@ class Model {
         this.data['state']['subObjects']       = this.data.sectionSubObjs[sectionName];
         this.data['state']['filterTags']       = this.data.filterTags[sectionName];
 
-
-
         this.data['state']['navigationBar'].links.map(link => link.toggleOff())
         this.data['state']['navigationBar'].links[index].toggleOn()
 
@@ -108,49 +167,16 @@ class Model {
         this._commitIndex(this.data);
     };
 
-
-    filterStateArticles(object) {
-        console.log("MODEL: filterStateArticles")
-
-        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
-        this.data['state']['subObjects'].map(button => button.toggleOff())
-
-        const index = object.index
-
-        this.data['state']['filterBar'].buttons[index].isActive = true
-        this.data['state']['subObjects'][index].isActive = true
-
-        this._commitSubObjectActive(this.data);
-
+//****** Model Binding ******
+    bindPaletteChanged(callback) {
+        console.log("MODEL: bindPaletteChanged")
+        this.onPaletteChanged = callback
     };
 
-    filterStateTiles(object) {
-        console.log("MODEL: filterStateTiles")
-
-        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
-        this.data['state']['subObjects'].map(button => button.toggleOff())
-
-        const title = object.title  // This is what the tiles will be filtered on
-
-        // If "All" is picked, then reveal all tiles
-        if (object.title === "All") {
-            this.data['state']['subObjects'].map(button => button.toggleOn())
-        }
-        else {
-            this.data['state']['subObjects'].forEach((tile, i) => {
-                // console.log(i)
-                if (tile.tags.includes(title)) {
-                    // console.log("yes");
-                    tile.toggleOn();
-                } else {
-                    // console.log("no");
-                }
-            });
-        }
-
-        this._commitSubObjectActive(this.data);
+    bindIndexChanged(callback) {
+        console.log("MODEL: bindIndexChanged")
+        this.onIndexChanged = callback;
     };
-
 
     bindArticleFiltered(callback) {
         console.log("MODEL: bindArticleFiltered")
@@ -162,22 +188,22 @@ class Model {
         this.onActiveSubObjectChanged = callback
     };
 
+
+//****** Model Commits ******
+    _commitPaletteChange(data) {
+        console.log("MODEL: _commitPaletteChange")
+        this.onPaletteChanged(data);        
+    };
+
     _commitSubObjectActive(data) {
         console.log("MODEL: _commitSubObjectActive")
         this.onActiveSubObjectChanged(data);        
-    }
+    };
 
     _commitIndex(data) {
         console.log("MODEL: _commitIndex")
         this.onIndexChanged(data);
     };
-
-
-    bindIndexChanged(callback) {
-        console.log("MODEL: bindIndexChanged")
-        this.onIndexChanged = callback;
-    };
-
 };
 
 export default Model;
