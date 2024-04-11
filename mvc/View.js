@@ -237,9 +237,12 @@ class View {
 
 //****** Creates the Navigation bar and the navigation links inside it ******
     async createNavigation(object) {
+        // displayHeading
+        console.log(object)
         console.log("VIEW: createNavigation");
+        let displayHeading;
         let index; let title; let isActive; let callback;
-        const navbar = new NavBarView();
+        const navbar = new NavBarView(displayHeading = object.displayHeading);
         object.links .forEach((link, i) => {
             navbar.appendLink(new NavLinkView(
                                       index = link.index

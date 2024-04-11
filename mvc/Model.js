@@ -163,6 +163,8 @@ class Model {
         this.data['state']['navigationBar'].links.map(link => link.toggleOff())
         this.data['state']['navigationBar'].links[index].toggleOn()
 
+        this.data['state']['navigationBar'].displayHeading = capitalizeFirstLetter(sectionName);
+
     
         this._commitIndex(this.data);
     };

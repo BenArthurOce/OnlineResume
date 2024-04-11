@@ -6,12 +6,14 @@ class NavBarObject {
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
     #links;                         //  Contains the NavLinkObjects
+    #displayHeading;                //  For mobile, the current active section name
     #isActive;                      //  true = is supposed to be shown to user, false = meant to be invis
     constructor() {
         this.#className = "Navigation";
         this.#classType = "Bar";
         this.#mvcComponent = "Model";
         this.#links = [];
+        this.#displayHeading = null;
         this.#isActive = false;
         this.#id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
     };
@@ -35,6 +37,12 @@ class NavBarObject {
     };
     get links() {
         return this.#links;
+    };
+    get displayHeading() {
+        return this.#displayHeading;
+    };
+    set displayHeading(value) {
+        this.#displayHeading = value;
     };
     get isActive() {
         return this.#isActive;
