@@ -18,9 +18,10 @@ class Model {
 
 
         this.data = {
-              "index" :             -1
-            , "count" :             -1
-            , "headings" :          []
+              "count" :             5
+            , "headings" :          ["Introduction", "Skills", "Education" , "Experience", "Portfolio"]
+            , "palette"  :          await this.frontpage.getPalette()
+            , "navigationBar" :     await this.frontpage.getNavigation()
 
             , "filterBars" :        {
                                         "introduction" :    this.frontpage.returnSingleFilterBar(0)
@@ -53,20 +54,20 @@ class Model {
                                         ,"experience" :     this.frontpage.returnExperienceTypes()
                                         ,"portfolio" :      this.frontpage.returnPortfolioTypes()
                                     }
-
-            , "state" :            {
-                                         "palette" :            await this.frontpage.getPalette()
-                                        ,"colourStyle" :        null
-                                        ,"navigationBar" :      await this.frontpage.getNavigation()
-                                        ,"heading" :            null
-                                        ,"filterBar" :          null
-                                        ,"filterButtons" :      null
-                                        ,"section" :            null
-                                        ,"subObjects" :         null
-                                        ,"filterTags" :         null
-
-                                    }
         };
+
+        this.state = {
+                 "index" :              0
+                ,"palette" :            this.frontpage.getPalette()
+                ,"colourStyle" :        null
+                ,"navigationBar" :      this.frontpage.getNavigation()
+                ,"heading" :            null
+                ,"filterBar" :          null
+                ,"filterButtons" :      null
+                ,"section" :            null
+                ,"subObjects" :         null
+                ,"filterTags" :         null      
+        }
     };
 
 
@@ -75,98 +76,77 @@ class Model {
         return this.data["state"]["navigationBar"][index]
     };
 
-    // returnColourStyle() {
-    //     const myPalette = this.data['state']['palette']
-    //     throw new Error ("stop code")
-    // };
-
 
 //****** Model Adjustments ******
     changeColour(colour) {
         console.log("MODEL: changeColour")
 
-        const paletteObj = this.data['state']['palette']
-        paletteObj.updateIndex(colour)
-
-        this._commitPaletteChange(this.data)
+       this.state['palette'].updateIndex(colour)
+        this._commitPaletteChange(this.state)
     };
 
-    filterStateArticles(object) {
+
+    filterStateArticles(filterButton) {
         console.log("MODEL: filterStateArticles")
 
-        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
-        this.data['state']['subObjects'].map(button => button.toggleOff())
+        // Remove the "activated" class from all the FilterButtons and Tile Objects
+       this.state['filterBar'].buttons.map(button => button.toggleOff())
+       this.state['subObjects'].map(button => button.toggleOff())
 
-        const index = object.index
+        // Obtain the index order of the FilterButton
+        const index = filterButton.index
 
-        this.data['state']['filterBar'].buttons[index].isActive = true
-        this.data['state']['subObjects'][index].isActive = true
+        // Using that Index number, toggle the matching FilterButton and Article object to be on
+       this.state['filterBar'].buttons[index].isActive = true
+       this.state['subObjects'][index].isActive = true
 
-        this._commitSubObjectActive(this.data);
+        this._commitSubObjectActive(this.state);
     };
     
 
-    filterStateTiles(object) {
+    filterStateTiles(filterButton) {
         console.log("MODEL: filterStateTiles")
 
-        this.data['state']['filterBar'].buttons.map(button => button.toggleOff())
-        this.data['state']['subObjects'].map(button => button.toggleOff())
+        // Remove the "activated" class from all the FilterButtons and Tile Objects
+       this.state['filterBar'].buttons.map(button => button.toggleOff())
+       this.state['subObjects'].map(button => button.toggleOff())
 
-        const title = object.title  // This is what the tiles will be filtered on
-
-        // If "All" is picked, then reveal all tiles
-        if (object.title === "All") {
-            this.data['state']['subObjects'].map(button => button.toggleOn())
+        // If FilterButton: "All" is picked, then reveal all tiles
+        if (filterButton.title === "All") {
+           this.state['subObjects'].map(button => button.toggleOn())
         }
         else {
-            this.data['state']['subObjects'].forEach((tile, i) => {
-                // console.log(i)
-                if (tile.tags.includes(title)) {
-                    // console.log("yes");
-                    tile.toggleOn();
-                } else {
-                    // console.log("no");
-                }
-            });
+            // If a Tile object has a tag that matches the "title" of the FilterButton, toggle that Tile on
+           this.state['subObjects'].map(tile => tile.tags.includes(filterButton.title) ? tile.toggleOn() : tile.toggleOff())
         }
-        this._commitSubObjectActive(this.data);
+        this._commitSubObjectActive(this.state);
     };
-
 
 
     // This function is called by the Controller() handler: handleChangeIndex
     // Controller: handleChangeIndex is called by the View: bindChangeIndex
     changeIndex(index) {
         console.log("MODEL: changeIndex")
-        
-        const capitalizeFirstLetter = (input) => input.charAt(0).toUpperCase() + input.slice(1);
 
-        // Make array of headers
-        // console.log("---setting header array and count----")
-        const headerArray = Object.keys(this.data.sections)
-        this.data['index'] = index;
-        this.data['headings'] = headerArray.map(header => capitalizeFirstLetter(header))
-        this.data['count'] = headerArray.length;
+        const key = this.data["headings"][index].toLowerCase();
 
+        this.state["index"]             = index;
+        this.state["palette"]           = this.data["palette"];
+        this.state["colourStyle"]       = null;
+        this.state["navigationBar"]     = this.data["navigationBar"];
+        this.state["heading"]           = this.data["headings"][index];
+        this.state["filterBar"]         = this.data["filterBars"][key];
+        this.state["filterButtons"]     = this.data["filterTags"][key];
+        this.state["section"]           = this.data["sections"][key];
+        this.state["subObjects"]        = this.data["sectionSubObjs"][key];
+        this.state["filterTags"]        = this.data["filterTags"][key];
 
-        // Set state data depending on index (this is what the model will read)
-        // console.log("---setting state data----")
-        const sectionName = Object.keys(this.data.sections)[index];
+        // Specific to Navigation Bar
+        this.state["navigationBar"].displayHeading = this.state["heading"] 
+        this.state['navigationBar'].links.map(link => link.toggleOff())
+        this.state['navigationBar'].links[index].toggleOn()
 
-        this.data['state']['heading']          = capitalizeFirstLetter(sectionName);
-        this.data['state']['filterBar']        = this.data.filterBars[sectionName];
-        this.data['state']['filterButtons']    = this.data.filterTags[sectionName];
-        this.data['state']['section']          = this.data.sections[sectionName];
-        this.data['state']['subObjects']       = this.data.sectionSubObjs[sectionName];
-        this.data['state']['filterTags']       = this.data.filterTags[sectionName];
-
-        this.data['state']['navigationBar'].links.map(link => link.toggleOff())
-        this.data['state']['navigationBar'].links[index].toggleOn()
-
-        this.data['state']['navigationBar'].displayHeading = capitalizeFirstLetter(sectionName);
-
-    
-        this._commitIndex(this.data);
+        this._commitIndex(this.state);
     };
 
 //****** Model Binding ******

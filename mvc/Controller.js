@@ -68,28 +68,31 @@ class Controller {
         this.model.filterStateTiles(subObject)
     };
 
-    handleIndexChange(index) {
+    handleIndexChange(input) {
         console.log("CONTROLLER: handleIndexChange");
-        const currentInx = this.model.data.index;
+    
+        const oldIndex = this.model.state.index;
         const numSections = this.model.data.count;
-
-        if (index === "-1") {
-            let a = currentInx;
-            let b = (a - 1 + numSections) % numSections;
-            this.indexView = b;
-            console.log("VIEW: decrementActiveNumber");
-        } else if (index === "+1") {
-            let a = currentInx;
-            let b = (a + 1 + numSections) % numSections;
-            this.indexView = b;
-            console.log("VIEW: incrementActiveNumber");
+        let newIndex;
+    
+        if (input === "-1") {
+            newIndex = oldIndex - 1;
+        } else if (input === "+1") {
+            newIndex = oldIndex + 1;
+        } else {
+            newIndex = parseInt(input); // Convert input to integer if it's not already
         }
-        else {
-            this.indexView = index;
+    
+        // Handle cycling of index if it goes beyond the upper or lower bounds
+        if (newIndex < 0) {
+            newIndex = numSections - 1; // Wrap around to the last index
+        } else if (newIndex >= numSections) {
+            newIndex = 0; // Wrap around to the first index
         }
 
-        this.model.changeIndex(this.indexView);
+        this.model.changeIndex(newIndex);
     };
+
 
 };
 

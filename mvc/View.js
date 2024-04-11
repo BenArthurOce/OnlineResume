@@ -21,15 +21,15 @@ class View {
     };
 
     returnActiveHeading(data) {
-        return data["state"]["heading"];
+        return data["heading"];
     };
 
     returnActiveFilterBar(data) {
-        return data["state"]["filterBar"];
+        return data["filterBar"];
     };
 
     returnActiveFilterButton(data) {
-        return data["state"]["filterButtons"];
+        return data["filterButtons"];
     };
 
     returnActiveSection(data) {
@@ -37,11 +37,11 @@ class View {
     };
 
     returnActiveSubObjects(data) {
-        return data["state"]["subObjects"];
+        return data["subObjects"];
     };
 
     returnActiveFilterTags(data) {
-        return Array.from(data["state"]["filterTags"]);
+        return Array.from(data["filterTags"]);
     };
 
 
@@ -67,12 +67,12 @@ class View {
         //  (1 of 5)
         //  Palette
         //
-        this.palette = await this.createPalette(data["state"].palette);
+        this.palette = await this.createPalette(data.palette);
 
         //  (2 of 5)
         //  Navigation
         //
-        this.navigationBar = await this.createNavigation(data["state"].navigationBar)
+        this.navigationBar = await this.createNavigation(data.navigationBar)
 
         //  (3 of 5)
         //  Title
@@ -82,6 +82,7 @@ class View {
         //  (4 of 5)
         //  Filter
         //
+        // console.log(data)
         this.filter = await this.createFilter(data);
 
         //  (5 of 5)
@@ -237,8 +238,6 @@ class View {
 
 //****** Creates the Navigation bar and the navigation links inside it ******
     async createNavigation(object) {
-        // displayHeading
-        console.log(object)
         console.log("VIEW: createNavigation");
         let displayHeading;
         let index; let title; let isActive; let callback;
@@ -263,9 +262,6 @@ class View {
         const key = this.returnActiveHeading(data)
         const activeBar = this.returnActiveFilterBar(data)
         let index; let title; let isActive; let callback;
-
-
-        index, title, isActive, callback
 
         switch (key) {
             case "Introduction":

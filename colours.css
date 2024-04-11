@@ -64,16 +64,6 @@
     --style-black: black;
 }
 
-/* "Forest Style Two" */
-:root[data-style="forest-two"] {
-    --style-shade1: #EDF5E1;
-    --style-shade2: #8EE4AF;
-    --style-shade3: #5CDB95;
-    --style-shade4: #379683;
-    --style-shade5: #063f77;
-    --style-shade6: #042e58;
-    --style-black: black;
-}
 
 /* Blue Refreshing */
 :root[data-style="blue-refreshing"] {
