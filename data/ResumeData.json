@@ -278,11 +278,10 @@
         ,"projectTags":      ["UserInterface", "Web", "Logic", "DataSets", "Finance"]
         ,"summarySmall":     "React based tax calculator with self made JSON data"
         ,"summaryLarge":     "React app that calls a self created JSON file containing ATO tax data, and then calculates the tax"
-        ,"projectUrl":       "https://github.com/BenArthurOce/"
+        ,"projectUrl":       "https://github.com/BenArthurOce/ReactTaxCalcPresentation"
         ,"projectImages":    [
-                                 "imgportfolios\\PlaceHolderImage.png"
-                                ,"imgportfolios\\PlaceHolderImage.png"
-                                ,"imgportfolios\\PlaceHolderImage.png"
+                                 "imgPortfolios\\slideshowReactTax\\ReactTax01.png"
+                                ,"imgPortfolios\\slideshowReactTax\\ReactTax01.png"
                             ]
     },
     {
@@ -291,7 +290,7 @@
         ,"projectTags":      ["Web", "DataSets"]
         ,"summarySmall":     "This Website!"
         ,"summaryLarge":     "Website that reads from an JSON file and imports into a HTML page using Javascript. Hosted using GoDaddy. First Version used XML to hold resume data."
-        ,"projectUrl":       "https://github.com/BenArthurOce/"
+        ,"projectUrl":       "https://github.com/BenArthurOce/OnlineResume"
         ,"projectImages":     [
                                  "imgportfolios\\slideshowWebsite\\ResumeWebsite01.png"
                                 ,"imgportfolios\\slideshowWebsite\\ResumeWebsite02.png"
@@ -321,13 +320,11 @@
        ,"projectTags":     ["Web", "Logic", "Games"]
        ,"summarySmall":    "Restarted Python Chess UI in Javascript framework."
        ,"summaryLarge":    "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening."
-       ,"projectUrl":      "https://github.com/BenArthurOce/??"
+       ,"projectUrl":      "https://github.com/BenArthurOce/ChessJavascript"
        ,"projectImages":   [
-                                 "imgportfolios\\PlaceHolderImage.png"
-                                ,"imgportfolios\\PlaceHolderImage.png"
-                                ,"imgportfolios\\PlaceHolderImage.png"
-                                ,"imgportfolios\\PlaceHolderImage.png"
-                                ,"imgportfolios\\PlaceHolderImage.png"
+                                 "imgPortfolios\\slideshowChessJs\\ChessJavascript01.png"
+                                ,"imgPortfolios\\slideshowChessJs\\ChessJavascript02.png"
+                                ,"imgPortfolios\\slideshowChessJs\\ChessJavascript03.png"
                            ]
     },
     {
@@ -336,7 +333,7 @@
         ,"projectTags":     ["Logic", "Games", "DataSets"]
         ,"summarySmall":    "Python based UI that processes chess games and openings"
         ,"summaryLarge":    "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening."
-        ,"projectUrl":      "https://github.com/BenArthurOce/"
+        ,"projectUrl":      "https://github.com/BenArthurOce/-ChessPythonTkinter"
         ,"projectImages":   [
                                  "imgportfolios\\slideshowChess\\Chess01.png"
                                 ,"imgportfolios\\slideshowChess\\Chess02.png"

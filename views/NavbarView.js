@@ -82,17 +82,23 @@ class NavBarView {
         return this.links[index];
     };
 
+
 //****** Prepares the Navigation bar HTML element ******
     generateElement() {
         const newElement = document.createElement('nav');
         newElement.innerHTML = `
-            <h1 class="navbar-title for-mobile">${this.displayHeading}</h1>
-            <div class="container for-navbar-links">
-
+            <div class="for-pc">
+                <div class="container">
+                </div>
             </div>
-            <a href="#" class="navbar-icon for-mobile">
-                <i class="fa fa-bars"></i>
-            </a>
+
+            <div class="for-mobile">
+                <h1 class="navbar-title">${this.displayHeading}</h1>
+
+                <a href="#" class="navbar-icon">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
          `;
         return newElement.cloneNode(true);
     };
@@ -101,7 +107,7 @@ class NavBarView {
 //****** Adds a Navigation link object to this class. Appends the link element to the navigation bar element ******
     appendLink(navLink) {
         this.links.push(navLink)
-        const elToAppend = this.element.querySelector(`.container.for-navbar-links`)
+        const elToAppend = this.element.querySelector(`.container`)
         elToAppend.appendChild(navLink.element)
     };
 };

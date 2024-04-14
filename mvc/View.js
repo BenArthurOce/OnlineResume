@@ -90,25 +90,6 @@ class View {
         //
         this.section = await this.createSection(data);
 
-        // Tile Event listeners for overlay
-        if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
-            this.section.subObjects.forEach((subObject, i) => {
-
-                subObject.element.addEventListener("click", (event) => {
-
-                    if (this.section.classType === "Experience") {
-                        const newOverlay = new ExperienceOverlayView(0, subObject)
-                        this.app.append(newOverlay.element)
-                    };
-
-                    if (this.section.classType === "Portfolio") {
-                        const newOverlay = new PortfolioOverlayView(0, subObject)
-                        this.app.append(newOverlay.element)
-                    };
-                });
-            });
-        }
-
         //
         //  Render
         //
@@ -139,6 +120,25 @@ class View {
                 button.callback()
             });
         });
+
+        //
+        //  Bind Tile Clicks
+        //
+        if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
+            this.section.subObjects.forEach((subObject, i) => {
+
+                subObject.element.addEventListener("click", (event) => {
+
+                    if (this.section.classType === "Experience") {
+                        subObject.callback()
+                    };
+
+                    if (this.section.classType === "Portfolio") {
+                        subObject.callback()
+                    };
+                });
+            });
+        }
 
         //
         //  Complete
@@ -175,6 +175,33 @@ class View {
     onNavigationButtonClick(buttonClicked) {
         // console.log("VIEW: onNavigationButtonClick");
         this.handleIndexChange(buttonClicked.index)
+    };
+
+
+//****** View() event that is the TileView() callback function. Triggers when the object element is clicked ******
+    onExperienceTileClick(tileClicked) {
+        console.log("VIEW: onExperienceTileClick");
+        let index; let data; let isActive;
+
+        const newOverlay = new ExperienceOverlayView(
+              index = tileClicked.index
+            , data = tileClicked.data
+            , isActive = true
+        );
+        this.app.append(newOverlay.element)
+    };
+
+//****** View() event that is the TileView() callback function. Triggers when the object element is clicked ******
+    onPortfolioTileClick(tileClicked) {
+        console.log("VIEW: onPortfolioTileClick");
+        let index; let data; let isActive;
+
+        const newOverlay = new PortfolioOverlayView(
+              index = tileClicked.index
+            , data = tileClicked.data
+            , isActive = true
+        );
+        this.app.append(newOverlay.element)
     };
 
 
@@ -351,7 +378,7 @@ class View {
         const activeSubObjects = this.returnActiveSubObjects(information);
 
         let section = null; // Set the element to null for the switch function
-        let index; let title; let data; let isActive;
+        let index; let title; let data; let isActive; let callback
 
         switch (key) {
             case "Introduction":
@@ -403,10 +430,11 @@ class View {
                 section = new ExperienceSectionView(information);
                 activeSubObjects.forEach((tile, i) => {
                     section.appendSubObject(new ExperienceTileView(
-                                          index=tile.index
-                                        , title="tile.title"
-                                        , data=tile.data
-                                        , isActive=tile.isActive
+                                          index = tile.index
+                                        , title = "tile.title"
+                                        , data = tile.data
+                                        , isActive = tile.isActive
+                                        , callback = this.onExperienceTileClick.bind(this, tile)
                                     ));
                 });
                 break;
@@ -417,10 +445,11 @@ class View {
                 section = new PortfolioSectionView(information);
                 activeSubObjects.forEach((tile, i) => {
                     section.appendSubObject(new PortfolioTileView(
-                                          index=tile.index
-                                        , title="tile.title"
-                                        , data=tile.data
-                                        , isActive=tile.isActive
+                                          index = tile.index
+                                        , title = "tile.title"
+                                        , data = tile.data
+                                        , isActive = tile.isActive
+                                        , callback = this.onPortfolioTileClick.bind(this, tile)
                                     ));
                 });
                 break;

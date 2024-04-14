@@ -93,23 +93,22 @@ class ArticleFilterButtonView extends FilterButtonView {
     constructor(index, title, isActive, callback) {
         super(index, title, isActive, callback);
         this.classType = "Article";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
-
-    
-        if (this.isActive) {this.toggleOn()} else {this.toggleOff()}
 
         if (index === undefined|| title === undefined || isActive === undefined || callback === undefined) {
             this.printToTerminal()
             throw new Error("ArticleFilterButtonView: parameter declared is null/undefined")
         }
+
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
     };
 
 //****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <li role="button" dataParent="${this.id}" dataFilter="${this.title}" class="filter-button for-article for-mobile">${this.title}</li>
+            <li role="button" class="filter-button for-article for-mobile">${this.title}</li>
         `.trim();
         return newElement.firstElementChild
     };
@@ -121,15 +120,15 @@ class TileFilterButtonView extends FilterButtonView {
     constructor(index, title, isActive, callback) {
         super(index, title, isActive, callback);
         this.classType = "Tile";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
-
-        if (this.isActive) {this.toggleOn()} else {this.toggleOff()}
 
         if (index === undefined|| title === undefined || isActive === undefined || callback === undefined) {
             this.printToTerminal()
             throw new Error("TileFilterButtonView: parameter declared is null/undefined")
         }
+
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
     };
 
 //****** Prepares the HTML element ******
@@ -144,20 +143,20 @@ class TileFilterButtonView extends FilterButtonView {
 //****** takes the "this.title" attribute to create a tile HTML object ******
     selectTileGraphic(title) {
         const filterOptions = {
-            "All":              `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="All">All</li>`
-            ,"Government":      `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Government"><i class="sidebar-icon fa fa-building icon"></i></li>`
-            ,"Programming":     `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Programming"><i class="sidebar-icon fa fa-code icon"></i></li>`
-            ,"HelpDesk":        `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="HelpDesk"><i class="sidebar-icon fa fa-desktop icon"></i></li>`
-            ,"Accounting":      `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>`
-            ,"CustomerService": `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>`
-            ,"UserInterface":   `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>`
-            ,"Web":             `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>`
-            ,"Database":        `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>`
-            ,"Logic":           `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>`
-            ,"Games":           `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>`
-            ,"Efficiency":      `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>`
-            ,"DataSets":        `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>`
-            ,"Finance":         `<li role="button" dataParent="${this.id}" dataFilter=${this.title} class="filter-button for-tile for-pc for-mobile" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>`
+            "All":              `<li role="button" class="filter-button for-tile" title="All">All</li>`
+            ,"Government":      `<li role="button" class="filter-button for-tile" title="Government"><i class="sidebar-icon fa fa-building icon"></i></li>`
+            ,"Programming":     `<li role="button" class="filter-button for-tile" title="Programming"><i class="sidebar-icon fa fa-code icon"></i></li>`
+            ,"HelpDesk":        `<li role="button" class="filter-button for-tile" title="HelpDesk"><i class="sidebar-icon fa fa-desktop icon"></i></li>`
+            ,"Accounting":      `<li role="button" class="filter-button for-tile" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>`
+            ,"CustomerService": `<li role="button" class="filter-button for-tile" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>`
+            ,"UserInterface":   `<li role="button" class="filter-button for-tile" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>`
+            ,"Web":             `<li role="button" class="filter-button for-tile" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>`
+            ,"Database":        `<li role="button" class="filter-button for-tile" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>`
+            ,"Logic":           `<li role="button" class="filter-button for-tile" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>`
+            ,"Games":           `<li role="button" class="filter-button for-tile" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>`
+            ,"Efficiency":      `<li role="button" class="filter-button for-tile" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>`
+            ,"DataSets":        `<li role="button" class="filter-button for-tile" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>`
+            ,"Finance":         `<li role="button" class="filter-button for-tile" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>`
         };
         if (title in filterOptions) {
             return filterOptions[title];

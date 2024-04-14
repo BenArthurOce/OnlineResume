@@ -1,27 +1,25 @@
-// In each section, there are sub items that contain resume information, either ArticleObject() or TileObject()
+// Whenever a Tile() is clicked, an Overlay() will appear to give more detailed information about the job/project
 
-class ArticleObject {
+class OverlayObject {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
-    #index;                         //  Index order of Article
-    #title;                         //  Heading
+    #index;                         //  Index number of overlay. Will match with the Tile()
     #data;                          //  String displayed on screen
     #isActive;                      //  DOM element displays a different attribute if active
-    constructor(index, title, data, isActive) {
-        this.#className = "Article";
+    constructor(index, data, isActive) {
+        this.#className = "Overlay";
         this.#classType = null
         this.#mvcComponent = "Model";
         this.#id = null;
         this.#index = index;
-        this.#title = title;
         this.#data = data;
         this.#isActive = isActive;
 
-        if (index === undefined|| title === undefined || data === undefined || isActive === undefined) {
+        if (index === undefined || data === undefined || isActive === undefined) {
             this.printToTerminal()
-            throw new Error("ArticleObject: parameter declared is null/undefined")
+            throw new Error("OverlayObject: parameter declared is null/undefined")
         }
     };
     get className() {
@@ -45,9 +43,6 @@ class ArticleObject {
     get index() {
         return this.#index;
     };
-    get title() {
-        return this.#title;
-    };
     get data() {
         return this.#data;
     };
@@ -67,7 +62,6 @@ class ArticleObject {
         mvcType     = ${this.mvcComponent}
         id          = ${this.id}
         index       = ${this.index}
-        title       = ${this.title}
         data        = (See Below)
         isActive    = ${this.isActive}
         `);
@@ -86,31 +80,21 @@ class ArticleObject {
 };
 
 
-class IntroductionArticleObject extends ArticleObject {
-    constructor(index, title, data, isActive) {
-        super(index, title, data, isActive);
-        this.classType = "Introduction";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+class ExperienceOverlayObject extends OverlayObject {
+    constructor(index, data, isActive) {
+        super(index, data, isActive);
+        this.classType = "Experience";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
     };
 };
 
 
-class SkillArticleObject extends ArticleObject {
-    constructor(index, title, data, isActive) {
-        super(index, title, data, isActive);
-        this.classType = "Skill";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+class PortfolioOverlayObject extends OverlayObject {
+    constructor(index, data, isActive) {
+        super(index, data, isActive);
+        this.classType = "Portfolio";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
     };
 };
 
-
-class EducationArticleObject extends ArticleObject {
-    constructor(index, title, data, isActive) {
-        super(index, title, data, isActive);
-        this.classType = "Education";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
-    };
-};
-
-
-export {IntroductionArticleObject, SkillArticleObject, EducationArticleObject}
+export {ExperienceOverlayObject, PortfolioOverlayObject}

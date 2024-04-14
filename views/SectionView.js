@@ -62,13 +62,11 @@ class SectionView {
 //****** Command to make this Object "visible" ******
     toggleOn() {
         this.isActive = true;
-        //this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" ******
     toggleOff() {
         this.isActive = false;
-        //this.element.classList.remove("activated")
     };
 
 //****** Adds an article / tile ******
@@ -87,14 +85,14 @@ class IntroductionSectionView extends SectionView {
     constructor(index) {
         super(index);
         this.classType = "Introduction";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
+            <section id="${this.id}" class="section-display container for-section ">
                 <div id="${this.id}-article-container" class="container for-article">
                 </div>
             </section>
@@ -111,14 +109,14 @@ class SkillsSectionView extends SectionView {
     constructor(index) {
         super(index);
         this.classType = "Skills";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
+            <section id="${this.id}" class="section-display container for-section ">
                 <div id="${this.id}-article-container" class="container for-article">
                 </div>
             </section>
@@ -135,14 +133,14 @@ class EducationSectionView extends SectionView {
     constructor(index) {
         super(index);
         this.classType = "Education";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
+            <section id="${this.id}" class="section-display container for-section ">
                 <div id="${this.id}-article-container" class="container for-article">
                 </div>
             </section>
@@ -159,14 +157,14 @@ class ExperienceSectionView extends SectionView {
     constructor(index) {
         super(index);
         this.classType = "Experience";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
+            <section id="${this.id}" class="section-display container for-section ">
                 <div id="${this.id}-tile-container" class="container for-tile">
                 </div>
             </section>
@@ -183,14 +181,14 @@ class PortfolioSectionView extends SectionView {
     constructor(index) {
         super(index);
         this.classType = "Portfolio";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };
 
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section for-pc for-mobile">
+            <section id="${this.id}" class="section-display container for-section ">
                 <div id="${this.id}-tile-container" class="container for-tile">
                 </div>
             </section>

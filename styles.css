@@ -16,10 +16,6 @@
 /* -------- GENERAL CSS -------- */
 /* ----------------------------- */ 
 
-
-
-
-
 * {
     box-sizing: border-box;
     padding: 0;
@@ -74,6 +70,37 @@ ul li {
 }
 
 
+.split-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    min-height: 10%;
+    max-height: 10%;
+}
+
+  .split-container > :nth-child(1) {
+    background-color: red;
+    align-self: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .split-container > :nth-child(2) {
+    background-color: blue;
+    align-self: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+.split-container5050 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+
 /* ----------------------------- */
 /* --------- TO REVIEW --------- */
 /* ----------------------------- */
@@ -92,14 +119,16 @@ ul li {
     Row 5: Section (main)
      */
 
-    grid-template-rows: 10% 20% 20% 20% 1fr;
+     /* grid-template-rows: 10% 10% 10% 1fr; */
+    grid-template-rows: 10% 30% 20% 20% 1fr;
     height: auto;
-    min-height: 100%;
+
     margin: 0px auto;
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 3%;
     background-color: var(--body-background-color);
+    min-height: 100vh;
     max-height: 100vh;
  }
 
@@ -112,26 +141,10 @@ ul li {
  }
 
 
-/* .section-display.activated {
-    height: 100%;
-    display: grid;
-
-    padding-top: 1%;
-} */
-    /* grid-template-rows: auto auto 1fr;  */
-    /* First row for buttons, second row for sections */
-
-
-
 
 /* ----------------------------- */
 /* -------- CONTAINERS --------- */
 /* ----------------------------- */ 
-
-
-/* .container.activated {
-    display: block;
- } */
 
 section.activated {
     display: block;
@@ -166,9 +179,6 @@ section.activated {
 .container.for-section {
     display: flex
 }
-
-
-
 
 /* Specific requirements for the container that holds the jobs and portfolio tiles*/
 .container.for-tile {
@@ -243,14 +253,15 @@ article.for-overlay {
 }
 
 /* Ensures that the article heading remains at the top and visible, regardless of scrolling. */
-article > h2.for-pc {
+article > h2.for-pc,
+article > h3 {
     display: inline-block;                                  /* Make heading width the size of the content */
     min-width: 100%;                                        /* As above */
     position: sticky;                                       /* Always keep at the top of the article */
     top: 0;                                                 /* Required to keep the heading "sticky" to the top */
     margin: 0;                                              /* Stops the h2 element from moving when scrolling is performed */
     background-color: var(--article-background-color);      /* Required so the scrolling text looks to appear behind the h2 element */
-    padding-top:5%;                                        /* Gives space between the heading and the h1 */
+    padding-top: 3%;                                        /* Gives space between the heading and the h1 */
 }
 
 
@@ -284,49 +295,50 @@ article > h2.for-pc {
 }
 
 
+
+/* ----------------------------- */
+/* -- ARTICLE/TILE CONTAINERS -- */
+/* ----------------------------- */
+
+.section-display p,
+.section-display li
+{
+    font-size: calc(100% + 0.5vmin);
+}
+
 /* ----------------------------- */
 /* ------ NAVIGATION BAR ------- */
 /* ----------------------------- */  
 
+nav {
+    background-color: var(--nav-basic-background-color);    /* Ensures Background for both PC and Mobile */
+    padding-left: 2%;   /* Ensures the h1 underline element doesnt touch the edges (mobile format) */
+    padding-right: 2%;
+}
+
 /* text styles inside the navbar */
-nav a { 
+nav .nav-link {
     padding-top: 2%;
+    padding-bottom: 1%;
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
     color: var(--nav-basic-font-color);         /* Standard inactive colour of nav text */
-    font-size: calc(100% + 0.9vmin);            /* Adaptive font size of the naviation words */
+    font-size: calc(150% + 0.9vmin);            /* Adaptive font size of the naviation words */
 }
 
-nav > .container > a:hover,
-nav > .container > a.activated {
-    color: var(--nav-active-font-color);            /* Change text color on hover or click */
+nav .nav-link:hover,
+nav .nav-link.activated {
+    color: var(--nav-active-font-color);  
 }
-
 
 /* ----------------------------- */
 /* ------ FILTER BUTTONS ------- */
 /* ----------------------------- */
 
-/* The <menu> element */
-/* .menu-filter { 
-    display: block;
-    background-color: var(--filter-basic-background-color); 
-    display: none;
-    width: 100%;
-    max-width: 100%;
-} */
-
-/* .menu-filter.activated {
-    display: block;
-} */
-
 
 /* The <ul> element */
 .filter-list {
-    /* display:flex; */
-    /* flex-direction: row; */
-    /* justify-items: center; */
     background-color: var(--filter-basic-background-color); 
     width: 100%;
     max-width: 100%;
@@ -354,16 +366,10 @@ nav > .container > a.activated {
     position: relative;                         /* Added for positioning the tooltip */
 }
 
+.filter-button.for-tile:hover,
 .filter-button.activated {
     background: var(--filter-active-background-color);     
     color: var(--filter-active-font-color);
-}
-
-
-.filter-button.for-tile:hover,
-.filter-button.for-tile.activated {
-    background: var(--filter-active-background-color);     /* Style change for when filter button is either clicked or moused over */
-    color: var(--filter-active-font-color)
 }
 
 
@@ -401,8 +407,6 @@ nav > .container > a.activated {
 .tile {
     display: none;                          /* Activated tile class is starting class, which has a display of "grid" */
     grid-template-columns: 30% 1fr 1fr;     /* To set the layout of the contents of the tile */
-    /* grid-template-rows: auto 1fr;  */
-    /* grid-template-rows: 23% 23% 23% 23%;  */
 
     cursor: pointer;
     background-color: var(--tile-basic-background-color);
@@ -413,7 +417,7 @@ nav > .container > a.activated {
     padding: 10px;
     border-radius: 20px;
     box-shadow: 5px 10px;
-    /* max-height: 70%; */
+    max-height: 80%;
     /* Prevents overlapping on the grid */
 
     margin-top: 5px;
@@ -471,12 +475,20 @@ nav > .container > a.activated {
 }
 
 
-.program-icon {
+.program-iconold {
     scale: 0.7;
     width: inherit;
     height: initial;
     flex-shrink: 0;
     /* max-height: 33%; */
+}
+
+.program-icon { 
+    min-height: 4vh;
+    max-height: 4vh;
+
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 
@@ -556,11 +568,21 @@ dialog .closeBtn {
 /* First Article - Description of portfolio */
 .container.for-overlay.for-portfolio > article:nth-child(1) {
     grid-column: 1 / span 1;
+    height: 100%;
+    width: 100%;
 }
 
 /* Second Article - Slideshow images for portfolio */
 .container.for-overlay.for-portfolio > article:nth-child(2) {
     grid-column: 2 / span 1;
+    position: relative;
+    padding-left: 0%;                       /* Remove initial padding for article */
+    padding-right: 0%;                      /* Remove initial padding for article */
+    height: 100%;
+    width: 100%;
+
+    min-height: 70vh;
+    max-height: 70vh;
 }
 
 
@@ -572,6 +594,7 @@ dialog .closeBtn {
     position: initial;
 }
 
+
 /* Programming icons in the first article */
 .lang-logo {
     margin-left: 20px;
@@ -579,28 +602,19 @@ dialog .closeBtn {
     width: 50px;
 }
 
-
-.image-container {
-    position: relative;
-    max-width: 100%;
-    max-height: 100%;
-    padding: 2%;
-}
-
-.image-container > img {
+.portfolio-image {
     display: none;
     width: 100%;
     height: 100%;
     object-fit: cover;
     border: 20px solid black;
     box-sizing: border-box; 
-    overflow: hidden;
+    overflow: hidden; 
 }
 
-.image-container > img.activated {
+.portfolio-image.activated {
     display: block;
 }
-
 
 
 /* ----------------------------- */
@@ -610,52 +624,23 @@ dialog .closeBtn {
 @media (max-width: 600px) {
 
 
-    #wrapper {
+    /* #wrapper {
         padding-left: 5%;
         padding-right: 5%;
-    }
+    } */
 
+    
+    .for-pc {display: none;}                            /* Hide any elements with a "for-pc" tag */
+    .for-mobile {display: unset;}                       /* Display all elements with a "for-mobile" tag (Code may not be required */
 
-    /* Hide any elements with a "for-pc" tag */
-    .for-pc {display: none;}
-
-    /* Display all elements with a "for-mobile" tag */
-    .for-mobile {display: unset;}
-
-
-
-    /* Override display: none; for elements with both "for-pc" and "for-mobile" classes */
-    /* .for-pc.for-mobile { display: inherit } */
-
-
-    /* Default display for mobile articles needs to be none */
-    /* .article-with-text.for-mobile {display: none;} */            /* Old Code before i removed the "with list" and "with text" */
-    /* .article-with-list.for-mobile {display: none;} */            /* Old Code before i removed the "with list" and "with text" */
-
-    article.for-mobile {display: none;}
-    article.for-mobile {display: none;}
-
-    .projectSumSmall {display: none;}
-
-    .for-mobile.activated {display: initial;}
-
-    article.for-mobile {
-        box-shadow: none;
-    }
-
-    /* Overrides the previous "display: none" for the articles in regards to overlay */
-    /* .article-with-text.for-overlay {display: unset;} */      /* Old Code before i removed the "with list" and "with text" */
-    /* .article-with-list.for-overlay {display: unset;} */      /* Old Code before i removed the "with list" and "with text" */
-
-    article.for-overlay {display: unset;}  
-    article.for-overlay {display: unset;}
-
+    article {display: none;}                            /* All articles on mobile are hidden by default */
+    article.activated {display: block;}                 /* Only Activated Articles are displayed on mobile */
 
     article {
         font-size: calc(80% + 0.9vmin);
         line-height: calc(150% + 0.9vmin);
     }
-
+    
     /* ----------------------------- */
     /* -- ARTICLE/TILE CONTAINERS -- */
     /* ----------------------------- */
@@ -666,69 +651,29 @@ dialog .closeBtn {
     }
 
 
+
     /* ----------------------------- */
     /* ------ NAVIGATION BAR ------- */
     /* ----------------------------- */
 
-    /* Style the navigation menu */
-    nav {
-        min-height: 50px;
-        overflow: hidden;
-        background-color: var(--nav-basic-background-color);
-        position: relative;
-        display: flex;             /* Gives space for the hamburger icon */
-        padding-left: 2%;
+    nav > div.for-mobile {
+        display: flex;                      /* Allows the hamburger menu icon and the heading to be placed side by side */
+        position: relative;                 /* Allows the hamburger menu icon to be positioned next to the heading text */
     }
-
-
+    
+    
     /* Style the hamburger menu */
-    nav > .navbar-icon {
+    nav .navbar-icon {
         background-color: var(--nav-basic-background-color);
         display: block;
         position: absolute;
         right: 0;
         top: 0;
-    }
-
-    /* Style navigation menu links (includes menu text and the hamburger icon) */
-    nav  a {
         color: var(--nav-basic-font-color);
-        padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
-        display: block;
+        padding: 14px 16px;
     }
-
-    /* Mobile header standard display */
-    .navbar-title.for-mobile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: initial;
-    }
-   
-    /* The mobile header is only displayed when "activated". When the hamburger menu is selected, its deactivated */
-    .navbar-title.for-mobile.activated {
-        display: none;
-    }
-
-    /* The navigation links on mobile is hidden by default. Activated when hamburger icon is clicked */
-    .container.for-navbar-links {
-        display: none
-    }
-
-    /* When the "hamburger" icon is clicked, the container becomes activated and displays all links */
-    .container.for-navbar-links.activated{
-        display: inline-block;
-    }
-
-    nav > .container > a:hover {
-        color: var(--nav-active-font-color);                                /* Change text color on hover or click */
-        background-color: var(--filter-active-background-color);            /* Change text color on hover or click */
-    }
-
-
-
 
     /* ----------------------------- */
     /* ------ FILTER BUTTONS ------- */
@@ -758,12 +703,11 @@ dialog .closeBtn {
         min-height: 4vh;
     }
 
-
-
     /* ----------------------------- */
     /* ----------- TILES ----------- */
     /* ----------------------------- */
-    
+    .projectSumSmall {display: none;}
+
     .tile {
         min-width: 35vw;
         min-height: 13vh;
@@ -786,26 +730,11 @@ dialog .closeBtn {
         grid-row: 1 / span 1;
     }
 
-
     /* ----------------------------- */
     /* ----- OVERLAY - GENERAL ----- */
     /* ----------------------------- */
-
-    .for-overlay > h3 {
-        position: sticky;
-        top: 0;
-        right: 0;
-        margin: 0;
-        padding: 1%;
-        background-color: var(--article-background-color)
-    }
-
-    /* Old code before i remove "with list, with text" */
-    /* .article-with-list.for-overlay ul {
-        margin-left: 10%;
-        margin-right: 10%;
-    } */
-
+    article.for-overlay {display: unset;}           /* Removes the default "All articles are not displayed" */
+    
     article.for-overlay ul {
         margin-left: 10%;
         margin-right: 10%;
@@ -815,85 +744,33 @@ dialog .closeBtn {
         margin-left: 5px;
     }
 
+
+/* 
+    .split-container3070 {
+        display: flex;
+    }
+
+    .split-container3070 .split-left {
+        flex: 30%;
+    }
+
+    .split-container3070 .split-right {
+        flex: 70%;
+    } */
+
     /* ----------------------------- */
     /* --- OVERLAY - EXPERIENCE ---- */
     /* ----------------------------- */
 
     /* Styles specific to overlay */
-    .container.for-overlay.for-experience {
-        grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
+    /* .container.for-overlay.for-experience {
+        grid-template-columns: 24% 24% 24% 24%; 
         grid-template-rows: 20% 1fr;
-    }
-
-    /* First Article - Experience details */
-    .container.for-overlay.for-experience > article:nth-child(1) {
-    grid-column: 1 / span 4;                           /* Cover 100%% of the top row */
-    grid-row: 1 / span 1;
-}
-
-
-    /* ----------------------------- */
-    /* ---- OVERLAY - PORTFOLIO ---- */
-    /* ----------------------------- */
-
-    /* Styles specific to overlay */
-    .container.for-overlay.for-portfolio {
-        /* grid-template-columns: 30% 70%; */
-        /* grid-template-rows: auto 1fr; */
-        grid-template-columns: initial;
-        grid-template-rows: 23% 23% 23% 23%;
-    }
-
-    /* First Article - Description of portfolio */
-    .container.for-overlay.for-portfolio > article:nth-child(1) {
-        grid-column: 1 / span 1;
-        grid-row: 1 / span 1;
-    }
-
-    /* Second Article - Slideshow images for portfolio */
-    .container.for-overlay.for-portfolio > article:nth-child(2) {
-        grid-column: 1 / span 1;
-        grid-row: 2 / span 2;
-    }
-
-
-    /* Programming icons in the first article */
-    .container.for-icons.for-overlay {
-        display: inline;
-        height: initial;
-        width: initial;
-        position: initial;
-    }
-
-    /* Programming icons in the first article */
-    .lang-logo {
-        margin-left: 20px;
-        height: 50px;
-        width: 50px;
-    }
-
-
-    .image-container {
-        position: relative;
-        max-width: 100%;
-        max-height: 100%;
-        padding: 5%;
-    }
-
-    /* .image-container > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
     } */
 
-
-    .image-container.for-overlay.for-portfolio > img {
-        width: 100%;
-        height: 100%;
-        /* object-fit: cover;  */
-    }
-
-
-
-
+    /* First Article - Experience details */
+    /* .container.for-overlay.for-experience > article:nth-child(1) {
+    grid-column: 1 / span 4;                          
+    grid-row: 1 / span 1;
+} */
 }

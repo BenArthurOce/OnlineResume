@@ -54,6 +54,14 @@ class Model {
                                         ,"experience" :     this.frontpage.returnExperienceTypes()
                                         ,"portfolio" :      this.frontpage.returnPortfolioTypes()
                                     }
+
+            , "overlays" :        {
+                                         "introduction" :   null
+                                        ,"skills" :         null
+                                        ,"education" :      null
+                                        ,"experience" :     this.frontpage.returnExperienceOverlays()
+                                        ,"portfolio" :      this.frontpage.returnPortfolioOverlays()
+                                    }
         };
 
         this.state = {
@@ -66,8 +74,9 @@ class Model {
                 ,"filterButtons" :      null
                 ,"section" :            null
                 ,"subObjects" :         null
-                ,"filterTags" :         null      
-        }
+                ,"filterTags" :         null
+                ,"overlay" :            null
+        };
     };
 
 
@@ -90,15 +99,15 @@ class Model {
         console.log("MODEL: filterStateArticles")
 
         // Remove the "activated" class from all the FilterButtons and Tile Objects
-       this.state['filterBar'].buttons.map(button => button.toggleOff())
-       this.state['subObjects'].map(button => button.toggleOff())
+        this.state['filterBar'].buttons.map(button => button.toggleOff())
+        this.state['subObjects'].map(button => button.toggleOff())
 
         // Obtain the index order of the FilterButton
         const index = filterButton.index
 
         // Using that Index number, toggle the matching FilterButton and Article object to be on
-       this.state['filterBar'].buttons[index].isActive = true
-       this.state['subObjects'][index].isActive = true
+        this.state['filterBar'].buttons[index].isActive = true
+        this.state['subObjects'][index].isActive = true
 
         this._commitSubObjectActive(this.state);
     };
@@ -108,16 +117,20 @@ class Model {
         console.log("MODEL: filterStateTiles")
 
         // Remove the "activated" class from all the FilterButtons and Tile Objects
-       this.state['filterBar'].buttons.map(button => button.toggleOff())
-       this.state['subObjects'].map(button => button.toggleOff())
+        this.state['filterBar'].buttons.map(button => button.toggleOff())
+        this.state['subObjects'].map(button => button.toggleOff())
 
         // If FilterButton: "All" is picked, then reveal all tiles
         if (filterButton.title === "All") {
-           this.state['subObjects'].map(button => button.toggleOn())
+            this.state['subObjects'].map(button => button.toggleOn())
+
+            this.state['filterBar'].buttons[0].toggleOn()
         }
         else {
             // If a Tile object has a tag that matches the "title" of the FilterButton, toggle that Tile on
-           this.state['subObjects'].map(tile => tile.tags.includes(filterButton.title) ? tile.toggleOn() : tile.toggleOff())
+            this.state['subObjects'].map(tile => tile.tags.includes(filterButton.title) ? tile.toggleOn() : tile.toggleOff())
+
+            this.state['filterBar'].buttons.map(button => button.index === filterButton.index ? button.toggleOn() : button.toggleOff())
         }
         this._commitSubObjectActive(this.state);
     };

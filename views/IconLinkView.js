@@ -11,13 +11,19 @@ class IconLinkView {
     #element;                       //  HTML Element
     constructor(key, title, link) {
         this.#className = "IconLink";
-        this.#classType = null
+        this.#classType = "Icon";
         this.#mvcComponent = "View";
-        this.#id = null;
+        this.#id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.#key = key;
         this.#title = title;
         this.#link = link;
-        this.#element = this.generateElement();  
+        this.#element = this.generateElement();
+        
+        if (key === undefined|| title === undefined || link === undefined) {
+            this.printToTerminal()
+            throw new Error("IconLinkView: parameter declared is null/undefined")
+        };
+
     };
     get className() {
         return this.#className;
@@ -53,6 +59,19 @@ class IconLinkView {
         this.#element = value;
     };
 
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        id          = ${this.id}
+        key         = ${this.key}
+        title       = ${this.title}
+        link        = ${this.link}`);
+    };
+
 //****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
@@ -65,9 +84,9 @@ class IconLinkView {
 //****** takes the "this.key" attribute to create an icon HTML object ******
     selectIconGraphic(key) {
         const iconOptions = {
-            "Email":       `<a href="${this.link}" target="_blank" class="icon-link for-pc for-mobile" title="${this.title}"><i class="sidebar-icon fa fa-envelope icon"></i></a>`,
-            "LinkedIn":    `<a href="${this.link}" target="_blank" class="icon-link for-pc for-mobile" title="${this.title}"><i class="sidebar-icon fa fa-linkedin icon"></i></a>`,
-            "Github":      `<a href="${this.link}" target="_blank" class="icon-link for-pc for-mobile" title="${this.title}"><i class="sidebar-icon fa fa-github icon"></i></a>`
+            "Email":       `<a href="${this.link}" target="_blank" class="icon-link " title="${this.title}"><i class="sidebar-icon fa fa-envelope icon"></i></a>`,
+            "LinkedIn":    `<a href="${this.link}" target="_blank" class="icon-link " title="${this.title}"><i class="sidebar-icon fa fa-linkedin icon"></i></a>`,
+            "Github":      `<a href="${this.link}" target="_blank" class="icon-link " title="${this.title}"><i class="sidebar-icon fa fa-github icon"></i></a>`
         };
         
         if (key in iconOptions) {

@@ -10,7 +10,8 @@ class TileView {
     #data;                          //  Detailed information about the Job/Project
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, title, data, isActive) {
+    #callback;                      //  Function in the View() class that is ran when the element of this class is clicked
+    constructor(index, title, data, isActive, callback) {
         this.#className = "Tile";
         this.#classType = null
         this.#mvcComponent = "View";
@@ -20,8 +21,9 @@ class TileView {
         this.#data = data;
         this.#isActive = isActive;
         this.#element = null;
+        this.#callback = callback;
         
-        if (index === undefined|| title === undefined || data === undefined || isActive === undefined) {
+        if (index === undefined|| title === undefined || data === undefined || isActive === undefined || callback === undefined) {
             this.printToTerminal()
             throw new Error("TileView: parameter declared is null/undefined")
         }
@@ -66,6 +68,10 @@ class TileView {
     set element(value) {
         this.#element = value;
     };
+    get callback() {
+        return this.#callback;
+    };
+
 
 //****** Print information about the class ******
     printToTerminal() {
@@ -74,10 +80,14 @@ class TileView {
         className   = ${this.className}
         classType   = ${this.classType}
         mvcType     = ${this.mvcComponent}
-        isActive    = ${this.isActive}
+        id          = ${this.id}
         index       = ${this.index}
         title       = ${this.title}
-        data        = ${this.data}`);
+        data        = (See Below)
+        isActive    = ${this.isActive}
+        element     = ${this.element}
+        callback    = ${this.callback}
+        `);
         console.log(this.data)
     };
 
@@ -100,10 +110,10 @@ class TileView {
 //  Experience
 //
 class ExperienceTileView extends TileView {
-    constructor(index, title, data, isActive) {
-        super(index, title, data, isActive);
+    constructor(index, title, data, isActive, callback) {
+        super(index, title, data, isActive, callback);
         this.classType = "Experience";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
 
         this.company    = this.data[`company`];
         this.address    = this.data[`address`];
@@ -156,10 +166,10 @@ class ExperienceTileView extends TileView {
 //  Portfolio
 //
 class PortfolioTileView extends TileView {
-    constructor(index, title, data, isActive) {
-        super(index, title, data, isActive);
+    constructor(index, title, data, isActive, callback) {
+        super(index, title, data, isActive, callback);
         this.classType = "Portfolio";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
 
         this.projectName        = this.data[`projectName`];
         this.projectLangs       = this.data[`projectLangs`];

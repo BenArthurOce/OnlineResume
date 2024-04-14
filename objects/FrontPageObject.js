@@ -10,6 +10,7 @@ import {ArticleFilterButtonObject, TileFilterButtonObject} from "./FilterButtonO
 import {IntroductionSectionObject, EducationSectionObject, SkillSectionObject, ExperienceSectionObject, PortfolioSectionObject} from "./SectionObject.js";
 import {IntroductionArticleObject, SkillArticleObject, EducationArticleObject} from "./ArticleObject.js"
 import {ExperienceTileObject, PortfolioTileObject} from "./TileObject.js"
+import {ExperienceOverlayObject, PortfolioOverlayObject} from "./OverlayObject.js"
 
 import PaletteObject from './PaletteObject.js';
 
@@ -25,6 +26,8 @@ class FrontPageObject {
     #allSections;           // An array of all the SectionObject()
     #searchTimeout;         // [Description Required]
     #index;                 // [Description Required]
+    #overlaysExperience
+    #overlaysPortfolio
 
 
     constructor() {
@@ -37,6 +40,9 @@ class FrontPageObject {
         this.#allSections       = null;
         this.#searchTimeout     = null;
         this.#index             = 0;
+
+        this.#overlaysExperience = [];
+        this.#overlaysPortfolio = [];
         clearTimeout(null)
     };
     get navigation() {
@@ -104,6 +110,14 @@ class FrontPageObject {
         return Array.from(new Set(this.dict("portfolio").flatMap(project => project.projectTags)));
     };
 
+    returnExperienceOverlays() {
+        return this.#overlaysExperience;
+    };
+
+    returnPortfolioOverlays() {
+        return this.#overlaysPortfolio;
+    };
+
 
 //****** Starts the class ******
 //****** Transforms the JSON file into a dictionary class, creates all the resume website objects that are used in Model() ******
@@ -120,6 +134,7 @@ class FrontPageObject {
         this.#allSections.forEach((section) => {
             this.prepareFilterButtonObjects(section.classType);
             this.prepareSectionSubObjects(section.classType);
+            this.prepareOverlayObjects(section.classType)
         });
     };
 
@@ -310,9 +325,6 @@ class FrontPageObject {
                 //console.log("-----------------SKILLS-----------------")
                 info = this.dict("skills");
                 section = this.returnSingleSection(1);
-                // section.appendSubObject(new SkillArticleObject(index=0, title="Technical", data=info["technical"],  isActive=false));
-                // section.appendSubObject(new SkillArticleObject(index=1, title="Soft",      data=info["soft"],       isActive=false));
-                // section.appendSubObject(new SkillArticleObject(index=2, title="Languages", data=info["languages"],  isActive=false));
                 section.appendSubObject(new SkillArticleObject(index=0, title="Technical", data=info["technical"],  isActive=false));
                 section.appendSubObject(new SkillArticleObject(index=1, title="Languages", data=info["languages"],  isActive=false));
                 section.appendSubObject(new SkillArticleObject(index=2, title="Soft",      data=info["soft"],       isActive=false));
@@ -344,6 +356,7 @@ class FrontPageObject {
             case "Experience":
                 //console.log("----------FRONTPAGE - SUBOBJECTS--------------")
                 //console.log("-----------------EXPERIENCE-----------------")
+
                 section = this.returnSingleSection(3);
                 this.dict("experience").forEach((job, i) => {
                     section.appendSubObject(new ExperienceTileObject(
@@ -353,11 +366,13 @@ class FrontPageObject {
                                             , isActive = true
                                         ));
                 });
+
                 break;
 
             case "Portfolio":
                 //console.log("----------FRONTPAGE - SUBOBJECTS--------------")
                 //console.log("-----------------PORTFOLIO-----------------")
+                
                 section = this.returnSingleSection(4);
                 this.dict("portfolio").forEach((project, i) => {
                     section.appendSubObject(new PortfolioTileObject(
@@ -373,6 +388,56 @@ class FrontPageObject {
                 console.error("Unknown section key: " + key);
         };
     };
+
+
+
+    //****** Create Overlays for the Experience and Portfolio tiles ******
+    async prepareOverlayObjects(key) {
+        console.log("FRONTPAGE:   prepareOverlayObjects");
+
+        let index; let data; let isActive;
+        switch (key) {
+            case "About":
+                break;
+
+            case "Skills":
+                break;
+
+            case "Education":
+                break;
+
+            case "Experience":
+                // console.log("----------FRONTPAGE - OVERLAYS--------------")
+                // console.log("-----------------EXPERIENCE-----------------")
+                this.dict("experience").forEach((job, i) => {
+                    const newOverlay = new ExperienceOverlayObject(
+                                          index = 1
+                                        , data = job
+                                        , isActive = false
+                                    );
+                    this.#overlaysExperience.push(newOverlay)
+                });    
+                break;
+
+            case "Portfolio":
+                // console.log("----------FRONTPAGE - OVERLAYS--------------")
+                // console.log("-----------------PORTFOLIO-----------------")
+                this.dict("portfolio").forEach((project, i) => {
+                    const newOverlay = new ExperienceOverlayObject(
+                                          index = 1
+                                        , data = project
+                                        , isActive = false
+                                    );
+                    this.#overlaysPortfolio.push(newOverlay)
+                });    
+                break;
+                
+            default:
+                console.error("Unknown section key: " + key);
+        };
+
+    };
+
 };
 
 export default FrontPageObject;

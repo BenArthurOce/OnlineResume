@@ -77,15 +77,19 @@ class ArticleView {
         className   = ${this.className}
         classType   = ${this.classType}
         mvcType     = ${this.mvcComponent}
-        isActive    = ${this.isActive}
+        id          = ${this.id}
         index       = ${this.index}
         title       = ${this.title}
-        data        = ${this.data}`);
+        data        = (See Below)
+        isActive    = ${this.isActive}
+        element     = ${this.element}
+        `);
         console.log(this.data)
     };
 
 //****** Command to make this Object "visible" ******
     toggleOn() {
+        console.log("toggleOn")
         this.isActive = true;
         this.element.classList.add("activated")
     };
@@ -108,14 +112,14 @@ class IntroductionArticleView extends ArticleView {
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
 
-        if (isActive) {this.toggleOn()} else {this.toggleOff()}
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
     };
 
 //****** Creates the element for the "IntroductionArticleView" ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}"> 
+            <article id="${this.id}" dataFilter="${this.title}"> 
                 <h2 class="for-pc">${this.title}:</h2>
                 ${this.title === "About Me" ? `<div> ${this.addIcons()} </div>` : ''}
                 ${this.title === "About Me" ? `<p> ${this.data.introduction} </p>` : ''}
@@ -148,13 +152,11 @@ class IntroductionArticleView extends ArticleView {
 class SkillsArticleView extends ArticleView {
     constructor(index, title, data, isActive) {
         super(index, title, data, isActive);
-        // console.log(index);
-        // console.log(title);
-        // console.log(data);
         this.classType = "Skills";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
-        if (isActive) {this.toggleOn()} else {this.toggleOff()}
+
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
 
     };
 
@@ -162,7 +164,7 @@ class SkillsArticleView extends ArticleView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}">
+            <article id="${this.id}" dataFilter="${this.title}">
                 <h2 class="for-pc">${this.title}:</h2>
                 <ul>${this.addInfo()}</ul>
             </article>
@@ -181,20 +183,18 @@ class SkillsArticleView extends ArticleView {
 class EducationArticleView extends ArticleView {
     constructor(index, title, data, isActive) {
         super(index, title, data, isActive);
-        // console.log(index);
-        // console.log(title);
-        // console.log(data);
         this.classType = "Education";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
-        if (isActive) {this.toggleOn()} else {this.toggleOff()}
+
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
     };
 
 //****** Creates the element for the "EducationArticleView" ******
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article id="${this.id}" class="for-pc for-mobile" dataFilter="${this.title}">
+            <article id="${this.id}" dataFilter="${this.title}">
                 <h2 class="for-pc">${this.title}:</h2>
                 <ul>${this.addInfo()}</ul>
             </article>

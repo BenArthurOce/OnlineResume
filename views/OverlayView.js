@@ -1,26 +1,29 @@
-
-
-//
+import IconLinkView from "./IconLinkView.js";
+// Whenever a Tile() is clicked, an Overlay() will appear to give more detailed information about the job/project
 
 class OverlayView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
     #mvcComponent;                  //  What part of the MVC is this class
     #id;                            //  Combination of class names to create an element id string
-    #index;                         //  Index order of Article
-    #data;                          //  
+    #index;                         //  Index number of overlay. Will match with the Tile()
+    #data;                          //  String displayed on screen
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    constructor(index, data) {
+    constructor(index, data, isActive) {
         this.#className = "Overlay";
         this.#classType = null
         this.#mvcComponent = "View";
         this.#id = null;
         this.#index = index;
         this.#data = data;
-        this.#isActive = false;
-        this.#element = null;  
-
+        this.#isActive = isActive;
+        this.#element = null;
+    
+        if (index === undefined || data === undefined || isActive === undefined) {
+            this.printToTerminal()
+            throw new Error("OverlayView: parameter declared is null/undefined")
+        }
     };
     get className() {
         return this.#className;
@@ -59,6 +62,31 @@ class OverlayView {
         this.#element = value;
     };
 
+//****** Print information about the class ******
+    printToTerminal() {
+        console.log(`
+        ====Error Found:====
+        className   = ${this.className}
+        classType   = ${this.classType}
+        mvcType     = ${this.mvcComponent}
+        id          = ${this.id}
+        index       = ${this.index}
+        data        = (See Below)
+        isActive    = ${this.isActive}
+        element    = ${this.element}
+        `);
+        console.log(this.data)
+    };
+
+//****** Command to make this Object "visible" 
+    toggleOn() {
+        this.isActive = true;
+    };
+
+//****** Command to make this Object "invisible" 
+    toggleOff() {
+        this.isActive = false;
+    };
 
 //****** Remove / Destroy Overlay when the "x" is clicked ****** 
     closeOverlay() {
@@ -67,16 +95,11 @@ class OverlayView {
 };
 
 
-//
-//  Experience
-//
 class ExperienceOverlayView extends OverlayView {
-    constructor(index, data) {
-        super(index, data);
+    constructor(index, data, isActive) {
+        super(index, data, isActive);
         this.classType = "Experience";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
-
-        console.log(data)
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
 
         this.company    = this.data[`company`];
         this.address    = this.data[`address`];
@@ -94,31 +117,29 @@ class ExperienceOverlayView extends OverlayView {
 
 //****** Creates the Overlay element for Experience ****** 
     generateElement() {
-        const domForName = `for-${this.className.toLowerCase()}`    // Cleaner way of typing "for-overlay"
-        const domForType = `for-${this.classType.toLowerCase()}`    // Cleaner way of typing "for-experience"
-
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} ${domForType}">
-                <div class="container ${domForName} ${domForType}" id="${this.classType.toLowerCase()}-wrapper">
-                    <article class="article-with-text for-pc for-mobile ${domForName} ${domForType}" id="experience-information">
-                        <h3 class="position">${this.data.position}</h3>
-                        <p class="period">${this.data.period}</p>
-                        <p class="company">${this.data.company}</p>
-                        <p class="address">${this.data.address}</p>
-                        <p class="extraInfo">${this.data.extraInfo}</p>
+            <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} for-experience">
+                <div class="container for-overlay for-experience" id="${this.classType.toLowerCase()}-wrapper">
+                    <article id="experience-information" class="for-overlay for-experience">
+                        <h3>${this.data.position}</h3>
+                        <p>${this.data.period}</p>
+                        <p>${this.data.company}</p>
+                        <p>${this.data.address}</p>
+                        <p>${this.data.extraInfo}</p>
                     </article>
 
-                    <article class="article-with-list for-pc for-mobile ${domForName} ${domForType}" id="experience-duties">
+                    <article class="for-overlay for-experience">
                         <h3>Duties</h3>
-                        <ul class="duties"> ${this.addDuties()} </ul> 
+                        <ul>${this.addDuties()} </ul> 
                     </article>
 
-                    <article class="article-with-list for-pc for-mobile ${domForName} ${domForType}" id="experience-softwares">
+                    <article class="for-overlay for-experience">
                         <h3>Softwares</h3>
-                        <ul class="softwares"> ${this.addSoftwares()} </ul> 
+                        <ul>${this.addSoftwares()} </ul> 
                     </article>
-                    <span class="closeBtn ${domForName} ${domForType}" id="experience-close-btn">x</span>
+
+                    <span class="closeBtn for-overlay for-experience" id="experience-close-btn">x</span>
                 </div>
             </dialog>
         `.trim();
@@ -144,15 +165,11 @@ class ExperienceOverlayView extends OverlayView {
     };
 };
 
-
-//
-//  Portfolio
-//
 class PortfolioOverlayView extends OverlayView {
-    constructor(index, data) {
-        super(index, data);
+    constructor(index, data, isActive) {
+        super(index, data, isActive);
         this.classType = "Portfolio";
-        this.id = `${this.classType.toLowerCase()}-${this.className.toLowerCase()}`;
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
 
         this.name               = this.data[`projectName`];
         this.languages          = this.data[`projectLangs`];
@@ -162,45 +179,70 @@ class PortfolioOverlayView extends OverlayView {
         this.url                = this.data[`projectUrl`]
         this.images             = this.data[`projectImages`]
 
+        this.githubIcon         = new IconLinkView("Github", this.name, this.url)
+        console.log( this.githubIcon)
+
         this.element = this.generateElement();
         this.addLocalEventListeners()
     };
 
 //****** Creates the Overlay element for Portfolio ****** 
     generateElement() {
-        // Set up class naming conventions for the DOM
-        const domForName = `for-${this.className.toLowerCase()}`    // Cleaner way of typing "for-overlay"
-        const domForType = `for-${this.classType.toLowerCase()}`    // Cleaner way of typing "for-portfolio"
+        // Create image slideshow
+        const slideshow = new Slideshow(this.images);
+        // this.element.querySelector("#portfolio-wrapper").append(slideshow.element)
+
+        console.log(slideshow)
+        console.log(slideshow.element)
 
         // Create the element
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} ${domForType}">
-                <div class="container ${domForName} ${domForType}" id="${this.classType.toLowerCase()}-wrapper">
+            <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} for-portfolio">
+                <div id="${this.classType.toLowerCase()}-wrapper" class="container for-overlay for-portfolio">
 
-                    <article class="article-with-text for-pc for-mobile ${domForName} ${domForType}" id="project-information">
-                        <h3 class="portfolio-project-title ${domForName} ${domForType}">${this.name}</h3>
-                        <div class="container for-icons ${domForName} ${domForType}">
-                            ${this.addProgrammingLogos()}
+                    <article id="project-information" class="for-overlay">
+
+                        <div class="split-container">
+                            <h3 class="portfolio-project-title for-overlay">${this.name}</h3>
+                            <div class="for-icons for-overlay">${this.addProgrammingLogos()}</div>
                         </div>
-                        <p class="portfolio-project-summary ${domForName} ${domForType}">${this.summaryLarge}</p>
+
+                        <br>
+
+                        <div class="split-container">
+                            <p>Git Repo:</p>
+                            ${this.addIcon()}
+                        </div>
+
+                        <br>
+
+                        <p class="for-overlay">${this.summaryLarge}</p>
+                        
                     </article>
 
-                    <span class="closeBtn ${domForName} ${domForType}" id="portfolio-close-btn">x</span>
+                    ${slideshow.element.outerHTML}
+
+                    <span class="closeBtn for-overlay" id="portfolio-close-btn">x</span>
                 </div>
             </dialog>
         `.trim();
         return newElement.firstElementChild
     };
 
+
 //****** Adds programming logos to the portfolio Overlay ******
     addProgrammingLogos() {
         return this.languages.map(language => `<img src="${`imgLogos/${language}.svg`}" alt="${language}" class="lang-logo">`).join('');
     };
 
-//****** Prepares each portfolio.image item as an image element and adds to the Overlay ****** 
-    addImages() {
-        return this.images.map(image => `<img src="${image}" alt="${image}" class="portfolio-image">`).join('');
+//****** Adds Github Icon (Just used the same code from "ArticleView") ******
+    addIcon() {
+            const tempEl = document.createElement('div');
+            const icon1 = new IconLinkView("Github" , this.name, this.url);
+            const linebreak = ''
+            tempEl.append(icon1.element)
+            return tempEl.innerHTML;
     };
 
 //****** Local event listener(s) that are contained only within the OverlayView() class ****** 
@@ -209,17 +251,13 @@ class PortfolioOverlayView extends OverlayView {
         this.element.querySelector('.closeBtn').onclick = () => {
             this.closeOverlay()
         };
-
-        // Create image slideshow
-        const slideshow = new Slideshow(this.images);
-        this.element.querySelector("#portfolio-wrapper").append(slideshow.element)
     };
 };
 
 
 class Slideshow {
     constructor(images) {
-        this.className  = "Overlay"
+        this.className  = "Slideshow"
         this.classType  = "Portfolio"
         this.images = images;
         this.currentIndex = 0;
@@ -231,22 +269,19 @@ class Slideshow {
 
 //****** Generates a slideshow element that will be added to the Portfolio Overlay class ****** 
     generateElement() {
-        const domForName = `for-${this.className.toLowerCase()}`    // Cleaner way of typing "for-overlay"
-        const domForType = `for-${this.classType.toLowerCase()}`    // Cleaner way of typing "for-portfolio"
-
+        
         // Create the element
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <article class="article-with-text for-pc for-mobile ${domForName} ${domForType}" id="project-slideshow">
-                <div class="image-container ${domForName} ${domForType}">
-                    <button class="arrow prev ${domForName} ${domForType}">❮</button>
-                    ${this.addImages()}
-                    <button class="arrow next ${domForName} ${domForType}">❯</button>
-                </div>
+            <article id="project-slideshow" class="for-overlay for-portfolio">
+                <button class="arrow prev for-overlay for-portfolio">❮</button>
+                ${this.addImages()}
+                <button class="arrow next for-overlay for-portfolio">❯</button>
             </article>
         `.trim();
         return newElement.firstElementChild
     };
+
 
 //****** Prepares each portfolio.image item as an image element and adds to the Overlay ****** 
     addImages() {
@@ -282,7 +317,6 @@ class Slideshow {
 //****** Hides all images, and then only displays the image with the matching index number of this class ****** 
     showImage(index) {
         const images = this.element.querySelectorAll(".portfolio-image")
-        console.log(images)
         images.forEach((image, i) => {
             if (i === index) {
                 image.classList.add("activated");
@@ -294,4 +328,4 @@ class Slideshow {
 };
 
 
-export {ExperienceOverlayView, PortfolioOverlayView};
+export {ExperienceOverlayView, PortfolioOverlayView}
