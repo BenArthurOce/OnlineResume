@@ -21,7 +21,7 @@ class NavBarView {
 
         if (displayHeading === undefined) {
             this.printToTerminal()
-            throw new Error("ArticleView: parameter declared is null/undefined")
+            throw new Error("NavBarView: parameter declared is null/undefined")
         }
     };
     get className() {
@@ -68,13 +68,11 @@ class NavBarView {
 //****** Command to make this Object "visible" ******
     toggleOn() {
         this.isActive = true;
-        //this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" ******
     toggleOff() {
         this.isActive = false;
-        //this.element.classList.remove("activated")
     };
 
 //****** return a Navigation Link ******
@@ -85,7 +83,11 @@ class NavBarView {
 
 //****** Prepares the Navigation bar HTML element ******
     generateElement() {
+        // terms.setAttribute(‘id’,‘para-1’);
+
         const newElement = document.createElement('nav');
+        newElement.setAttribute("id","top-nav-view");
+
         newElement.innerHTML = `
             <div class="for-pc">
                 <div class="container">

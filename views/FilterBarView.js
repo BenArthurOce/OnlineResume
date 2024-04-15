@@ -66,15 +66,12 @@ class FilterBarView {
 //****** Command to make this Object "visible" 
     toggleOn() {
         this.isActive = true;
-        // //this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" 
     toggleOff() {
         this.isActive = false;
-        // //this.element.classList.remove("activated")
     };
-
 };
 
 //
@@ -92,11 +89,33 @@ class IntroductionFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter for-mobile">
-                <menu id="${this.id}">
-                    <ul class="filter-list for-article for-mobile"></ul>
+                <menu id="top-filter-view">
+                    <ul class="filter-bar for-mobile"></ul>
                 </menu>
-            </div>
+        `.trim();
+        return newElement.firstElementChild
+    };
+};
+
+
+//
+//  Skills
+//
+class SkillsFilterBarView extends FilterBarView {
+    constructor(index) {
+        super(index);
+        this.classType = "Skills";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
+        this.element = this.generateElement();
+    };
+
+//****** Prepares the HTML element ******
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+                <menu id="top-filter-view">
+                    <ul class="filter-bar for-mobile"></ul>
+                </menu>
         `.trim();
         return newElement.firstElementChild
     };
@@ -118,40 +137,15 @@ class EducationFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter for-mobile">
-                <menu id="${this.id}">
-                    <ul class="filter-list for-article for-mobile"></ul>
+                <menu id="top-filter-view">
+                    <ul class="filter-bar for-mobile"></ul>
                 </menu>
-            </div>
         `.trim();
         return newElement.firstElementChild
     };
 };
 
-//
-//  Skills
-//
-class SkillsFilterBarView extends FilterBarView {
-    constructor(index) {
-        super(index);
-        this.classType = "Skills";
-        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
-        this.element = this.generateElement();
-    };
 
-//****** Prepares the HTML element ******
-    generateElement() {
-        const newElement = document.createElement('div');
-        newElement.innerHTML = `
-            <div class="container for-filter for-mobile">
-                <menu id="${this.id}">
-                    <ul class="filter-list for-article for-mobile"></ul>
-                </menu>
-            </div>
-        `.trim();
-        return newElement.firstElementChild
-    };
-};
 
 //
 //  Experience
@@ -168,15 +162,19 @@ class ExperienceFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter activated">
-                <menu id="${this.id}" class="activated">
-                    <ul ></ul>
-                </menu>
-            </div>
+            <menu id="top-filter-view">
+                <ul class="filter-bar"></ul>
+            </menu>
         `.trim();
         return newElement.firstElementChild
     };
 };
+
+// <div id="top-filter-view">
+// <menu id="${this.id}">
+//     <ul ></ul>
+// </menu>
+// </div>
 
 //
 //  Portfolio
@@ -193,11 +191,9 @@ class PortfolioFilterBarView extends FilterBarView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div class="container for-filter activated">
-                <menu id="${this.id}" class="activated">
-                    <ul ></ul>
-                </menu>
-            </div>
+            <menu id="top-filter-view">
+                <ul class="filter-bar"></ul>
+            </menu>
         `.trim();
         return newElement.firstElementChild
     };

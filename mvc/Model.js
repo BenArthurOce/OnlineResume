@@ -74,10 +74,17 @@ class Model {
                 ,"filterButtons" :      null
                 ,"section" :            null
                 ,"subObjects" :         null
+                ,"overlays" :           null
+                ,"activeOverlay" :      null
                 ,"filterTags" :         null
-                ,"overlay" :            null
+
         };
     };
+
+//****** Ensures the Active Overlay is Empty ******
+    commandClearActiveOverlay() {
+        this.state["activeOverlay"] = null
+    }
 
 
 
@@ -86,17 +93,55 @@ class Model {
     };
 
 
+//****** Testing Function - Force something to happen when loaded ******
+    testFunction() {
+        console.log("MODEL: testFunction")
+        
+        // const expSection = this.data["sections"]["experience"]
+        // const testOverlay = this.data["overlays"]["experience"][0]
+        // console.log(testOverlay)
+
+        // testOverlay.isActive = true
+        // this.state["activeOverlay"] = testOverlay
+
+        // const index = 3
+        this.changeIndex(3)
+
+
+        // const tile = this.state["subObjects"][0]
+        // console.log(tile)
+
+        // console.log(this.state["overlays"])
+
+        // this.state["activeOverlay"] = this.state["overlays"][0]
+
+        // this.state["section"]           = this.data["sections"][key];
+        // this.state["subObjects"]        = this.data["sectionSubObjs"][key];
+
+        // this._commitIndex(this.state);
+    }
+
+    overlayStart(index) {
+        console.log("MODEL: overlayStart")
+        this.commandClearActiveOverlay()
+        this.state["activeOverlay"] = this.state["overlays"][index]
+        this._commitIndex(this.state);
+    }
+
+
 //****** Model Adjustments ******
     changeColour(colour) {
         console.log("MODEL: changeColour")
+        this.commandClearActiveOverlay()
 
-       this.state['palette'].updateIndex(colour)
+        this.state['palette'].updateIndex(colour)
         this._commitPaletteChange(this.state)
     };
 
 
     filterStateArticles(filterButton) {
         console.log("MODEL: filterStateArticles")
+        this.commandClearActiveOverlay()
 
         // Remove the "activated" class from all the FilterButtons and Tile Objects
         this.state['filterBar'].buttons.map(button => button.toggleOff())
@@ -115,6 +160,7 @@ class Model {
 
     filterStateTiles(filterButton) {
         console.log("MODEL: filterStateTiles")
+        this.commandClearActiveOverlay()
 
         // Remove the "activated" class from all the FilterButtons and Tile Objects
         this.state['filterBar'].buttons.map(button => button.toggleOff())
@@ -141,6 +187,8 @@ class Model {
     changeIndex(index) {
         console.log("MODEL: changeIndex")
 
+        this.commandClearActiveOverlay()
+
         const key = this.data["headings"][index].toLowerCase();
 
         this.state["index"]             = index;
@@ -150,8 +198,7 @@ class Model {
         this.state["heading"]           = this.data["headings"][index];
         this.state["filterBar"]         = this.data["filterBars"][key];
         this.state["filterButtons"]     = this.data["filterTags"][key];
-        this.state["section"]           = this.data["sections"][key];
-        this.state["subObjects"]        = this.data["sectionSubObjs"][key];
+
         this.state["filterTags"]        = this.data["filterTags"][key];
 
         // Specific to Navigation Bar
@@ -159,10 +206,25 @@ class Model {
         this.state['navigationBar'].links.map(link => link.toggleOff())
         this.state['navigationBar'].links[index].toggleOn()
 
+        // Specific to Subobjects and Overlays (if Applicable)
+        this.state["section"]           = this.data["sections"][key];
+        this.state["subObjects"]        = this.data["sectionSubObjs"][key];
+        this.state["overlays"]          = this.data["overlays"][key];
+
+        console.log(this.state["overlays"])
+
+        // On an index change, the active overlay must be blank
+        // this.state["activeOverlay"] = null
+
         this._commitIndex(this.state);
     };
 
 //****** Model Binding ******
+    bindOnLoaded(callback) {
+        console.log("MODEL: bindOnLoaded")
+        this.onLoaded = callback
+    };
+
     bindPaletteChanged(callback) {
         console.log("MODEL: bindPaletteChanged")
         this.onPaletteChanged = callback
@@ -181,6 +243,11 @@ class Model {
     bindTileFiltered(callback) {
         console.log("MODEL: bindTileFiltered")
         this.onActiveSubObjectChanged = callback
+    };
+
+    bindOverlayStarted(callback) {
+        console.log("MODEL: bindOverlayStarted")
+        this.onOverlayStarted = callback
     };
 
 

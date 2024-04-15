@@ -92,8 +92,8 @@ class IntroductionSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section ">
-                <div id="${this.id}-article-container" class="container for-article">
+            <section id="top-section-view" class="section-display container for-section ">
+                <div id="${this.id}" class="container for-article">
                 </div>
             </section>
         `.trim();
@@ -116,8 +116,8 @@ class SkillsSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section ">
-                <div id="${this.id}-article-container" class="container for-article">
+            <section id="top-section-view" class="section-display container for-section ">
+                <div id="${this.id}" class="container for-article">
                 </div>
             </section>
         `.trim();
@@ -140,8 +140,8 @@ class EducationSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section ">
-                <div id="${this.id}-article-container" class="container for-article">
+            <section id="top-section-view" class="section-display container for-section ">
+                <div id="${this.id}" class="container for-article">
                 </div>
             </section>
         `.trim();
@@ -164,8 +164,8 @@ class ExperienceSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section ">
-                <div id="${this.id}-tile-container" class="container for-tile">
+            <section id="top-section-view" class="section-display container for-section ">
+                <div id="${this.id}" class="container for-tile">
                 </div>
             </section>
         `.trim();
@@ -188,8 +188,8 @@ class PortfolioSectionView extends SectionView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <section id="${this.id}" class="section-display container for-section ">
-                <div id="${this.id}-tile-container" class="container for-tile">
+            <section id="top-section-view" class="section-display container for-section ">
+                <div id="${this.id}" class="container for-tile">
                 </div>
             </section>
         `.trim();

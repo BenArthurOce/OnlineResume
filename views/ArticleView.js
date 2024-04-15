@@ -1,4 +1,5 @@
 import IconLinkView from "./IconLinkView.js";
+import StaticGetIcon from "./StaticGetIcon.js";
 
 // Sections are the main content displayers of this app/website. Inside each section, are either Articles or Tiles depending on what section it is
 // These "SubObjects" are created in the View() class, and are appended in the SectionView() class
@@ -89,15 +90,14 @@ class ArticleView {
 
 //****** Command to make this Object "visible" ******
     toggleOn() {
-        console.log("toggleOn")
         this.isActive = true;
-        this.element.classList.add("activated")
+        // this.element.classList.add("activated")
     };
 
 //****** Command to make this Object "invisible" ******
     toggleOff() {
         this.isActive = false;
-        this.element.classList.remove("activated")
+        // this.element.classList.remove("activated")
     };
 };
 
@@ -121,24 +121,19 @@ class IntroductionArticleView extends ArticleView {
         newElement.innerHTML = `
             <article id="${this.id}" dataFilter="${this.title}"> 
                 <h2 class="for-pc">${this.title}:</h2>
-                ${this.title === "About Me" ? `<div> ${this.addIcons()} </div>` : ''}
+                ${
+                    this.title === "About Me" ? 
+                    StaticGetIcon.generateLinkIconElement("Envelope", this.data.email).outerHTML +
+                    StaticGetIcon.generateLinkIconElement("LinkedIn", this.data.linkedin).outerHTML +
+                    StaticGetIcon.generateLinkIconElement("Github", this.data.github).outerHTML
+                    :
+                    ""
+                }
                 ${this.title === "About Me" ? `<p> ${this.data.introduction} </p>` : ''}
                 ${this.title === "Key Skills" ? `<ul> ${this.addInfoList()} </ul>` : ''}
             </article>
         `.trim();
         return newElement.firstElementChild
-    };
-
-//****** Adds Email, Linkedin, and Github icons to the "About Me" section ******
-    addIcons() {
-        // console.log(this.data)
-            const tempEl = document.createElement('div');
-            const icon1 = new IconLinkView("Email" , "Email Me", this.data.email);
-            const icon2 = new IconLinkView("LinkedIn" , "Linkedin", this.data.linkedin);
-            const icon3 = new IconLinkView("Github" , "Github", this.data.github);
-            const linebreak = ''
-            tempEl.append(icon1.element, icon2.element, icon3.element)
-            return tempEl.innerHTML;
     };
 
     addInfoList() {

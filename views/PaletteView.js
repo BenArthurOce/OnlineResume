@@ -82,7 +82,7 @@ class PaletteView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <div>
+            <div id="top-palette-view">
                 <label for="paletteSelector">Select Color Palette:</label>
                 <select id="paletteSelector">
                     ${this.addInfo()}

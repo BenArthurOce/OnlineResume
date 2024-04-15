@@ -12,6 +12,9 @@ class Controller {
 
         clearTimeout(this.searchTimeout);
 
+        this.model.bindOnLoaded(this.onLoaded.bind(this));
+        this.view.bindOnLoad(this.handleOnLoad.bind(this));
+
         this.model.bindPaletteChanged(this.onPaletteChanged.bind(this));
         this.view.bindPaletteChange(this.handlePaletteChange.bind(this));
 
@@ -24,13 +27,24 @@ class Controller {
         this.model.bindIndexChanged(this.onIndexChanged.bind(this));
         this.view.bindIndexChange(this.handleIndexChange.bind(this));
 
+        this.model.bindOverlayStarted(this.onOverlayStarted.bind(this));
+        this.view.bindOverlayStart(this.handleOverlayStart.bind(this));
+
         // Manually activate so the app displays the first section
-        this.handleIndexChange(0);
+        this.handleIndexChange(3);
+
+        // this.handleOnLoad()
 
     };
 
 
 //****** On Change ******
+
+    onLoaded(modelData) {
+        console.log("CONTROLLER: onLoaded")
+        this.view.commenceRender(modelData);
+    };
+
     onPaletteChanged(modelData) {
         console.log("CONTROLLER: onPaletteChanged")
         this.view.commenceRender(modelData);
@@ -51,8 +65,18 @@ class Controller {
         this.view.commenceRender(modelData);
     };
 
+    onOverlayStarted(modelData) {
+        console.log("CONTROLLER: onOverlayStarted")
+        this.view.commenceRender(modelData);
+    };
+
 
 //****** Handle Change ******
+    handleOnLoad() {
+        console.log("CONTROLLER: handleOnLoad")
+        this.model.testFunction()
+    };
+
     handlePaletteChange(style) {
         console.log("CONTROLLER: handlePaletteChange")
         this.model.changeColour(style)
@@ -91,6 +115,11 @@ class Controller {
         }
 
         this.model.changeIndex(newIndex);
+    };
+
+    handleOverlayStart(overlay) {
+        console.log("CONTROLLER: handleOverlayStart")
+        this.model.overlayStart(overlay)
     };
 
 

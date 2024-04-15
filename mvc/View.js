@@ -14,6 +14,8 @@ import HeadingView from '../views/HeadingView.js';
 
 import { ExperienceOverlayView,  PortfolioOverlayView } from '../views/OverlayView.js';
 
+import StaticGetIcon from '../views/StaticGetIcon.js';
+
 
 class View {
     constructor() {
@@ -43,6 +45,10 @@ class View {
     returnActiveFilterTags(data) {
         return Array.from(data["filterTags"]);
     };
+
+    returnActiveOverlay(data) {
+        return data["activeOverlay"]
+    }
 
 
     async init() {
@@ -144,7 +150,75 @@ class View {
         //  Complete
         //
         console.log("--------------rendering finished--------------")
+
+        //
+        //  For testing - Active Overlays
+        //
+
+        const overlay = this.returnActiveOverlay(data)
+        // console.log(this.returnActiveOverlay(data))
+
+        if (overlay) {
+            let index; let data; let isActive; let newOverlay;
+            if (this.section.classType === "Experience") {
+
+                newOverlay = new ExperienceOverlayView(
+                    index = overlay.index
+                  , data = overlay.data
+                  , isActive = true
+                );
+            };
+
+            if (this.section.classType === "Portfolio") {
+
+                newOverlay = new PortfolioOverlayView(
+                  index = overlay.index
+                , data = overlay.data
+                , isActive = true
+                );
+            };
+          this.app.append(newOverlay.element)
+        }
+
+
+        // const newIcon1 = StaticGetIcon.generateElement("Internet")
+        // const newIcon2= StaticGetIcon.generateElement("Calendar")
+        // const newIcon3 = StaticGetIcon.generateElement("Location")
+        // const newIcon4 = StaticGetIcon.generateElement("Building")
+        // const newIcon5 = StaticGetIcon.generateElement("Exclamation")
+        // const newIcon6 = StaticGetIcon.generateElement("Profile")
+        // const newIcon7 = StaticGetIcon.generateElement("All")
+        // // console.log(newIcon)
+
+        const newIcon0 = StaticGetIcon.generateDisplayIconElement("JavaScript")
+
+        
+
+        // const newIcon1  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
+        // const newIcon2  = StaticGetIcon.generateLinkIconElement("Github", "https://www.google.com/")
+        // const newIcon3  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
+        // const newIcon4  = StaticGetIcon.generateLinkIconElement("Exclamation", "https://www.google.com/")
+        // const newIcon5  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
+        // const newIcon6  = StaticGetIcon.generateLinkIconElement("Location", "https://www.google.com/")
+        // const newIcon7  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
+
+        // const newIcon8 = StaticGetIcon.generateButtonElement("Exclamation")
+        // const newIcon9 = StaticGetIcon.generateButtonElement("Shallamah Goolamah")
+        // this.app.append(newIcon0) 
+        // this.app.append(newIcon1) 
+        // this.app.append(newIcon2)
+        // this.app.append(newIcon3)
+        // this.app.append(newIcon4)
+        // this.app.append(newIcon5)
+        // this.app.append(newIcon6)
+        // this.app.append(newIcon7)
+        // this.app.append(newIcon8)
+        // this.app.append(newIcon9)
+
     };
+
+
+
 
 
 //****************************
@@ -181,33 +255,41 @@ class View {
 //****** View() event that is the TileView() callback function. Triggers when the object element is clicked ******
     onExperienceTileClick(tileClicked) {
         console.log("VIEW: onExperienceTileClick");
-        let index; let data; let isActive;
+        // let index; let data; let isActive;
 
-        const newOverlay = new ExperienceOverlayView(
-              index = tileClicked.index
-            , data = tileClicked.data
-            , isActive = true
-        );
-        this.app.append(newOverlay.element)
+        // const newOverlay = new ExperienceOverlayView(
+        //       index = tileClicked.index
+        //     , data = tileClicked.data
+        //     , isActive = true
+        // );
+        // this.app.append(newOverlay.element)
+        this.handleOverlayStart(tileClicked.index)
     };
 
 //****** View() event that is the TileView() callback function. Triggers when the object element is clicked ******
     onPortfolioTileClick(tileClicked) {
         console.log("VIEW: onPortfolioTileClick");
-        let index; let data; let isActive;
+        // let index; let data; let isActive;
 
-        const newOverlay = new PortfolioOverlayView(
-              index = tileClicked.index
-            , data = tileClicked.data
-            , isActive = true
-        );
-        this.app.append(newOverlay.element)
+        // const newOverlay = new PortfolioOverlayView(
+        //       index = tileClicked.index
+        //     , data = tileClicked.data
+        //     , isActive = true
+        // );
+        // this.app.append(newOverlay.element)
+        this.handleOverlayStart(tileClicked.index)
     };
 
 
 //****************************
 //****** Binding Events ******
 //****************************
+
+    bindOnLoad(handler) {
+        console.log("VIEW: bindOnLoad");
+        this.handleOnLoad = handler;
+    };
+
     bindPaletteChange(handler) {
         // console.log("VIEW: bindPaletteChange");
         this.handlePaletteChange = handler;
@@ -232,6 +314,11 @@ class View {
         // console.log("VIEW: updateColorScheme");
         const root = document.documentElement;
         root.setAttribute('data-style', newColour);
+    };
+
+    bindOverlayStart(handler) {
+        console.log("VIEW: bindOverlayStart");
+        this.handleOverlayStart = handler;
     };
 
 

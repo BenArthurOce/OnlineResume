@@ -1,5 +1,7 @@
 //
 
+import StaticGetIcon from "./StaticGetIcon.js";
+
 class FilterButtonView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
@@ -105,14 +107,21 @@ class ArticleFilterButtonView extends FilterButtonView {
     };
 
 //****** Prepares the HTML element ******
+    // generateElement() {
+    //     const newElement = document.createElement('div');
+    //     newElement.innerHTML = `
+    //         <li role="button" class="filter-button for-article for-mobile">${this.title}</li>
+    //     `.trim();
+    //     return newElement.firstElementChild
+    // };
+
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <li role="button" class="filter-button for-article for-mobile">${this.title}</li>
+            ${StaticGetIcon.generateButtonElement(this.title).outerHTML}      
         `.trim();
         return newElement.firstElementChild
     };
-
 };
 
 
@@ -135,34 +144,9 @@ class TileFilterButtonView extends FilterButtonView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            ${this.selectTileGraphic(this.title)}
+            ${StaticGetIcon.generateButtonElement(this.title).outerHTML}      
         `.trim();
         return newElement.firstElementChild
-    };
-
-//****** takes the "this.title" attribute to create a tile HTML object ******
-    selectTileGraphic(title) {
-        const filterOptions = {
-            "All":              `<li role="button" class="filter-button for-tile" title="All">All</li>`
-            ,"Government":      `<li role="button" class="filter-button for-tile" title="Government"><i class="sidebar-icon fa fa-building icon"></i></li>`
-            ,"Programming":     `<li role="button" class="filter-button for-tile" title="Programming"><i class="sidebar-icon fa fa-code icon"></i></li>`
-            ,"HelpDesk":        `<li role="button" class="filter-button for-tile" title="HelpDesk"><i class="sidebar-icon fa fa-desktop icon"></i></li>`
-            ,"Accounting":      `<li role="button" class="filter-button for-tile" title="Accounting"><i class="sidebar-icon fa fa-dollar icon"></i></li>`
-            ,"CustomerService": `<li role="button" class="filter-button for-tile" title="Customer Services"><i class="sidebar-icon fa fa-bell icon"></i></li>`
-            ,"UserInterface":   `<li role="button" class="filter-button for-tile" title="User Interfaces"><i class="sidebar-icon fa fa-desktop icon"></i></li>`
-            ,"Web":             `<li role="button" class="filter-button for-tile" title="Web"><i class="sidebar-icon fa fa-globe icon"></i></li>`
-            ,"Database":        `<li role="button" class="filter-button for-tile" title="Databases"><i class="sidebar-icon fa fa-database icon"></i></li>`
-            ,"Logic":           `<li role="button" class="filter-button for-tile" title="Logic"><i class="sidebar-icon fa fa-puzzle-piece icon"></i></li>`
-            ,"Games":           `<li role="button" class="filter-button for-tile" title="Games"><i class="sidebar-icon fa fa-gamepad icon"></i></li>`
-            ,"Efficiency":      `<li role="button" class="filter-button for-tile" title="Efficiency"><i class="sidebar-icon fa fa-car icon"></i></li>`
-            ,"DataSets":        `<li role="button" class="filter-button for-tile" title="DataSets"><i class="sidebar-icon fa fa-table icon"></i></li>`
-            ,"Finance":         `<li role="button" class="filter-button for-tile" title="Finance"><i class="sidebar-icon fa fa-dollar icon"></i></li>`
-        };
-        if (title in filterOptions) {
-            return filterOptions[title];
-        } else {
-            throw new Error(`Title '${title}' not found in filterOptions`);
-        }
     };
 };
 

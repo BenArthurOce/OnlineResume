@@ -1,5 +1,7 @@
 // In each section, there are sub items that contain resume information, either ArticleObject() or TileObject()
 
+import StaticGetIcon from "./StaticGetIcon.js";
+
 class TileView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
@@ -134,7 +136,7 @@ class ExperienceTileView extends TileView {
         newElement.innerHTML = `
             <div class="tile activated for-experience">
                 <div class="container for-icons">
-                    ${this.addIcon(this.data.tags[0])}
+                    ${this.addJobLogos().map(icon => icon.outerHTML).join('')}
                 </div>
                 <p class="position">${this.position}</p>
                 <p class="company">${this.company}</p>
@@ -143,21 +145,9 @@ class ExperienceTileView extends TileView {
         return newElement.firstElementChild
     };
 
-
-//****** Adds a single FontAwesome Icon based on the first tag in the JSON data ******
-    addIcon(key) {
-        const iconTypes = {
-             "Government":      `<i class="sidebar-icon fa fa-building icon"></i>`
-            ,"Programming":     `<i class="sidebar-icon fa fa-code icon"></i>`
-            ,"HelpDesk":        `<i class="sidebar-icon fa fa-desktop icon"></i>`
-            ,"Accounting":      `<i class="sidebar-icon fa fa-dollar icon"></i>`
-            ,"CustomerService": `<i class="sidebar-icon fa fa-bell icon"></i>`
-        }
-        if (key in iconTypes) {
-            return iconTypes[key];
-        } else {
-            throw new Error(`Title '${key}' not found in addIcon`);
-        }
+//****** Adds job icons to the jobo tile ******
+    addJobLogos() {
+        return this.tags.map(tag => StaticGetIcon.generateDisplayIconElement(tag));
     };
 };
 
@@ -189,7 +179,7 @@ class PortfolioTileView extends TileView {
         newElement.innerHTML = `
             <div class="tile activated for-portfolio">
                 <div class="container for-icons">
-                    ${this.addProgrammingLogos()}
+                    ${this.addProgrammingLogos().map(icon => icon.outerHTML).join('')}
                 </div>
                 <p class="projectName">${this.projectName}</p>
                 <p class="projectSumSmall">${this.summarySmall}</p>
@@ -200,7 +190,7 @@ class PortfolioTileView extends TileView {
 
 //****** Adds programming logos to the portfolio tile ******
     addProgrammingLogos() {
-        return this.projectLangs.map(language => `<img src="${`imgLogos/${language}.svg`}" alt="${language}" class="program-icon">`).join('');
+        return this.projectLangs.map(language => StaticGetIcon.generateDisplayIconElement(language));
     };
 };
 
