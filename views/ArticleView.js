@@ -123,9 +123,9 @@ class IntroductionArticleView extends ArticleView {
                 <h2 class="for-pc">${this.title}:</h2>
                 ${
                     this.title === "About Me" ? 
-                    StaticGetIcon.generateLinkIconElement("Envelope", this.data.email).outerHTML +
-                    StaticGetIcon.generateLinkIconElement("LinkedIn", this.data.linkedin).outerHTML +
-                    StaticGetIcon.generateLinkIconElement("Github", this.data.github).outerHTML
+                    StaticGetIcon.generateLinkIconElement("Envelope", this.data.email, "medium").outerHTML +
+                    StaticGetIcon.generateLinkIconElement("LinkedIn", this.data.linkedin, "medium").outerHTML +
+                    StaticGetIcon.generateLinkIconElement("Github", this.data.github, "medium").outerHTML
                     :
                     ""
                 }

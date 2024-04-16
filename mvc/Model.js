@@ -98,11 +98,11 @@ class Model {
         console.log("MODEL: testFunction")
         
         // const expSection = this.data["sections"]["experience"]
-        // const testOverlay = this.data["overlays"]["experience"][0]
+        const testOverlay = this.data["overlays"]["experience"][0]
         // console.log(testOverlay)
 
-        // testOverlay.isActive = true
-        // this.state["activeOverlay"] = testOverlay
+        testOverlay.isActive = true
+        this.state["activeOverlay"] = testOverlay
 
         // const index = 3
         this.changeIndex(3)

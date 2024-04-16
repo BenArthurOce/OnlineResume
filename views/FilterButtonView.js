@@ -118,7 +118,7 @@ class ArticleFilterButtonView extends FilterButtonView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            ${StaticGetIcon.generateButtonElement(this.title).outerHTML}      
+            ${StaticGetIcon.generateButtonElement(this.title, "medium").outerHTML}      
         `.trim();
         return newElement.firstElementChild
     };
@@ -144,7 +144,7 @@ class TileFilterButtonView extends FilterButtonView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            ${StaticGetIcon.generateButtonElement(this.title).outerHTML}      
+            ${StaticGetIcon.generateButtonElement(this.title, "medium").outerHTML}      
         `.trim();
         return newElement.firstElementChild
     };

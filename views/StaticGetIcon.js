@@ -54,19 +54,18 @@ class StaticGetIcon {
         if (key in this.#icons) {
             return this.#icons[key];
         };
-        return { title: `${key}`,        icon: `${""}`,                 display: `${key}` }
+        return { title: `${key}`, icon: `${""}`, display: `${key}` }
     };
 
 
 
 //****** This creates a button that can be hovered over ******
-    static generateButtonElement(key) {
-        const classsss = "";
+    static generateButtonElement(key, size) {
         const { title, icon, display } = this.getIcon(key);
 
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <li class="${"square-icon button-icon"}" title="${title}">
+            <li class="${"square-icon button-icon"} ${size}" title="${title}">
                 ${icon  ? (icon.includes('.svg') ? `<img src="${icon}" alt="${display}">` : `<i class="${icon}"></i>`) : title}
             </li>
         `.trim();
@@ -75,14 +74,12 @@ class StaticGetIcon {
       
 
 //****** This creates a clickable icon that redirects ******
-    static generateLinkIconElement(key, url) {
-        const classsss = "square-icon icon-link";
+    static generateLinkIconElement(key, url, size) {
         const { title, icon, display } = this.#icons[key] || {};    
 
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-
-            <a class="${classsss}" href="${url}" target="_blank" title="${title}">
+            <a class="${"square-icon icon-link"} ${size}" href="${url}" target="_blank" title="${title}">
                 ${icon.includes('.svg') ? `<img src="${icon}" alt="${display}">` : `${icon  ? `<i class="${icon}"></i>` : title}`}
             </a>
 
@@ -90,13 +87,14 @@ class StaticGetIcon {
         return newElement.firstElementChild
     };
 
+
 //****** This creates an image ******
-    static generateDisplayIconElement(key) {
-        const classsss = "square-icon";
+    static generateDisplayIconElement(key, size) {
         const { title, icon, display } = this.#icons[key] || {};    
+
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            ${icon  ? (icon.includes('.svg') ? `<img src="${icon}" alt="${display}">` : `<i class="${icon}"></i>`) : title}
+            ${icon  ? (icon.includes('.svg') ? `<img class="square-icon ${size}" src="${icon}" alt="${display}">` : `<i class="square-icon ${icon}"></i>`) : title}
         `.trim();
         return newElement.firstElementChild
     };

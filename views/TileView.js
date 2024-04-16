@@ -147,7 +147,7 @@ class ExperienceTileView extends TileView {
 
 //****** Adds job icons to the jobo tile ******
     addJobLogos() {
-        return this.tags.map(tag => StaticGetIcon.generateDisplayIconElement(tag));
+        return this.tags.map(tag => StaticGetIcon.generateDisplayIconElement(tag, "small"));
     };
 };
 
@@ -190,7 +190,7 @@ class PortfolioTileView extends TileView {
 
 //****** Adds programming logos to the portfolio tile ******
     addProgrammingLogos() {
-        return this.projectLangs.map(language => StaticGetIcon.generateDisplayIconElement(language));
+        return this.projectLangs.map(language => StaticGetIcon.generateDisplayIconElement(language, "small"));
     };
 };
 

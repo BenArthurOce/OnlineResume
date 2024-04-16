@@ -31,9 +31,9 @@ class Controller {
         this.view.bindOverlayStart(this.handleOverlayStart.bind(this));
 
         // Manually activate so the app displays the first section
-        this.handleIndexChange(3);
+        // this.handleIndexChange(3);
 
-        // this.handleOnLoad()
+        this.handleOnLoad()
 
     };
 

@@ -1,10 +1,11 @@
 
 /* 
-    General CSS
+    General CSS       (1 of 5)
     _________________________________________
 
     Global Variables
 */
+
 
 * {
     box-sizing: border-box;
@@ -20,6 +21,7 @@ body {
     width: 100vw;
     background-color: var(--body-background-color);
     color: var(--all-basic-font-color);
+
 }
 
 p, ul {
@@ -32,85 +34,128 @@ p, ul {
 
 
 
+
+
+
+
 /* 
-    Bars
+    General CSS       (2 of 5)
     _________________________________________
 
-    Navigation Bars, Filter Bars
+    Headings
 */
 
-nav {
-    background-color: var(--nav-basic-background-color);    /* Ensures Background for both PC and Mobile */
-    padding-left: 2%;   /* Ensures the h1 underline element doesnt touch the edges (mobile format) */
-    padding-right: 2%;
-}
+h1, h2, h3 {
+    display: inline-block;
+    min-width : 100%;
+    color: var(--all-basic-head-color);
+    margin-bottom: 10px;
 
-/* text styles inside the navbar */
-nav .nav-link {
-    padding-top: 2%;
-    padding-bottom: 1%;
-    text-decoration: none;                      /* Removes all natural formatting ie: underlines */
-    font-weight: bold;                          /* Make the text bold for emphasis */
-    transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
-    color: var(--nav-basic-font-color);         /* Standard inactive colour of nav text */
-    font-size: calc(100% + 0.9vw);            /* Adaptive font size of the naviation words */
-}
-
-nav .nav-link:hover,
-nav .nav-link.activated {
-    color: var(--nav-active-font-color);  
-}
-
-
-.filter-bar {
-    display: inline-flex;                           /* Allows us to set direction to row - for a horizontal filter */
-    flex-direction: row;                            /* Make the horizontal filter happen */
-    list-style-type: none;                          /* Move the list style markings */
-    gap: 10%                                        /* Space the filter items away from each other */
-}
-
-
-
-/* 
-    Bars
-    _________________________________________
+    position: sticky;                                       /* Always keep at the top of the article */
+    top: 0;                                                 /* Required to keep the heading "sticky" to the top */
+    margin: 0;                                              /* Stops the h2 element from moving when scrolling is performed */
+    background-color: var(--article-background-color);      /* Makes scrolling text disappear behind the heading */
     
-    ToolTips on Filter Bar hovering
-*/
-
-
-.button-icon:hover::before {
-    content: attr(title);               /* The overlay content is the "title" attribute of the li element */
-    position: absolute;
-    background: #333;
-    color: #fff;
-    white-space: nowrap;
-    padding: 5px;
-    font-size: 14px;
-    bottom: 70%;                        /* Position the tooltip above the icon */
-    left: 50%;                          /* Center the tooltip horizontally */
-    transform: translateX(-50%);        /* Center the tooltip horizontally */
-    visibility: hidden;                 /* hidden by default */
-    z-index: 9999;
 }
 
-
-.button-icon:hover::before {
-    visibility: visible;
-    opacity: 1;                         /* How seethrough the tooltip is */
-    margin-bottom: 0px;                /* Space away the tooltip from the filter button */
-    margin-left: -15px;                 /* Off center the tooltip a bit */
+h1 {
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--all-basic-head-color);
+    align-self: end;                                            /* Sticks to the bottom of its element, on top of the bottom line border */
 }
+
+h2 {
+    font-size: 1.6rem;
+}
+
+h3 {
+    font-size: 1.3rem;
+}
+
 
 
 /* 
-    Buttons, Logos
+    General CSS       (3 of 5)
+    _________________________________________
+
+    Articles
+*/
+
+article {
+    flex: 1;                                            /* Allows articles to share equal space on the screen */
+    overflow-y: auto;                                   /* Allows articles to scroll downwards if there is too much text */
+    overflow-x: hidden;                                 /* Prevents horizontal scrollbar at bottom of the article */
+    
+    padding-left: 2%;                                   /* Move all items of the article away from the left hand edge */
+    padding-right: 2%;                                  /* Reduces the chance of text being overlapped by the right hand side scrollbar */
+
+}
+
+/* Lists */
+article ul {
+    padding-left: 20px;                                 /* Adjust padding to create space for dot points */
+}
+
+
+
+
+
+/* 
+    General CSS       (4 of 5)
     _________________________________________
 
     Buttons, Tiles, Logos
 */
 
+
+
+
+/* draft */
+
 .square-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.square-icon.small {
+    min-width: 3vw;
+    min-height: 3vw;
+    max-width: 3vw;
+    max-height: 3vw;
+    font-size: 1vw;
+}
+
+.square-icon.small > i {
+    font-size: 2vw; 
+}
+
+.square-icon.medium {
+    min-width: 4vw;
+    min-height: 4vw;
+    max-width: 4vw;
+    max-height: 4vw;
+    font-size: 2vw;
+}
+
+.square-icon.medium > i {
+    font-size: 3vw; 
+}
+
+.square-icon.large {
+    min-width: 5vw;
+    min-height: 5vw;
+    max-width: 5vw;
+    max-height: 5vw;
+    font-size: 5vw;
+}
+
+.square-icon.large > i {
+    font-size: 4vw; 
+}
+
+/* .square-icon {
     display: inline-flex;
     min-width: 4vw;
     min-height: 4vw;
@@ -122,7 +167,7 @@ nav .nav-link.activated {
 
 .square-icon > i {
     font-size: 3vw; 
-}
+} */
 
 /* Icons That are interactive */
 .button-icon {
@@ -145,89 +190,49 @@ nav .nav-link.activated {
 
 
 
+/* Programming icons in the first article - CURRENTLY BEING USED */
+.lang-logo {
+    margin-left: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+
 /* 
-    General CSS
+    General CSS       (5 of 5)
     _________________________________________
 
-    Articles
+    Arrows
 */
-
-
-/* General */
-article {
-    flex: 1;                                            /* Allows articles to share equal space on the screen */
-    overflow-y: auto;                                   /* Allows articles to scroll downwards if there is too much text */
-    overflow-x: hidden;                                 /* Prevents horizontal scrollbar at bottom of the article */
-    
-    padding-left: 2%;                                   /* Move all items of the article away from the left hand edge */
-    padding-right: 2%;                                  /* Reduces the chance of text being overlapped by the right hand side scrollbar */
+.arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 50%;
+    user-select: none;
 }
 
-/* Lists */
-article ul {
-    padding-left: 20px;                                 /* Adjust padding to create space for dot points */
-}
+.arrow.disabled {display: none;}                  /* When overlay is active, the section arrows become disabled. */
+.arrow.prev { left: 0; }                          /* positions it to the left edge of its containing element. */
+.arrow.next { right: 0; }                         /* positions it to the right edge of its containing element. */
 
-/* Overlay Borders */
-article.for-overlay {
-    border: 5px solid var(--tile-basic-background-color);   /* Adds a border around the articles with a lighter colour */
-    border-radius: 10px;                                    /* Gives the borders curved edges */
-    background-color: var(--article-background-color);      /* Gives background colour to the overlay articles. */
-}
 
+.arrow.prev.for-overlay, .arrow.next.for-overlay {
+    background-color: rgba(0, 0, 0, 0.8);   /* shows background of slideshow arrow when mouse hovers.*/
+}
 
 
 /* 
-    General CSS
+    Main       (1 of 1)
     _________________________________________
 
-    Headings
-*/
-
-h1, h2, h3 {
-    display: inline-block;
-    min-width : 100%;
-    color: var(--all-basic-head-color);
-    margin-bottom: 10px;
-
-    position: sticky;                                       /* Always keep at the top of the article */
-    top: 0;                                                 /* Required to keep the heading "sticky" to the top */
-    margin: 0;                                              /* Stops the h2 element from moving when scrolling is performed */
-    background-color: var(--article-background-color);      /* Makes scrolling text disappear behind the heading */
-    align-self: end;
-}
-
-h1 {
-    font-size: 2.5rem;
-    border-bottom: 2px solid var(--all-basic-head-color)
-}
-
-h2 {
-    font-size: 1.6rem;
-}
-
-h3 {
-    font-size: 1.3rem;
-}
-
-
-
-
-/* 
-    General CSS
-    _________________________________________
-
-    Wrapper, Containers
-*/
-
-
-
-
-
-/* 
-    Part 0 of 5     -       All Parts
-    _________________________________________
-
+    Top levels and containers
 */
 
 
@@ -273,59 +278,6 @@ h3 {
     justify-content: space-between; 
 }
 
-
-
-/* 
-    Part 1 of 5     -       Palette
-    _________________________________________
-*/
-
-
-
-/* 
-    Part 2 of 5     -       Navigation Bar
-    _________________________________________
-*/
-
-
-
-
-/* 
-    Part 3 of 5     -       Heading
-    _________________________________________
-
-*/
-
-
-
-
-
-/* 
-    Part 4 of 5     -       Filter Bar
-    _________________________________________
-
-    (General)
-*/
-
-
-
-/* .filter-bar > .button-icon {
-    background-color: red;
-} */
-
-
-
-
-
-
-
-/* 
-    Part 5 of 5     -       Section (Main Content)
-    _________________________________________
-
-    (General)
-*/
-
 /* Specific requirements for the container that holds the jobs and portfolio tiles*/
 .container.for-tile {
     display: grid;              /* Overwrites container flex display */
@@ -342,12 +294,98 @@ h3 {
 } 
 
 
+/* Two items side by side. Generally and icon and information */
+.pair-container {
+    display: flex;                  /* Use flexbox to align items */
+    align-items: center;            /* Align items vertically */
+    margin-top: 5px;             /* Adjust spacing between pairs */
+    margin-bottom: 5px;             /* Adjust spacing between pairs */
+}
+
+.pair-container > *:first-child {
+    margin-right: 10px;             /* Add margin to the first child element in each pair */
+}
+
 
 /* 
-    Part 5 of 5     -       Section (Main Content)
+    Bars       (1 of 3)
     _________________________________________
 
-    Tiles - General
+    Navigation Bars
+*/
+
+nav {
+    background-color: var(--nav-basic-background-color);    /* Ensures Background for both PC and Mobile */
+    padding-left: 2%;                                       /* Ensures the h1 underline element doesnt touch the edges (mobile format) */
+    padding-right: 2%;
+}
+
+/* text styles inside the navbar */
+nav .nav-link {
+    padding-top: 2%;
+    padding-bottom: 1%;
+    text-decoration: none;                      /* Removes all natural formatting ie: underlines */
+    font-weight: bold;                          /* Make the text bold for emphasis */
+    transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
+    color: var(--nav-basic-font-color);         /* Standard inactive colour of nav text */
+    font-size: calc(100% + 0.9vw);            /* Adaptive font size of the naviation words */
+}
+
+nav .nav-link:hover,
+nav .nav-link.activated {
+    color: var(--nav-active-font-color);  
+}
+
+
+/* 
+    Bars       (2 of 3)
+    _________________________________________
+
+    Filter Bars
+*/
+
+.filter-bar {
+    display: inline-flex;                           /* Allows us to set direction to row - for a horizontal filter */
+    flex-direction: row;                            /* Make the horizontal filter happen */
+    list-style-type: none;                          /* Move the list style markings */
+    gap: 10%                                        /* Space the filter items away from each other */
+}
+
+/* 
+    Bars       (3 of 3)
+    _________________________________________
+
+    ToolTips on Filter Bar hovering
+*/
+
+.button-icon:hover::before {
+    content: attr(title);               /* The overlay content is the "title" attribute of the li element */
+    position: absolute;
+    background: #333;
+    color: #fff;
+    white-space: nowrap;
+    padding: 5px;
+    font-size: 14px;
+    bottom: 70%;                        /* Position the tooltip above the icon */
+    left: 50%;                          /* Center the tooltip horizontally */
+    transform: translateX(-50%);        /* Center the tooltip horizontally */
+    visibility: hidden;                 /* hidden by default */
+    z-index: 9999;
+}
+
+
+.button-icon:hover::before {
+    visibility: visible;
+    opacity: 1;                         /* How seethrough the tooltip is */
+    margin-bottom: 0px;                /* Space away the tooltip from the filter button */
+    margin-left: -15px;                 /* Off center the tooltip a bit */
+}
+
+/* 
+    Tiles       (1 of 2)
+    _________________________________________
+
+    General
 */
 
 
@@ -383,11 +421,17 @@ h3 {
 }
 
 
+/* 
+    Tiles       (2 of 2)
+    _________________________________________
+
+    Tile Layout
+*/
+
 /* Logo container */
 .tile > div:first-child {
     grid-column: 1 / span 1;
     grid-row: 1 / 4;
-    /* background-color: aqua; */
 
     display: flex;
     flex-direction: column;
@@ -398,15 +442,12 @@ h3 {
     color: inherit;
 
     margin-top: 20%;
-
-
 }
 
 /* Adjust spacing between child elements */
 .tile > div:first-child > * {
-    margin-bottom: 10px; /* Adjust this value to set the spacing between items */
+    margin-bottom: 10px;
 }
-
 
 /* Tile Header */
 .tile > p:nth-child(2) {
@@ -414,48 +455,31 @@ h3 {
     grid-row: 1 / span 1;                       /* Starts at the top of the tile, and fills the top 50% of the height */
     font-weight: 900;
     align-self: center;
-
 }
-
 
 /* Tile Desc */
 .tile > p:nth-child(3) {
     grid-column: 2 / span 1;                    /* Placed in the second column (out of 2 columns) */
     grid-row: 2 / span 2;                       /* Starts at the tiles middle, and fills the bottom 50% of the tile */
     align-self: center;
-    text-align: center; /* Horizontally center the text */
+    text-align: center;                         /* Horizontally center the text */
 }
 
 
-
-
 /* 
-    Tiles
+    Overlays    (1 of 3)
     _________________________________________
 
-    Tiles - Experience
+    General
 */
 
-/* 
-    Tiles
-    _________________________________________
+#top-overlay-view article {
+    padding-left: 0%;
+    padding-right: 0%;
+}
 
-    Tiles - Portfolio
-*/
-
-
-
-
-
-
-/* 
-    Part 5 of 5     -       Section (Main Content)
-    _________________________________________
-
-    Overlay - General
-*/
-
-dialog {
+/* Main element that covers the rest of the website */
+#top-overlay-view { 
     display: inline-grid;               /* Default display is non visible. Display is modified when class becomes "active" */
     position: fixed;                    /* Positions the overlay relative to the browser window and does not scroll with the page */
     top: 0;
@@ -469,38 +493,60 @@ dialog {
     min-height: 100vh;                  /* To cover the entire viewscreen */ 
 }
 
+/* Second level. Container that holds all the articles */
+#top-overlay-view > div {
+    display: grid;                      /* Using Grid, we can make the articles form a correct layout */
+    position: relative;                 /* Allows the close button to be positioned inside this element */
+    background-color: var(--article-background-color);
+
+    min-width: 80vw;                   /* To cover the entire viewscreen except for the outer borders */ 
+    min-height: 90vh;                  /* To cover the entire viewscreen except for the outer borders */ 
+    max-width: 80vw;                   /* To cover the entire viewscreen except for the outer borders */ 
+    max-height: 90vh;                  /* To cover the entire viewscreen except for the outer borders */ 
+
+    border: 10px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+}
+
 
 /* Overlay close button */
-dialog .closeBtn {
-    position: fixed;                /* Forces the close button to be in the top/right of the overlay */
-    top: 10px;
-    right: 10px;
+#top-overlay-view .closeBtn {
+    position: absolute;              /* Position the close button relative to its closest positioned ancestor */
+    top: 10px;                       /* Position it in the top-right corner */
+    right: 10px;                     /* Position it in the top-right corner */
     cursor: pointer;
-    background-color: #ff0000; /* Red background color */
-    color: #fff; /* White text color */
+    background-color: #ff0000;       /* Red background color */
+    color: #fff;                     /* White text color */
     padding: 5px 10px;
     border-radius: 5px;
+    z-index: 9999;                   /* Ensure it's above other elements */
   }
 
 
 /* 
-    Part 5 of 5     -       Section (Main Content)
+    Overlays    (2 of 3)
     _________________________________________
 
-    Overlay - Experience
+    Experience
 */
-
 
 /* Styles specific to overlay */
 .container.for-overlay.for-experience {
     grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
     grid-template-rows: 30% 1fr;
+    gap: 0;
 }
 
 /* First Article - Experience details */
 .container.for-overlay.for-experience > article:nth-child(1) {
-    grid-column: 1 / span 3;                           /* Cover 75% of the top row */
+    grid-column: 1 / span 4;                                /* Cover 100% of the top row */
     grid-row: 1 / span 1;
+    overflow-x: initial;                                    /* Remove overflow from original article*/
+    overflow-y: initial;                                    /* Remove overflow from original article*/
+    margin-top: 1%;                                         /* Put some distance between top of overlay, and the heading */
+    margin-bottom: 1%;                                      /* Put some distance between the bottom of the information article, and the "duties" */
+    border-bottom: 2px solid var(--all-basic-head-color);   /* Adds a seperation line between this article and the duties/softwares */
+    margin-right: 2%;                                       /* Stops the border line touching the right side of the overlay */
 }
 
 /* Second Article - Duties */
@@ -515,38 +561,40 @@ dialog .closeBtn {
     grid-row: 2 / span 1;                               /* Start from the second row and span 1 row */
 }
 
+
 /* 
-    Overlays
+    Overlays    (3 of 3)
     _________________________________________
 
-    Overlay - Portfolio
+    Portfolio
 */
 
 
 /* Styles specific to overlay */
 .container.for-overlay.for-portfolio {
-    grid-template-columns: 30% 70%;
-    grid-template-rows: auto 1fr;
+    grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
+    grid-template-rows: 30% 1fr;
+    gap: 0;
 }
 
 /* First Article - Description of portfolio */
 .container.for-overlay.for-portfolio > article:nth-child(1) {
-    grid-column: 1 / span 1;
-    height: 100%;
-    width: 100%;
+    grid-column: 1 / span 4;                                /* Cover 100% of the top row */
+    grid-row: 1 / span 1;
+    overflow-x: initial;                                    /* Remove overflow from original article */
+    overflow-y: initial;                                    /* Remove overflow from original article */
+    margin-top: 1%;                                         /* Put some distance between top of overlay, and the heading */
+    margin-bottom: 1%;                                      /* Put some distance between the bottom of the information article, and the "duties" */
+    border-bottom: 2px solid var(--all-basic-head-color);   /* Adds a seperation line between this article and the duties/softwares */
+    margin-right: 2%;                                       /* Stops the border line touching the right side of the overlay */
 }
 
 /* Second Article - Slideshow images for portfolio */
 .container.for-overlay.for-portfolio > article:nth-child(2) {
-    grid-column: 2 / span 1;
-    position: relative;
-    padding-left: 0%;                       /* Remove initial padding for article */
-    padding-right: 0%;                      /* Remove initial padding for article */
-    height: 100%;
-    width: 100%;
-
-    min-height: 70vh;
-    max-height: 70vh;
+    grid-column: 1 / span 4;                /* Cover 100% of the bottom row */
+    grid-row: 2 / span 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 
@@ -559,12 +607,6 @@ dialog .closeBtn {
 }
 
 
-/* Programming icons in the first article */
-.lang-logo {
-    margin-left: 20px;
-    height: 50px;
-    width: 50px;
-}
 
 .portfolio-image {
     display: none;
@@ -578,6 +620,7 @@ dialog .closeBtn {
 
 .portfolio-image.activated {
     display: block;
+
 }
 
 

@@ -1,4 +1,5 @@
 import IconLinkView from "./IconLinkView.js";
+import StaticGetIcon from "./StaticGetIcon.js";
 // Whenever a Tile() is clicked, an Overlay() will appear to give more detailed information about the job/project
 
 class OverlayView {
@@ -119,32 +120,50 @@ class ExperienceOverlayView extends OverlayView {
     generateElement() {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} for-experience">
-                <div class="container for-overlay for-experience" id="${this.classType.toLowerCase()}-wrapper">
-                    <article id="experience-information" class="for-overlay for-experience">
+            <dialog id="top-overlay-view" class="for-experience">
+                <div id="${this.id}" class="container for-overlay for-experience" >
+
+                    <article>
                         <h3>${this.data.position}</h3>
-                        <p>${this.data.period}</p>
-                        <p>${this.data.company}</p>
-                        <p>${this.data.address}</p>
-                        <p>${this.data.extraInfo}</p>
+
+                        <div class="pair-container">
+                            ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
+                            <strong><p>${this.data.period}</p></strong>
+                        </div>
+
+                        <div class="pair-container">
+                            ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
+                            <strong><p>${this.data.company}</p></strong>
+                        </div>
+
+                        <div class="pair-container">
+                            ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
+                            <strong><p>${this.data.address}</p></strong>
+                        </div>
+
+                        <div class="pair-container">
+                            ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
+                            <strong><p>${this.data.extraInfo}</p></strong>
+                        </div>
                     </article>
 
-                    <article class="for-overlay for-experience">
-                        <h3>Duties</h3>
-                        <ul>${this.addDuties()} </ul> 
+                    <article>
+                        <h3>Duties:</h3>
+                        <ul>${this.addDuties()} </ul>
                     </article>
 
-                    <article class="for-overlay for-experience">
-                        <h3>Softwares</h3>
+                    <article>
+                        <h3>Softwares:</h3>
                         <ul>${this.addSoftwares()} </ul> 
                     </article>
 
-                    <span class="closeBtn for-overlay for-experience" id="experience-close-btn">x</span>
+                    <span id="experience-close-btn" class="closeBtn for-overlay"> x</span>
                 </div>
             </dialog>
         `.trim();
         return newElement.firstElementChild
     };
+
 
 //****** Prepares each job.duty item as a list element ****** 
     addDuties() {
@@ -186,44 +205,38 @@ class PortfolioOverlayView extends OverlayView {
         this.addLocalEventListeners()
     };
 
+
+
 //****** Creates the Overlay element for Portfolio ****** 
     generateElement() {
         // Create image slideshow
         const slideshow = new Slideshow(this.images);
-        // this.element.querySelector("#portfolio-wrapper").append(slideshow.element)
-
-        console.log(slideshow)
-        console.log(slideshow.element)
 
         // Create the element
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            <dialog id="${this.classType}-${this.className}" class="${this.className.toLowerCase()} for-portfolio">
-                <div id="${this.classType.toLowerCase()}-wrapper" class="container for-overlay for-portfolio">
+            <dialog id="top-overlay-view" class="for-portfolio">
+                <div id="${this.id}" class="container for-overlay for-portfolio" >
 
-                    <article id="project-information" class="for-overlay">
+                    <article>
+                        <h3>${this.name}</h3>
 
-                        <div class="split-container">
-                            <h3 class="portfolio-project-title for-overlay">${this.name}</h3>
-                            <div class="for-icons for-overlay">${this.addProgrammingLogos()}</div>
+                        <div class="pair-container">
+                            <strong><p>${"Github Repository:"}</p></strong>
+                            ${ StaticGetIcon.generateLinkIconElement("Github", this.url, "large").outerHTML}
                         </div>
 
-                        <br>
-
-                        <div class="split-container">
-                            <p>Git Repo:</p>
-                            ${this.addIcon()}
+                        <div class="pair-container">
+                            <strong><p>${"Languages:"}</p></strong>
+                            ${this.addProgrammingLogos().map(icon => icon.outerHTML).join('')}
                         </div>
 
-                        <br>
-
-                        <p class="for-overlay">${this.summaryLarge}</p>
-                        
+                        <p class="for-overlay">${this.summaryLarge}</p>     
                     </article>
+                    
+                        ${slideshow.element.outerHTML}
 
-                    ${slideshow.element.outerHTML}
-
-                    <span class="closeBtn for-overlay" id="portfolio-close-btn">x</span>
+                    <span id="portfolio-close-btn" class="closeBtn for-overlay">x</span>
                 </div>
             </dialog>
         `.trim();
@@ -233,17 +246,9 @@ class PortfolioOverlayView extends OverlayView {
 
 //****** Adds programming logos to the portfolio Overlay ******
     addProgrammingLogos() {
-        return this.languages.map(language => `<img src="${`imgLogos/${language}.svg`}" alt="${language}" class="lang-logo">`).join('');
+        return this.languages.map(language => StaticGetIcon.generateDisplayIconElement(language, "large"));
     };
 
-//****** Adds Github Icon (Just used the same code from "ArticleView") ******
-    addIcon() {
-            const tempEl = document.createElement('div');
-            const icon1 = new IconLinkView("Github" , this.name, this.url);
-            const linebreak = ''
-            tempEl.append(icon1.element)
-            return tempEl.innerHTML;
-    };
 
 //****** Local event listener(s) that are contained only within the OverlayView() class ****** 
     addLocalEventListeners() {
@@ -268,8 +273,20 @@ class Slideshow {
     };
 
 //****** Generates a slideshow element that will be added to the Portfolio Overlay class ****** 
+    // generateElement() {
+    //     // Create the element
+    //     const newElement = document.createElement('div');
+    //     newElement.innerHTML = `
+    //         <article id="project-slideshow" class="for-overlay for-portfolio">
+    //             <button class="arrow prev for-overlay for-portfolio">❮</button>
+    //             ${this.addImages()}
+    //             <button class="arrow next for-overlay for-portfolio">❯</button>
+    //         </article>
+    //     `.trim();
+    //     return newElement.firstElementChild
+    // };
+
     generateElement() {
-        
         // Create the element
         const newElement = document.createElement('div');
         newElement.innerHTML = `
