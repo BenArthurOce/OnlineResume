@@ -1,7 +1,7 @@
 import JSONReader from '../data/JSONReader.js';
 import Dictionary from '../data/Dictionary.js';
 
-import NavBarObject from './NavBarObject.js';
+import NavBarObject from './NavbarObject.js';
 import NavLinkObject from './NavlinkObject.js';
 
 import {IntroductionFilterBarObject, EducationFilterBarObject, SkillFilterBarObject, ExperienceFilterBarObject, PortfolioFilterBarObject} from './FilterBarObject.js';
