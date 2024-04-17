@@ -79,12 +79,12 @@ class SectionView {
 
 
 //
-//  Introduction
+//  About
 //
 class IntroductionSectionView extends SectionView {
     constructor(index) {
         super(index);
-        this.classType = "Introduction";
+        this.classType = "About";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };
@@ -165,7 +165,7 @@ class ExperienceSectionView extends SectionView {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
             <section id="top-section-view" class="section-display container for-section ">
-                <div id="${this.id}" class="container for-tile">
+                <div id="${this.id}" class="container for-tile for-experience">
                 </div>
             </section>
         `.trim();
@@ -189,7 +189,7 @@ class PortfolioSectionView extends SectionView {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
             <section id="top-section-view" class="section-display container for-section ">
-                <div id="${this.id}" class="container for-tile">
+                <div id="${this.id}" class="container for-tile for-portfolio">
                 </div>
             </section>
         `.trim();

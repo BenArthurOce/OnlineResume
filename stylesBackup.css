@@ -243,25 +243,7 @@ section.activated {
     } */
 
     
-    .for-pc {display: none;}                            /* Hide any elements with a "for-pc" tag */
-    .for-mobile {display: unset;}                       /* Display all elements with a "for-mobile" tag (Code may not be required */
 
-    article {display: none;}                            /* All articles on mobile are hidden by default */
-    article.activated {display: block;}                 /* Only Activated Articles are displayed on mobile */
-
-    article {
-        font-size: calc(80% + 0.9vmin);
-        line-height: calc(150% + 0.9vmin);
-    }
-    
-    /* ----------------------------- */
-    /* -- ARTICLE/TILE CONTAINERS -- */
-    /* ----------------------------- */
-    .section-display > .container {
-        grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
-        grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
-        gap: 4%;
-    }
 
 
 
@@ -288,33 +270,7 @@ section.activated {
         padding: 14px 16px;
     }
 
-    /* ----------------------------- */
-    /* ------ FILTER BUTTONS ------- */
-    /* ----------------------------- */
 
-    .menu-filter.for-article {
-        display: inline-flex;
-        /* align-content: space-between; */
-    }
-
-    .filter-list.for-article {
-        display: inline-flex;
-        /* align-content: space-between; */
-    } 
-
-    .filter-button.for-article {
-        display: inline-flex;
-        font-size: 4vw; 
-        min-width: 30%;
-        min-height: 4vh;
-    }
-
-    .filter-button.for-tile {
-        display: inline-flex;
-        font-size: 2vh;  
-        min-width: 4vh;
-        min-height: 4vh;
-    }
 
     /* ----------------------------- */
     /* ----------- TILES ----------- */

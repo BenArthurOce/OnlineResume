@@ -34,7 +34,7 @@ class FrontPageObject {
         this.#dictionary        = new Dictionary();
         this.#paletteObject     = null
         this.#sectionKeys       = ['About', 'Skills', 'Education', 'Experience', 'Portfolio'];
-        this.#navigationTitles  = ['About Me', 'Skills', 'Education', 'Experience', 'Portfolio'];
+        this.#navigationTitles  = ['About', 'Skills', 'Education', 'Experience', 'Portfolio'];
         this.#navigationBar     = null
         this.#allFilterBars     = null;
         this.#allSections       = null;
@@ -220,7 +220,7 @@ class FrontPageObject {
                 //console.log("-----------------INTRODUCTION---------------------")
                 filter = this.returnSingleFilterBar(0);
                 keywords = this.returnIntroductionTypes()
-                filter.appendSubObject(new ArticleFilterButtonObject(index=0, title="About Me",     isActive=false));
+                filter.appendSubObject(new ArticleFilterButtonObject(index=0, title="Introduction", isActive=false));
                 filter.appendSubObject(new ArticleFilterButtonObject(index=1, title="Key Skills",   isActive=false));
                 break;
 
@@ -316,7 +316,7 @@ class FrontPageObject {
                 //console.log("-----------------INTRODUCTION-----------------")
                 info = this.dict("about");
                 section = this.returnSingleSection(0);
-                section.appendSubObject(new IntroductionArticleObject(index=0, title="About Me",    data=info,              isActive=false));
+                section.appendSubObject(new IntroductionArticleObject(index=0, title="About",    data=info,              isActive=false));
                 section.appendSubObject(new IntroductionArticleObject(index=1, title="Key Skills",  data=info["keySkills"], isActive=false));
                 break;
 

@@ -16,6 +16,8 @@ import { ExperienceOverlayView,  PortfolioOverlayView } from '../views/OverlayVi
 
 import StaticGetIcon from '../views/StaticGetIcon.js';
 
+import {PrevArrowView, NextArrowView} from '../views/ArrowView.js';
+
 
 class View {
     constructor() {
@@ -96,10 +98,16 @@ class View {
         //
         this.section = await this.createSection(data);
 
+
+        // PrevArrowView, NextArrowView
+        // createArrows
+        this.createArrows()
+
+
         //
         //  Render
         //
-        this.app.append(this.palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element);
+        this.app.append(this.palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element, this.prevArrow.element, this.nextArrow.element);
         this.updateColorScheme(this.palette.currentCSSName);
 
         //
@@ -147,6 +155,18 @@ class View {
         }
 
         //
+        //  Bind Arrow Clicks
+        //
+
+        this.prevArrow.element.addEventListener("click", () => {
+            this.prevArrow.callback()
+        });
+        this.nextArrow.element.addEventListener("click", () => {
+            this.nextArrow.callback()
+        });
+
+
+        //
         //  Complete
         //
         console.log("--------------rendering finished--------------")
@@ -158,6 +178,10 @@ class View {
         const overlay = this.returnActiveOverlay(data)
         // console.log(this.returnActiveOverlay(data))
 
+
+        //
+        //  If there is an active overlay, generate the overlay
+        //
         if (overlay) {
             let index; let data; let isActive; let newOverlay;
             if (this.section.classType === "Experience") {
@@ -179,42 +203,6 @@ class View {
             };
           this.app.append(newOverlay.element)
         }
-
-
-        // const newIcon1 = StaticGetIcon.generateElement("Internet")
-        // const newIcon2= StaticGetIcon.generateElement("Calendar")
-        // const newIcon3 = StaticGetIcon.generateElement("Location")
-        // const newIcon4 = StaticGetIcon.generateElement("Building")
-        // const newIcon5 = StaticGetIcon.generateElement("Exclamation")
-        // const newIcon6 = StaticGetIcon.generateElement("Profile")
-        // const newIcon7 = StaticGetIcon.generateElement("All")
-        // // console.log(newIcon)
-
-        const newIcon0 = StaticGetIcon.generateDisplayIconElement("JavaScript")
-
-        
-
-        // const newIcon1  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
-        // const newIcon2  = StaticGetIcon.generateLinkIconElement("Github", "https://www.google.com/")
-        // const newIcon3  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
-        // const newIcon4  = StaticGetIcon.generateLinkIconElement("Exclamation", "https://www.google.com/")
-        // const newIcon5  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
-        // const newIcon6  = StaticGetIcon.generateLinkIconElement("Location", "https://www.google.com/")
-        // const newIcon7  = StaticGetIcon.generateLinkIconElement("All", "https://www.google.com/")
-
-        // const newIcon8 = StaticGetIcon.generateButtonElement("Exclamation")
-        // const newIcon9 = StaticGetIcon.generateButtonElement("Shallamah Goolamah")
-        // this.app.append(newIcon0) 
-        // this.app.append(newIcon1) 
-        // this.app.append(newIcon2)
-        // this.app.append(newIcon3)
-        // this.app.append(newIcon4)
-        // this.app.append(newIcon5)
-        // this.app.append(newIcon6)
-        // this.app.append(newIcon7)
-        // this.app.append(newIcon8)
-        // this.app.append(newIcon9)
-
     };
 
 
@@ -280,13 +268,24 @@ class View {
         this.handleOverlayStart(tileClicked.index)
     };
 
+    onLeftArrowClick(buttonClicked) {
+        console.log("VIEW: onLeftArrowClick");
+        this.handleIndexChange("-1")
+
+    };
+
+    onRightArrowClick(buttonClicked) {
+        console.log("VIEW: onRightArrowClick");
+        this.handleIndexChange("+1")
+    };
+
 
 //****************************
 //****** Binding Events ******
 //****************************
 
     bindOnLoad(handler) {
-        console.log("VIEW: bindOnLoad");
+        // console.log("VIEW: bindOnLoad");
         this.handleOnLoad = handler;
     };
 
@@ -378,9 +377,9 @@ class View {
         let index; let title; let isActive; let callback;
 
         switch (key) {
-            case "Introduction":
+            case "About":
                 //console.log("-----------------CREATE FILTER------------------")
-                //console.log("-----------------INTRODUCTION-------------------")
+                //console.log("---------------------ABOUT------------------------")
                 filter = new IntroductionFilterBarView(0);
                 activeBar.buttons.forEach((button, i) => {
                     filter.appendSubObject(new ArticleFilterButtonView(
@@ -468,9 +467,9 @@ class View {
         let index; let title; let data; let isActive; let callback
 
         switch (key) {
-            case "Introduction":
+            case "About":
                 //console.log("-----------------CREATE SECTION-----------------")
-                //console.log("-----------------INTRODUCTION-------------------")
+                //console.log("---------------------ABOUT------------------------")
                 section = new IntroductionSectionView(information);
                 activeSubObjects.forEach((article, i) => {
                     section.appendSubObject(new IntroductionArticleView(
@@ -545,6 +544,12 @@ class View {
         };
         section.toggleOn()
         return section
+    };
+
+//****** Creates Arrows ******
+    createArrows() {
+        this.prevArrow = new PrevArrowView(0, this.onLeftArrowClick.bind(this))
+        this.nextArrow = new NextArrowView(1, this.onRightArrowClick.bind(this))
     };
 
 

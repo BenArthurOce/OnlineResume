@@ -38,7 +38,7 @@ class HeadingView {
         const newElement = document.createElement('div');
         newElement.innerHTML = `
             <div id="top-heading-view" class="container for-heading">
-                <h1 class="for-pc">${this.heading}</h1>
+                <h1>${this.heading}</h1>
             </div>
         `.trim();
         return newElement.firstElementChild

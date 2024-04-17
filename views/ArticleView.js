@@ -91,24 +91,24 @@ class ArticleView {
 //****** Command to make this Object "visible" ******
     toggleOn() {
         this.isActive = true;
-        // this.element.classList.add("activated")
+        this.element.classList.add("activated")     // Needed for mobile
     };
 
 //****** Command to make this Object "invisible" ******
     toggleOff() {
         this.isActive = false;
-        // this.element.classList.remove("activated")
+        this.element.classList.remove("activated")
     };
 };
 
 
 //
-//  Introduction
+//  About
 //
 class IntroductionArticleView extends ArticleView {
     constructor(index, title, data, isActive) {
         super(index, title, data, isActive);
-        this.classType = "Introduction";
+        this.classType = "About";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
         this.element = this.generateElement();
 
@@ -122,14 +122,14 @@ class IntroductionArticleView extends ArticleView {
             <article id="${this.id}" dataFilter="${this.title}"> 
                 <h2 class="for-pc">${this.title}:</h2>
                 ${
-                    this.title === "About Me" ? 
+                    this.title === "About" ? 
                     StaticGetIcon.generateLinkIconElement("Envelope", this.data.email, "medium").outerHTML +
                     StaticGetIcon.generateLinkIconElement("LinkedIn", this.data.linkedin, "medium").outerHTML +
                     StaticGetIcon.generateLinkIconElement("Github", this.data.github, "medium").outerHTML
                     :
                     ""
                 }
-                ${this.title === "About Me" ? `<p> ${this.data.introduction} </p>` : ''}
+                ${this.title === "About" ? `<p> ${this.data.introduction} </p>` : ''}
                 ${this.title === "Key Skills" ? `<ul> ${this.addInfoList()} </ul>` : ''}
             </article>
         `.trim();

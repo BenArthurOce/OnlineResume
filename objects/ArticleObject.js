@@ -89,7 +89,7 @@ class ArticleObject {
 class IntroductionArticleObject extends ArticleObject {
     constructor(index, title, data, isActive) {
         super(index, title, data, isActive);
-        this.classType = "Introduction";
+        this.classType = "About";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
     };
 };

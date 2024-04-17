@@ -1,5 +1,7 @@
 //
 
+import StaticGetIcon from "./StaticGetIcon.js";
+
 class NavLinkView {
     #className;                     //  The name of the class
     #classType;                     //  The name of the subclass
@@ -83,11 +85,28 @@ class NavLinkView {
 //****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
+        this.printToTerminal()
         newElement.innerHTML = `
-        <a href="#" data-index="${this.index}" class="nav-link">${this.title}</a>
+        <a href="#" data-index="${this.index}" class="nav-link">
+            <p class="for-pc">
+                ${this.title}
+            </p>
+            <p class="for-mobile">
+                ${StaticGetIcon.generateDisplayIconElement(this.title, "medium").outerHTML}
+            </p>
+            
+        </a>
          `;
          return newElement.firstElementChild
     };
+
+    // generateElement() {
+    //     const newElement = document.createElement('div');
+    //     newElement.innerHTML = `
+    //     <a href="#" data-index="${this.index}" class="nav-link">${this.title}</a>
+    //      `;
+    //      return newElement.firstElementChild
+    // };
 
 //****** Command to make this Object "visible" ******
     toggleOn() {

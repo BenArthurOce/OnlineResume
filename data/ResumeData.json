@@ -93,9 +93,9 @@
     {
          "company":         "Borough of Queenscliffe"
         ,"address":         "Learmonth Street, Queenscliffe"
-        ,"position":        "Systems Accountant"
-        ,"period":          "Jun-2023 to Current"
-        ,"extraInfo":       "Contracted part-time basis"
+        ,"position":        "ERP Migration Specialist"
+        ,"period":          "Jun-2023 to Mar 2024"
+        ,"extraInfo":       "Contracted role"
         ,"tags":            ["Programming", "Accounting", "Government"]
         ,"softwares":       [
                                  "Microsoft Dynamics 365 Business Central"
@@ -108,11 +108,11 @@
                                 ,"Various other council related SaaS such as RMS, Councilwise, Greenlight"
                             ]
         ,"duties":          [
-                                "Facilitated the transition to the new accounting system, Business Central, by learning its functionalities and assisting with data migration."
-                                ,"Created custom detailed trial balance reports by combining and analyzing multiple data sources in Excel."
-                                ,"Contributed to process improvement initiatives by identifying opportunities for automation and efficiency gains."
+                                "Participated in transitioning the councils finance system to Dynamics 365 Business Central, by undertaking the internal “resident expert” role and leading all support inquires regarding the platform."
+                                ,"Produced time-saving automation measures through Microsoft Excel and complex formulas, such as custom trial balance reports used throughout the finance team, accelerating budget creations by 20%."
+                                ,"Identified automation opportunities with the Finance Officer to save hours of data input on a weekly basis by using Power Automate to populate general journals."
+                                ,"Offered training and assistance to colleagues on utilizing Business Central, including crafting reference materials, accessible by a Communication site on Sharepoint."
                                 ,"Demonstrated strong analytical skills and attention to detail in handling complex financial data and reconciliations."
-                                ,"Provided training and support to other staff members on using Business Central, including creating documentation for reference."
                                 ,"Managed accounts payable processes, including invoice processing and vendor payments."
                                 ,"Conducted bank reconciliations to ensure accuracy and completeness of financial records."
                             ]

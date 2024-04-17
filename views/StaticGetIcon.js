@@ -29,6 +29,7 @@ class StaticGetIcon {
         , "Car":                { title: "Car",                 icon: "fa fa-car",                  display: "Car" }
         , "Table":              { title: "Table",               icon: "fa fa-table",                display: "Table" }
         , "Bell":               { title: "Bell",                icon: "fa fa-bell",                 display: "Bell" }
+        , "IT":                 { title: "IT",                  icon: "fa fa-desktop",              display: "IT" }
 
         , "Javascript":         { title: "JavaScript",          icon: "imgLogos/Javascript.svg",    display: "JavaScript Logo" }
         , "Python":             { title: "Python",              icon: "imgLogos/Python.svg",        display: "Python Logo" }
@@ -47,7 +48,14 @@ class StaticGetIcon {
         , "SQL":                { title: "SQL",                 icon: "imgLogos/SQL.svg",           display: "SQL Logo" }
         , "tkinter":            { title: "Tkinter",             icon: "imgLogos/tkinter.svg",       display: "Tkinter Logo" }
         , "VBA":                { title: "VBA",                 icon: "imgLogos/VBA.svg",           display: "VBA Logo" }
-      
+
+        , "About":              { title: "About",               icon: "fa fa-user-circle",          display: "Profile Circle Icon" }
+
+        , "Skills":             { title: "Skills",              icon: "fa fa-cogs",                 display: "Skills Cogs" }
+        , "Education":          { title: "Education",           icon: "fa fa-graduation-cap",       display: "Education Graduation Cap" }
+        , "Experience":         { title: "Experience",          icon: "fa fa-briefcase",            display: "Jobs Briefcase" }
+        , "Portfolio":          { title: "Portfolio",           icon: "fa fa-folder-open",          display: "Portfolio Folder Open" }
+    
       };
 
     static getIcon(key) {
@@ -82,7 +90,6 @@ class StaticGetIcon {
             <a class="${"square-icon icon-link"} ${size}" href="${url}" target="_blank" title="${title}">
                 ${icon.includes('.svg') ? `<img src="${icon}" alt="${display}">` : `${icon  ? `<i class="${icon}"></i>` : title}`}
             </a>
-
         `.trim();
         return newElement.firstElementChild
     };
@@ -94,7 +101,7 @@ class StaticGetIcon {
 
         const newElement = document.createElement('div');
         newElement.innerHTML = `
-            ${icon  ? (icon.includes('.svg') ? `<img class="square-icon ${size}" src="${icon}" alt="${display}">` : `<i class="square-icon ${icon}"></i>`) : title}
+            ${icon  ? (icon.includes('.svg') ? `<img class="square-icon ${size}" src="${icon}" alt="${display}">` : `<i class="square-icon ${icon} ${size}"></i>`) : title}
         `.trim();
         return newElement.firstElementChild
     };

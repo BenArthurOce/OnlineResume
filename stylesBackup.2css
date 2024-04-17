@@ -3,7 +3,7 @@
     General CSS       (1 of 5)
     _________________________________________
 
-    Global Variables                    [PC]
+    Global Variables
 */
 
 
@@ -26,23 +26,14 @@ body {
 
 p, ul {
     line-height: calc(150% + 0.9vmin);                  /* Dynamically adjust line spacing based on the screen size */
-    font-size: calc(70% + 0.8vmin);
+    font-size: calc(60% + 0.8vmin);
 }
-
-li {
-    margin: 1px;                        
-}
-
-/* Spacing between list items */
-article > li:not(:first-of-type) { 
-    margin-top: 1.3em; 
-} 
-
-article li:not(:last-of-type) { 
-    margin-bottom: 1.3em; 
-} 
 
 .for-mobile {display: none;}            /* When on normal PC display: Hide any elements with a "for-mobile" tag */
+.filter-bar.for-mobile {display: none;} 
+
+
+
 
 
 
@@ -51,7 +42,7 @@ article li:not(:last-of-type) {
     General CSS       (2 of 5)
     _________________________________________
 
-    Headings                              [PC]
+    Headings
 */
 
 h1, h2, h3 {
@@ -75,12 +66,10 @@ h1 {
 
 h2 {
     font-size: 1.6rem;
-    margin-bottom: 5px;
 }
 
 h3 {
     font-size: 1.3rem;
-
 }
 
 
@@ -89,7 +78,7 @@ h3 {
     General CSS       (3 of 5)
     _________________________________________
 
-    Articles                              [PC]
+    Articles
 */
 
 article {
@@ -109,11 +98,13 @@ article ul {
 
 
 
+
+
 /* 
     General CSS       (4 of 5)
     _________________________________________
 
-    Buttons, Tiles, Logos               [PC]
+    Buttons, Tiles, Logos (For PC)
 */
 
 
@@ -122,41 +113,42 @@ article ul {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 1%
 }
 
 .square-icon.small {
-    font-size: 1.5vmax; 
-    height: 2vmax;
-    width: 2vmax;
-    padding: 1%;            /* When button is activated, gives border around the tile */
+    min-width: 2vw;
+    min-height: 2vw;
+    max-width: 2vw;
+    max-height: 2vw;
+    font-size: 1.5vw; 
 }
 
 .square-icon.small > i {
-    font-size: 1.5vmax; 
+    font-size: 1.5vw; 
 }
 
 .square-icon.medium {
-    font-size: 2vmax;         /* Sizes the text that is not icons */
-    height: 2.5vmax;
-    width: 2.5vmax;
-    padding: 1%;            /* When button is activated, gives border around the tile */
+    min-width: 3vw;
+    min-height: 3vw;
+    max-width: 3vw;
+    max-height: 3vw;
+    font-size: 2vw;
 }
 
 .square-icon.medium > i {
-    font-size: 2vmax;         /* Sizes the text that IS icons */
+    font-size: 2vw; 
 }
 
 .square-icon.large {
-    font-size: 3vmax;
-    height: 3vmax;
-    width: 3vmax;
-    padding: 1%;            /* When button is activated, gives border around the tile */
-
+    min-width: 5vw;
+    min-height: 5vw;
+    max-width: 5vw;
+    max-height: 5vw;
+    font-size: 4vw;
 }
 
 .square-icon.large > i {
-    font-size: 3vmax; 
+    font-size: 4vw; 
 }
 
 
@@ -184,7 +176,7 @@ article ul {
     General CSS       (5 of 5)
     _________________________________________
 
-    Arrows                              [PC]
+    Arrows
 */
 .arrow {
     cursor: pointer;
@@ -282,12 +274,10 @@ article ul {
     align-items: center;            /* Align items vertically */
     margin-top: 5px;             /* Adjust spacing between pairs */
     margin-bottom: 5px;             /* Adjust spacing between pairs */
-    width: 80%;
 }
 
 .pair-container > *:first-child {
-    margin-right: 10%;             /* Add margin to the first child element in each pair */
-    padding: 0%;
+    margin-right: 10px;             /* Add margin to the first child element in each pair */
 }
 
 
@@ -295,7 +285,7 @@ article ul {
     Bars       (1 of 3)
     _________________________________________
 
-    Navigation Bars                     [PC]
+    Navigation Bars
 */
 
 nav {
@@ -312,7 +302,7 @@ nav .nav-link {
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
     color: var(--nav-basic-font-color);         /* Standard inactive colour of nav text */
-    font-size: calc(100% + 0.9vmax);            /* Adaptive font size of the naviation words */
+    font-size: calc(100% + 0.9vw);            /* Adaptive font size of the naviation words */
 }
 
 nav .nav-link:hover,
@@ -325,46 +315,30 @@ nav .nav-link.activated {
     Bars       (2 of 3)
     _________________________________________
 
-    Filter Bars                         [PC]
+    Filter Bars
 */
-
-.filter-bar.for-mobile {display: none;} 
-
-#top-filter-view ul {
-    display: flex
-}
-
-#top-filter-view ul.for-mobile {
-    display: none
-}
-
-
 #top-filter-view {
+    width: 100%;
+    display: inline-flex;
+}
+
+
+
+
+.filter-bar {
     display: inline-flex;                           /* Allows us to set direction to row - for a horizontal filter */
     flex-direction: row;                            /* Make the horizontal filter happen */
     list-style-type: none;                          /* Move the list style markings */
-
+    /* gap: 10%                                         */
+    /* Space the filter items away from each other */
+    gap: 10vw;
 }
-
-
-
-
-
-/* Filter bar inside the top level menu element */
-#top-filter-view ul {
-    flex-wrap: wrap;
-    list-style-type: none;                          /* Move the list style markings */
-    gap: 10%;                                       /* Space the filter items away from each other */
-    width: 100%;
-}
-
-
 
 /* 
     Bars       (3 of 3)
     _________________________________________
 
-    ToolTips on Filter Bar hovering     [PC]
+    ToolTips on Filter Bar hovering
 */
 
 .button-icon:hover::before {
@@ -394,7 +368,7 @@ nav .nav-link.activated {
     Tiles       (1 of 2)
     _________________________________________
 
-    General                              [PC]
+    General
 */
 
 
@@ -434,7 +408,7 @@ nav .nav-link.activated {
     Tiles       (2 of 2)
     _________________________________________
 
-    Tile Layout                         [PC]
+    Tile Layout
 */
 
 /* Logo container */
@@ -479,7 +453,7 @@ nav .nav-link.activated {
     Overlays    (1 of 3)
     _________________________________________
 
-    General                              [PC]
+    General
 */
 
 #top-overlay-view article {
@@ -536,7 +510,7 @@ nav .nav-link.activated {
     Overlays    (2 of 3)
     _________________________________________
 
-    Experience                          [PC]
+    Experience
 */
 
 /* Styles specific to overlay */
@@ -575,7 +549,7 @@ nav .nav-link.activated {
     Overlays    (3 of 3)
     _________________________________________
 
-    Portfolio                              [PC]
+    Portfolio
 */
 
 
@@ -631,73 +605,18 @@ nav .nav-link.activated {
     display: block;
 
 }
-/* Styles for screens smaller than 600px in width */
-/* @media screen and (max-width: 600px) {
-    body {
-      font-size: 14px;
-    }
-  } */
-  
-  /* Styles for screens between 601px and 800px in width */
-  /* @media screen and (min-width: 601px) and (max-width: 800px) {
-    body {
-      font-size: 16px;
-    }
-  } */
-  
-  /* Styles for screens larger than 800px in width */
-  /* @media screen and (min-width: 801px) {
-    body {
-      font-size: 18px;
-    }
-  } */
+
 
 /* ----------------------------- */
 /* --------- TO REVIEW --------- */
 /* ----------------------------- */
-
-
-@media screen and (max-height: 800px) {
-    /* Styles to apply when screen height is 800 pixels or less */
-
-
-
-
-    /* 
-        Tiles       (2 of 2)
-        _________________________________________
-
-        Tile Layout                         [MOBILE]
-    */
-
-    /* Mobile Adjustments for job tile*/
-    .projectSumSmall {display: none;}
-
-
-    /* Mobile Adjustments for project tile*/
-
-    /* Logo container */
-    .tile.for-portfolio > div:first-child {
-        margin-top: 10px;
-        grid-column: 1 / span 3;
-        grid-row: 2 / span 2;
-        flex-direction: row;
-        justify-content: space-around; 
-    }
-
-
-    /* Tile Header */
-    .tile.for-portfolio > p:nth-child(2) {
-        grid-column: 1 / span 3;
-        grid-row: 1 / span 1;
-
-    }
-
-  }
-
-
-  /* @media (max-width: 600px), (max-height: 800px) { */
 @media (max-width: 600px) {
+
+
+    /* #wrapper {
+        padding-left: 5%;
+        padding-right: 5%;
+    } */
 
     
     .for-pc {display: none;}                            /* Hide any elements with a "for-pc" tag */
@@ -709,217 +628,166 @@ nav .nav-link.activated {
     .for-pc {display: none;}                            /* Hide any elements with a "for-pc" tag */
     .for-mobile {display: unset;}                       /* Display all elements with a "for-mobile" tag (Code may not be required */
 
-/* 
-    General CSS       (3 of 5)
-    _________________________________________
+    article {display: none;}                            /* All articles on mobile are hidden by default */
+    article.activated {display: block;}                 /* Only Activated Articles are displayed on mobile */
 
-    Articles                            [MOBILE]
-*/
+    article {
+        font-size: calc(80% + 0.9vmin);
+        line-height: calc(150% + 0.9vmin);
+    }
 
-article {display: none;}                            /* All articles on mobile are hidden by default */
-article.activated {display: block;}                 /* Only Activated Articles are displayed on mobile */
 
-article {
-    font-size: calc(80% + 0.9vmin);
-    line-height: calc(150% + 0.9vmin);
-}
+    
+    
+
+    /* ----------------------------- */
+    /* -- ARTICLE/TILE CONTAINERS -- */
+    /* ----------------------------- */
+    /* .section-display > .container {
+        grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(10%, 1fr));
+        gap: 4%;
+    } */
+
+
+    /* ----------------------------- */
+    /* ------ NAVIGATION BAR ------- */
+    /* ----------------------------- */
+
+    nav > .divsdas.for-mobile {
+        display: flex;                      /* Allows the hamburger menu icon and the heading to be placed side by side */
+        position: relative;                 /* Allows the hamburger menu icon to be positioned next to the heading text */
+    }
+    
+    
+    /* Style the hamburger menu */
+    /* nav .navbar-icon {
+        background-color: var(--nav-basic-background-color);
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: var(--nav-basic-font-color);
+        text-decoration: none;
+        font-size: 17px;
+        padding: 14px 16px;
+    } */
+
+    #top-filter-view > ul {
+        /* display: inline-flex;
+        min-width: 100%;
+        max-width: 100%; */
+        /* justify-content: space-around; */
+        margin: 0;
+    }
+
+
+
+    #top-filter-view > ul > li {
+        margin:0
+        /* display: flex;
+        flex: 1; */
+
+        /* display: inline-flex;
+        font-size: 2vh;
+        min-width: 25%;
+        min-height: 4vh;
+        width: 100%;
+
+        min-width: 4vh;
+    min-height: 4vh; */
+
+        /* display: inline-flex; */
+        /* font-size: 4vw; */
+        /* min-width: 32%; */
+        /* min-height: 4vh; */
+    }
+
+
+
+    /* ----------------------------- */
+    /* ------ FILTER BUTTONS ------- */
+    /* ----------------------------- */
+
+    /* .menu-filter.for-article {
+        display: inline-flex;
+
+    }
+
+    .filter-list.for-article {
+        display: inline-flex;
+
+    } 
+
+    .filter-button.for-article {
+        display: inline-flex;
+        font-size: 4vw; 
+        min-width: 30%;
+        min-height: 4vh;
+    }
+
+    .filter-button.for-tile {
+        display: inline-flex;
+        font-size: 2vh;  
+        min-width: 4vh;
+        min-height: 4vh;
+    } */
 
 
 /* 
     General CSS       (4 of 5)
     _________________________________________
 
-    Buttons, Tiles, Logos           [MOBILE]
+    Buttons, Tiles, Logos           [Mobile]
 */
 
-.square-icon.small {
-    font-size: 1.5vh;         /* Sizes the text that is not icons */
-    height: 3vh;
-    width: 3vh;
+
+
+
+/* .square-icon {
+    margin-right: 10px;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+} */
+
+
+
+/* .square-icon.small {
+    min-width: 2vw;
+    min-height: 2vw;
+    max-width: 2vw;
+    max-height: 2vw;
+    font-size: 1.5vh; 
 }
 
 .square-icon.small > i {
-    font-size: 1.5vh;         /* Sizes the text that IS icons */
-}
+    font-size: 1.5vh; 
+} */
 
 .square-icon.medium {
-    font-size: 2vh;         /* Sizes the text that is not icons */
-    height: 5vh;
-    width: 5vh;
+    min-width: 3vw;
+    min-height: 3vw;
+    max-width: 3vw;
+    max-height: 3vw;
+    font-size: 2vh;
 }
 
 .square-icon.medium > i {
-    font-size: 2vh;         /* Sizes the text that IS icons */
+    font-size: 2vh; 
 }
 
-.square-icon.large {
-    font-size: 3vh;         /* Sizes the text that is not icons */
-    height: 6vh;
-    width: 6vh;
+/* .square-icon.large {
+    min-width: 5vw;
+    min-height: 5vw;
+    max-width: 5vw;
+    max-height: 5vw;
+    font-size: 4vh;
 }
 
 .square-icon.large > i {
-    font-size: 3vh;         /* Sizes the text that IS icons */
-}
-
-
-/* 
-    Main       (1 of 1)
-    _________________________________________
-
-    Top levels and containers           [MOBILE]
-*/
-
-#wrapper {
-    /* 
-    Row 1: Palette
-    -> Move
-    Row 3: Heading (h1)
-    Row 4: Filter (menu)
-    Row 5: Section (main)
-    ->  Row 2: NavBar (nav)
-     */
-     display: grid;
-     height: 100%;
-     grid-template-rows: min-content min-content min-content  minmax(0, 1fr) min-content;
-     overflow: hidden;
-     padding-left: 10%;
-     padding-right: 10%;
- }
-
-
-
- nav {
-    grid-row: 5; /* Place it in the fifth row */
-}
-
-
-
-#wrapper {
-     padding-left: 5%;
-     padding-right: 5%;
- }
-
-
-/* Specific requirements for the container that holds the jobs and portfolio tiles*/
-.container.for-tile.for-experience  {
-    grid-template-rows: repeat(auto-fit, 23%);
-    grid-template-columns: repeat(auto-fit, 48%);
-} 
-
-.container.for-tile.for-portfolio {
-    grid-template-rows: repeat(auto-fit, 18%);
-    grid-template-columns: repeat(auto-fit, 48%);
-} 
-
-
-/* for-portfolio */
-/* 
-    Bars       (1 of 3)
-    _________________________________________
-
-    Navigation Bars                     [MOBILE]
-*/
-
-nav .nav-link {
-    padding: 0
-}
-
-
-/* 
-    Bars       (2 of 3)
-    _________________________________________
-
-    Filter Bars                         [MOBILE]
-*/
-
-/* Filter bar inside the top level menu element */
-#top-filter-view ul {
-    display: flex;
-    gap: 5%;                                       /* Space the filter items away from each other */
-}
-
-#top-filter-view li {
-    padding-top: 1%;
-    padding-bottom: 1%;
-}
-
-#top-filter-view ul {
-    display: inline-flex;
-}
-
-#top-filter-view ul.for-mobile {
-    display: inline-flex;
-   
-}
-
-.filter-bar.for-mobile li {
-    width: 25%;
-}
-
-
-
-/* 
-    Tiles       (1 of 2)
-    _________________________________________
-
-    General                             [MOBILE]
-*/
-
-.tile p {
-    font-size: calc(50% + 0.5vmin);                 /* Scaling font size of Tile */
-}
-
-
-/* 
-    Tiles       (2 of 2)
-    _________________________________________
-
-    Tile Layout                         [MOBILE]
-*/
-
-/* Mobile Adjustments for job tile*/
-.projectSumSmall {display: none;}
-
-
-/* Mobile Adjustments for project tile*/
-
-/* Logo container */
-.tile.for-portfolio > div:first-child {
-    margin-top: 10px;
-    grid-column: 1 / span 3;
-    grid-row: 2 / span 2;
-    flex-direction: row;
-    justify-content: space-around; 
-}
-
-
-/* Tile Header */
-.tile.for-portfolio > p:nth-child(2) {
-    grid-column: 1 / span 3;
-    grid-row: 1 / span 1;
-
-}
-
-
-/* --Exp Tiles */
-
-/* Tile Header */
-.tile.for-experience > p:nth-child(2) {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-            line-clamp: 2; 
-    -webkit-box-orient: vertical;
-}
-
-/* Tile Desc */
-.tile.for-experience > p:nth-child(3) {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-            line-clamp: 2; 
-    -webkit-box-orient: vertical;
-}
+    font-size: 4vh; 
+} */
 
 }

@@ -89,18 +89,8 @@ class NavBarView {
         newElement.setAttribute("id","top-nav-view");
 
         newElement.innerHTML = `
-            <div class="for-pc">
-                <div class="container">
-                </div>
-            </div>
-
-            <div class="for-mobile">
-                <h1 class="navbar-title">${this.displayHeading}</h1>
-
-                <a href="#" class="navbar-icon">
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
+        <div class="container">
+        </div>
          `;
         return newElement.cloneNode(true);
     };

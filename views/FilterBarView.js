@@ -75,12 +75,12 @@ class FilterBarView {
 };
 
 //
-//  Introduction
+//  About
 //
 class IntroductionFilterBarView extends FilterBarView {
     constructor(index) {
         super(index);
-        this.classType = "Introduction";
+        this.classType = "About";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
         this.element = this.generateElement();
     };

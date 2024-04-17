@@ -126,25 +126,35 @@ class ExperienceOverlayView extends OverlayView {
                     <article>
                         <h3>${this.data.position}</h3>
 
+
+                        
                         <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
-                            <strong><p>${this.data.period}</p></strong>
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
+                                <strong><p>${this.data.company}</p></strong>
+                            </div>
+
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
+                                <strong><p>${this.data.address}</p></strong>
+                            </div>
                         </div>
 
+                        
                         <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
-                            <strong><p>${this.data.company}</p></strong>
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
+                                <strong><p>${this.data.period}</p></strong>
+                            </div>
+
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
+                                <strong><p>${this.data.extraInfo}</p></strong>
+                            </div>
                         </div>
 
-                        <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
-                            <strong><p>${this.data.address}</p></strong>
-                        </div>
 
-                        <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
-                            <strong><p>${this.data.extraInfo}</p></strong>
-                        </div>
+
                     </article>
 
                     <article>
@@ -222,13 +232,15 @@ class PortfolioOverlayView extends OverlayView {
                         <h3>${this.name}</h3>
 
                         <div class="pair-container">
-                            <strong><p>${"Github Repository:"}</p></strong>
-                            ${ StaticGetIcon.generateLinkIconElement("Github", this.url, "large").outerHTML}
-                        </div>
+                            <div class="pair-container">
+                                <strong><p>${"Languages:"}</p></strong>
+                                ${this.addProgrammingLogos().map(icon => icon.outerHTML).join('')}
+                            </div>
 
-                        <div class="pair-container">
-                            <strong><p>${"Languages:"}</p></strong>
-                            ${this.addProgrammingLogos().map(icon => icon.outerHTML).join('')}
+                            <div class="pair-container">
+                                <strong><p>${"Github Repository:"}</p></strong>
+                                ${ StaticGetIcon.generateLinkIconElement("Github", this.url, "large").outerHTML}
+                            </div>
                         </div>
 
                         <p class="for-overlay">${this.summaryLarge}</p>     
@@ -272,28 +284,15 @@ class Slideshow {
         this.showImage(this.currentIndex)
     };
 
-//****** Generates a slideshow element that will be added to the Portfolio Overlay class ****** 
-    // generateElement() {
-    //     // Create the element
-    //     const newElement = document.createElement('div');
-    //     newElement.innerHTML = `
-    //         <article id="project-slideshow" class="for-overlay for-portfolio">
-    //             <button class="arrow prev for-overlay for-portfolio">❮</button>
-    //             ${this.addImages()}
-    //             <button class="arrow next for-overlay for-portfolio">❯</button>
-    //         </article>
-    //     `.trim();
-    //     return newElement.firstElementChild
-    // };
 
     generateElement() {
         // Create the element
         const newElement = document.createElement('div');
         newElement.innerHTML = `
             <article id="project-slideshow" class="for-overlay for-portfolio">
-                <button class="arrow prev for-overlay for-portfolio">❮</button>
+                <button id="portfolio-prev-arrow" class="arrow prev for-overlay for-portfolio">❮</button>
                 ${this.addImages()}
-                <button class="arrow next for-overlay for-portfolio">❯</button>
+                <button id="portfolio-next-arrow" class="arrow next for-overlay for-portfolio">❯</button>
             </article>
         `.trim();
         return newElement.firstElementChild
@@ -307,26 +306,34 @@ class Slideshow {
 
 //****** Event listeners to handle the left and right arrow clicks of the slideshow ****** 
     addLocalEventListeners() {
-        const prevButton = this.element.querySelector(".arrow.prev");
-        const nextButton = this.element.querySelector(".arrow.next");
+        console.log("addLocalEventListeners")
+        const prevButton = this.element.querySelector("#portfolio-prev-arrow");
+        const nextButton = this.element.querySelector("#portfolio-next-arrow");
+        console.log(prevButton)
 
-        prevButton.addEventListener("click", ()  => {
+        prevButton.addEventListener("onClick", ()  => {
             this.prevImage()
         })
 
         nextButton.addEventListener("click", ()  => {
             this.nextImage()
         })
+
+        prevButton.addEventListener('click', () => { // add a click event listener
+            console.log('Button clicked!'); // do something when the button is clicked
+          });
     };
 
 //****** Decreases slideshow index by 1 and calls the adjustment of the current slideshow image ****** 
     prevImage() {
+        console.log("prevImage")
         this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
         this.showImage(this.currentIndex);
     };
 
 //****** Increases slideshow index by 1 and calls the adjustment of the current slideshow image ****** 
     nextImage() {
+        console.log("nextImage")
         this.currentIndex = (this.currentIndex + 1) % this.images.length;
         this.showImage(this.currentIndex);
     };
