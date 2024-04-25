@@ -30,8 +30,12 @@ class Controller {
         this.model.bindOverlayStarted(this.onOverlayStarted.bind(this));
         this.view.bindOverlayStart(this.handleOverlayStart.bind(this));
 
+        this.model.bindOverlayClosed(this.onOverlayClosed.bind(this));
+        this.view.bindOverlayClose(this.handleOverlayClose.bind(this));
+
         // Manually activate so the app displays the first section
         this.handleIndexChange(0);
+
 
         // this.handleOnLoad()
 
@@ -67,6 +71,11 @@ class Controller {
 
     onOverlayStarted(modelData) {
         console.log("CONTROLLER: onOverlayStarted")
+        this.view.commenceRender(modelData);
+    };
+
+    onOverlayClosed(modelData) {
+        console.log("CONTROLLER: onOverlayClosed")
         this.view.commenceRender(modelData);
     };
 
@@ -122,6 +131,10 @@ class Controller {
         this.model.overlayStart(overlay)
     };
 
+    handleOverlayClose(overlay) {
+        console.log("CONTROLLER: handleOverlayClose")
+        this.model.overlayClose(overlay)
+    };
 
 };
 

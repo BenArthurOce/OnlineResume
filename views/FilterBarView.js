@@ -200,4 +200,31 @@ class PortfolioFilterBarView extends FilterBarView {
 };
 
 
-export {IntroductionFilterBarView, EducationFilterBarView, SkillsFilterBarView, ExperienceFilterBarView, PortfolioFilterBarView};
+//
+//  About
+//
+class OverlayFilterBarView extends FilterBarView {
+    constructor(index) {
+        super(index);
+        this.classType = "Overlay";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
+        this.element = this.generateElement();
+        // console.log(this.element)
+        // this.element.addEventListener("click", () => {console.log("aaasasadas")})
+        // console.log(this.element)
+    };
+
+//****** Prepares the HTML element ******
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+                <menu id="top-filter-view">
+                    <ul class="filter-bar for-mobile"></ul>
+                </menu>
+        `.trim();
+        return newElement.firstElementChild
+    };
+};
+
+
+export {IntroductionFilterBarView, EducationFilterBarView, SkillsFilterBarView, ExperienceFilterBarView, PortfolioFilterBarView, OverlayFilterBarView};

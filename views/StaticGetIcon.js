@@ -55,7 +55,8 @@ class StaticGetIcon {
         , "Education":          { title: "Education",           icon: "fa fa-graduation-cap",       display: "Education Graduation Cap" }
         , "Experience":         { title: "Experience",          icon: "fa fa-briefcase",            display: "Jobs Briefcase" }
         , "Portfolio":          { title: "Portfolio",           icon: "fa fa-folder-open",          display: "Portfolio Folder Open" }
-    
+
+
       };
 
     static getIcon(key) {

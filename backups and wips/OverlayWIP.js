@@ -1,7 +1,7 @@
-import { ExperienceArticleView, PortfolioArticleView } from "./ArticleView.js";
-import StaticGetIcon from "./StaticGetIcon.js";
-import { OverlayFilterBarView } from "./FilterBarView.js";
-import { ArticleFilterButtonView } from "./FilterButtonView.js";
+import { ExperienceArticleView, PortfolioArticleView } from "../views/ArticleView.js";
+import StaticGetIcon from "../views/StaticGetIcon.js";
+import { OverlayFilterBarView } from "../views/FilterBarView.js";
+import { ArticleFilterButtonView } from "../views/FilterButtonView.js";
 
 // Whenever a Tile() is clicked, an Overlay() will appear to give more detailed information about the job/project
 
@@ -159,78 +159,61 @@ class ExperienceOverlayView extends OverlayView {
     };
 
 
-//****** Creates the Overlay element for Experience ****** 
-generateElement() {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = `
-        <dialog id="top-overlay-view" class="for-experience">
-            <div id="${this.id}" class="container for-overlay for-experience" >
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <dialog id="top-overlay-view" class="for-experience">
+                <section id="${this.id}" class="container for-overlay for-experience" >
 
-                <article>
-                    <h3>${this.data.position}</h3>
+                    <article class="overlay-info for-overlay for-experience">
+                        <h2>${this.data.position}</h2>
 
-
-                    
-                    <div class="pair-container">
                         <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
-                            <strong><p>${this.data.company}</p></strong>
+                            <span class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
+                                <strong><p>${this.data.company}</p></strong>
+                            </span>
+
+                            <span class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
+                                <strong><p>${this.data.address}</p></strong>
+                            </span>
                         </div>
 
                         <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
-                            <strong><p>${this.data.address}</p></strong>
+                            <span class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
+                                <strong><p>${this.data.period}</p></strong>
+                            </span>
+
+                            <span class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
+                                <strong><p>${this.data.extraInfo}</p></strong>
+                            </span>
                         </div>
+                    </article>
+
+                    <menu class="overlay-filter for-overlay for-experience for-mobile">
+                        ${this.button1.element.outerHTML}
+                        ${this.button2.element.outerHTML}
+                    </menu>
+
+                    <div class="overlay-content for-overlay for-experience">
+                        ${this.article1.element.outerHTML.outerHTML}
+                        ${this.article2.element.outerHTML.outerHTML}
                     </div>
 
-                    
-                    <div class="pair-container">
-                        <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
-                            <strong><p>${this.data.period}</p></strong>
-                        </div>
+                    <span id="experience-close-btn" class="closeBtn for-overlay"> x</span>
+                </section>
+            </dialog>
+        `.trim();
 
-                        <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
-                            <strong><p>${this.data.extraInfo}</p></strong>
-                        </div>
-                    </div>
-
-
-
-                </article>
-
-                <article>
-                    <h3>Duties:</h3>
-                    <ul>${this.addDuties()} </ul>
-                </article>
-
-                <article>
-                    <h3>Softwares:</h3>
-                    <ul>${this.addSoftwares()} </ul> 
-                </article>
-
-                <span id="experience-close-btn" class="closeBtn for-overlay"> x</span>
-            </div>
-        </dialog>
-    `.trim();
-    return newElement.firstElementChild
-};
-
+        return newElement.firstElementChild;
+    };
 
     toggleArticle(article) {
         // code does nothing. Required for a callback bind. Just ignore it.
         console.log("toggleArticle")
-    };
-
-//****** Prepares each job.duty item as a list element ****** 
-    addDuties() {
-        return this.duties.map(duty => `<li>${duty}</li>`).join('');
-    };
-
-//****** Prepares each job.software item as a list element ****** 
-    addSoftwares() {
-        return this.softwares.map(software => `<li>${software}</li>`).join('');
     };
 
 };
@@ -259,7 +242,7 @@ class PortfolioOverlayView extends OverlayView {
 //****** Creates the Overlay element for Portfolio ****** 
     generateElement() {
         // Create image slideshow
-        this.slideshow = new Slideshow(this.images);
+        const slideshow = new Slideshow(this.images);
 
         // Create the element
         const newElement = document.createElement('div');
@@ -285,7 +268,7 @@ class PortfolioOverlayView extends OverlayView {
                         <p class="for-overlay">${this.summaryLarge}</p>     
                     </article>
                     
-                        ${this.slideshow.element.outerHTML}
+                        ${slideshow.element.outerHTML}
 
                     <span id="portfolio-close-btn" class="closeBtn for-overlay">x</span>
                 </div>
@@ -358,9 +341,9 @@ class Slideshow {
             this.nextImage()
         })
 
-        // prevButton.addEventListener('click', () => { // add a click event listener
-        //     console.log('Button clicked!'); // do something when the button is clicked
-        //   });
+        prevButton.addEventListener('click', () => { // add a click event listener
+            console.log('Button clicked!'); // do something when the button is clicked
+          });
     };
 
 //****** Decreases slideshow index by 1 and calls the adjustment of the current slideshow image ****** 
@@ -379,20 +362,14 @@ class Slideshow {
 
 //****** Hides all images, and then only displays the image with the matching index number of this class ****** 
     showImage(index) {
-        console.log("showImage")
         const images = this.element.querySelectorAll(".portfolio-image")
-
-        // hide all
         images.forEach((image, i) => {
-            image.classList.remove("activated");
+            if (i === index) {
+                image.classList.add("activated");
+            } else {
+                image.classList.remove("activated");
+            }
         });
-
-
-
-        // WHY DOESNT THIS WORK. THIS IS SO STUPID
-
-        console.log(index)
-        images[index].classList.add("activated");
     };
 };
 

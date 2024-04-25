@@ -62,6 +62,9 @@ class FilterButtonView {
     get callback() {
         return this.#callback;
     };
+    set callback(value) {
+        this.#callback = value;
+    };
 
 //****** Print information about the class ******
     printToTerminal() {
@@ -105,15 +108,6 @@ class ArticleFilterButtonView extends FilterButtonView {
 
         if (isActive) {this.toggleOn()} else {this.toggleOff()};
     };
-
-//****** Prepares the HTML element ******
-    // generateElement() {
-    //     const newElement = document.createElement('div');
-    //     newElement.innerHTML = `
-    //         <li role="button" class="filter-button for-article for-mobile">${this.title}</li>
-    //     `.trim();
-    //     return newElement.firstElementChild
-    // };
 
     generateElement() {
         const newElement = document.createElement('div');

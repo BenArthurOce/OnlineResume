@@ -1,7 +1,7 @@
-import { ExperienceArticleView, PortfolioArticleView } from "./ArticleView.js";
-import StaticGetIcon from "./StaticGetIcon.js";
-import { OverlayFilterBarView } from "./FilterBarView.js";
-import { ArticleFilterButtonView } from "./FilterButtonView.js";
+import { ExperienceArticleView, PortfolioArticleView } from "../views/ArticleView.js";
+import StaticGetIcon from "../views/StaticGetIcon.js";
+import { OverlayFilterBarView } from "../views/FilterBarView.js";
+import { ArticleFilterButtonView } from "../views/FilterButtonView.js";
 
 // Whenever a Tile() is clicked, an Overlay() will appear to give more detailed information about the job/project
 
@@ -14,8 +14,7 @@ class OverlayView {
     #data;                          //  String displayed on screen
     #isActive;                      //  DOM element displays a different attribute if active
     #element;                       //  HTML Element
-    #closeCallback;                 //  Callback function for the close button
-    constructor(index, data, isActive, closeCallback) {
+    constructor(index, data, isActive) {
         this.#className = "Overlay";
         this.#classType = null
         this.#mvcComponent = "View";
@@ -24,9 +23,8 @@ class OverlayView {
         this.#data = data;
         this.#isActive = isActive;
         this.#element = null;
-        this.#closeCallback = closeCallback;
     
-        if (index === undefined || data === undefined || isActive === undefined || closeCallback === undefined) {
+        if (index === undefined || data === undefined || isActive === undefined) {
             this.printToTerminal()
             throw new Error("OverlayView: parameter declared is null/undefined")
         }
@@ -67,12 +65,6 @@ class OverlayView {
     set element(value) {
         this.#element = value;
     };
-    get closeCallback() {
-        return this.#closeCallback;
-    };
-    set closeCallback(value) {
-        this.#closeCallback = value;
-    };
 
 //****** Print information about the class ******
     printToTerminal() {
@@ -99,148 +91,188 @@ class OverlayView {
     toggleOff() {
         this.isActive = false;
     };
+
+//****** Remove / Destroy Overlay when the "x" is clicked ****** 
+    closeOverlay() {
+        this.element.remove();
+    };
 };
 
 
 class ExperienceOverlayView extends OverlayView {
-    constructor(index, data, isActive, closeCallback) {
-        super(index, data, isActive, closeCallback);
+    constructor(index, data, isActive) {
+        super(index, data, isActive);
         this.classType = "Experience";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
-        this.activeIndex = 0
 
-        this.company = this.data[`company`];
-        this.address = this.data[`address`];
-        this.position = this.data[`position`];
-        this.period = this.data[`period`];
-        this.extraInfo = this.data[`extraInfo`]
-        this.tags = this.data[`tags`]
-        this.softwares = this.data[`softwares`]
-        this.duties = this.data[`duties`]
+        this.company    = this.data[`company`];
+        this.address    = this.data[`address`];
+        this.position   = this.data[`position`];
+        this.period     = this.data[`period`];
+        this.extraInfo  = this.data[`extraInfo`]
+        this.tags       = this.data[`tags`]
+        this.softwares  = this.data[`softwares`]
+        this.duties     = this.data[`duties`]
+
+        // const filter = overlayFilter()
 
         this.article1 = new ExperienceArticleView(0, "Duties", this.duties, true);
         this.article2 = new ExperienceArticleView(1, "Softwares", this.softwares, false);
-        this.button1 = new ArticleFilterButtonView(0, "Duties", false, this.toggleArticle.bind(this));
-        this.button2 = new ArticleFilterButtonView(1, "Softwares", false, this.toggleArticle.bind(this));
+
+        this.filter = new OverlayFilterBarView(0);
+
+        this.button1 = new ArticleFilterButtonView(0, "Duties", false, this.toggleArticle.bind(this, this.article1));
+        this.button2 = new ArticleFilterButtonView(1, "Softwares", false, this.toggleArticle.bind(this, this.article2));
+
+        this.button1.element.addEventListener("click", () => {
+            this.button1.callback()
+        });
+
+        this.button2.element.addEventListener("click", () => {
+            this.button2.callback()
+        });
+
+        this.filter.appendSubObject(this.button1)
+        this.filter.appendSubObject(this.button2)
 
 
-        this.element = this.generateElement();
+        const articles = this.overlayArticles()
+        articles.append(this.article1.element)
+        articles.append(this.article2.element)
 
-        // ALRIGHT I GIVE UP. THE EVENT LISTENERS WILL NOT WORK. IM JUST GOING TO MAKE HORRIBLE GROSS CODE TO MAKE IT WORK
+        const base = this.overlayBase()
+        const contain = this.overlayContainer()
+        const info = this.overlayInfo();
 
-    //     const articles = this.element.querySelector(".overlay-content")
-    //     const article1 = articles.children[0]
-    //     const article2 = articles.children[1]
+        const exit = this.overlayExit()
 
-    //     const buttons = this.element.querySelector(".overlay-filter")
-    //     const button1 = buttons.children[0]
-    //     const button2 = buttons.children[1]
+        contain.append(info)
+        contain.append(this.filter.element)
+        contain.append(articles)
+        contain.append()
+
+        base.append(contain)
+        base.append(exit)
+
+        this.element = base
+
+        // this.element.append(info)
+        this.addLocalEventListeners()   
 
 
-    //     button1.addEventListener("click", () => {
-
-    //         button1.classList.add("activated")
-    //         button2.classList.remove("activated")
-
-    //         article1.classList.add("activated")
-    //         article2.classList.remove("activated")
-    //         // this.button1.callback()
-    //     });
-
-    //     button2.addEventListener("click", () => {
-
-    //         button1.classList.remove("activated")
-    //         button2.classList.add("activated")
-
-    //         article1.classList.remove("activated")
-    //         article2.classList.add("activated")
-    //     });
-
+        const a = this.element.querySelectorAll(".overlay-content")
+        console.log(a)
     };
 
+    overlayFilter() {
+        const filter = ''
+        return filter
+    }
 
-//****** Creates the Overlay element for Experience ****** 
-generateElement() {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = `
-        <dialog id="top-overlay-view" class="for-experience">
-            <div id="${this.id}" class="container for-overlay for-experience" >
+    overlayBase() {
+        const baseElement = document.createElement('dialog');
+        baseElement.id = "top-overlay-view"
+        baseElement.classList.add("for-experience");
+        return baseElement
+    };
 
-                <article>
-                    <h3>${this.data.position}</h3>
+    overlayContainer() {
+        const sectionElement = document.createElement('section');
+        // sectionElement.id = `${this.id}`
+        sectionElement.id = "overlay-section"
+        sectionElement.classList.add("for-overlay");
+        sectionElement.classList.add("for-experience");
+        return sectionElement
+    };
 
-
+    overlayInfo() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+                    <div class="overlay-info for-overlay for-experience">
                     
-                    <div class="pair-container">
+                        <h2>${this.data.position}</h2>
+
                         <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
-                            <strong><p>${this.data.company}</p></strong>
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Building", "medium").outerHTML}
+                                <strong><p>${this.data.company}</p></strong>
+                            </div>
+
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
+                                <strong><p>${this.data.address}</p></strong>
+                            </div>
                         </div>
 
+                        
                         <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Location", "medium").outerHTML}
-                            <strong><p>${this.data.address}</p></strong>
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
+                                <strong><p>${this.data.period}</p></strong>
+                            </div>
+
+                            <div class="pair-container">
+                                ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
+                                <strong><p>${this.data.extraInfo}</p></strong>
+                            </div>
                         </div>
                     </div>
+        `.trim();
+        return newElement.firstElementChild
+    };
 
-                    
-                    <div class="pair-container">
-                        <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Calendar", "medium").outerHTML}
-                            <strong><p>${this.data.period}</p></strong>
-                        </div>
+    overlayArticles() {
+        const articlesContainer = document.createElement('div');
+        articlesContainer.id = "articles-container"
+        articlesContainer.classList.add("for-overlay");
+        articlesContainer.classList.add("for-experience");
+        articlesContainer.classList.add("overlay-content");
+        return articlesContainer
+    };
 
-                        <div class="pair-container">
-                            ${StaticGetIcon.generateDisplayIconElement("Exclamation", "medium").outerHTML}
-                            <strong><p>${this.data.extraInfo}</p></strong>
-                        </div>
-                    </div>
-
-
-
-                </article>
-
-                <article>
-                    <h3>Duties:</h3>
-                    <ul>${this.addDuties()} </ul>
-                </article>
-
-                <article>
-                    <h3>Softwares:</h3>
-                    <ul>${this.addSoftwares()} </ul> 
-                </article>
-
-                <span id="experience-close-btn" class="closeBtn for-overlay"> x</span>
-            </div>
-        </dialog>
-    `.trim();
-    return newElement.firstElementChild
-};
+    overlayExit() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+        // <span id="experience-close-btn" class="closeBtn for-overlay"> x</span>
+        `.trim();
+        return newElement.firstElementChild
+    }
 
 
+
+
+//****** Toggle visibility of articles ****** 
     toggleArticle(article) {
-        // code does nothing. Required for a callback bind. Just ignore it.
+        console.log
+        this.article1.toggleOff()
+        this.article2.toggleOff()
+        this.article1.element.classList.remove("activated")
+        this.article2.element.classList.remove("activated")
+
+        article.element.classList.add("activated")
         console.log("toggleArticle")
+        console.log(article)
+        console.log(this)
+        this.article1.isActive = (article === this.article1);
+        this.article2.isActive = (article === this.article2);
     };
 
-//****** Prepares each job.duty item as a list element ****** 
-    addDuties() {
-        return this.duties.map(duty => `<li>${duty}</li>`).join('');
-    };
 
-//****** Prepares each job.software item as a list element ****** 
-    addSoftwares() {
-        return this.softwares.map(software => `<li>${software}</li>`).join('');
-    };
 
+//****** Local event listener(s) that are contained only within the OverlayView() class ****** 
+    addLocalEventListeners() {
+        // On pressing the close button, deletes the overlay
+        this.element.querySelector('.closeBtn').onclick = () => {
+            this.closeOverlay()
+        };
+    };
 };
 
 class PortfolioOverlayView extends OverlayView {
-    constructor(index, data, isActive, closeCallback) {
-        super(index, data, isActive, closeCallback);
+    constructor(index, data, isActive) {
+        super(index, data, isActive);
         this.classType = "Portfolio";
         this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}`;
-        this.activeIndex = 0
 
         this.name               = this.data[`projectName`];
         this.languages          = this.data[`projectLangs`];
@@ -259,7 +291,7 @@ class PortfolioOverlayView extends OverlayView {
 //****** Creates the Overlay element for Portfolio ****** 
     generateElement() {
         // Create image slideshow
-        this.slideshow = new Slideshow(this.images);
+        const slideshow = new Slideshow(this.images);
 
         // Create the element
         const newElement = document.createElement('div');
@@ -285,7 +317,7 @@ class PortfolioOverlayView extends OverlayView {
                         <p class="for-overlay">${this.summaryLarge}</p>     
                     </article>
                     
-                        ${this.slideshow.element.outerHTML}
+                        ${slideshow.element.outerHTML}
 
                     <span id="portfolio-close-btn" class="closeBtn for-overlay">x</span>
                 </div>
@@ -358,9 +390,9 @@ class Slideshow {
             this.nextImage()
         })
 
-        // prevButton.addEventListener('click', () => { // add a click event listener
-        //     console.log('Button clicked!'); // do something when the button is clicked
-        //   });
+        prevButton.addEventListener('click', () => { // add a click event listener
+            console.log('Button clicked!'); // do something when the button is clicked
+          });
     };
 
 //****** Decreases slideshow index by 1 and calls the adjustment of the current slideshow image ****** 
@@ -379,20 +411,14 @@ class Slideshow {
 
 //****** Hides all images, and then only displays the image with the matching index number of this class ****** 
     showImage(index) {
-        console.log("showImage")
         const images = this.element.querySelectorAll(".portfolio-image")
-
-        // hide all
         images.forEach((image, i) => {
-            image.classList.remove("activated");
+            if (i === index) {
+                image.classList.add("activated");
+            } else {
+                image.classList.remove("activated");
+            }
         });
-
-
-
-        // WHY DOESNT THIS WORK. THIS IS SO STUPID
-
-        console.log(index)
-        images[index].classList.add("activated");
     };
 };
 

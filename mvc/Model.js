@@ -77,6 +77,9 @@ class Model {
                 ,"overlays" :           null
                 ,"activeOverlay" :      null
                 ,"filterTags" :         null
+        };
+
+        this.overlayState = {
 
         };
     };
@@ -87,6 +90,10 @@ class Model {
         this.state["activeOverlay"] = null
     }
 
+    // commandInitOverlay(index) {
+    //     this.state["activeOverlay"] = this.state["overlays"][index]
+    // }
+
 
 
     returnSingleNavLink(index) {
@@ -96,8 +103,7 @@ class Model {
 
 //****** Testing Function - Force something to happen when loaded ******
     testFunction() {
-
-
+        console.log("MODEL: testFunction")
         
     }
 
@@ -105,6 +111,13 @@ class Model {
         console.log("MODEL: overlayStart")
         this.commandClearActiveOverlay()
         this.state["activeOverlay"] = this.state["overlays"][index]
+        this._commitIndex(this.state);
+    }
+
+    overlayClose(index) {
+        console.log("MODEL: overlayClose")
+        this.commandClearActiveOverlay()
+        // this.state["activeOverlay"] = this.state["overlays"][index]
         this._commitIndex(this.state);
     }
 
@@ -192,6 +205,11 @@ class Model {
         this.state["subObjects"]        = this.data["sectionSubObjs"][key];
         this.state["overlays"]          = this.data["overlays"][key];
 
+
+        // this.commandInitOverlay(0)
+
+        // this.state["activeOverlay"] = this.state["overlays"][index]
+        // console.log(this.state["activeOverlay"])
         this._commitIndex(this.state);
     };
 
@@ -224,6 +242,11 @@ class Model {
     bindOverlayStarted(callback) {
         console.log("MODEL: bindOverlayStarted")
         this.onOverlayStarted = callback
+    };
+
+    bindOverlayClosed(callback) {
+        console.log("MODEL: bindOverlayClosed")
+        this.onOverlayClosed = callback
     };
 
 

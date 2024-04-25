@@ -85,7 +85,6 @@ class NavLinkView {
 //****** Prepares the HTML element ******
     generateElement() {
         const newElement = document.createElement('div');
-        this.printToTerminal()
         newElement.innerHTML = `
         <a href="#" data-index="${this.index}" class="nav-link">
             <p class="for-pc">

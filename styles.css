@@ -20,8 +20,7 @@ body {
     height: 100vh;
     width: 100vw;
     background-color: var(--body-background-color);
-    color: var(--all-basic-font-color);
-
+    color: var(--all-basic-font-color)
 }
 
 p, ul {
@@ -126,37 +125,37 @@ article ul {
 }
 
 .square-icon.small {
-    font-size: 1.5vmax; 
-    height: 2vmax;
+    font-size: calc(70% + 0.5vmax);     /* 70% of the parent element (the tile) */
+    /* height: 2vmax; */
     width: 2vmax;
     padding: 1%;            /* When button is activated, gives border around the tile */
 }
 
 .square-icon.small > i {
-    font-size: 1.5vmax; 
+    font-size: calc(70% + 0.5vmax);     /* 70% of the parent element (the tile) */
 }
 
 .square-icon.medium {
-    font-size: 2vmax;         /* Sizes the text that is not icons */
-    height: 2.5vmax;
+    font-size: calc(70% + 0.8vmax);     /* 70% of the parent element (the tile) */
+    /* height: 2.5vmax; */
     width: 2.5vmax;
     padding: 1%;            /* When button is activated, gives border around the tile */
 }
 
 .square-icon.medium > i {
-    font-size: 2vmax;         /* Sizes the text that IS icons */
+    font-size: calc(70% + 0.8vmax);        /* Sizes the text that IS icons */
 }
 
 .square-icon.large {
-    font-size: 3vmax;
-    height: 3vmax;
+    font-size: calc(70% + 1.2vmax);     /* 70% of the parent element (the tile) */
+    /* height: 3vmax; */
     width: 3vmax;
     padding: 1%;            /* When button is activated, gives border around the tile */
 
 }
 
 .square-icon.large > i {
-    font-size: 3vmax; 
+    font-size: calc(70% + 1.2vmax);     /* 70% of the parent element (the tile) */
 }
 
 
@@ -475,6 +474,7 @@ nav .nav-link.activated {
 }
 
 
+
 /* 
     Overlays    (1 of 3)
     _________________________________________
@@ -571,6 +571,23 @@ nav .nav-link.activated {
 }
 
 
+/* For overlay reduces the amount of lines to 3*/
+dialog .pair-container p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+            line-clamp: 3; 
+    -webkit-box-orient: vertical;
+}
+
+
+
+.pair-container {
+    width: 100%;
+}
+
+
+
 /* 
     Overlays    (3 of 3)
     _________________________________________
@@ -631,30 +648,7 @@ nav .nav-link.activated {
     display: block;
 
 }
-/* Styles for screens smaller than 600px in width */
-/* @media screen and (max-width: 600px) {
-    body {
-      font-size: 14px;
-    }
-  } */
-  
-  /* Styles for screens between 601px and 800px in width */
-  /* @media screen and (min-width: 601px) and (max-width: 800px) {
-    body {
-      font-size: 16px;
-    }
-  } */
-  
-  /* Styles for screens larger than 800px in width */
-  /* @media screen and (min-width: 801px) {
-    body {
-      font-size: 18px;
-    }
-  } */
 
-/* ----------------------------- */
-/* --------- TO REVIEW --------- */
-/* ----------------------------- */
 
 
 @media screen and (max-height: 800px) {
@@ -709,6 +703,33 @@ nav .nav-link.activated {
     .for-pc {display: none;}                            /* Hide any elements with a "for-pc" tag */
     .for-mobile {display: unset;}                       /* Display all elements with a "for-mobile" tag (Code may not be required */
 
+
+
+/* 
+    General CSS       (1 of 5)
+    _________________________________________
+
+    Global Variables                    [PC]
+*/
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    border: none;
+}
+
+
+body {
+    height: calc(100vh - constant(safe-area-inset-top) - constant(safe-area-inset-bottom));
+    width: 100vw;
+    background-color: var(--body-background-color);
+    color: var(--all-basic-font-color)
+}
+
+
 /* 
     General CSS       (3 of 5)
     _________________________________________
@@ -716,13 +737,16 @@ nav .nav-link.activated {
     Articles                            [MOBILE]
 */
 
-article {display: none;}                            /* All articles on mobile are hidden by default */
+/* article {display: none;}                            */
+ /* All articles on mobile are hidden by default */
 article.activated {display: block;}                 /* Only Activated Articles are displayed on mobile */
 
 article {
+    display: none;
     font-size: calc(80% + 0.9vmin);
     line-height: calc(150% + 0.9vmin);
 }
+
 
 
 /* 
@@ -732,35 +756,7 @@ article {
     Buttons, Tiles, Logos           [MOBILE]
 */
 
-.square-icon.small {
-    font-size: 1.5vh;         /* Sizes the text that is not icons */
-    height: 3vh;
-    width: 3vh;
-}
 
-.square-icon.small > i {
-    font-size: 1.5vh;         /* Sizes the text that IS icons */
-}
-
-.square-icon.medium {
-    font-size: 2vh;         /* Sizes the text that is not icons */
-    height: 5vh;
-    width: 5vh;
-}
-
-.square-icon.medium > i {
-    font-size: 2vh;         /* Sizes the text that IS icons */
-}
-
-.square-icon.large {
-    font-size: 3vh;         /* Sizes the text that is not icons */
-    height: 6vh;
-    width: 6vh;
-}
-
-.square-icon.large > i {
-    font-size: 3vh;         /* Sizes the text that IS icons */
-}
 
 
 /* 
@@ -780,7 +776,13 @@ article {
     ->  Row 2: NavBar (nav)
      */
      display: grid;
-     height: 100%;
+
+
+
+    height: calc(100vh - constant(safe-area-inset-top) - constant(safe-area-inset-bottom));
+    /* Subtracting browser overlay heights using the safe-area-inset-top and safe-area-inset-bottom properties */
+
+
      grid-template-rows: min-content min-content min-content  minmax(0, 1fr) min-content;
      overflow: hidden;
      padding-left: 10%;
@@ -813,6 +815,29 @@ article {
 } 
 
 
+
+/* Two items side by side. Generally and icon and information */
+.pair-container {
+    display: flex;                  /* Use flexbox to align items */
+    align-items: center;            /* Align items vertically */
+    margin-top: 5px;             /* Adjust spacing between pairs */
+    margin-bottom: 5px;             /* Adjust spacing between pairs */
+    width: 80%;
+}
+
+.pair-container > *:first-child {
+    margin-right: 10%;             /* Add margin to the first child element in each pair */
+    padding: 0%;
+}
+
+.pair-container {
+    width: 100%;
+    font-size: calc(70% + 0.8vmin);
+}
+
+
+
+
 /* for-portfolio */
 /* 
     Bars       (1 of 3)
@@ -820,6 +845,9 @@ article {
 
     Navigation Bars                     [MOBILE]
 */
+.overlay-info {
+    display: block;
+}
 
 nav .nav-link {
     padding: 0
@@ -884,6 +912,13 @@ nav .nav-link {
 
 /* Mobile Adjustments for project tile*/
 
+
+/* Adjust spacing between child elements */
+.tile.for-portfolio > div:first-child > * {
+    margin-bottom: 0px;
+}
+
+
 /* Logo container */
 .tile.for-portfolio > div:first-child {
     margin-top: 10px;
@@ -921,5 +956,47 @@ nav .nav-link {
             line-clamp: 2; 
     -webkit-box-orient: vertical;
 }
+
+
+
+
+/* <menu class="overlay-filter for-overlay for-experience"> */
+
+menu.for-overlay.for-experience {
+    display: inline-flex;
+    flex-direction: row; 
+    list-style-type: none;
+}
+
+/* For overlay mobile, reduces the amount of lines to 2*/
+dialog .pair-container p {
+    font-size: calc(70% + 0.5vmin); 
+    -webkit-line-clamp: 2; 
+            line-clamp: 2; 
+}
+
+
+
+
+
+}
+
+
+
+/* Filter bar inside the top level menu element */
+menu.for-overlay.for-experience li {
+    flex-wrap: wrap;
+    list-style-type: none;                          /* Move the list style markings */
+    gap: 10%;                                       /* Space the filter items away from each other */
+    width: 100%;
+}
+
+/* .tile.for-experience > p:nth-child(2) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+} */
 
 }

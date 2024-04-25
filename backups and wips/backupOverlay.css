@@ -1,0 +1,156 @@
+
+/* 
+    Overlays    (1 of 3)
+    _________________________________________
+
+    General                              [PC]
+*/
+
+#top-overlay-view article {
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
+/* Main element that covers the rest of the website */
+#top-overlay-view { 
+    display: inline-grid;               /* Default display is non visible. Display is modified when class becomes "active" */
+    position: fixed;                    /* Positions the overlay relative to the browser window and does not scroll with the page */
+    top: 0;
+    left: 0;      
+    background: rgba(0, 0, 0, 0.7);     /* Sets transparent background */
+    color: var(--all-basic-font-color); 
+    justify-content: center;            /* Centers the child elements horizontally */
+    align-items: center;                /* Centers the child elements vertically */
+    z-index: 9999;                      /* Must be most front facing forward since its an overlay */ 
+    min-width: 100vw;                   /* To cover the entire viewscreen */ 
+    min-height: 100vh;                  /* To cover the entire viewscreen */ 
+}
+
+/* Second level. Container that holds all the articles */
+#top-overlay-view > div {
+    display: grid;                      /* Using Grid, we can make the articles form a correct layout */
+    position: relative;                 /* Allows the close button to be positioned inside this element */
+    background-color: var(--article-background-color);
+
+    min-width: 80vw;                   /* To cover the entire viewscreen except for the outer borders */ 
+    min-height: 90vh;                  /* To cover the entire viewscreen except for the outer borders */ 
+    max-width: 80vw;                   /* To cover the entire viewscreen except for the outer borders */ 
+    max-height: 90vh;                  /* To cover the entire viewscreen except for the outer borders */ 
+
+    border: 10px solid var(--tile-basic-background-color);
+    border-radius: 10px;
+}
+
+
+/* Overlay close button */
+#top-overlay-view .closeBtn {
+    position: absolute;              /* Position the close button relative to its closest positioned ancestor */
+    top: 10px;                       /* Position it in the top-right corner */
+    right: 10px;                     /* Position it in the top-right corner */
+    cursor: pointer;
+    background-color: #ff0000;       /* Red background color */
+    color: #fff;                     /* White text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 9999;                   /* Ensure it's above other elements */
+  }
+
+
+/* 
+    Overlays    (2 of 3)
+    _________________________________________
+
+    Experience                          [PC]
+*/
+
+/* Styles specific to overlay */
+.container.for-overlay.for-experience {
+    grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
+    grid-template-rows: 30% 1fr;
+    gap: 0;
+}
+
+/* First Article - Experience details */
+.container.for-overlay.for-experience > article:nth-child(1) {
+    grid-column: 1 / span 4;                                /* Cover 100% of the top row */
+    grid-row: 1 / span 1;
+    overflow-x: initial;                                    /* Remove overflow from original article*/
+    overflow-y: initial;                                    /* Remove overflow from original article*/
+    margin-top: 1%;                                         /* Put some distance between top of overlay, and the heading */
+    margin-bottom: 1%;                                      /* Put some distance between the bottom of the information article, and the "duties" */
+    border-bottom: 2px solid var(--all-basic-head-color);   /* Adds a seperation line between this article and the duties/softwares */
+    margin-right: 2%;                                       /* Stops the border line touching the right side of the overlay */
+}
+
+/* Second Article - Duties */
+.container.for-overlay.for-experience > article:nth-child(2) {
+    grid-column: 1 / span 2;                            /* Start from the first column and span 1 column */
+    grid-row: 2 / span 1;                               /* Start from the second row and span 1 row */
+}
+
+/* Third Article - Software */
+.container.for-overlay.for-experience > article:nth-child(3) {
+    grid-column: 3 / span 2;                            /* Start from the second column and span 1 column */
+    grid-row: 2 / span 1;                               /* Start from the second row and span 1 row */
+}
+
+
+/* 
+    Overlays    (3 of 3)
+    _________________________________________
+
+    Portfolio                              [PC]
+*/
+
+
+/* Styles specific to overlay */
+.container.for-overlay.for-portfolio {
+    grid-template-columns: 24% 24% 24% 24%; /* Four columns, each taking up 25% of the width */
+    grid-template-rows: 30% 1fr;
+    gap: 0;
+}
+
+/* First Article - Description of portfolio */
+.container.for-overlay.for-portfolio > article:nth-child(1) {
+    grid-column: 1 / span 4;                                /* Cover 100% of the top row */
+    grid-row: 1 / span 1;
+    overflow-x: initial;                                    /* Remove overflow from original article */
+    overflow-y: initial;                                    /* Remove overflow from original article */
+    margin-top: 1%;                                         /* Put some distance between top of overlay, and the heading */
+    margin-bottom: 1%;                                      /* Put some distance between the bottom of the information article, and the "duties" */
+    border-bottom: 2px solid var(--all-basic-head-color);   /* Adds a seperation line between this article and the duties/softwares */
+    margin-right: 2%;                                       /* Stops the border line touching the right side of the overlay */
+}
+
+/* Second Article - Slideshow images for portfolio */
+.container.for-overlay.for-portfolio > article:nth-child(2) {
+    grid-column: 1 / span 4;                /* Cover 100% of the bottom row */
+    grid-row: 2 / span 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+/* Programming icons in the first article */
+.container.for-icons.for-overlay {
+    display: inline;
+    height: initial;
+    width: initial;
+    position: initial;
+}
+
+
+
+.portfolio-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 20px solid black;
+    box-sizing: border-box; 
+    overflow: hidden; 
+}
+
+.portfolio-image.activated {
+    display: block;
+}

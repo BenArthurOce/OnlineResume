@@ -123,9 +123,9 @@ class IntroductionArticleView extends ArticleView {
                 <h2 class="for-pc">${this.title}:</h2>
                 ${
                     this.title === "About" ? 
-                    StaticGetIcon.generateLinkIconElement("Envelope", this.data.email, "medium").outerHTML +
-                    StaticGetIcon.generateLinkIconElement("LinkedIn", this.data.linkedin, "medium").outerHTML +
-                    StaticGetIcon.generateLinkIconElement("Github", this.data.github, "medium").outerHTML
+                    StaticGetIcon.generateLinkIconElement("Envelope", this.data.email, "large").outerHTML +
+                    StaticGetIcon.generateLinkIconElement("LinkedIn", this.data.linkedin, "large").outerHTML +
+                    StaticGetIcon.generateLinkIconElement("Github", this.data.github, "large").outerHTML
                     :
                     ""
                 }
@@ -202,5 +202,62 @@ class EducationArticleView extends ArticleView {
     };
 };
 
+//
+//  Experience (Overlay)
+//
+class ExperienceArticleView extends ArticleView {
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
+        this.classType = "Overlay";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+        this.element = this.generateElement();
 
-export {IntroductionArticleView, SkillsArticleView as SkillArticleView, EducationArticleView};
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
+    };
+
+//****** Creates the element for the "ExperienceArticleView" ******
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <article id="${this.id}" dataFilter="${this.title}">
+                <h3>${this.title}:</h3>
+                <ul>${this.addListItems()} </ul>
+            </article>
+        `.trim();
+        return newElement.firstElementChild
+    };
+
+//****** Prepares each job.duty or job.software item as a list element ****** 
+    addListItems() {
+        return this.data.map(el => `<li>${el}</li>`).join('');
+    };
+};
+
+//
+//  Portfolio (Overlay)
+//
+class PortfolioArticleView extends ArticleView {
+    constructor(index, title, data, isActive) {
+        super(index, title, data, isActive);
+        this.classType = "Overlay";
+        this.id = `${this.className.toLowerCase()}-${this.classType.toLowerCase()}-${this.mvcComponent.toLowerCase()}-${this.title.toLowerCase()}`;
+        this.element = this.generateElement();
+
+        if (isActive) {this.toggleOn()} else {this.toggleOff()};
+    };
+
+//****** Creates the element for the "EducationArticleView" ******
+    generateElement() {
+        const newElement = document.createElement('div');
+        newElement.innerHTML = `
+            <article id="${this.id}" dataFilter="${this.title}">
+                <h2>${this.title}:</h2>
+            </article>
+        `.trim();
+        return newElement.firstElementChild
+    };
+};
+
+
+export {IntroductionArticleView, SkillsArticleView as SkillArticleView, EducationArticleView, ExperienceArticleView, PortfolioArticleView};
+// export {IntroductionArticleView, SkillsArticleView as SkillArticleView, EducationArticleView};

@@ -67,110 +67,13 @@ class View {
     async commenceRender(data) {
         console.log("VIEW: commenceRender" + "\n" + "--------------------")
 
+
         //  (0 of 5)
         //  Clear entire HTML
         //        
         this.app.innerHTML = null;
 
-        //  (1 of 5)
-        //  Palette
-        //
-        this.palette = await this.createPalette(data.palette);
-
-        //  (2 of 5)
-        //  Navigation
-        //
-        this.navigationBar = await this.createNavigation(data.navigationBar)
-
-        //  (3 of 5)
-        //  Title
-        //
-        const heading = await this.createHeading(data);
-
-        //  (4 of 5)
-        //  Filter
-        //
-        // console.log(data)
-        this.filter = await this.createFilter(data);
-
-        //  (5 of 5)
-        //  Sections
-        //
-        this.section = await this.createSection(data);
-
-
-        // PrevArrowView, NextArrowView
-        // createArrows
-        this.createArrows()
-
-
-        //
-        //  Render
-        //
-        this.app.append(this.palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element, this.prevArrow.element, this.nextArrow.element);
-        this.updateColorScheme(this.palette.currentCSSName);
-
-        //
-        //  Bind Palette
-        //
-        this.palette.element.addEventListener("change", () => {
-            this.palette.callback()
-        });
-
-        //
-        //  Bind Navigation bar
-        //
-        this.navigationBar.links.forEach((link, i) => {
-            link.element.addEventListener("click", () => {
-                link.callback()
-            });
-        });
-
-        //
-        //  Bind Filter bar
-        //
-        this.filter.buttons.forEach((button, i) => {
-            button.element.addEventListener("click", () => {
-                button.callback()
-            });
-        });
-
-        //
-        //  Bind Tile Clicks
-        //
-        if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
-            this.section.subObjects.forEach((subObject, i) => {
-
-                subObject.element.addEventListener("click", (event) => {
-
-                    if (this.section.classType === "Experience") {
-                        subObject.callback()
-                    };
-
-                    if (this.section.classType === "Portfolio") {
-                        subObject.callback()
-                    };
-                });
-            });
-        }
-
-        //
-        //  Bind Arrow Clicks
-        //
-
-        this.prevArrow.element.addEventListener("click", () => {
-            this.prevArrow.callback()
-        });
-        this.nextArrow.element.addEventListener("click", () => {
-            this.nextArrow.callback()
-        });
-
-
-        //
-        //  Complete
-        //
-        console.log("--------------rendering finished--------------")
-
+        // If an overlay is to be produced:
         //
         //  For testing - Active Overlays
         //
@@ -183,13 +86,14 @@ class View {
         //  If there is an active overlay, generate the overlay
         //
         if (overlay) {
-            let index; let data; let isActive; let newOverlay;
+            let index; let data; let isActive; let closeCallback; let newOverlay;
             if (this.section.classType === "Experience") {
 
                 newOverlay = new ExperienceOverlayView(
                     index = overlay.index
                   , data = overlay.data
                   , isActive = true
+                  , closeCallback = this.onOverlayClose.bind(this)
                 );
             };
 
@@ -199,10 +103,139 @@ class View {
                   index = overlay.index
                 , data = overlay.data
                 , isActive = true
+                , closeCallback = this.onOverlayClose.bind(this)
                 );
+
+                const prevButton = newOverlay.element.querySelector('#portfolio-prev-arrow')
+                const nextButton = newOverlay.element.querySelector('#portfolio-next-arrow')
+
+                prevButton.addEventListener("click", ()  => {
+                    newOverlay.slideshow.prevImage()
+                })
+        
+                nextButton.addEventListener("click", ()  => {
+                    newOverlay.slideshow.nextImage()
+                })
             };
-          this.app.append(newOverlay.element)
+
+            console.log(newOverlay)
+            newOverlay.element.querySelector('.closeBtn').onclick = () => {
+                newOverlay.closeCallback()
+            };
+
+            this.app.append(newOverlay.element)
+
         }
+
+        // If there is no overlay marked in the state:
+        else {
+
+
+            //  (1 of 5)
+            //  Palette
+            //
+            this.palette = await this.createPalette(data.palette);
+
+            //  (2 of 5)
+            //  Navigation
+            //
+            this.navigationBar = await this.createNavigation(data.navigationBar)
+
+            //  (3 of 5)
+            //  Title
+            //
+            const heading = await this.createHeading(data);
+
+            //  (4 of 5)
+            //  Filter
+            //
+            // console.log(data)
+            this.filter = await this.createFilter(data);
+
+            //  (5 of 5)
+            //  Sections
+            //
+            this.section = await this.createSection(data);
+
+
+            // PrevArrowView, NextArrowView
+            // createArrows
+            this.createArrows()
+
+
+            //
+            //  Render
+            //
+            this.app.append(this.palette.element, this.navigationBar.element, heading.element, this.filter.element, this.section.element, this.prevArrow.element, this.nextArrow.element);
+            this.updateColorScheme(this.palette.currentCSSName);
+
+            //
+            //  Bind Palette
+            //
+            this.palette.element.addEventListener("change", () => {
+                this.palette.callback()
+            });
+
+            //
+            //  Bind Navigation bar
+            //
+            this.navigationBar.links.forEach((link, i) => {
+                link.element.addEventListener("click", () => {
+                    link.callback()
+                });
+            });
+
+            //
+            //  Bind Filter bar
+            //
+            this.filter.buttons.forEach((button, i) => {
+                button.element.addEventListener("click", () => {
+                    button.callback()
+                });
+            });
+
+            //
+            //  Bind Tile Clicks
+            //
+            if (this.section.classType === "Experience" || this.section.classType === "Portfolio") {
+                this.section.subObjects.forEach((subObject, i) => {
+
+                    subObject.element.addEventListener("click", (event) => {
+
+                        if (this.section.classType === "Experience") {
+                            subObject.callback()
+                        };
+
+                        if (this.section.classType === "Portfolio") {
+                            subObject.callback()
+                        };
+                    });
+                });
+            }
+
+            //
+            //  Bind Arrow Clicks
+            //
+
+            this.prevArrow.element.addEventListener("click", () => {
+                this.prevArrow.callback()
+            });
+            this.nextArrow.element.addEventListener("click", () => {
+                this.nextArrow.callback()
+            });
+
+        }
+
+
+
+
+
+        //
+        //  Complete
+        //
+        console.log("--------------rendering finished--------------")
+
+
     };
 
 
@@ -279,6 +312,13 @@ class View {
         this.handleIndexChange("+1")
     };
 
+//****** For Portfolio, "x" button that closes the overlay ******
+    onOverlayClose(buttonClicked) {
+        console.log("VIEW: onOverlayClose");
+        this.handleOverlayClose(buttonClicked)
+        // this.handleIndexChange("+1")
+    };
+
 
 //****************************
 //****** Binding Events ******
@@ -318,6 +358,11 @@ class View {
     bindOverlayStart(handler) {
         console.log("VIEW: bindOverlayStart");
         this.handleOverlayStart = handler;
+    };
+
+    bindOverlayClose(handler) {
+        console.log("VIEW: bindOverlayClose");
+        this.handleOverlayClose = handler;
     };
 
 
