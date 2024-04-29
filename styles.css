@@ -128,7 +128,7 @@ article ul {
     font-size: calc(70% + 0.5vmax);     /* 70% of the parent element (the tile) */
     /* height: 2vmax; */
     width: 2vmax;
-    padding: 1%;            /* When button is activated, gives border around the tile */
+    padding: 0.5%;            /* When button is activated, gives border around the tile */
 }
 
 .square-icon.small > i {
@@ -139,7 +139,7 @@ article ul {
     font-size: calc(70% + 0.8vmax);     /* 70% of the parent element (the tile) */
     /* height: 2.5vmax; */
     width: 2.5vmax;
-    padding: 1%;            /* When button is activated, gives border around the tile */
+    padding: 0.5%;            /* When button is activated, gives border around the tile */
 }
 
 .square-icon.medium > i {
@@ -150,7 +150,7 @@ article ul {
     font-size: calc(70% + 1.2vmax);     /* 70% of the parent element (the tile) */
     /* height: 3vmax; */
     width: 3vmax;
-    padding: 1%;            /* When button is activated, gives border around the tile */
+    padding: 0.5%;            /* When button is activated, gives border around the tile */
 
 }
 
@@ -242,7 +242,7 @@ article ul {
     background-color: var(--section-background-color);
     padding-left: 2%;
     padding-right: 2%;
-    padding-top: 1%;
+    padding-top: 0.5%;
 }
 
 /* General CSS for all container style elements */
@@ -305,8 +305,8 @@ nav {
 
 /* text styles inside the navbar */
 nav .nav-link {
-    padding-top: 2%;
-    padding-bottom: 1%;
+    /* padding-top: 2%; */
+    /* padding-bottom: 1%; */
     text-decoration: none;                      /* Removes all natural formatting ie: underlines */
     font-weight: bold;                          /* Make the text bold for emphasis */
     transition: color 0.3s ease-in-out;         /* Smooth transition for color change */
@@ -353,7 +353,7 @@ nav .nav-link.activated {
 #top-filter-view ul {
     flex-wrap: wrap;
     list-style-type: none;                          /* Move the list style markings */
-    gap: 10%;                                       /* Space the filter items away from each other */
+    gap: 5%;                                       /* Space the filter items away from each other */
     width: 100%;
 }
 
@@ -976,13 +976,6 @@ dialog .pair-container p {
 }
 
 
-
-
-
-}
-
-
-
 /* Filter bar inside the top level menu element */
 menu.for-overlay.for-experience li {
     flex-wrap: wrap;
@@ -990,6 +983,13 @@ menu.for-overlay.for-experience li {
     gap: 10%;                                       /* Space the filter items away from each other */
     width: 100%;
 }
+
+
+}
+
+
+
+
 
 /* .tile.for-experience > p:nth-child(2) {
     overflow: hidden;
@@ -999,4 +999,3 @@ menu.for-overlay.for-experience li {
     -webkit-box-orient: vertical;
 } */
 
-}
