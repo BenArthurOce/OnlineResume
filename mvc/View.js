@@ -109,13 +109,44 @@ class View {
                 const prevButton = newOverlay.element.querySelector('#portfolio-prev-arrow')
                 const nextButton = newOverlay.element.querySelector('#portfolio-next-arrow')
 
-                prevButton.addEventListener("click", ()  => {
-                    newOverlay.slideshow.prevImage()
-                })
+
+            // I HAVE NO IDEA WHY THIS ISNT WORKING
+
+            //     prevButton.addEventListener("click", ()  => {
+            //         let currentSlideshowIndex = newOverlay.slideshow.currentIndex
+            //         let newSlideshowIndex = (currentSlideshowIndex - 1 + newOverlay.slideshow.images.length) % newOverlay.slideshow.images.length;
+
+            //         newOverlay.slideshow.currentIndex = newSlideshowIndex
+
+            //         // newOverlay.slideshow.showImage(newOverlay.slideshow.currentIndex)
+
+            //         const images =  newOverlay.slideshow.element.querySelectorAll(".portfolio-image")
+            //         console.log(images)
+
+            //         images.forEach((image, i) => {
+            //             console.log(image)
+            //             image.classList.remove("activated");
+            //         });
+            //         images[newSlideshowIndex].classList.add("activated");
+            //     })
         
-                nextButton.addEventListener("click", ()  => {
-                    newOverlay.slideshow.nextImage()
-                })
+            //     nextButton.addEventListener("click", ()  => {
+            //         let currentSlideshowIndex = newOverlay.slideshow.currentIndex
+            //         let newSlideshowIndex = (currentSlideshowIndex + 1) % newOverlay.slideshow.images.length;
+
+            //         newOverlay.slideshow.currentIndex = newSlideshowIndex
+
+            //         // newOverlay.slideshow.showImage(newOverlay.slideshow.currentIndex)
+
+            //         const images =  newOverlay.slideshow.element.querySelectorAll(".portfolio-image")
+            //         console.log(images)
+
+            //         images.forEach((image, i) => {
+            //             console.log(image)
+            //             image.classList.remove("activated");
+            //         });
+            //         images[newSlideshowIndex].classList.add("activated");
+            //     })
             };
 
             console.log(newOverlay)

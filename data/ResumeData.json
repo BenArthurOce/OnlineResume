@@ -50,7 +50,8 @@
     "skills": {
 
         "technical":           [
-                                    "Microsoft SQL Server Management Studio 2019"
+                                     "Microsoft Dynamics 365 Business Central"
+                                    ,"Microsoft SQL Server Management Studio 2019"
                                     ,"Microsoft Excel"
                                     ,"Microsoft Visual Studio 2019"
                                     ,"Visual Studio Code"
@@ -67,6 +68,7 @@
         ,"languages":           [
                                     "React"
                                     ,"Javascript"
+                                    ,"JSON / Resful APIs"
                                     ,"HTML, CSS"
                                     ,"Python"
                                     ,"SQL"
@@ -272,31 +274,47 @@
     }
     ],
     "portfolio": [
+        {
+        "projectName":       "ChessCom Match History"
+        ,"projectLangs":     ["React", "nodeJs"]
+        ,"projectTags":      ["UserInterface", "Web", "Logic", "DataSets", "Games"]
+        ,"summarySmall":     "Chess.com Match history by username"
+        ,"summaryLarge":     "React app that reads the ChessCom API to return previous games depending on player. It then reads through several different information points of the received information and creates React Styled Components based on the game information"
+        ,"projectUrl":       "https://github.com/BenArthurOce/ChessComHistory/tree/master"
+        ,"projectPagesURL":  "https://benarthuroce.github.io/ChessComHistory/"
+        ,"projectImages":    [
+                                "imgPortfolios\\slideshowChessComHistory\\ChessComHistory01.png"
+                                ,"imgPortfolios\\slideshowChessComHistory\\ChessComHistory02.png"
+                             ]
+       },
     {
          "projectName":      "Taxation Calculator"
         ,"projectLangs":     ["React", "nodeJs"]
         ,"projectTags":      ["UserInterface", "Web", "Logic", "DataSets", "Finance"]
-        ,"summarySmall":     "React based tax calculator with self made JSON data"
-        ,"summaryLarge":     "React app that calls a self created JSON file containing ATO tax data, and then calculates the tax"
+        ,"summarySmall":     "Tax calculator based from JSON tax data"
+        ,"summaryLarge":     "React app that calls a self created JSON file containing ATO tax data, and then calculates the tax based on the user input"
         ,"projectUrl":       "https://github.com/BenArthurOce/ReactTaxCalcPresentation"
+        ,"projectPagesURL":  "https://benarthuroce.github.io/ReactTaxCalcPresentation/"
         ,"projectImages":    [
                                  "imgPortfolios\\slideshowReactTax\\ReactTax01.png"
                                 ,"imgPortfolios\\slideshowReactTax\\ReactTax01.png"
                             ]
     },
     {
-         "projectName":      "Resume Website"
+         "projectName":      "Online Resume"
         ,"projectLangs":     ["HTML", "CSS", "Javascript"]
         ,"projectTags":      ["Web", "DataSets"]
         ,"summarySmall":     "This Website!"
         ,"summaryLarge":     "Website that reads from an JSON file and imports into a HTML page using Javascript. Hosted using GoDaddy. First Version used XML to hold resume data."
         ,"projectUrl":       "https://github.com/BenArthurOce/OnlineResume"
+        ,"projectPagesURL":  "https://benarthuroce.github.io/OnlineResume/"
         ,"projectImages":     [
-                                 "imgportfolios\\slideshowWebsite\\ResumeWebsite01.png"
-                                ,"imgportfolios\\slideshowWebsite\\ResumeWebsite02.png"
-                                ,"imgportfolios\\slideshowWebsite\\ResumeWebsite03.png"
-                                ,"imgportfolios\\slideshowWebsite\\ResumeWebsite04.png"
-                                ,"imgportfolios\\slideshowWebsite\\ResumeWebsite05.png"
+                                 "imgportfolios\\slideshowOnlineResume\\OnlineResume01.png"
+                                ,"imgportfolios\\slideshowOnlineResume\\OnlineResume02.png"
+                                ,"imgportfolios\\slideshowOnlineResume\\OnlineResume03.png"
+                                ,"imgportfolios\\slideshowOnlineResume\\OnlineResume04.png"
+                                ,"imgportfolios\\slideshowOnlineResume\\OnlineResume05.png"
+                                ,"imgportfolios\\slideshowOnlineResume\\OnlineResume06.png"
                             ]
     },
     {
@@ -306,12 +324,13 @@
         ,"summarySmall":     "Winforms based application that returns historical ASX data"
         ,"summaryLarge":     "Application that reads historical ASX prices from self created 10-15 table database on SQL. Modeled with Dapper"
         ,"projectUrl":       "https://github.com/BenArthurOce/ASXSharePrices"
+        ,"projectPagesURL":  ""
         ,"projectImages":    [
-                                 "imgportfolios\\slideshowASX\\ASXProgram1.png"
-                                ,"imgportfolios\\slideshowASX\\ASXProgram2.png"
-                                ,"imgportfolios\\slideshowASX\\ASXProgram3.png"
-                                ,"imgportfolios\\slideshowASX\\ASXProgram4.png"
-                                ,"imgportfolios\\slideshowASX\\ASXProgram5.png"
+                                 "imgportfolios\\slideshowASX\\ASXProgram01.png"
+                                ,"imgportfolios\\slideshowASX\\ASXProgram02.png"
+                                ,"imgportfolios\\slideshowASX\\ASXProgram03.png"
+                                ,"imgportfolios\\slideshowASX\\ASXProgram04.png"
+                                ,"imgportfolios\\slideshowASX\\ASXProgram05.png"
                             ]
     },
     {
@@ -319,12 +338,13 @@
        ,"projectLangs":    ["HTML", "CSS", "Javascript"]
        ,"projectTags":     ["Web", "Logic", "Games"]
        ,"summarySmall":    "Restarted Python Chess UI in Javascript framework."
-       ,"summaryLarge":    "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening."
+       ,"summaryLarge":    "Reworked the Chess Python project in order to work with an easier UI. Includes a script to generate a 50,000 line JSON containing all of the chess openings"
        ,"projectUrl":      "https://github.com/BenArthurOce/ChessJavascript"
+       ,"projectPagesURL": "https://benarthuroce.github.io/ChessJavascript/"
        ,"projectImages":   [
-                                 "imgPortfolios\\slideshowChessJs\\ChessJavascript01.png"
-                                ,"imgPortfolios\\slideshowChessJs\\ChessJavascript02.png"
-                                ,"imgPortfolios\\slideshowChessJs\\ChessJavascript03.png"
+                                 "imgPortfolios\\slideshowChessJavascript\\ChessJavascript01.png"
+                                ,"imgPortfolios\\slideshowChessJavascript\\ChessJavascript02.png"
+                                ,"imgPortfolios\\slideshowChessJavascript\\ChessJavascript03.png"
                            ]
     },
     {
@@ -334,9 +354,10 @@
         ,"summarySmall":    "Python based UI that processes chess games and openings"
         ,"summaryLarge":    "Object Orientated Program. Reads from a local database CSV file of chess openings, and displays the next move to take in that current opening."
         ,"projectUrl":      "https://github.com/BenArthurOce/-ChessPythonTkinter"
+        ,"projectPagesURL": ""
         ,"projectImages":   [
-                                 "imgportfolios\\slideshowChess\\Chess01.png"
-                                ,"imgportfolios\\slideshowChess\\Chess02.png"
+                                 "imgportfolios\\slideshowChessPython\\ChessPython01.png"
+                                ,"imgportfolios\\slideshowChessPython\\ChessPython02.png"
                             ]
     },
     {
@@ -346,6 +367,7 @@
         ,"summarySmall":    "Recursive CTE to calculate mortgage details in its lifetime"
         ,"summaryLarge":    "Uses a recursive CTE and payment/interest functions to calculate the balances, principal/interest repayments on a mortgage over its lifetime. No Image provided"
         ,"projectUrl":      "https://github.com/BenArthurOce/InstalmentAmortisationSchedule"
+        ,"projectPagesURL": ""
         ,"projectImages":   [
                                 "imgportfolios\\PlaceHolderImage.png"
                                 ,"imgportfolios\\PlaceHolderImage.png"
@@ -360,6 +382,7 @@
         ,"summarySmall":    "Simulates Texas Hold 'em games and displays cards to terminal"
         ,"summaryLarge":    "(Mention Pandas) Object orientated text based program that simulates Texas hold ‘em games thousands of times to show the likely outcome of each hand against the other."
         ,"projectUrl":      "https://github.com/BenArthurOce/Poker5Hand"
+        ,"projectPagesURL": ""
         ,"projectImages":   [
                                  "imgportfolios\\slideshowPoker\\Poker01.png"
                                 ,"imgportfolios\\slideshowPoker\\Poker02.png"
@@ -382,29 +405,6 @@
                                 ,"imgportfolios\\PlaceHolderImage.png"
                                 ,"imgportfolios\\PlaceHolderImage.png"
                            ]
-    },
-    {
-         "projectName":     "Bank Transaction Coder"
-        ,"projectLangs":    ["Excel"]
-        ,"projectTags":     ["Finance", "Efficiency"]
-        ,"summarySmall":    "Excel sheet (replace this one)"
-        ,"summaryLarge":    "Complex spreadsheet that reads your banking transactions and allocates each transaction based on lookup/reference codes inputted"
-        ,"projectUrl":      "https://github.com/BenArthurOce/"
-        ,"projectImages":   [
-                                 "imgportfolios\\slideshowTransactionSorter\\TransactionCoder01.png"
-                                ,"imgportfolios\\slideshowTransactionSorter\\TransactionCoder02.png"
-                            ]
-    },
-    {
-         "projectName":     "Timesheeter"
-        ,"projectLangs":    ["VBA"]
-        ,"projectTags":     ["Efficiency", "UserInterface", "DataSets"]
-        ,"summarySmall":    "VBA based program that logs and records tasks as a timesheet"
-        ,"summaryLarge":    "VBA Program that uses a basic interface to store the start and end time in a job, and records details of that job into a stored library of files, sorted/grouped by date of job"
-        ,"projectUrl":      "https://github.com/BenArthurOce/"
-        ,"projectImages":   [
-                                "imgportfolios\\slideshowTimesheeter\\Timesheeter01.png"
-                            ]
     }
     ]
 }

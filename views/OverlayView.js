@@ -248,6 +248,7 @@ class PortfolioOverlayView extends OverlayView {
         this.summarySmall       = this.data[`summarySmall`];
         this.summaryLarge       = this.data[`summaryLarge`]
         this.url                = this.data[`projectUrl`]
+        this.pages              = this.data[`projectPagesURL`]
         this.images             = this.data[`projectImages`]
 
         this.element = this.generateElement();
@@ -282,6 +283,12 @@ class PortfolioOverlayView extends OverlayView {
                             </div>
                         </div>
 
+                        
+                        <div class="pair-container" id="live-page-section">
+                            <strong><p>${"Live Page:"}</p></strong>
+                            ${StaticGetIcon.generateLinkIconElement("Web", this.pages, "large").outerHTML}
+                        </div>
+
                         <p class="for-overlay">${this.summaryLarge}</p>     
                     </article>
                     
@@ -291,6 +298,15 @@ class PortfolioOverlayView extends OverlayView {
                 </div>
             </dialog>
         `.trim();
+
+        // Remove the Live Page section if this.pages is an empty string
+        if (!this.pages) {
+            const livePageSection = newElement.querySelector('#live-page-section');
+            if (livePageSection) {
+                livePageSection.remove();
+            }
+        }
+
         return newElement.firstElementChild
     };
 
@@ -350,40 +366,30 @@ class Slideshow {
         const nextButton = this.element.querySelector("#portfolio-next-arrow");
         console.log(prevButton)
 
-        prevButton.addEventListener("onClick", ()  => {
+        prevButton.addEventListener("click", ()  => {
             this.prevImage()
+            console.log("prevImage")
+            this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+            this.showImage(this.currentIndex);
         })
 
         nextButton.addEventListener("click", ()  => {
-            this.nextImage()
+            console.log("nextImage")
+            this.currentIndex = (this.currentIndex + 1) % this.images.length;
+            this.showImage(this.currentIndex);
         })
-
-        // prevButton.addEventListener('click', () => { // add a click event listener
-        //     console.log('Button clicked!'); // do something when the button is clicked
-        //   });
     };
 
-//****** Decreases slideshow index by 1 and calls the adjustment of the current slideshow image ****** 
-    prevImage() {
-        console.log("prevImage")
-        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-        this.showImage(this.currentIndex);
-    };
-
-//****** Increases slideshow index by 1 and calls the adjustment of the current slideshow image ****** 
-    nextImage() {
-        console.log("nextImage")
-        this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        this.showImage(this.currentIndex);
-    };
 
 //****** Hides all images, and then only displays the image with the matching index number of this class ****** 
     showImage(index) {
         console.log("showImage")
+        console.log(`function = ${"showImage"} ||  index = ${index}`);
         const images = this.element.querySelectorAll(".portfolio-image")
 
         // hide all
         images.forEach((image, i) => {
+            console.log(image)
             image.classList.remove("activated");
         });
 
